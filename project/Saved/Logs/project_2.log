@@ -1863,3 +1863,264 @@ NVIDIA GeForce RTX 4060 Laptop GPU
 [2024.11.28-12.27.07:532][518]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
 [2024.11.28-12.27.07:532][518]AssetCheck: /Game/Gate/Map_01 正在验证资产
 [2024.11.28-12.27.07:549][518]LogAutomationController: Ignoring very large delta of 7.85 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.30.17:783][219]LogSlate: Took 0.000530 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Italic.ttf' (157K)
+[2024.11.28-12.30.53:711][405]LogSlate: Window '编辑器偏好设置' being destroyed
+[2024.11.28-12.30.53:720][405]LogSlate: Window '编辑器偏好设置' being destroyed
+[2024.11.28-12.30.56:693][517]LogSlate: External Image Picker: DecompressImage failed
+[2024.11.28-12.30.56:876][518]LogChaosDD: Creating Chaos Debug Draw Scene for world World_1
+[2024.11.28-12.31.04:447][738]LogAutomationController: Ignoring very large delta of 3.14 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.31.20:328][124]LogSlate: Took 0.000472 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2024.11.28-12.31.39:314][557]LogStreaming: Display: FlushAsyncLoading(498): 1 QueuedPackages, 0 AsyncPackages
+[2024.11.28-12.31.39:317][557]LogChaosDD: Creating Chaos Debug Draw Scene for world Map_menu
+[2024.11.28-12.31.46:289][647]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.31.46:295][647]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.31.52:444][922]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 342.178589
+[2024.11.28-12.31.52:779][942]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2024.11.28-12.31.52:779][942]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 342.499817, Update Interval: 324.752960
+[2024.11.28-12.32.02:520][ 18]LogAutomationController: Ignoring very large delta of 2.79 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.32.14:896][281]LogAutomationController: Ignoring very large delta of 4.53 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: ================================================
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: Total job queries 11,614, among them cache hits 1,047 (9.01%), DDC hits 4,340 (37.37%), Duplicates 1,639 (14.11%)
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: Tracking 8,928 distinct input hashes that result in 8,439 distinct outputs (94.52%)
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: RAM used: 6.15 MiB of 819.20 MiB budget. Usage: 0.75%
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: Shaders Compiled: 4,588
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: Jobs assigned 4,588, completed 4,588 (100%)
+[2024.11.28-12.32.17:437][434]LogShaderCompilers: Display: Average time worker was idle: 4.90 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Time job spent in pending queue: average 248.88 s, longest 600.80 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Job execution time: average 10.36 s, max 163.31 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Job life time (pending + execution): average 259.24 s, max 601.89
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Shader code size: average 15.099 KiB, min 1.16 KiB, max 330.049 KiB
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 610.71 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Mutex wait stall in FShaderJobCache::SubmitJobs:  0.08%
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Jobs were issued in 493 batches (only local compilation was used), average 9.31 jobs/batch
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Average processing rate: 7.51 jobs/sec
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Total thread time: 4,690.765 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Total thread preprocess time: 131.91 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Percentage time preprocessing: 2.81%
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Effective parallelization: 7.68 (times faster than compiling all shaders on one thread). Compare with number of workers: 8
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Top 5 most expensive shader types by average time:
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                          FTSRRejectShadingCS (compiled   26 times, average 43.95 sec, max 154.69 sec, min 2.43 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                               FPathTracingRG (compiled    1 times, average 24.29 sec, max 24.29 sec, min 24.29 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                   FSSDTemporalAccumulationCS (compiled    8 times, average 15.97 sec, max 19.78 sec, min 10.22 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                    FSSDSpatialAccumulationCS (compiled   30 times, average 6.76 sec, max 26.91 sec, min 1.88 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                      FGenerateLightSamplesCS (compiled   62 times, average 4.90 sec, max 7.85 sec, min 2.85 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Top 5 shader types by total compile time:
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                          FTSRRejectShadingCS - 24.36% of total time (compiled   26 times, average 43.95 sec, max 154.69 sec, min 2.43 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                              FVolumetricFogLightScatteringCS - 11.50% of total time (compiled  447 times, average 1.21 sec, max 15.77 sec, min 0.33 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                      FGenerateLightSamplesCS - 6.47% of total time (compiled   62 times, average 4.90 sec, max 7.85 sec, min 2.85 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                                FOcclusionRGS - 5.75% of total time (compiled  182 times, average 1.48 sec, max 4.37 sec, min 0.68 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display:                                             FDeferredLightPS - 4.93% of total time (compiled  100 times, average 2.31 sec, max 3.10 sec, min 1.88 sec)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: === Material stats ===
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Materials Cooked:        0
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Materials Translated:    129
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Material Total Translate Time: 0.11 s
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Material Translation Only: 0.05 s (46%)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Material DDC Serialization Only: 0.00 s (1%)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: Material Cache Hits: 12 (9%)
+[2024.11.28-12.32.17:440][434]LogShaderCompilers: Display: ================================================
+[2024.11.28-12.32.22:649][552]LogAutomationController: Ignoring very large delta of 3.25 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.33.57:487][698]LogSlate: Window '编辑器偏好设置' being destroyed
+[2024.11.28-12.33.57:495][698]LogSlate: Window '编辑器偏好设置' being destroyed
+[2024.11.28-12.34.00:678][833]LogSlate: External Image Picker: DecompressImage failed
+[2024.11.28-12.35.49:460][184]LogAutomationController: Ignoring very large delta of 2.22 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.35.58:587][426]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.35.58:592][426]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.36.01:873][615]LogContentBrowser: Deferred new asset folder creation: 新建文件夹
+[2024.11.28-12.36.01:889][615]LogContentBrowser: Creating deferred item: 新建文件夹
+[2024.11.28-12.36.01:905][616]LogContentBrowser: Renaming the item being created (Deferred Item: 新建文件夹).
+[2024.11.28-12.36.19:811][691]LogContentBrowser: Attempting asset rename: 新建文件夹 -> blue_map
+[2024.11.28-12.36.19:811][691]LogContentBrowser: End creating deferred item 新建文件夹
+[2024.11.28-12.36.37:057][ 16]LogSlate: Window '选取父类' being destroyed
+[2024.11.28-12.36.37:071][ 16]LogContentBrowser: Deferred new asset file creation: NewBlueprint
+[2024.11.28-12.36.37:077][ 16]LogContentBrowser: Creating deferred item: NewBlueprint
+[2024.11.28-12.36.37:080][ 16]LogAutomationController: Ignoring very large delta of 6.24 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.36.37:105][ 18]LogContentBrowser: Renaming the item being created (Deferred Item: NewBlueprint).
+[2024.11.28-12.36.48:655][161]LogContentBrowser: Attempting asset rename: NewBlueprint -> NewBlueprint
+[2024.11.28-12.36.48:680][161]LogContentBrowser: End creating deferred item NewBlueprint
+[2024.11.28-12.37.12:964][ 90]LogContentBrowser: Attempting asset rename: NewBlueprint -> Mod_
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.Mod_:UserConstructionScript.K2Node_FunctionEntry_0' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.SKEL_Mod__C:UserConstructionScript' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.SKEL_Mod__C' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.Mod__C' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.Mod_:EventGraph.K2Node_Event_0' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:102][ 90]LogMetaData: Removing '/Game/blue_map/Mod_.Mod_:EventGraph.K2Node_Event_1' ref from Metadata '/Game/blue_map/NewBlueprint.PackageMetaData'
+[2024.11.28-12.37.13:106][ 90]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.37.13:106][ 90]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/Mod_] ([2] browsable assets)...
+[2024.11.28-12.37.13:106][ 90]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/Mod_]
+[2024.11.28-12.37.13:106][ 90]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/Mod_" FILE="E:/Stardew-Valley/project/Content/blue_map/Mod_.uasset" SILENT=true
+[2024.11.28-12.37.13:112][ 90]LogSavePackage: Moving output files for package: /Game/blue_map/Mod_
+[2024.11.28-12.37.13:112][ 90]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/Mod_AD4095DE4ABEB0B725C3B881422F972E.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/Mod_.uasset'
+[2024.11.28-12.37.13:116][ 90]LogFileHelpers: InternalPromptForCheckoutAndSave took 10.755 ms (total: 661.907 ms)
+[2024.11.28-12.37.13:139][ 90]LogUObjectHash: Compacting FUObjectHashTables data took   0.43ms
+[2024.11.28-12.37.13:154][ 90]LogUObjectHash: Compacting FUObjectHashTables data took   0.50ms
+[2024.11.28-12.37.13:163][ 90]LogUObjectHash: Compacting FUObjectHashTables data took   0.26ms
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: Display: Starting to validate 1 assets
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: Enabled validators:
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.37.13:255][ 90]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.37.13:255][ 90]AssetCheck: /Game/blue_map/Mod_ 正在验证资产
+[2024.11.28-12.37.16:631][282]LogContentBrowser: Attempting asset rename: Mod_ -> Mod_
+[2024.11.28-12.37.21:191][549]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 670.926514
+[2024.11.28-12.37.21:557][571]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2024.11.28-12.37.21:557][571]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 671.276428, Update Interval: 304.480713
+[2024.11.28-12.37.43:356][879]LogContentBrowser: Attempting asset rename: Mod_ -> Mod_Model
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.Mod_Model_C' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.SKEL_Mod_Model_C' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.SKEL_Mod_Model_C:UserConstructionScript' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.Mod_Model:UserConstructionScript.K2Node_FunctionEntry_0' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.Mod_Model:EventGraph.K2Node_Event_0' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogMetaData: Removing '/Game/blue_map/Mod_Model.Mod_Model:EventGraph.K2Node_Event_1' ref from Metadata '/Game/blue_map/Mod_.PackageMetaData'
+[2024.11.28-12.37.43:450][879]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.37.43:450][879]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/Mod_Model] ([2] browsable assets)...
+[2024.11.28-12.37.43:450][879]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/Mod_Model]
+[2024.11.28-12.37.43:450][879]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/Mod_Model" FILE="E:/Stardew-Valley/project/Content/blue_map/Mod_Model.uasset" SILENT=true
+[2024.11.28-12.37.43:485][879]LogSavePackage: Moving output files for package: /Game/blue_map/Mod_Model
+[2024.11.28-12.37.43:485][879]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/Mod_ModelDBADF744495BD2E3284C05BC6AB06659.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/Mod_Model.uasset'
+[2024.11.28-12.37.43:490][879]LogFileHelpers: InternalPromptForCheckoutAndSave took 40.513 ms (total: 702.420 ms)
+[2024.11.28-12.37.43:511][879]LogUObjectHash: Compacting FUObjectHashTables data took   0.40ms
+[2024.11.28-12.37.43:521][879]LogUObjectHash: Compacting FUObjectHashTables data took   0.46ms
+[2024.11.28-12.37.43:538][879]LogUObjectHash: Compacting FUObjectHashTables data took   0.22ms
+[2024.11.28-12.37.43:614][879]LogContentValidation: Display: Starting to validate 1 assets
+[2024.11.28-12.37.43:614][879]LogContentValidation: Enabled validators:
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.37.43:614][879]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.37.43:614][879]AssetCheck: /Game/blue_map/Mod_Model 正在验证资产
+[2024.11.28-12.38.00:836][901]LogContentBrowser: Attempting asset rename: Mod_Model -> GameModel
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.GameModel_C' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.SKEL_GameModel_C' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.SKEL_GameModel_C:UserConstructionScript' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.GameModel:UserConstructionScript.K2Node_FunctionEntry_0' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.GameModel:EventGraph.K2Node_Event_0' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:926][901]LogMetaData: Removing '/Game/blue_map/GameModel.GameModel:EventGraph.K2Node_Event_1' ref from Metadata '/Game/blue_map/Mod_Model.PackageMetaData'
+[2024.11.28-12.38.00:927][901]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.38.00:927][901]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/GameModel] ([2] browsable assets)...
+[2024.11.28-12.38.00:927][901]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/GameModel]
+[2024.11.28-12.38.00:927][901]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/GameModel" FILE="E:/Stardew-Valley/project/Content/blue_map/GameModel.uasset" SILENT=true
+[2024.11.28-12.38.00:930][901]LogSavePackage: Moving output files for package: /Game/blue_map/GameModel
+[2024.11.28-12.38.00:930][901]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/GameModel81F51AD94336B9EB2C291B92C8D43AF2.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/GameModel.uasset'
+[2024.11.28-12.38.00:933][901]LogFileHelpers: InternalPromptForCheckoutAndSave took 6.988 ms (total: 709.409 ms)
+[2024.11.28-12.38.00:956][901]LogUObjectHash: Compacting FUObjectHashTables data took   0.41ms
+[2024.11.28-12.38.00:965][901]LogUObjectHash: Compacting FUObjectHashTables data took   0.45ms
+[2024.11.28-12.38.00:973][901]LogUObjectHash: Compacting FUObjectHashTables data took   0.22ms
+[2024.11.28-12.38.01:050][901]LogContentValidation: Display: Starting to validate 1 assets
+[2024.11.28-12.38.01:050][901]LogContentValidation: Enabled validators:
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.38.01:050][901]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.38.01:050][901]AssetCheck: /Game/blue_map/GameModel 正在验证资产
+[2024.11.28-12.38.11:023][984]LogAssetEditorSubsystem: Opening Asset editor for Blueprint /Game/blue_map/GameModel.GameModel
+[2024.11.28-12.38.11:025][984]LogChaosDD: Creating Chaos Debug Draw Scene for world World_2
+[2024.11.28-12.38.11:067][984]LogStreaming: Display: FlushAsyncLoading(499): 1 QueuedPackages, 0 AsyncPackages
+[2024.11.28-12.38.11:765][984]LogStaticMesh: Display: 正在构建静态网格体PhAT_FloorBox（所需内存估计：0.024887MB）…
+[2024.11.28-12.38.11:770][984]LogStaticMesh: Built static mesh [0.02s] /Engine/EditorMeshes/PhAT_FloorBox.PhAT_FloorBox
+[2024.11.28-12.38.12:230][985]LogPSOHitching: Encountered 150 PSO creation hitches so far (56 graphics, 94 compute). 0 of them were precached.
+[2024.11.28-12.39.10:154][474]LogSlate: Window '选取父类' being destroyed
+[2024.11.28-12.39.10:167][474]LogContentBrowser: Deferred new asset file creation: NewBlueprint
+[2024.11.28-12.39.10:174][474]LogContentBrowser: Creating deferred item: NewBlueprint
+[2024.11.28-12.39.10:177][474]LogAutomationController: Ignoring very large delta of 4.96 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.39.10:189][475]LogContentBrowser: Renaming the item being created (Deferred Item: NewBlueprint).
+[2024.11.28-12.40.25:455][258]LogContentBrowser: Attempting asset rename: NewBlueprint -> Player_control
+[2024.11.28-12.40.25:462][258]LogContentBrowser: End creating deferred item NewBlueprint
+[2024.11.28-12.41.27:415][195]LogUObjectHash: Compacting FUObjectHashTables data took   1.18ms
+[2024.11.28-12.41.28:417][195]LogSlate: Window '保存内容' being destroyed
+[2024.11.28-12.41.28:465][195]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.41.28:526][195]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/GameModel] ([2] browsable assets)...
+[2024.11.28-12.41.28:527][195]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/GameModel]
+[2024.11.28-12.41.28:527][195]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/GameModel" FILE="E:/Stardew-Valley/project/Content/blue_map/GameModel.uasset" SILENT=true
+[2024.11.28-12.41.28:529][195]LogSavePackage: Moving output files for package: /Game/blue_map/GameModel
+[2024.11.28-12.41.28:530][195]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/GameModelE61ECEF246565D4A3E70FFA98C0F67CE.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/GameModel.uasset'
+[2024.11.28-12.41.28:531][195]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/Player_control] ([2] browsable assets)...
+[2024.11.28-12.41.28:531][195]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/Player_control]
+[2024.11.28-12.41.28:531][195]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/Player_control" FILE="E:/Stardew-Valley/project/Content/blue_map/Player_control.uasset" SILENT=true
+[2024.11.28-12.41.28:534][195]LogSavePackage: Moving output files for package: /Game/blue_map/Player_control
+[2024.11.28-12.41.28:534][195]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/Player_control08027DEB4FC6BF34CACA64ABB1555C3C.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/Player_control.uasset'
+[2024.11.28-12.41.28:552][195]LogFileHelpers: InternalPromptForCheckoutAndSave took 87.524 ms (total: 796.933 ms)
+[2024.11.28-12.41.28:623][195]LogContentValidation: Display: Starting to validate 2 assets
+[2024.11.28-12.41.28:623][195]LogContentValidation: Enabled validators:
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.41.28:623][195]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.41.28:623][195]AssetCheck: /Game/blue_map/GameModel 正在验证资产
+[2024.11.28-12.41.28:623][195]AssetCheck: /Game/blue_map/Player_control 正在验证资产
+[2024.11.28-12.42.31:173][720]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 980.908997
+[2024.11.28-12.42.32:174][723]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2024.11.28-12.42.32:174][723]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 981.577148, Update Interval: 319.285248
+[2024.11.28-12.42.37:931][864]LogSlate: External Image Picker: DecompressImage failed
+[2024.11.28-12.43.10:144][230]LogContentBrowser: Attempting asset rename: GameModel -> GameModel
+[2024.11.28-12.43.19:406][778]LogContentBrowser: Attempting asset rename: GameModel -> MyGameModel
+[2024.11.28-12.43.24:835][778]LogSlate: Window '消息' being destroyed
+[2024.11.28-12.43.24:845][778]Message dialog closed, result: Cancel, title: 消息, text: 源代码、配置INI和文本文件可能需要查找/替换：
+
+
+GameModel
+
+否则烘焙版本可能缺失资产。继续重命名？
+[2024.11.28-12.43.24:881][778]LogAutomationController: Ignoring very large delta of 5.49 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2024.11.28-12.43.38:120][561]LogContentBrowser: Attempting asset rename: GameModel -> MyGameModel
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.MyGameModel_C' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.SKEL_MyGameModel_C' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.SKEL_MyGameModel_C:UserConstructionScript' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.MyGameModel:UserConstructionScript.K2Node_FunctionEntry_0' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.MyGameModel:EventGraph.K2Node_Event_0' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:210][561]LogMetaData: Removing '/Game/blue_map/MyGameModel.MyGameModel:EventGraph.K2Node_Event_1' ref from Metadata '/Game/blue_map/GameModel.PackageMetaData'
+[2024.11.28-12.43.38:218][561]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.43.38:218][561]OBJ SavePackage: Generating thumbnails for [0] asset(s) in package [/Game/blue_map/MyGameModel] ([2] browsable assets)...
+[2024.11.28-12.43.38:218][561]OBJ SavePackage: Finished generating thumbnails for package [/Game/blue_map/MyGameModel]
+[2024.11.28-12.43.38:218][561]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/blue_map/MyGameModel" FILE="E:/Stardew-Valley/project/Content/blue_map/MyGameModel.uasset" SILENT=true
+[2024.11.28-12.43.38:221][561]LogSavePackage: Moving output files for package: /Game/blue_map/MyGameModel
+[2024.11.28-12.43.38:221][561]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/MyGameModel98D9222745B78E19E16B74B9E68B0698.tmp' to 'E:/Stardew-Valley/project/Content/blue_map/MyGameModel.uasset'
+[2024.11.28-12.43.38:225][561]LogFileHelpers: InternalPromptForCheckoutAndSave took 6.972 ms (total: 803.906 ms)
+[2024.11.28-12.43.38:250][561]LogUObjectHash: Compacting FUObjectHashTables data took   1.07ms
+[2024.11.28-12.43.38:267][561]LogUObjectHash: Compacting FUObjectHashTables data took   0.83ms
+[2024.11.28-12.43.38:280][561]LogUObjectHash: Compacting FUObjectHashTables data took   0.39ms
+[2024.11.28-12.43.38:354][561]LogContentValidation: Display: Starting to validate 1 assets
+[2024.11.28-12.43.38:354][561]LogContentValidation: Enabled validators:
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.43.38:354][561]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.43.38:354][561]AssetCheck: /Game/blue_map/MyGameModel 正在验证资产
+[2024.11.28-12.43.59:993][449]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.43.59:999][449]LogSlate: Window '项目设置' being destroyed
+[2024.11.28-12.44.18:444][769]LogUObjectHash: Compacting FUObjectHashTables data took   0.50ms
+[2024.11.28-12.44.19:420][769]LogSlate: Window '保存内容' being destroyed
+[2024.11.28-12.44.19:469][769]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2024.11.28-12.44.19:532][769]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/Gate/Map_01" FILE="E:/Stardew-Valley/project/Content/Gate/Map_01.umap" SILENT=true AUTOSAVING=false KEEPDIRTY=false
+[2024.11.28-12.44.19:556][769]LogUObjectHash: Compacting FUObjectHashTables data took   0.40ms
+[2024.11.28-12.44.19:561][769]LogSavePackage: Moving output files for package: /Game/Gate/Map_01
+[2024.11.28-12.44.19:561][769]LogSavePackage: Moving 'E:/Stardew-Valley/project/Saved/Map_01D91267D54D34A33536D2089FB07D1869.tmp' to 'E:/Stardew-Valley/project/Content/Gate/Map_01.umap'
+[2024.11.28-12.44.19:566][769]LogFileHelpers: Saving map 'Map_01' took 0.034
+[2024.11.28-12.44.19:576][769]LogFileHelpers: InternalPromptForCheckoutAndSave took 107.808 ms (total: 911.714 ms)
+[2024.11.28-12.44.19:639][769]LogContentValidation: Display: Starting to validate 1 assets
+[2024.11.28-12.44.19:639][769]LogContentValidation: Enabled validators:
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/DataValidation.EditorValidator_Material
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/DataValidation.DirtyFilesChangelistValidator
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/DataValidation.EditorValidator_Localization
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/DataValidation.PackageFileValidator
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/DataValidation.WorldPartitionChangelistValidator
+[2024.11.28-12.44.19:639][769]LogContentValidation: 	/Script/InputBlueprintNodes.EnhancedInputUserWidgetValidator
+[2024.11.28-12.44.19:639][769]AssetCheck: /Game/Gate/Map_01 正在验证资产
+[2024.11.28-12.48.07:217][480]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 1316.952759
+[2024.11.28-12.48.08:215][483]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2024.11.28-12.48.08:216][483]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 1317.619263, Update Interval: 353.072906
+[2024.11.28-12.54.24:973][613]LogEOSSDK: LogEOS: Updating Product SDK Config, Time: 1694.709473
+[2024.11.28-12.54.25:972][616]LogEOSSDK: LogEOS: SDK Config Product Update Request Completed - No Change
+[2024.11.28-12.54.25:972][616]LogEOSSDK: LogEOS: ScheduleNextSDKConfigDataUpdate - Time: 1695.375977, Update Interval: 349.143341
