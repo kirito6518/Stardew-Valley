@@ -66,10 +66,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    // turn on display FPS
+    // 是否显示帧率
     director->setDisplayStats(true);
 
-    // set FPS. the default value is 1.0/60 if you don't call this
+    // 更改帧率
     director->setAnimationInterval(1.0f / 60);
 
     // Set the design resolution
