@@ -1,9 +1,4 @@
 ﻿  precheader.cpp
-  AssetsManager.cpp
-  AssetsManagerEx.cpp
-  CCEventAssetsManagerEx.cpp
-  CCEventListenerAssetsManagerEx.cpp
-  Manifest.cpp
   CCControl.cpp
   CCControlButton.cpp
   CCControlColourPicker.cpp
@@ -15,11 +10,6 @@
   CCControlSwitch.cpp
   CCControlUtils.cpp
   CCInvocation.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
-  (编译源文件“/extensions/assets-manager/AssetsManager.cpp”)
-      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
-      参见“CC_DLL”的前一个定义
-  
   CCScrollView.cpp
   CCTableView.cpp
   CCTableViewCell.cpp
@@ -28,18 +18,10 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip
   CCParticle3DRender.cpp
   CCParticleSystem3D.cpp
   CCPUAffector.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
-  (编译源文件“/extensions/assets-manager/AssetsManagerEx.cpp”)
-      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
-      参见“CC_DLL”的前一个定义
-  
   CCPUAffectorManager.cpp
   CCPUAffectorTranslator.cpp
   CCPUAlignAffector.cpp
   CCPUAlignAffectorTranslator.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\extensions\assets-manager\AssetsManagerEx.cpp(1180,27): warning C4305: “+=”: 从“double”到“float”截断
-  (编译源文件“/extensions/assets-manager/AssetsManagerEx.cpp”)
-  
   CCPUBaseCollider.cpp
   CCPUBaseColliderTranslator.cpp
   CCPUBaseForceAffector.cpp
@@ -96,10 +78,10 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\extensions\assets-ma
   CCPUJetAffectorTranslator.cpp
   CCPULineAffector.cpp
   CCPULineAffectorTranslator.cpp
-  CCPULinearForceAffector.cpp
-  CCPULinearForceAffectorTranslator.cpp
   CCPULineEmitter.cpp
   CCPULineEmitterTranslator.cpp
+  CCPULinearForceAffector.cpp
+  CCPULinearForceAffectorTranslator.cpp
   CCPUListener.cpp
   CCPUMaterialManager.cpp
   CCPUMaterialTranslator.cpp
@@ -182,12 +164,27 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\extensions\assets-ma
   CCPUVertexEmitter.cpp
   CCPUVortexAffector.cpp
   CCPUVortexAffectorTranslator.cpp
+  AssetsManager.cpp
+  AssetsManagerEx.cpp
+  CCEventAssetsManagerEx.cpp
+  CCEventListenerAssetsManagerEx.cpp
+  Manifest.cpp
   CCPhysicsDebugNode.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
+  (编译源文件“/extensions/assets-manager/AssetsManager.cpp”)
+      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
+      参见“CC_DLL”的前一个定义
+  
   CCPhysicsSprite.cpp
-  clipper.cpp
   ConvertUTF.c
   ConvertUTFWrapper.cpp
+  clipper.cpp
   edtaa3func.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
+  (编译源文件“/extensions/assets-manager/AssetsManagerEx.cpp”)
+      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
+      参见“CC_DLL”的前一个定义
+  
   idl_gen_cpp.cpp
   idl_gen_fbs.cpp
   idl_gen_general.cpp
@@ -196,39 +193,42 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\extensions\assets-ma
   idl_parser.cpp
   md5.c
   shapes.cc
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\extensions\assets-manager\AssetsManagerEx.cpp(1180,27): warning C4305: “+=”: 从“double”到“float”截断
+  (编译源文件“/extensions/assets-manager/AssetsManagerEx.cpp”)
+  
   advancing_front.cc
   cdt.cc
   sweep.cc
   sweep_context.cc
   tinyxml2.cpp
-  ioapi_mem.cpp
-  ioapi.cpp
-  unzip.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\ioapi.h(25,9): warning C4005: “CC_DLL”: 宏重定义
-  (编译源文件“/external/unzip/ioapi_mem.cpp”)
-      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
-      参见“CC_DLL”的前一个定义
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\flatbuffers\idl_parser.cpp(790,3): warning C4858: 正在放弃返回值: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
+  (编译源文件“/external/flatbuffers/idl_parser.cpp”)
   
+  ioapi.cpp
+  ioapi_mem.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\ioapi.h(25,9): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/external/unzip/ioapi.cpp”)
       C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
       参见“CC_DLL”的前一个定义
   
-  xxhash.c
-  CCAABB.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\ioapi.h(25,9): warning C4005: “CC_DLL”: 宏重定义
+  (编译源文件“/external/unzip/ioapi_mem.cpp”)
+      C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
+      参见“CC_DLL”的前一个定义
+  
+  unzip.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/external/unzip/unzip.cpp”)
       C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
       参见“CC_DLL”的前一个定义
   
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\flatbuffers\idl_parser.cpp(790,3): warning C4858: 正在放弃返回值: The 'remove' and 'remove_if' algorithms return the iterator past the last element that should be kept. You need to call container.erase(result, container.end()) afterwards. In C++20, 'std::erase' and 'std::erase_if' are simpler replacements for these two steps.
-  (编译源文件“/external/flatbuffers/idl_parser.cpp”)
-  
+  xxhash.c
+  CCAABB.cpp
   CCAnimate3D.cpp
-  CCAnimation3D.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\xxhash\xxhash.c(312,5): warning C4804: “/”: 在操作中使用类型“bool”不安全
   (编译源文件“/external/xxhash/xxhash.c”)
   
+  CCAnimation3D.cpp
   CCAttachNode.cpp
   CCBillBoard.cpp
   CCBundle3D.cpp
@@ -257,25 +257,19 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\xxhash\xxha
   AudioPlayer.cpp
   MciPlayer.cpp
   SimpleAudioEngine.cpp
-  CCAllocatorDiagnostics.cpp
-  CCAllocatorGlobal.cpp
-  CCAllocatorGlobalNewDelete.cpp
-  atitc.cpp
-  base64.cpp
   CCAsyncTaskPool.cpp
   CCAutoreleasePool.cpp
-  ccCArray.cpp
   CCConfiguration.cpp
   CCConsole.cpp
-  CCController.cpp
   CCController-linux-win32.cpp
+  CCController.cpp
   CCData.cpp
   CCDataVisitor.cpp
   CCDirector.cpp
-  CCEvent.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\base\CCDirector.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   (编译源文件“/base/CCDirector.cpp”)
   
+  CCEvent.cpp
   CCEventAcceleration.cpp
   CCEventController.cpp
   CCEventCustom.cpp
@@ -292,35 +286,41 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\base\CCDirecto
   CCEventListenerTouch.cpp
   CCEventMouse.cpp
   CCEventTouch.cpp
-  ccFPSImages.c
   CCIMEDispatcher.cpp
-  CCNinePatchImageParser.cpp
-  CCStencilStateManager.cpp
   CCNS.cpp
+  CCNinePatchImageParser.cpp
   CCProfiling.cpp
   CCProperties.cpp
-  ccRandom.cpp
   CCRef.cpp
   CCScheduler.cpp
   CCScriptSupport.cpp
+  CCStencilStateManager.cpp
   CCTouch.cpp
-  ccTypes.cpp
   CCUserDefault.cpp
-  ccUTF8.cpp
-  ccUtils.cpp
   CCValue.cpp
-  etc1.cpp
-  pvr.cpp
   ObjectFactory.cpp
-  s3tc.cpp
   TGAlib.cpp
   ZipUtils.cpp
-  cocos2d.cpp
+  CCAllocatorDiagnostics.cpp
+  CCAllocatorGlobal.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/base/ZipUtils.cpp”)
       C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
       参见“CC_DLL”的前一个定义
   
+  CCAllocatorGlobalNewDelete.cpp
+  atitc.cpp
+  base64.cpp
+  ccCArray.cpp
+  ccFPSImages.c
+  ccRandom.cpp
+  ccTypes.cpp
+  ccUTF8.cpp
+  ccUtils.cpp
+  etc1.cpp
+  pvr.cpp
+  s3tc.cpp
+  cocos2d.cpp
   CCArray.cpp
   CCDeprecated.cpp
   CCDictionary.cpp
@@ -362,8 +362,6 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip
   CCActionFrameEasing.cpp
   CCActionManagerEx.cpp
   CCActionNode.cpp
-  CCActionObject.cpp
-  CCArmature.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
@@ -378,6 +376,8 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/ActionTimeline/CCActionTimelineCache.cpp”)
   
+  CCActionObject.cpp
+  CCArmature.cpp
   CCArmatureAnimation.cpp
   CCArmatureDataManager.cpp
   CCArmatureDefine.cpp
@@ -387,6 +387,7 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
   CCComAttribute.cpp
   CCComAudio.cpp
   CCComController.cpp
+  CCComExtensionData.cpp
   CCComRender.cpp
   CCDataReaderHelper.cpp
   CCDatas.cpp
@@ -408,12 +409,11 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/ActionTimeline/CSLoader.cpp”)
   
-  CCComExtensionData.cpp
   CCProcessBase.cpp
   CCSGUIReader.cpp
+  CCSSceneReader.cpp
   CCSkin.cpp
   CCSpriteFrameCacheHelper.cpp
-  CCSSceneReader.cpp
   CCTransformHelp.cpp
   CCTween.cpp
   CCUtilMath.cpp
@@ -429,6 +429,7 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
   ArmatureNodeReader.cpp
   ButtonReader.cpp
   CheckBoxReader.cpp
+  ComAudioReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
@@ -443,7 +444,6 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/ArmatureNodeReader/ArmatureNodeReader.cpp”)
   
-  ComAudioReader.cpp
   GameMapReader.cpp
   GameNode3DReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -459,6 +459,34 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/GameMapReader/GameMapReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
   
   ImageViewReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -480,58 +508,30 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ButtonReader/ButtonReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/FlatBuffersSerialize.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/FlatBuffersSerialize.cpp”)
   
   LayoutReader.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ComAudioReader/ComAudioReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/FlatBuffersSerialize.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/FlatBuffersSerialize.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/GameNode3DReader/GameNode3DReader.cpp”)
-  
   Light3DReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -553,62 +553,78 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Light3DReader/Light3DReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/LayoutReader/LayoutReader.cpp”)
   
   LoadingBarReader.cpp
+  Node3DReader.cpp
   NodeReaderDefine.cpp
   NodeReaderProtocol.cpp
   NodeReader.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ListViewReader/ListViewReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ListViewReader/ListViewReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
+  
   PageViewReader.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ListViewReader/ListViewReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ListViewReader/ListViewReader.cpp”)
-  
+  Particle3DReader.cpp
   ParticleReader.cpp
   ProjectNodeReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -625,57 +641,71 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/LoadingBarReader/LoadingBarReader.cpp”)
   
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
+  
   ScrollViewReader.cpp
   SingleNodeReader.cpp
   BoneNodeReader.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
+  
   SkeletonNodeReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ProjectNodeReader/ProjectNodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/PageViewReader/PageViewReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
@@ -684,20 +714,6 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/SingleNodeReader/SingleNodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
   
   SliderReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
@@ -705,139 +721,109 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
   
-  SpriteReader.cpp
-  TabControlReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/ScrollViewReader/ScrollViewReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/BoneNodeReader.cpp”)
   
+  Sprite3DReader.cpp
+  SpriteReader.cpp
+  TabControlReader.cpp
   TextAtlasReader.cpp
   TextBMFontReader.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SkeletonReader/SkeletonNodeReader.cpp”)
+  
   TextFieldReader.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
+  
   TextReader.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
   
-  Node3DReader.cpp
-  Sprite3DReader.cpp
   UserCameraReader.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
-  
-  Particle3DReader.cpp
   WidgetReader.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/SliderReader/SliderReader.cpp”)
+  
   CCAffineTransform.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Node3DReader/Node3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Sprite3DReader/Sprite3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
-  
   CCGeometry.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
+  
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TabControlReader/TabControlReader.cpp”)
   
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
@@ -854,53 +840,68 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
   (编译源文件“/editor-support/cocostudio/WidgetReader/UserCameraReader/UserCameraReader.cpp”)
   
   CCVertex.cpp
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/Particle3DReader/Particle3DReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
-  
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
-  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
-  
   Mat4.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextFieldReader/TextFieldReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextBMFontReader/TextBMFontReader.cpp”)
+  
   MathUtil.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextAtlasReader/TextAtlasReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
+  
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305: “参数”: 从“double”到“T”截断
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         with
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         [
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:             T=float
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
+  (编译源文件“/editor-support/cocostudio/WidgetReader/TextReader/TextReader.cpp”)
+  
   Quaternion.cpp
   TransformUtils.cpp
   Vec2.cpp
+  Vec3.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305: “参数”: 从“double”到“T”截断
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         with
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1546,68): warning C4305:         [
@@ -915,7 +916,6 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\cocostudio\CSParseBinary_generated.h(1593,115): warning C4305:         ]
   (编译源文件“/editor-support/cocostudio/WidgetReader/WidgetReader.cpp”)
   
-  Vec3.cpp
   Vec4.cpp
   CCNavMesh.cpp
   CCNavMeshAgent.cpp
@@ -942,12 +942,12 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support
   CCPhysicsShape.cpp
   CCPhysicsWorld.cpp
   CCFileUtils.cpp
+  CCGLView.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip.h(47,9): warning C4005: “CC_DLL”: 宏重定义
   (编译源文件“/platform/CCFileUtils.cpp”)
       C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\platform\win32\CCPlatformDefine-win32.h(40,13):
       参见“CC_DLL”的前一个定义
   
-  CCGLView.cpp
   CCImage.cpp
   CCSAXParser.cpp
   CCThread.cpp
@@ -965,7 +965,6 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip
   CCGLProgramCache.cpp
   CCGLProgramState.cpp
   CCGLProgramStateCache.cpp
-  ccGLStateCache.cpp
   CCGroupCommand.cpp
   CCMaterial.cpp
   CCMeshCommand.cpp
@@ -973,6 +972,7 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\external\unzip\unzip
   CCPrimitive.cpp
   CCPrimitiveCommand.cpp
   CCQuadCommand.cpp
+  CCRenderCommand.cpp
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLProgramState.cpp(920,16): warning C4996: 'cocos2d::UniformValue::setTexture': 被声明为已否决
   (编译源文件“/renderer/CCGLProgramState.cpp”)
   
@@ -985,28 +985,27 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLP
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLProgramState.cpp(945,16): warning C4996: 'cocos2d::UniformValue::setTexture': 被声明为已否决
   (编译源文件“/renderer/CCGLProgramState.cpp”)
   
-  CCRenderCommand.cpp
-  CCRenderer.cpp
   CCRenderState.cpp
-  ccShaders.cpp
+  CCRenderer.cpp
   CCTechnique.cpp
   CCTexture2D.cpp
   CCTextureAtlas.cpp
-  CCTextureCube.cpp
   CCTextureCache.cpp
+  CCTextureCube.cpp
   CCTrianglesCommand.cpp
   CCVertexAttribBinding.cpp
   CCVertexIndexBuffer.cpp
   CCVertexIndexData.cpp
+  ccGLStateCache.cpp
+  ccShaders.cpp
   LocalStorage.cpp
   CocosGUI.cpp
-  UIButton.cpp
   UIAbstractCheckButton.cpp
+  UIButton.cpp
   UICheckBox.cpp
-  UIEditBoxImpl-common.cpp
-  UIRadioButton.cpp
   UIDeprecated.cpp
   UIEditBox.cpp
+  UIEditBoxImpl-common.cpp
   UIEditBoxImpl-win32.cpp
   UIHBox.cpp
   UIHelper.cpp
@@ -1019,6 +1018,7 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLP
   UILoadingBar.cpp
   UIPageView.cpp
   UIPageViewIndicator.cpp
+  UIRadioButton.cpp
   UIRelativeBox.cpp
   UIRichText.cpp
   UIScale9Sprite.cpp
@@ -1060,8 +1060,8 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLP
   CCClippingRectangleNode.cpp
   CCComponent.cpp
   CCComponentContainer.cpp
-  CCDrawingPrimitives.cpp
   CCDrawNode.cpp
+  CCDrawingPrimitives.cpp
   CCFastTMXLayer.cpp
   CCFastTMXTiledMap.cpp
   CCFontAtlas.cpp
@@ -1075,8 +1075,8 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLP
   CCLabel.cpp
   CCLabelAtlas.cpp
   CCLabelBMFont.cpp
-  CCLabelTextFormatter.cpp
   CCLabelTTF.cpp
+  CCLabelTextFormatter.cpp
   CCLayer.cpp
   CCLight.cpp
   CCMenu.cpp
@@ -1097,12 +1097,12 @@ C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\renderer\CCGLP
   CCSpriteBatchNode.cpp
   CCSpriteFrame.cpp
   CCSpriteFrameCache.cpp
-  CCTextFieldTTF.cpp
-  CCTileMapAtlas.cpp
   CCTMXLayer.cpp
   CCTMXObjectGroup.cpp
   CCTMXTiledMap.cpp
   CCTMXXMLParser.cpp
+  CCTextFieldTTF.cpp
+  CCTileMapAtlas.cpp
   CCTransition.cpp
   CCTransitionPageTurn.cpp
   CCTransitionProgress.cpp

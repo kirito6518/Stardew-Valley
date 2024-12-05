@@ -58,11 +58,11 @@ bool HelloWorld::init()
 
     /////////////////////////////
     //3.在下面添加您的代码。。。
-    //添加一个标签显示“Hello World”
+    //添加一个标签显示“”
     //创建并初始化标签
 
     // 这里是添加一个标签，参数分别是文字，字库，大小。使用自带的TTF字库，也可以使用Windows自带字库，更改函数名即可
-    auto label = Label::createWithTTF("StardewValley", "fonts/Najfont.ttf", 100);
+    auto label = Label::createWithTTF("", "fonts/Najfont.ttf", 100);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
