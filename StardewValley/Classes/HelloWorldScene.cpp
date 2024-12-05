@@ -29,10 +29,11 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
+    //这个函数可以添加一个按钮！！！！
+    // 2. 添加一个带有“X”图像的菜单项，单击该菜单项可退出程序
+    //    你可以修改它。
+    //
+    // 添加“关闭”图标以退出进度。它是一个自动释放对象
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
@@ -57,10 +58,10 @@ bool HelloWorld::init()
     this->addChild(menu, 1);
 
     /////////////////////////////
+    // 这个函数可以添加一段文本！！！！
     //3.在下面添加您的代码。。。
     //添加一个标签显示“”
     //创建并初始化标签
-
     // 这里是添加一个标签，参数分别是文字，字库，大小。使用自带的TTF字库，也可以使用Windows自带字库，更改函数名即可
     auto label = Label::createWithTTF("", "fonts/Najfont.ttf", 100);
     if (label == nullptr)
@@ -79,6 +80,7 @@ bool HelloWorld::init()
 
     // 添加“HelloWorld”启动画面
     // 这里是显示了一张精灵
+    // 这个函数可以添加一张图片！！！！
     auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
     {
