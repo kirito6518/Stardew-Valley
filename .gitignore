@@ -49,3 +49,12 @@ StardewValley/proj.win32/.vs/StardewValley/v17/Solution.VC.db
 *.obj
 *.lastbuildstate
 *.tlog
+*.lib
+*.dll
+*.exp
+*.ilk
+*.pdb
+*.idb
+*.db
+*.db
+*.db
