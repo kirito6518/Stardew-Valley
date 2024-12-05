@@ -1,27 +1,3 @@
-/****************************************************************************
- Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
- http://www.cocos2d-x.org
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 
@@ -81,27 +57,28 @@ bool HelloWorld::init()
     this->addChild(menu, 1);
 
     /////////////////////////////
-    // 3. add your codes below...
+    //3.在下面添加您的代码。。。
+    //添加一个标签显示“Hello World”
+    //创建并初始化标签
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    // 这里是添加一个标签，参数分别是文字，字库，大小。使用自带的TTF字库，也可以使用Windows自带字库，更改函数名即可
+    auto label = Label::createWithTTF("StardewValley", "fonts/Najfont.ttf", 100);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
     }
     else
     {
-        // position the label on the center of the screen
+        // 将标签放在屏幕中央
         label->setPosition(Vec2(origin.x + visibleSize.width/2,
                                 origin.y + visibleSize.height - label->getContentSize().height));
 
-        // add the label as a child to this layer
+        // 将标签作为子标签添加到此图层
         this->addChild(label, 1);
     }
 
-    // add "HelloWorld" splash screen"
+    // 添加“HelloWorld”启动画面
+    // 这里是显示了一张精灵
     auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
     {
@@ -109,7 +86,7 @@ bool HelloWorld::init()
     }
     else
     {
-        // position the sprite on the center of the screen
+        // 将精灵放置在屏幕中央
         sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
         // add the sprite as a child to this layer
