@@ -18,19 +18,21 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //初始化
+    //////////////////////////////
+    // 1. super init first
     if ( !Scene::init() )
     {
         return false;
     }
 
-    const auto visibleSize = Director::getInstance()->getVisibleSize();
-    const Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    //获取游戏屏幕宽高
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
     //这个函数可以添加一个按钮！！！！
-    // 添加一个带有“X”图像的菜单项，单击该菜单项可退出程序
-    // 你可以修改它。
+    // 2. 添加一个带有“X”图像的菜单项，单击该菜单项可退出程序
+    //    你可以修改它。
     //
     // 添加“关闭”图标以退出进度。它是一个自动释放对象
     auto closeItem = MenuItemImage::create(
@@ -46,7 +48,6 @@ bool HelloWorld::init()
     }
     else
     {
-        // 刚刚好挨到左下角
         float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
         float y = origin.y + closeItem->getContentSize().height/2;
         closeItem->setPosition(Vec2(x,y));
@@ -59,20 +60,20 @@ bool HelloWorld::init()
 
     /////////////////////////////
     // 这个函数可以添加一段文本！！！！
-    // 添加一个标签显示“Exit”
-    // 创建并初始化标签
+    //3.在下面添加您的代码。。。
+    //添加一个标签显示“”
+    //创建并初始化标签
     // 这里是添加一个标签，参数分别是文字，字库，大小。使用自带的TTF字库，也可以使用Windows自带字库，更改函数名即可
-    auto label = Label::createWithTTF("Exit", "fonts/Marker Felt.ttf", 40);
+    auto label = Label::createWithTTF("", "fonts/Najfont.ttf", 100);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
     }
     else
     {
-        // 将标签放在按钮中央
-        float x = origin.x + visibleSize.width - label->getContentSize().width / 2;
-        float y = origin.y + label->getContentSize().height / 2;
-        label->setPosition(Vec2(x - 30, y + 8));
+        // 将标签放在屏幕中央
+        label->setPosition(Vec2(origin.x + visibleSize.width/2,
+                                origin.y + visibleSize.height - label->getContentSize().height));
 
         // 将标签作为子标签添加到此图层
         this->addChild(label, 1);
@@ -100,10 +101,10 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
-    //关闭cocos2d-x游戏场景并退出应用程序
+    //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
 
-    /*要在不退出应用程序的情况下导航回本机iOS屏幕（如果存在），请不要如上所述使用Director:：getInstance（）->end（），而是触发在RootViewController.mm中创建的自定义事件，如下所示*/
+    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
