@@ -14,5 +14,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance,
 
     // 创建应用程序实例
     AppDelegate app;
+    // 开始运行
     return Application::getInstance()->run();
 }
