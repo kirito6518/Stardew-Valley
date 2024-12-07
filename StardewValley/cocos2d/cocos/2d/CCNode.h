@@ -321,10 +321,10 @@ public:
     virtual void setScale(float scaleX, float scaleY);
 
     /**
-     * Sets the position (x,y) of the node in its parent's coordinate system.
+     * 设置节点在其父坐标系中的位置（x，y）。
      *
      * Usually we use `Vec2(x,y)` to compose Vec2 object.
-     * This code snippet sets the node in the center of screen.
+     * 此代码片段将节点设置在屏幕的中心。
      @code
      Size size = Director::getInstance()->getWinSize();
      node->setPosition(size.width/2, size.height/2);

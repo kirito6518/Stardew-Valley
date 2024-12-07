@@ -256,7 +256,7 @@ namespace DrawPrimitives
      */
     CC_DEPRECATED_ATTRIBUTE void CC_DLL setDrawColor4F(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 
-    /** Set the point size in points. Default 1.
+    /** 以点为单位设置点大小。默认值1。
      *
      * @param pointSize The point size with an float.
      * @since v2.0

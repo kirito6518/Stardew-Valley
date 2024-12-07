@@ -27,3 +27,9 @@ StardewValley/proj.win32/.vs/StardewValley/v17/fileList.bin
 /StardewValley/proj.win32/.vs
 /StardewValley/cocos2d/cocos/2d/Debug.win32
 *.bin
+/StardewValley/cocos2d/cocos/2d/Debug.win32
+*.obj
+*.pdb
+*.tlog
+*.idb
+*.vsidx

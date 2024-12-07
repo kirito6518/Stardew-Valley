@@ -41,11 +41,11 @@ class Touch;
 
 
 
-/** @brief A Menu for touch handling.
+/** @brief 用于触摸处理的菜单。
 * 
-* Features and Limitation:
-*  - You can add MenuItem objects in runtime using addChild.
-*  - But the only accepted children are MenuItem objects.
+* 特点和限制：
+*  - 您可以使用addChild在运行时添加MenuItem对象。
+*  - 但唯一被接受的子对象是MenuItem对象。
 */
 class CC_DLL Menu : public Layer
 {
