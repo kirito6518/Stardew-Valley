@@ -66,7 +66,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-    // 开关帧率显示！！！！
+    // 开关帧率显示
     director->setDisplayStats(false);
 
     // 设置FPS。如果不调用此函数，默认值为1.0/60

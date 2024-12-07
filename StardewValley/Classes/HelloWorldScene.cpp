@@ -25,6 +25,7 @@ bool HelloWorld::init()
         return false;
     }
 
+    //获取游戏屏幕宽高
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
