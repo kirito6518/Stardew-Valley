@@ -31,11 +31,8 @@ bool AuthorListScene::init()
 
     {
         //添加一个按钮，左键点击后切回主屏幕
-        auto toHollowWorld = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", [](Ref* sender) {
-            // 切换到新的场景
-            auto HollowWorldScene = HelloWorld::createScene();
-            Director::getInstance()->replaceScene(HollowWorldScene);
-            });
+        auto toHollowWorld = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(AuthorListScene::toMenu, this));
+           
         //设置坐标
         const float x = visibleSize.width - toHollowWorld->getContentSize().width / 2;
         const float y = toHollowWorld->getContentSize().height / 2;
@@ -59,5 +56,14 @@ bool AuthorListScene::init()
         this->addChild(toHollowWorld, 2);
     }
 
+
     return true;
+}
+
+
+// 切换到主菜单
+void AuthorListScene::toMenu(Ref* ref)
+{
+    auto HollowWorldScene = HelloWorld::createScene();
+    Director::getInstance()->replaceScene(HollowWorldScene);
 }

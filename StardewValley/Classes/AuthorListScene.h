@@ -10,6 +10,9 @@ public:
 
     virtual bool init();
 
+    //前往主菜单场景
+    void toMenu(Ref*);
+
     // 实现 "init" 方法
     CREATE_FUNC(AuthorListScene);
 };

@@ -66,12 +66,8 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后播放制作名单
-        //转到播放作者名单的场景
-        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", [](Ref* sender) {
-            // 切换到新的场景
-            auto authorListScene = AuthorListScene::createScene();
-            Director::getInstance()->replaceScene(authorListScene);
-            });
+        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::to_authorlist, this));
+            
         //设置坐标
         const float x = visibleSize.width / 4 * 3 - toAuthorList->getContentSize().width / 2;
         const float y = toAuthorList->getContentSize().height / 2;
@@ -160,3 +156,12 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
+
+//前往作者名单场景
+void HelloWorld::to_authorlist(Ref* ref)
+{
+    auto authorListScene = AuthorListScene::createScene();
+    Director::getInstance()->replaceScene(authorListScene);
+}
+
+
