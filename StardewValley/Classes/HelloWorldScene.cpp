@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AuthorListScene.h"
 
 USING_NS_CC;
 //创建场景
@@ -65,14 +66,18 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后播放制作名单
-        //执行播放作者名单的函数（未实现）
-        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        //转到播放作者名单的场景
+        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", [](Ref* sender) {
+            // 切换到新的场景
+            auto authorListScene = AuthorListScene::createScene();
+            Director::getInstance()->replaceScene(authorListScene);
+            });
         //设置坐标
-        const float x = visibleSize.width / 4 * 3 - closeItem->getContentSize().width / 2;
-        const float y = closeItem->getContentSize().height / 2;
-        closeItem->setPosition(Vec2(x, y));
+        const float x = visibleSize.width / 4 * 3 - toAuthorList->getContentSize().width / 2;
+        const float y = toAuthorList->getContentSize().height / 2;
+        toAuthorList->setPosition(Vec2(x, y));
         // 创建菜单，它是一个自动释放对象
-        auto menu = Menu::create(closeItem, NULL);
+        auto menu = Menu::create(toAuthorList, NULL);
         menu->setPosition(Vec2::ZERO);
         // 添加到图层
         this->addChild(menu, 1);
@@ -81,13 +86,13 @@ bool HelloWorld::init()
     {
         // 添加一段文本
         // 使用自己的字库
-        auto label = Label::createWithTTF("Author\n  List", "fonts/Marker Felt.ttf", 20);
+        auto toAuthorList = Label::createWithTTF("Author\n  List", "fonts/Marker Felt.ttf", 20);
         // 将标签放在按钮里
-        const float x = visibleSize.width / 4 * 3 - label->getContentSize().width / 2;
-        const float y = label->getContentSize().height / 2;
-        label->setPosition(Vec2(x - 30, y + 5));
+        const float x = visibleSize.width / 4 * 3 - toAuthorList->getContentSize().width / 2;
+        const float y = toAuthorList->getContentSize().height / 2;
+        toAuthorList->setPosition(Vec2(x - 30, y + 5));
         // 将标签作为子标签添加到此图层
-        this->addChild(label, 2);
+        this->addChild(toAuthorList, 2);
     }
 
     {
