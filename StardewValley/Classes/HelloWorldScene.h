@@ -15,7 +15,7 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
     //前往作者名单场景
-    void to_authorlist(Ref*);
+    void toAuthorlist(Ref*);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
