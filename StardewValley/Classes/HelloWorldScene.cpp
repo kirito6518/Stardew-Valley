@@ -135,11 +135,11 @@ bool HelloWorld::init()
     {
         // 添加一段文本
         // 使用自己的字库
-        auto label = Label::createWithTTF(" Start A\nNew Game", "fonts/Marker Felt.ttf", 15);
+        auto label = Label::createWithTTF("New Game", "fonts/Marker Felt.ttf", 20);
         // 将标签放在按钮里
         const float x = label->getContentSize().width / 2;
         const float y = label->getContentSize().height / 2;
-        label->setPosition(Vec2(x + 30, y + 10));
+        label->setPosition(Vec2(x + 20, y + 20));
         // 将标签作为子标签添加到此图层
         this->addChild(label, 2);
     }
