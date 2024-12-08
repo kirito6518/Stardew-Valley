@@ -66,7 +66,7 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后播放制作名单
-        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::to_authorlist, this));
+        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::toAuthorlist, this));
             
         //设置坐标
         const float x = visibleSize.width / 4 * 3 - toAuthorList->getContentSize().width / 2;
@@ -158,7 +158,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 //前往作者名单场景
-void HelloWorld::to_authorlist(Ref* ref)
+void HelloWorld::toAuthorlist(Ref* ref)
 {
     auto authorListScene = AuthorListScene::createScene();
     Director::getInstance()->replaceScene(authorListScene);
