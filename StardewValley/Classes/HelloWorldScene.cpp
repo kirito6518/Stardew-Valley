@@ -165,5 +165,3 @@ void HelloWorld::toAuthorlist(Ref* ref)
 }
 
 
-
-
