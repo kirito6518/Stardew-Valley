@@ -42,6 +42,5 @@ StardewValley/proj.win32/Debug.win32/libcocos2d.pdb
 StardewValley/proj.win32/Debug.win32/libcocos2d.pdb
 *.obj
 *.txt
-/StardewValley/cocos2d
 /StardewValley/proj.win32/Debug.win32
 /StardewValley/proj.win32/.vs
