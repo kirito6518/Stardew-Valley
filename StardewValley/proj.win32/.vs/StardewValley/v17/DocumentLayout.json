@@ -1,27 +1,36 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\proj.win32\\",
+  "WorkspaceRootPath": "E:\\Stardew-Valley\\StardewValley\\proj.win32\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}|..\\cocos2d\\cocos\\2d\\libcocos2d.vcxproj|E:\\Stardew-Valley\\StardewValley\\cocos2d\\cocos\\base\\CCConsole.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,88 +40,132 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthorListScene.cpp",
-              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
-              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAADoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-08T14:02:43.397Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthorListScene.h",
-              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
-              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-08T14:01:41.346Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "HelloWorldScene.h",
-              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h",
-              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAEAAAA",
+              "Title": "CCConsole.h",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\cocos2d\\cocos\\base\\CCConsole.h",
+              "RelativeDocumentMoniker": "..\\cocos2d\\cocos\\base\\CCConsole.h",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\cocos2d\\cocos\\base\\CCConsole.h",
+              "RelativeToolTip": "..\\cocos2d\\cocos\\base\\CCConsole.h",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAYwDIBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-08T13:57:37.519Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HelloWorldScene.cpp",
-              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
-              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-08T13:49:43.071Z"
+              "WhenOpened": "2024-12-09T07:44:35.531Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HelloWorldScene.cpp",
-              "DocumentMoniker": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
-              "RelativeDocumentMoniker": "..\\Classes\\HelloWorldScene.cpp",
-              "ToolTip": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
-              "RelativeToolTip": "..\\Classes\\HelloWorldScene.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "MainMap.h",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h",
+              "RelativeDocumentMoniker": "..\\Classes\\MainMap.h",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h",
+              "RelativeToolTip": "..\\Classes\\MainMap.h",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-09T07:33:53.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainMap.cpp",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\MainMap.cpp",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp",
+              "RelativeToolTip": "..\\Classes\\MainMap.cpp",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAAABMAAAAGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-08T13:05:48.053Z",
+              "WhenOpened": "2024-12-09T07:33:35.343Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "AuthorListScene.cpp",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.cpp",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
+              "RelativeToolTip": "..\\Classes\\AuthorListScene.cpp",
+              "ViewState": "AQIAACEAAAAAAAAAAAAowEQAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-08T14:02:43.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthorListScene.h",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
+              "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.h",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
+              "RelativeToolTip": "..\\Classes\\AuthorListScene.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-08T14:01:41.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HelloWorldScene.h",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h",
+              "RelativeDocumentMoniker": "..\\Classes\\HelloWorldScene.h",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h",
+              "RelativeToolTip": "..\\Classes\\HelloWorldScene.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-08T13:57:37.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HelloWorldScene.cpp",
+              "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
+              "RelativeDocumentMoniker": "..\\Classes\\HelloWorldScene.cpp",
+              "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
+              "RelativeToolTip": "..\\Classes\\HelloWorldScene.cpp",
+              "ViewState": "AQIAAJwAAAAAAAAAAAAAAKoAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-08T13:49:43.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HelloWorldScene.cpp",
+              "DocumentMoniker": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
+              "ToolTip": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-08T13:05:48.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "AuthorListScene.h",
               "DocumentMoniker": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
-              "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.h",
               "ToolTip": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
-              "RelativeToolTip": "..\\Classes\\AuthorListScene.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-08T13:05:23.376Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "AuthorListScene.cpp",
               "DocumentMoniker": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
-              "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.cpp",
               "ToolTip": "C:\\Users\\76886\\Desktop\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
-              "RelativeToolTip": "..\\Classes\\AuthorListScene.cpp",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-08T13:05:18.264Z"
             }

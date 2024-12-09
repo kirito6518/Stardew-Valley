@@ -1,6 +1,8 @@
 #include "HelloWorldScene.h"
+#include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "AuthorListScene.h"
+#include "MainMap.h"
 
 USING_NS_CC;
 //创建场景
@@ -120,8 +122,8 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后开启一个新存档
-        //执行创建新存档的函数（未实现）
-        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        //执行创建新存档的函数
+        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::toMainMap, this));
         //设置坐标
         const float x = closeItem->getContentSize().width / 2;
         const float y = closeItem->getContentSize().height / 2;
@@ -162,6 +164,14 @@ void HelloWorld::toAuthorlist(Ref* ref)
 {
     auto authorListScene = AuthorListScene::createScene();
     Director::getInstance()->replaceScene(authorListScene);
+}
+
+
+//前往主地图场景
+void HelloWorld::toMainMap(Ref* ref)
+{
+    auto MainMapScene = MainMap::createScene();
+    Director::getInstance()->replaceScene(MainMapScene);
 }
 
 

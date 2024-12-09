@@ -17,6 +17,9 @@ public:
     //前往作者名单场景
     void toAuthorlist(Ref*);
 
+    //前往主地图场景
+    void toMainMap(Ref*);
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 };
