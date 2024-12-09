@@ -171,7 +171,7 @@ void HelloWorld::toAuthorlist(Ref* ref)
 void HelloWorld::toMainMap(Ref* ref)
 {
     auto MainMapScene = MainMap::createScene();
-    Director::getInstance()->replaceScene(MainMapScene);
+    Director::getInstance()->replaceScene(TransitionFade::create(1.0f, MainMapScene));
 }
 
 

@@ -12,13 +12,14 @@ public:
     //初始化
     virtual bool init();
 
-
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
+    //前往主菜单场景
+    void toMenu(Ref*);
 
     // 实现create函数
     CREATE_FUNC(MainMap);
 
+private:
+    cocos2d::Sprite* mapSprite;
 };
 
 #endif // __MainMap_H__
