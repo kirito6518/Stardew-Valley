@@ -22,11 +22,11 @@ bool MainMap::init()
 
     {
         // 加载地图
-        mapSprite = Sprite::create("MainMap.png");
+        mapSprite = Sprite::create("Farm_Combat.png");
         mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
         mapSprite->setPosition(visibleSize / 2);
         this->addChild(mapSprite, 0);
-        mapSprite->setScale(1.8f); // 将 sprite 放大到原来的 1.8倍
+        mapSprite->setScale(1.2f); // 将 sprite 放大到原来的 1.2倍
     }
 
     {
