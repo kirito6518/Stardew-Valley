@@ -27,6 +27,12 @@
     <ClCompile Include="..\Classes\MainMap.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BackpackLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackpackManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -42,6 +48,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MainMap.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackpackLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackpackManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
