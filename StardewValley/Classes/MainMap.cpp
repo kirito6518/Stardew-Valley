@@ -93,8 +93,8 @@ bool MainMap::init()
     }
 
     // 创建主角精灵
-    auto texture = Director::getInstance()->getTextureCache()->addImage("walk.png");
-    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 96.0, 96.0)); // 待机是向下的第一帧
+    auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
+    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 96.0, 96.0)); // 待机是向下待机的第一帧
     playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
     this->addChild(playerSprite, 1);
 
