@@ -44,7 +44,7 @@ bool BackpackManager::addItem(const std::string& itemImagePath)
 {
     if (isFull())
     {
-        CCLOG("Backpack is full! Cannot add more items.");
+        log("Backpack is full! Cannot add more items.");
         return false;
     }
 
