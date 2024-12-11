@@ -4,20 +4,6 @@
 
 USING_NS_CC;
 
-// 创建函数
-Player* Player::create(const std::string& filename)
-{
-    Player* sprite = new (std::nothrow) Player();
-    if (sprite && sprite->initWithFile(filename))
-    {
-        sprite->autorelease();
-        sprite->init(); // 调用自定义初始化函数
-        return sprite;
-    }
-    CC_SAFE_DELETE(sprite);
-    return nullptr;
-}
-
 // 初始化函数
 bool Player::init()
 {
@@ -180,22 +166,23 @@ void Player::updatePlayerPosition(float dt)
 
     if (direction != Vec2::ZERO)
     {
-        targetPosition = playerSprite->getPosition() + direction * 100 * dt;
-
-        int directionIndex = getDirectionIndex(playerSprite->getPosition(), targetPosition);
-
-        // 播放跑动动画
-        playerSprite->runAction(RepeatForever::create(Animate::create(walkAnimations[directionIndex])));
-
-        playerSprite->setPosition(targetPosition);
+        //移动方向
+        Vec2 moveDistance = direction * 100 * dt;
+        //移动
+        auto moveAction = MoveBy::create(dt, moveDistance);
+        //判断方向动画
+        int directionIndex = getDirectionIndex(this->getPosition(), this->getPosition() + moveDistance);
+        //创建行走的动作
+        auto animateAction = Animate::create(walkAnimations[directionIndex]);
+        //行走动作和移动一起播放
+        auto spawn = Spawn::create(moveAction, animateAction, NULL);
+        //播放
+        playerSprite->runAction(spawn);
 
         lastDirectionIndex = directionIndex;
     }
     else
     {
-        // 停止之前的动画
-        playerSprite->stopAllActions();
-
         // 播放待机动画
         playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastDirectionIndex])));
     }

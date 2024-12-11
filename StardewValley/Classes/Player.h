@@ -7,9 +7,6 @@ class Player : public cocos2d::Sprite
 {
 public:
 
-    // 创建函数
-    static Player* create(const std::string& filename);
-
     // 初始化函数
     virtual bool init();
 
