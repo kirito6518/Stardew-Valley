@@ -61,35 +61,22 @@ bool MainMap::init()
 
     //添加一个按钮，左键点击后打开背包
     {
-        {
-            // 创建背包按钮
-            auto backpackButton = MenuItemImage::create(
-                "CloseNormal.png",  // 按钮正常状态的图片
-                "CloseSelected.png", // 按钮按下状态的图片
-                CC_CALLBACK_1(MainMap::onBackpackButtonClicked, this));
+        // 创建背包按钮
+        auto backpackButton = MenuItemImage::create(
+            "BagBottom_normal.png",  // 按钮正常状态的图片
+            "BagBottom_pressed.png", // 按钮按下状态的图片
+            CC_CALLBACK_1(MainMap::onBackpackButtonClicked, this));
 
-            //设置坐标
-            const float x = visibleSize.width - backpackButton->getContentSize().width / 2;
-            const float y = visibleSize.height - backpackButton->getContentSize().height / 2;
-            backpackButton->setPosition(Vec2(x, y));
-            backpackButton->setScale(0.8f);
-            // 创建菜单，它是一个自动释放对象
-            auto menu = Menu::create(backpackButton, NULL);
-            menu->setPosition(Vec2::ZERO);
-            // 添加到图层
-            this->addChild(menu, 1);
-        }
-
-        {
-            // 添加一段文本
-            auto backpackButton = Label::createWithTTF("Bag", "fonts/Marker Felt.ttf", 30);
-            // 将标签放在按钮里
-            const float x = visibleSize.width - backpackButton->getContentSize().width / 2-18;
-            const float y = visibleSize.height- backpackButton->getContentSize().height / 2-19;
-            backpackButton->setPosition(Vec2(x - 20, y + 5));
-            // 将标签作为子标签添加到此图层
-            this->addChild(backpackButton, 2);
-        }
+        //设置坐标
+        const float x = visibleSize.width - backpackButton->getContentSize().width / 2;
+        const float y = visibleSize.height - backpackButton->getContentSize().height / 2 + 12;
+        backpackButton->setPosition(Vec2(x, y));
+        backpackButton->setScale(0.8f);
+        // 创建菜单，它是一个自动释放对象
+        auto menu = Menu::create(backpackButton, NULL);
+        menu->setPosition(Vec2::ZERO);
+        // 添加到图层
+        this->addChild(menu, 1);
     }
 
     // 创建主角精灵
