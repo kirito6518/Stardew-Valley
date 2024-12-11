@@ -30,6 +30,7 @@ void BackpackManager::showBackpack(Node* parent)
 {
     if (backpackLayer->getParent() == nullptr)
     {
+
         parent->addChild(backpackLayer); // 将背包层添加到当前场景
     }
 }

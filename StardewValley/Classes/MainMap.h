@@ -2,6 +2,7 @@
 #define __MainMap_H__
 
 #include "cocos2d.h"
+#include "BackpackManager.h"
 
 class MainMap : public cocos2d::Scene
 {
@@ -19,6 +20,9 @@ public:
 
     // 键盘释放事件处理
     void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+
+    // 背包按钮的回调函数
+    void onBackpackButtonClicked(Ref* sender);
 
     // 实现create函数
     CREATE_FUNC(MainMap);

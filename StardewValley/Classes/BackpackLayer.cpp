@@ -38,9 +38,9 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         return false;
     }
 
-    backpackBgSprite->setAnchorPoint(Vec2(0, 0));
+    backpackBgSprite->setAnchorPoint(Vec2(0.5, 0.5));
     backpackBgSprite->setPosition(visibleSize / 2); 
-    this->addChild(backpackBgSprite);
+    this->addChild(backpackBgSprite,3);
 
     // ³õÊ¼»¯±³°ü×´Ì¬
     this->maxItems = maxItems;
