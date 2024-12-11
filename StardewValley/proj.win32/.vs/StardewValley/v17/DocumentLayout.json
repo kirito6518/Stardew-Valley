@@ -3,34 +3,34 @@
   "WorkspaceRootPath": "E:\\Stardew-Valley\\StardewValley\\proj.win32\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76A39BB2-9B84-4C65-98A5-654D86B86F2A}|StardewValley.vcxproj|E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{98A51BA8-FC3A-415B-AC8F-8C7BD464E93E}|..\\cocos2d\\cocos\\2d\\libcocos2d.vcxproj|E:\\Stardew-Valley\\StardewValley\\cocos2d\\cocos\\deprecated\\CCDeprecated.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
@@ -58,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "BackpackManager.h",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.h",
               "RelativeDocumentMoniker": "..\\Classes\\BackpackManager.h",
@@ -83,32 +83,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BackpackManager.cpp",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.cpp",
               "RelativeDocumentMoniker": "..\\Classes\\BackpackManager.cpp",
               "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackManager.cpp",
               "RelativeToolTip": "..\\Classes\\BackpackManager.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAuwBEAAAAOAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAuwCAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-11T14:59:44.72Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "BackpackLayer.cpp",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.cpp",
               "RelativeDocumentMoniker": "..\\Classes\\BackpackLayer.cpp",
               "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.cpp",
               "RelativeToolTip": "..\\Classes\\BackpackLayer.cpp",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAuwCEAAAAAAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAACgAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-11T14:59:24.095Z"
+              "WhenOpened": "2024-12-11T14:59:24.095Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "BackpackLayer.h",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\BackpackLayer.h",
               "RelativeDocumentMoniker": "..\\Classes\\BackpackLayer.h",
@@ -116,7 +117,8 @@
               "RelativeToolTip": "..\\Classes\\BackpackLayer.h",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAkAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-11T14:59:10.99Z"
+              "WhenOpened": "2024-12-11T14:59:10.99Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -156,32 +158,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "MainMap.h",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h",
               "RelativeDocumentMoniker": "..\\Classes\\MainMap.h",
               "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.h",
               "RelativeToolTip": "..\\Classes\\MainMap.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAIAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-09T07:33:53.3Z"
+              "WhenOpened": "2024-12-09T07:33:53.3Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainMap.cpp",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp",
               "RelativeDocumentMoniker": "..\\Classes\\MainMap.cpp",
               "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\MainMap.cpp",
               "RelativeToolTip": "..\\Classes\\MainMap.cpp",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABoAAAAfAAAA",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAAAFQAAABbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-09T07:33:35.343Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "AuthorListScene.cpp",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.cpp",
               "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.cpp",
@@ -193,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "AuthorListScene.h",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\AuthorListScene.h",
               "RelativeDocumentMoniker": "..\\Classes\\AuthorListScene.h",
@@ -205,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "HelloWorldScene.h",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.h",
               "RelativeDocumentMoniker": "..\\Classes\\HelloWorldScene.h",
@@ -213,17 +216,18 @@
               "RelativeToolTip": "..\\Classes\\HelloWorldScene.h",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-08T13:57:37.519Z"
+              "WhenOpened": "2024-12-08T13:57:37.519Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "HelloWorldScene.cpp",
               "DocumentMoniker": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
               "RelativeDocumentMoniker": "..\\Classes\\HelloWorldScene.cpp",
               "ToolTip": "E:\\Stardew-Valley\\StardewValley\\Classes\\HelloWorldScene.cpp",
               "RelativeToolTip": "..\\Classes\\HelloWorldScene.cpp",
-              "ViewState": "AQIAAIYAAAAAAAAAAAAuwKMAAAABAAAA",
+              "ViewState": "AQIAAI8AAAAAAAAAAAAuwJEAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-08T13:49:43.071Z",
               "EditorCaption": ""
