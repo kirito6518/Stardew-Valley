@@ -81,26 +81,8 @@ bool MainMap::init()
     }
 
     // 创建主角精灵
-    auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
-    player.playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 72, 96)); // 待机是向下待机的第一帧
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
     this->addChild(player.playerSprite, 1);
-
-    // 创建六个方向的行走动画
-    player.createWalkAnimations();
-
-    // 创建六个方向的待机动画
-    player.createIdleAnimations();
-
-    // 初始化目标位置
-    player.targetPosition = player.playerSprite->getPosition();
-    player.isMoving = false;
-
-    // 初始化键盘状态
-    player.isWPressed = player.isAPressed = player.isSPressed = player.isDPressed = false;
-
-    // 初始化最后一次行走的方向索引
-    player.lastDirectionIndex = 0; // 默认向下
 
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
@@ -108,8 +90,8 @@ bool MainMap::init()
     keyboardListener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, &player);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
-    // 每帧更新主角位置
-    this->scheduleUpdate();
+    // 每多少s更新主角位置
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0.2f);
 
     return true;
 }

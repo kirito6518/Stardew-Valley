@@ -1282,14 +1282,14 @@ public:
     Action* getActionByTag(int tag);
 
     /**
-     * Returns the numbers of actions that are running plus the ones that are schedule to run (actions in actionsToAdd and actions arrays).
-     *
-     * Composable actions are counted as 1 action. Example:
-     *    If you are running 1 Sequence of 7 actions, it will return 1.
-     *    If you are running 7 Sequences of 2 actions, it will return 7.
-     *
-     * @return The number of actions that are running plus the ones that are schedule to run.
-     */
+    *返回正在运行的操作数加上计划运行的操作（actionsToAdd和actions数组中的操作）。
+    *
+    *可组合动作计为1个动作。例子：
+    *如果你正在运行7个动作的1序列，它将返回1。
+    *如果你正在运行7个2个动作的序列，它将返回7。
+    *
+    *@return正在运行的操作数加上计划运行的操作。
+    */
     ssize_t getNumberOfRunningActions() const;
 
     /**

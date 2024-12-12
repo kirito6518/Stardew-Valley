@@ -172,13 +172,13 @@ public:
      */
     static Animation* create(void);
 
-    /* Creates an animation with an array of SpriteFrame and a delay between frames in seconds.
-     * The frames will be added with one "delay unit".
-     * @since v0.99.5
-     * @param arrayOfSpriteFrameNames An array of SpriteFrame.
-     * @param delay A delay between frames in seconds.
-     * @param loops The times the animation is going to loop.
-     */
+    /*使用SpriteFrame数组和帧之间的延迟（以秒为单位）创建动画。
+    *这些帧将添加一个“延迟单元”。
+    *@从v0.9.5开始
+    *@param arrayOfSpriteFrameNames SpriteFrame的数组。
+    *@param-delay帧之间的延迟，单位为秒。
+    *@param循环动画循环的次数。
+    */
     static Animation* createWithSpriteFrames(const Vector<SpriteFrame*>& arrayOfSpriteFrameNames, float delay = 0.0f, unsigned int loops = 1);
 
     /* Creates an animation with an array of AnimationFrame, the delay per units in seconds and how many times it should be executed.

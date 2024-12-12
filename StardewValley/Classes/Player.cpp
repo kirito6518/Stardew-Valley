@@ -1,8 +1,15 @@
 #include "Player.h"
 #include "cocos2d.h"
-#include "HelloWorldScene.h"
 
 USING_NS_CC;
+
+
+#define Seconds 0.025f // 每帧间隔多少秒
+
+// 构造函数
+Player::Player() {
+    init();
+}
 
 // 初始化函数
 bool Player::init()
@@ -12,17 +19,23 @@ bool Player::init()
         return false;
     }
 
+    //添加主角信息
+    auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
+    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 72, 96)); // 待机是向下待机的第一帧
+
     // 初始化属性
     isWPressed = isAPressed = isSPressed = isDPressed = false; // 初始化键盘状态
+
+    // 初始化
+    lastDirectionIndex = 0;
+
+    // 初始化目标位置
+    targetPosition = playerSprite->getPosition();
+    isMoving = false;
 
     // 创建动画
     createWalkAnimations();
     createIdleAnimations();
-
-
-
-    // 注册每帧更新
-    this->scheduleUpdate();
 
     return true;
 }
@@ -53,7 +66,7 @@ void Player::createWalkAnimations()
         }
 
         // 创建动画
-        walkAnimations[i] = Animation::createWithSpriteFrames(frames, 0.1f); // 每帧间隔 0.1 秒
+        walkAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // 每帧间隔多少秒
         walkAnimations[i]->retain(); // 保留动画，防止被释放
     }
 }
@@ -84,7 +97,7 @@ void Player::createIdleAnimations()
         }
 
         // 创建动画
-        idleAnimations[i] = Animation::createWithSpriteFrames(frames, 0.1f); // 每帧间隔 0.1 秒
+        idleAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // 每帧间隔多少秒
         idleAnimations[i]->retain(); // 保留动画，防止被释放
     }
 }
@@ -157,6 +170,7 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
 // 更新主角位置
 void Player::updatePlayerPosition(float dt)
 {
+
     Vec2 direction = Vec2::ZERO;
 
     if (isWPressed) direction.y += 1;
@@ -164,21 +178,23 @@ void Player::updatePlayerPosition(float dt)
     if (isSPressed) direction.y -= 1;
     if (isDPressed) direction.x += 1;
 
+    // 停下
+    playerSprite->stopAllActions();
+
     if (direction != Vec2::ZERO)
     {
-        //移动方向
-        Vec2 moveDistance = direction * 100 * dt;
-        //移动
+        // 移动方向
+        Vec2 moveDistance = direction * 200 * dt;
+        // 移动
         auto moveAction = MoveBy::create(dt, moveDistance);
-        //判断方向动画
+        // 判断方向动画
         int directionIndex = getDirectionIndex(this->getPosition(), this->getPosition() + moveDistance);
-        //创建行走的动作
+        // 创建行走的动作
         auto animateAction = Animate::create(walkAnimations[directionIndex]);
-        //行走动作和移动一起播放
-        auto spawn = Spawn::create(moveAction, animateAction, NULL);
-        //播放
-        playerSprite->runAction(spawn);
-
+        // 播放行走动画
+        playerSprite->runAction(RepeatForever::create(animateAction));
+        // 播放移动
+        playerSprite->runAction(moveAction);
         lastDirectionIndex = directionIndex;
     }
     else

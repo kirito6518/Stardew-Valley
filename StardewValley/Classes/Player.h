@@ -7,6 +7,9 @@ class Player : public cocos2d::Sprite
 {
 public:
 
+    // 构造函数
+    Player();
+
     // 初始化函数
     virtual bool init();
 
