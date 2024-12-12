@@ -22,9 +22,12 @@ bool MainMap::init()
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     {
-        auto tiledMap = TMXTiledMap::create("maps/Farm_Combat.tmx");
-        tiledMap->setAnchorPoint(Vec2(0.5, 0.5));
-        this->addChild(tiledMap);
+        // 加载地图
+        mapSprite = Sprite::create("Farm_Combat.png");
+        mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
+        mapSprite->setPosition(visibleSize / 2);
+        this->addChild(mapSprite, 0);
+        mapSprite->setScale(1.2f); // 将 sprite 放大到原来的 1.2倍
 
     }
 

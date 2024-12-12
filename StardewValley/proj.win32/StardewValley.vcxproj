@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BackpackLayer.cpp" />
     <ClCompile Include="..\Classes\BackpackManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\MainMap.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\BackpackLayer.h" />
     <ClInclude Include="..\Classes\BackpackManager.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\MainMap.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="main.h" />

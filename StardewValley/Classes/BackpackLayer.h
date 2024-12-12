@@ -2,37 +2,38 @@
 #define __BACKPACK_LAYER_H__
 
 #include "cocos2d.h"
+#include "Item.h" // 确保包含 Item.h
 
 USING_NS_CC;
 
-//BackpackLayer 负责显示背包背景和物品
 class BackpackLayer : public cocos2d::Layer
 {
 public:
-    // 创建背包层，传入背包背景图片路径和物品上限
     static BackpackLayer* create(const std::string& backpackBgPath, int maxItems);
 
-    // 初始化方法
     virtual bool init(const std::string& backpackBgPath, int maxItems);
 
-    // 添加物品到背包
-    bool addItem(const std::string& itemImagePath);
+    bool addItem(Sprite* itemSprite);
+    void removeItem(Sprite* itemSprite);
 
-    // 隐藏背包层
     void hideBackpack(Ref* sender);
 
+    // 显示物品详细信息
+    void showItemDetails(Item* item);
+
+    // 隐藏物品详细信息
+    void hideItemDetails();
+
 private:
-    // 背包背景精灵
     cocos2d::Sprite* backpackBgSprite;
-
-    // 物品容器
     cocos2d::Vector<cocos2d::Sprite*> itemSprites;
-
-    // 背包物品上限
     int maxItems;
-
-    // 当前背包中的物品数量
     int currentItems;
+
+    cocos2d::Label* itemNameLabel;
+    cocos2d::Label* itemCountLabel;
+    cocos2d::MenuItem* useButton;
+    cocos2d::Label* useResultLabel;
 };
 
 #endif // __BACKPACK_LAYER_H__
