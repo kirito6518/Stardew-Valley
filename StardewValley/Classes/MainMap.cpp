@@ -1,6 +1,7 @@
-#include "HelloWorldScene.h"
+ï»¿#include "HelloWorldScene.h"
 #include "MainMap.h"
 #include "cocos2d.h"
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -20,279 +21,116 @@ bool MainMap::init()
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     {
-        // ¼ÓÔØµØÍ¼
+        // åŠ è½½åœ°å›¾
         mapSprite = Sprite::create("Farm_Combat.png");
         mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
         mapSprite->setPosition(visibleSize / 2);
         this->addChild(mapSprite, 0);
-        mapSprite->setScale(1.2f); // ½« sprite ·Å´óµ½Ô­À´µÄ 1.2±¶
+        mapSprite->setScale(1.2f); // å°† sprite æ”¾å¤§åˆ°åŸæ¥çš„ 1.2å€
     }
 
 
-    //Ìí¼ÓÒ»¸ö°´Å¥£¬×ó¼üµã»÷ºóÇĞ»ØÖ÷ÆÁÄ»
+    //æ·»åŠ ä¸€ä¸ªæŒ‰é’®ï¼Œå·¦é”®ç‚¹å‡»ååˆ‡å›ä¸»å±å¹•
     {
         {
             auto toHollowWorld = MenuItemImage::create(
                 "CloseNormal.png", 
                 "CloseSelected.png",
                 CC_CALLBACK_1(MainMap::toMenu, this));
-            //ÉèÖÃ×ø±ê
+            //è®¾ç½®åæ ‡
             const float x = visibleSize.width - toHollowWorld->getContentSize().width / 2;
             const float y = toHollowWorld->getContentSize().height / 2;
             toHollowWorld->setPosition(Vec2(x, y));
-            // ´´½¨²Ëµ¥£¬ËüÊÇÒ»¸ö×Ô¶¯ÊÍ·Å¶ÔÏó
+            // åˆ›å»ºèœå•ï¼Œå®ƒæ˜¯ä¸€ä¸ªè‡ªåŠ¨é‡Šæ”¾å¯¹è±¡
             auto menu = Menu::create(toHollowWorld, NULL);
             menu->setPosition(Vec2::ZERO);
-            // Ìí¼Óµ½Í¼²ã
-            this->addChild(menu, 1);
+            // æ·»åŠ åˆ°å›¾å±‚
+            this->addChild(menu, 2);
         }
         {
-            // Ìí¼ÓÒ»¶ÎÎÄ±¾
+            // æ·»åŠ ä¸€æ®µæ–‡æœ¬
             auto toHollowWorld = Label::createWithTTF("Menu", "fonts/Marker Felt.ttf", 35);
-            // ½«±êÇ©·ÅÔÚ°´Å¥Àï
+            // å°†æ ‡ç­¾æ”¾åœ¨æŒ‰é’®é‡Œ
             const float x = visibleSize.width - toHollowWorld->getContentSize().width / 2;
             const float y = toHollowWorld->getContentSize().height / 2;
             toHollowWorld->setPosition(Vec2(x - 20, y + 5));
-            // ½«±êÇ©×÷Îª×Ó±êÇ©Ìí¼Óµ½´ËÍ¼²ã
+            // å°†æ ‡ç­¾ä½œä¸ºå­æ ‡ç­¾æ·»åŠ åˆ°æ­¤å›¾å±‚
             this->addChild(toHollowWorld, 2);
         }
     }
 
 
-    //Ìí¼ÓÒ»¸ö°´Å¥£¬×ó¼üµã»÷ºó´ò¿ª±³°ü
+    //æ·»åŠ ä¸€ä¸ªæŒ‰é’®ï¼Œå·¦é”®ç‚¹å‡»åæ‰“å¼€èƒŒåŒ…
     {
-        // ´´½¨±³°ü°´Å¥
+        // åˆ›å»ºèƒŒåŒ…æŒ‰é’®
         auto backpackButton = MenuItemImage::create(
-            "BagBottom_normal.png",  // °´Å¥Õı³£×´Ì¬µÄÍ¼Æ¬
-            "BagBottom_pressed.png", // °´Å¥°´ÏÂ×´Ì¬µÄÍ¼Æ¬
+            "BagBottom_normal.png",  // æŒ‰é’®æ­£å¸¸çŠ¶æ€çš„å›¾ç‰‡
+            "BagBottom_pressed.png", // æŒ‰é’®æŒ‰ä¸‹çŠ¶æ€çš„å›¾ç‰‡
             CC_CALLBACK_1(MainMap::onBackpackButtonClicked, this));
 
-        //ÉèÖÃ×ø±ê
+        //è®¾ç½®åæ ‡
         const float x = visibleSize.width - backpackButton->getContentSize().width / 2;
         const float y = visibleSize.height - backpackButton->getContentSize().height / 2 + 12;
         backpackButton->setPosition(Vec2(x, y));
         backpackButton->setScale(0.8f);
-        // ´´½¨²Ëµ¥£¬ËüÊÇÒ»¸ö×Ô¶¯ÊÍ·Å¶ÔÏó
+        // åˆ›å»ºèœå•ï¼Œå®ƒæ˜¯ä¸€ä¸ªè‡ªåŠ¨é‡Šæ”¾å¯¹è±¡
         auto menu = Menu::create(backpackButton, NULL);
         menu->setPosition(Vec2::ZERO);
-        // Ìí¼Óµ½Í¼²ã
-        this->addChild(menu, 1);
+        // æ·»åŠ åˆ°å›¾å±‚
+        this->addChild(menu, 2);
     }
 
-    // ´´½¨Ö÷½Ç¾«Áé
+    // åˆ›å»ºä¸»è§’ç²¾çµ
     auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
-    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 96.0, 96.0)); // ´ı»úÊÇÏòÏÂ´ı»úµÄµÚÒ»Ö¡
-    playerSprite->setPosition(visibleSize / 2); // ³õÊ¼Î»ÖÃÔÚÆÁÄ»ÖĞÑë
-    this->addChild(playerSprite, 1);
+    player.playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 72, 96)); // å¾…æœºæ˜¯å‘ä¸‹å¾…æœºçš„ç¬¬ä¸€å¸§
+    player.playerSprite->setPosition(visibleSize / 2); // åˆå§‹ä½ç½®åœ¨å±å¹•ä¸­å¤®
+    this->addChild(player.playerSprite, 1);
 
-    // ´´½¨Áù¸ö·½ÏòµÄĞĞ×ß¶¯»­
-    createWalkAnimations();
+    // åˆ›å»ºå…­ä¸ªæ–¹å‘çš„è¡Œèµ°åŠ¨ç”»
+    player.createWalkAnimations();
 
-    // ´´½¨Áù¸ö·½ÏòµÄ´ı»ú¶¯»­
-    createIdleAnimations();
+    // åˆ›å»ºå…­ä¸ªæ–¹å‘çš„å¾…æœºåŠ¨ç”»
+    player.createIdleAnimations();
 
-    // ³õÊ¼»¯Ä¿±êÎ»ÖÃ
-    targetPosition = playerSprite->getPosition();
-    isMoving = false;
+    // åˆå§‹åŒ–ç›®æ ‡ä½ç½®
+    player.targetPosition = player.playerSprite->getPosition();
+    player.isMoving = false;
 
-    // ³õÊ¼»¯¼üÅÌ×´Ì¬
-    isWPressed = isAPressed = isSPressed = isDPressed = false;
+    // åˆå§‹åŒ–é”®ç›˜çŠ¶æ€
+    player.isWPressed = player.isAPressed = player.isSPressed = player.isDPressed = false;
 
-    // ³õÊ¼»¯×îºóÒ»´ÎĞĞ×ßµÄ·½ÏòË÷Òı
-    lastDirectionIndex = 0; // Ä¬ÈÏÏòÏÂ
+    // åˆå§‹åŒ–æœ€åä¸€æ¬¡è¡Œèµ°çš„æ–¹å‘ç´¢å¼•
+    player.lastDirectionIndex = 0; // é»˜è®¤å‘ä¸‹
 
-    // ×¢²á¼üÅÌÊÂ¼ş
+    // æ³¨å†Œé”®ç›˜äº‹ä»¶
     auto keyboardListener = EventListenerKeyboard::create();
-    keyboardListener->onKeyPressed = CC_CALLBACK_2(MainMap::onKeyPressed, this);
-    keyboardListener->onKeyReleased = CC_CALLBACK_2(MainMap::onKeyReleased, this);
+    keyboardListener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, &player);
+    keyboardListener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, &player);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
-    // Ã¿Ö¡¸üĞÂÖ÷½ÇÎ»ÖÃ
+    // æ¯å¸§æ›´æ–°ä¸»è§’ä½ç½®
     this->scheduleUpdate();
 
     return true;
 }
 
-// ÇĞ»»µ½Ö÷²Ëµ¥
+// åˆ‡æ¢åˆ°ä¸»èœå•
 void MainMap::toMenu(Ref* ref)
 {
     auto HollowWorldScene = HelloWorld::createScene();
     Director::getInstance()->replaceScene(HollowWorldScene);
 }
 
-// ´´½¨Áù¸ö·½ÏòµÄĞĞ×ß¶¯»­
-void MainMap::createWalkAnimations()
-{
-    // ¼ÓÔØ walk.png Í¼Æ¬
-    auto texture = Director::getInstance()->getTextureCache()->addImage("walk.png");
-
-    // walk.png ÊÇÒ»¸ö 6 ·½ÏòµÄÍ¼Æ¬£¬Ã¿Ö¡µÄ¿í¶ÈÎª 72 ÏñËØ£¬¸ß¶ÈÎª 96 ÏñËØ
-    const int frameWidth = 72;
-    const int frameHeight = 96;
-    const int framesPerDirection = 8; // Ã¿¸ö·½ÏòÓĞ 8 Ö¡
-
-    // ¶¨ÒåÃ¿¸ö·½ÏòµÄÖ¡·¶Î§
-    // ·½ÏòË³Ğò£ºÏÂ¡¢×ó¡¢×óÉÏ¡¢ÉÏ¡¢ÓÒÉÏ¡¢ÓÒ
-    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ¸ö·½ÏòµÄÆ«ÒÆÁ¿
-
-    for (int i = 0; i < 6; ++i)
-    {
-        Vector<SpriteFrame*> frames;
-        for (int j = 0; j < framesPerDirection; ++j)
-        {
-            // ¸ù¾İ·½ÏòÆ«ÒÆÁ¿¼ÆËãÖ¡µÄ×ø±ê
-            auto frame = SpriteFrame::createWithTexture(texture, Rect(j * frameWidth, directionOffsets[i] * frameHeight, frameWidth, frameHeight));
-            frames.pushBack(frame);
-        }
-
-        // ´´½¨¶¯»­
-        walkAnimations[i] = Animation::createWithSpriteFrames(frames, 0.1f); // Ã¿Ö¡¼ä¸ô 0.1 Ãë
-        walkAnimations[i]->retain(); // ±£Áô¶¯»­£¬·ÀÖ¹±»ÊÍ·Å
-    }
-}
-
-// ´´½¨Áù¸ö·½ÏòµÄ´ı»ú¶¯»­
-void MainMap::createIdleAnimations()
-{
-    // ¼ÓÔØ idle.png Í¼Æ¬
-    auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
-
-    // idle.png ÊÇÒ»¸ö 6 ·½ÏòµÄÍ¼Æ¬£¬Ã¿Ö¡µÄ¿í¶ÈÎª 72 ÏñËØ£¬¸ß¶ÈÎª 96 ÏñËØ
-    const int frameWidth = 72;
-    const int frameHeight = 96;
-    const int framesPerDirection = 8; // Ã¿¸ö·½ÏòÓĞ 8 Ö¡
-
-    // ¶¨ÒåÃ¿¸ö·½ÏòµÄÖ¡·¶Î§
-    // ·½ÏòË³Ğò£ºÏÂ¡¢×ó¡¢×óÉÏ¡¢ÉÏ¡¢ÓÒÉÏ¡¢ÓÒ
-    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ¸ö·½ÏòµÄÆ«ÒÆÁ¿
-
-    for (int i = 0; i < 6; ++i)
-    {
-        Vector<SpriteFrame*> frames;
-        for (int j = 0; j < framesPerDirection; ++j)
-        {
-            // ¸ù¾İ·½ÏòÆ«ÒÆÁ¿¼ÆËãÖ¡µÄ×ø±ê
-            auto frame = SpriteFrame::createWithTexture(texture, Rect(j * frameWidth, directionOffsets[i] * frameHeight, frameWidth, frameHeight));
-            frames.pushBack(frame);
-        }
-
-        // ´´½¨¶¯»­
-        idleAnimations[i] = Animation::createWithSpriteFrames(frames, 0.1f); // Ã¿Ö¡¼ä¸ô 0.1 Ãë
-        idleAnimations[i]->retain(); // ±£Áô¶¯»­£¬·ÀÖ¹±»ÊÍ·Å
-    }
-}
-
-// ¸ù¾İ·½ÏòÑ¡Ôñ¶¯»­
-int MainMap::getDirectionIndex(const cocos2d::Vec2& from, const cocos2d::Vec2& to)
-{
-    Vec2 direction = to - from;
-    float angle = CC_RADIANS_TO_DEGREES(atan2(direction.y, direction.x));
-
-    // ¸ù¾İ½Ç¶ÈÈ·¶¨·½Ïò
-    if (angle >= -22.5f && angle < 22.5f) return 5; // ÓÒ
-    if (angle >= 22.5f && angle < 67.5f) return 4;  // ÓÒÉÏ
-    if (angle >= 67.5f && angle < 112.5f) return 3; // ÉÏ
-    if (angle >= 112.5f && angle < 157.5f) return 2; // ×óÉÏ
-    if (angle >= 157.5f || angle < -157.5f) return 1; // ×ó
-    if (angle >= -157.5f && angle < -112.5f) return 1; // ×óÏÂ
-    if (angle >= -112.5f && angle < -67.5f) return 0; // ÏÂ
-    if (angle >= -67.5f && angle < -22.5f) return 5; // ÓÒÏÂ
-
-    return 5; // Ä¬ÈÏÓÒ
-}
-
-// ¼üÅÌ°´ÏÂÊÂ¼ş´¦Àí
-void MainMap::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
-{
-    CCLOG("Key pressed: %d", keyCode); // Êä³ö°´¼ü´úÂë
-    switch (keyCode)
-    {
-        case EventKeyboard::KeyCode::KEY_W:
-            isWPressed = true;
-            break;
-        case EventKeyboard::KeyCode::KEY_A:
-            isAPressed = true;
-            break;
-        case EventKeyboard::KeyCode::KEY_S:
-            isSPressed = true;
-            break;
-        case EventKeyboard::KeyCode::KEY_D:
-            isDPressed = true;
-            break;
-        default:
-            break;
-    }
-}
-
-// ¼üÅÌÊÍ·ÅÊÂ¼ş´¦Àí
-void MainMap::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
-{
-    CCLOG("Key released: %d", keyCode); // Êä³ö°´¼ü´úÂë
-    switch (keyCode)
-    {
-        case EventKeyboard::KeyCode::KEY_W:
-            isWPressed = false;
-            break;
-        case EventKeyboard::KeyCode::KEY_A:
-            isAPressed = false;
-            break;
-        case EventKeyboard::KeyCode::KEY_S:
-            isSPressed = false;
-            break;
-        case EventKeyboard::KeyCode::KEY_D:
-            isDPressed = false;
-            break;
-        default:
-            break;
-    }
-}
-
-// ¸üĞÂÖ÷½ÇÎ»ÖÃ
-void MainMap::updatePlayerPosition(float dt)
-{
-    Vec2 direction = Vec2::ZERO;
-
-    if (isWPressed) direction.y += 1; // ÉÏ
-    if (isAPressed) direction.x -= 1; // ×ó
-    if (isSPressed) direction.y -= 1; // ÏÂ
-    if (isDPressed) direction.x += 1; // ÓÒ
-
-    if (direction != Vec2::ZERO)
-    {
-        // ¼ÆËãÄ¿±êÎ»ÖÃ
-        targetPosition = playerSprite->getPosition() + direction * 100 * dt; // Ã¿ÃëÒÆ¶¯ 100 ÏñËØ
-
-        // ¸ù¾İ·½ÏòÑ¡Ôñ¶¯»­
-        int directionIndex = getDirectionIndex(playerSprite->getPosition(), targetPosition);
-
-        // ²¥·ÅÅÜ¶¯¶¯»­
-        playerSprite->runAction(RepeatForever::create(Animate::create(walkAnimations[directionIndex])));
-
-        // ¸üĞÂÖ÷½ÇÎ»ÖÃ
-        playerSprite->setPosition(targetPosition);
-
-        // ¼ÇÂ¼×îºóÒ»´ÎĞĞ×ßµÄ·½ÏòË÷Òı
-        lastDirectionIndex = directionIndex;
-    }
-    else
-    {
-        // Í£Ö¹¶¯»­
-        playerSprite->stopAllActions();
-
-        // ²¥·Å´ı»ú¶¯»­
-        playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastDirectionIndex])));
-    }
-}
-
-// Ã¿Ö¡¸üĞÂ
-void MainMap::update(float dt)
-{
-    updatePlayerPosition(dt);
-}
-
-// ±³°ü°´Å¥µÄ»Øµ÷º¯Êı
+// èƒŒåŒ…æŒ‰é’®çš„å›è°ƒå‡½æ•°
 void MainMap::onBackpackButtonClicked(Ref* sender)
 {
-    // µ÷ÓÃµ¥Àı¹ÜÀíÀàÏÔÊ¾±³°ü²ã
+    // è°ƒç”¨å•ä¾‹ç®¡ç†ç±»æ˜¾ç¤ºèƒŒåŒ…å±‚
     BackpackManager::getInstance()->showBackpack(this);
+}
+
+void MainMap::update(float delta)
+{
+    // åœ¨è¿™é‡Œæ·»åŠ æ¯ä¸€å¸§éœ€è¦æ›´æ–°çš„é€»è¾‘
+    // ä¾‹å¦‚ï¼Œæ›´æ–°ç©å®¶çš„ä½ç½®ã€åŠ¨ç”»ç­‰
+    player.update(delta);
 }
