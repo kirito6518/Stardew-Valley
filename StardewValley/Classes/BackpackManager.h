@@ -1,3 +1,6 @@
+#ifndef __BACKPACK_MANAGER_H__
+#define __BACKPACK_MANAGER_H__
+
 #include "cocos2d.h"
 #include "BackpackLayer.h"
 
@@ -29,3 +32,5 @@ private:
     int maxItems;                  // 背包物品上限
     int currentItems;              // 当前背包中的物品数量
 };
+
+#endif // __BACKPACK_MANAGER_H__

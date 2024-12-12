@@ -42,7 +42,10 @@ bool HelloWorld::init()
     {
         //添加一个按钮，左键点击后执行退出函数
         //执行menuCloseCallback这个函数
-        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        auto closeItem = MenuItemImage::create(
+            "ui/CloseNormal.png", 
+            "ui/CloseSelected.png", 
+            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
         //设置坐标
         const float x = visibleSize.width - closeItem->getContentSize().width / 2;
         const float y = closeItem->getContentSize().height / 2;
@@ -68,7 +71,9 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后播放制作名单
-        auto toAuthorList = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::toAuthorlist, this));
+        auto toAuthorList = MenuItemImage::create("ui/CloseNormal.png", 
+            "ui/CloseSelected.png",
+            CC_CALLBACK_1(HelloWorld::toAuthorlist, this));
             
         //设置坐标
         const float x = visibleSize.width / 4 * 3 - toAuthorList->getContentSize().width / 2;
@@ -96,7 +101,10 @@ bool HelloWorld::init()
     {
         //添加一个按钮，左键点击后加载存档
         //执行加载存档的函数（未实现）
-        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        auto closeItem = MenuItemImage::create(
+            "ui/CloseNormal.png",
+            "ui/CloseSelected.png",
+            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
         //设置坐标
         const float x = visibleSize.width / 4 + closeItem->getContentSize().width / 2;
         const float y = closeItem->getContentSize().height / 2;
@@ -123,7 +131,10 @@ bool HelloWorld::init()
     {
         //添加一个按钮，左键点击后开启一个新存档
         //执行创建新存档的函数
-        auto closeItem = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(HelloWorld::toMainMap, this));
+        auto closeItem = MenuItemImage::create(
+            "ui/CloseNormal.png", 
+            "ui/CloseSelected.png", 
+            CC_CALLBACK_1(HelloWorld::toMainMap, this));
         //设置坐标
         const float x = closeItem->getContentSize().width / 2;
         const float y = closeItem->getContentSize().height / 2;

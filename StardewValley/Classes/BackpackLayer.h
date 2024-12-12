@@ -1,8 +1,11 @@
+#ifndef __BACKPACK_LAYER_H__
+#define __BACKPACK_LAYER_H__
 
 #include "cocos2d.h"
 
 USING_NS_CC;
 
+//BackpackLayer 负责显示背包背景和物品
 class BackpackLayer : public cocos2d::Layer
 {
 public:
@@ -15,6 +18,8 @@ public:
     // 添加物品到背包
     bool addItem(const std::string& itemImagePath);
 
+    // 隐藏背包层
+    void hideBackpack(Ref* sender);
 
 private:
     // 背包背景精灵
@@ -29,3 +34,5 @@ private:
     // 当前背包中的物品数量
     int currentItems;
 };
+
+#endif // __BACKPACK_LAYER_H__

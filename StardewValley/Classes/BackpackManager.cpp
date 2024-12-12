@@ -1,5 +1,5 @@
 #include "BackpackManager.h"
-
+#include "cocos2d.h"
 USING_NS_CC;
 
 BackpackManager* BackpackManager::getInstance()
@@ -8,18 +8,18 @@ BackpackManager* BackpackManager::getInstance()
     return &instance;
 }
 
-/*此处暂定*/
+
 BackpackManager::BackpackManager()
 {
     // 初始化背包层
-    backpackLayer = BackpackLayer::create("backpack.png", 40); // 背包背景图片为 "backpack.png"，上限为 40 个物品
+    backpackLayer = BackpackLayer::create("ui/backpack.png", 40); // 背包背景图片为 "backpack.png"，上限为 40 个物品
     backpackLayer->retain(); // 保留背包层，防止被释放
 
     // 初始化背包状态
     maxItems = 40;
     currentItems = 0;
 }
-/*此处暂定*/
+
 
 BackpackManager::~BackpackManager()
 {

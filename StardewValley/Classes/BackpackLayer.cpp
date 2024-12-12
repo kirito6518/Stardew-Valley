@@ -1,5 +1,6 @@
-#include "BackpackLayer.h"
 
+#include "BackpackLayer.h"
+#include "BackpackManager.h"
 USING_NS_CC;
 
 BackpackLayer* BackpackLayer::create(const std::string& backpackBgPath, int maxItems)
@@ -28,8 +29,6 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
 
     // 初始化背包背景
-
-
     backpackBgSprite = Sprite::create(backpackBgPath);
 
     if (!backpackBgSprite)
@@ -41,6 +40,22 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     backpackBgSprite->setAnchorPoint(Vec2(0.5, 0.5));
     backpackBgSprite->setPosition(visibleSize / 2); 
     this->addChild(backpackBgSprite,3);
+
+    auto backpackSize=backpackBgSprite->getContentSize();
+
+    // 添加背包隐藏按钮
+    auto hideButton = MenuItemImage::create(
+        "ui/close_normal.png",  // 隐藏按钮正常状态的图片
+        "ui/close_pressed.png", // 隐藏按钮按下状态的图片
+        CC_CALLBACK_1(BackpackLayer::hideBackpack, this));
+
+    hideButton->setAnchorPoint(Vec2(1, 0));
+    hideButton->setPosition(Vec2(visibleSize.width / 2+ backpackSize.width/2, visibleSize.height / 2 + backpackSize.height / 2)); // 设置隐藏按钮的位置
+
+    auto menu = Menu::create(hideButton, nullptr);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu);
+
 
     // 初始化背包状态
     this->maxItems = maxItems;
@@ -80,4 +95,11 @@ bool BackpackLayer::addItem(const std::string& itemImagePath)
     // 更新当前物品数量
     currentItems++;
     return true;
+}
+
+
+void BackpackLayer::hideBackpack(Ref* sender)
+{
+    // 调用 BackpackManager 的 hideBackpack 方法
+    BackpackManager::getInstance()->hideBackpack();
 }

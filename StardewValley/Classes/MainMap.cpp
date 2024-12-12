@@ -34,8 +34,8 @@ bool MainMap::init()
     {
         {
             auto toHollowWorld = MenuItemImage::create(
-                "CloseNormal.png", 
-                "CloseSelected.png",
+                "ui/CloseNormal.png", 
+                "ui/CloseSelected.png",
                 CC_CALLBACK_1(MainMap::toMenu, this));
             //设置坐标
             const float x = visibleSize.width - toHollowWorld->getContentSize().width / 2;
@@ -64,8 +64,8 @@ bool MainMap::init()
     {
         // 创建背包按钮
         auto backpackButton = MenuItemImage::create(
-            "BagBottom_normal.png",  // 按钮正常状态的图片
-            "BagBottom_pressed.png", // 按钮按下状态的图片
+            "ui/BagBottom_normal.png",  // 按钮正常状态的图片
+            "ui/BagBottom_pressed.png", // 按钮按下状态的图片
             CC_CALLBACK_1(MainMap::onBackpackButtonClicked, this));
 
         //设置坐标
