@@ -59,17 +59,18 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     this->maxItems = maxItems;
     this->currentItems = 0;
 
+#if 1
     // 初始化物品显示UI
-    itemNameLabel = Label::createWithSystemFont("", "Arial", 24);
+    itemNameLabel = Label::createWithSystemFont("test", "Arial", 24);
     itemNameLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel);
 
-    itemCountLabel = Label::createWithSystemFont("", "Arial", 24);
+    itemCountLabel = Label::createWithSystemFont("100", "Arial", 24);
     itemCountLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     itemCountLabel->setVisible(false);
     this->addChild(itemCountLabel);
-
+#endif
 
     // 添加鼠标事件监听器
     auto mouseListener = EventListenerMouse::create();
@@ -97,6 +98,32 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
         // 如果鼠标不在任何物品上，隐藏物品名称
         itemNameLabel->setVisible(false);
+        };
+
+    mouseListener->onMouseDown = [this](Event* event) {
+        EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
+        Vec2 mousePosition = mouseEvent->getLocationInView();
+
+        // 遍历所有物品图标，检查鼠标是否点击了某个物品
+        for (auto itemSprite : itemSprites)
+        {
+            if (itemSprite->getBoundingBox().containsPoint(mousePosition))
+            {
+                // 获取物品对象
+                Item* item = static_cast<Item*>(itemSprite->getUserData());
+                if (item)
+                {
+                    // 显示使用按钮
+                    useButton->setUserData(item); // 将物品对象与使用按钮关联
+                    useButton->setVisible(true);
+                    useButton->setPosition(mousePosition + Vec2(0, -50)); // 在物品图标下方显示
+                }
+                return;
+            }
+        }
+
+        // 如果点击的不是物品图标，隐藏使用按钮
+        useButton->setVisible(false);
         };
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
@@ -156,8 +183,23 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
     float y = gridStartY - (currentItems / gridWidth) * (80 + gridSpacing);
     itemSprite->setPosition(Vec2(x, y));
 
+    // 确保 itemSprite 没有父节点
+    if (itemSprite->getParent() != nullptr)
+    {
+        CCLOG("Item sprite already has a parent!");
+        return false;
+    }
+
+    // 将物品图标添加到背包层
     this->addChild(itemSprite);
     itemSprites.pushBack(itemSprite);
+
+    // 为物品图标设置用户数据（即 Item 对象）
+    Item* item = static_cast<Item*>(itemSprite->getUserData());
+    if (item)
+    {
+        itemSprite->setUserData(item);
+    }
 
     currentItems++;
     return true;

@@ -28,6 +28,23 @@ bool MainMap::init()
     mapSprite->setPosition(visibleSize / 2);
     this->addChild(mapSprite, 0);
 
+
+
+    /*此处为test*/
+#if 1
+    // 创建一个物品精灵（假设玩家可以点击拾取）
+    auto itemSprite = Sprite::create("icons/test.png");
+    std::string itemName = "Item 1";
+    std::string itemImagePath = "icons/test.png";
+    ItemCategory category = ItemCategory::Consumable;
+    bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category);
+
+#endif
+    /*此处为test*/
+
+
+
+
     // 添加一个按钮，左键点击后切回主屏幕
     toHollowWorldButton = MenuItemImage::create(
         "ui/CloseNormal.png",
@@ -226,10 +243,11 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 更新摄像机的位置
     this->setPosition(-targetCameraPosition);
-
+ 
     // 更新背包位置
     auto backpackSize = Bag->backpackLayer->backpackBgSprite->getContentSize();
     Bag->backpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
+    Bag->backpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));

@@ -37,8 +37,6 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
         return false; // 如果图标创建失败，返回 false
     }
 
-    // 将物品图标添加到 Item 节点中
-    this->addChild(itemIcon);
 
     return true; // 初始化成功，返回 true
 }

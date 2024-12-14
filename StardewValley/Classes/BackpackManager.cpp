@@ -73,7 +73,13 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
 
     // 添加物品到背包
     items.pushBack(item);
-    static_cast<BackpackLayer*>(backpackLayer)->addItem(item->getIcon());
+
+    // 获取物品图标并设置用户数据
+    auto itemSprite = item->getIcon();
+    itemSprite->setUserData(item); // 将 Item 对象与物品图标关联
+
+    // 将物品图标添加到背包层
+    static_cast<BackpackLayer*>(backpackLayer)->addItem(itemSprite);
 
     // 更新当前物品数量
     currentItems++;
