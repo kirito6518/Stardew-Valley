@@ -4,7 +4,7 @@
 USING_NS_CC;
 
 
-#define Seconds 0.025f // 每帧间隔多少秒
+#define Seconds 0.025f // 动作每帧间隔多少秒
 
 // 构造函数
 Player::Player() {
@@ -184,7 +184,7 @@ void Player::updatePlayerPosition(float dt)
     if (direction != Vec2::ZERO)
     {
         // 移动方向
-        Vec2 moveDistance = direction * 200 * dt;
+        Vec2 moveDistance = direction * 120 * dt;
         // 移动
         auto moveAction = MoveBy::create(dt, moveDistance);
         // 判断方向动画

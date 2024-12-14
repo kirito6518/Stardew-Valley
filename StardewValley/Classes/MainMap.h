@@ -23,11 +23,17 @@ public:
     CREATE_FUNC(MainMap);
 
     // 每帧更新
-    void MainMap::update(float dt);
+    void MainMap::updatePlayerPosition(float dt);
+
+    // 每帧更新
+    void MainMap::updateCameraPosition(float dt);
 
 private:
-    cocos2d::Sprite* mapSprite;    
-    Player player;
+    cocos2d::Sprite* mapSprite; // 地图
+    Player player; // 玩家
+    MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
+    Label* toHollowWorldWord; // 返回菜单按钮的文字
+    MenuItemImage* backpackButton; // 开启背包的文字
 };
 
 #endif // __MainMap_H__
