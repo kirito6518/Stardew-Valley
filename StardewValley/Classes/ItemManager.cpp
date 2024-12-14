@@ -25,13 +25,13 @@ ItemManager::~ItemManager()
     }
 }
 
-// 创建物品并存储
+// 创建物品
 Item* ItemManager::createItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category)
 {
     auto item = Item::create(itemImagePath, itemName, category);
     if (item)
     {
-        item->retain(); // 保留物品，防止被自动释放
+        item->retain(); // 保留物品，防止被释放
         items.pushBack(item);
         return item;
     }
@@ -56,7 +56,7 @@ void ItemManager::releaseItem(Item* item)
 {
     if (item)
     {
-        items.eraseObject(item); // 从容器中移除物品
+        items.eraseObject(item); // 从列表中移除物品
         item->release(); // 释放物品
     }
 }

@@ -1,6 +1,7 @@
 #include "BackpackLayer.h"
 #include "BackpackManager.h"
 #include "Item.h"
+#include "AppDelegate.h"
 
 USING_NS_CC;
 
@@ -28,7 +29,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // 初始化背包背景
+    // 加载背包背景图片
     backpackBgSprite = Sprite::create(backpackBgPath);
     if (!backpackBgSprite)
     {
@@ -42,24 +43,23 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     auto backpackSize = backpackBgSprite->getContentSize();
 
-    // 添加隐藏按钮
-    auto hideButton = MenuItemImage::create(
+    // 创建关闭按钮
+    hideButton = MenuItemImage::create(
         "ui/close_normal.png",
         "ui/close_pressed.png",
         CC_CALLBACK_1(BackpackLayer::hideBackpack, this));
 
     hideButton->setAnchorPoint(Vec2(1, 0));
     hideButton->setPosition(Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
-
     auto menu = Menu::create(hideButton, nullptr);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu);
 
-    // 初始化背包状态
+    // 初始化背包属性
     this->maxItems = maxItems;
     this->currentItems = 0;
 
-    // 初始化物品详细信息UI
+    // 初始化物品显示UI
     itemNameLabel = Label::createWithSystemFont("", "Arial", 24);
     itemNameLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
     itemNameLabel->setVisible(false);
@@ -69,6 +69,38 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     itemCountLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     itemCountLabel->setVisible(false);
     this->addChild(itemCountLabel);
+
+
+    // 添加鼠标事件监听器
+    auto mouseListener = EventListenerMouse::create();
+    mouseListener->onMouseMove = [this](Event* event) {
+        EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
+        Vec2 mousePosition = mouseEvent->getLocationInView();
+
+        // 遍历所有物品图标，检查鼠标是否悬停在某个物品上
+        for (auto itemSprite : itemSprites)
+        {
+            if (itemSprite->getBoundingBox().containsPoint(mousePosition))
+            {
+                // 获取物品对象
+                Item* item = static_cast<Item*>(itemSprite->getUserData());
+                if (item)
+                {
+                    // 显示物品名称
+                    itemNameLabel->setString(item->getName());
+                    itemNameLabel->setPosition(mousePosition + Vec2(0, 20)); // 在鼠标位置上方显示
+                    itemNameLabel->setVisible(true);
+                }
+                return;
+            }
+        }
+
+        // 如果鼠标不在任何物品上，隐藏物品名称
+        itemNameLabel->setVisible(false);
+        };
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+
 
     useButton = MenuItemFont::create("Use", [this](Ref* sender) {
         auto item = static_cast<Item*>(sender);
@@ -101,10 +133,17 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     useResultLabel->setVisible(false);
     this->addChild(useResultLabel);
 
+    // 初始化背包格子布局
+    gridWidth = 10;
+    gridHeight = 3;
+    gridSpacing = 20;
+    gridStartX = (visibleSize.width - (gridWidth * 80 + (gridWidth - 1) * gridSpacing)) / 2;
+    gridStartY = (visibleSize.height + (gridHeight * 80 + (gridHeight - 1) * gridSpacing)) / 2;
+
     return true;
 }
 
-// 添加物品图标到背包
+// 添加物品到背包
 bool BackpackLayer::addItem(Sprite* itemSprite)
 {
     if (currentItems >= maxItems)
@@ -113,8 +152,8 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
         return false;
     }
 
-    float x = 100 + (currentItems % 5) * 80;
-    float y = 400 - (currentItems / 5) * 80;
+    float x = gridStartX + (currentItems % gridWidth) * (80 + gridSpacing);
+    float y = gridStartY - (currentItems / gridWidth) * (80 + gridSpacing);
     itemSprite->setPosition(Vec2(x, y));
 
     this->addChild(itemSprite);
@@ -124,7 +163,7 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
     return true;
 }
 
-// 移除物品图标
+// 移除物品
 void BackpackLayer::removeItem(Sprite* itemSprite)
 {
     itemSprites.eraseObject(itemSprite);
@@ -138,7 +177,7 @@ void BackpackLayer::hideBackpack(Ref* sender)
     BackpackManager::getInstance()->hideBackpack();
 }
 
-// 显示物品详细信息
+// 显示物品详情
 void BackpackLayer::showItemDetails(Item* item)
 {
     itemNameLabel->setString(item->getName());
@@ -149,7 +188,7 @@ void BackpackLayer::showItemDetails(Item* item)
     useButton->setVisible(true);
 }
 
-// 隐藏物品详细信息
+// 隐藏物品详情
 void BackpackLayer::hideItemDetails()
 {
     itemNameLabel->setVisible(false);

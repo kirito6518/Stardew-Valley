@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "BackpackManager.h"
 #include "Player.h"
+#include "BackpackLayer.h"
 
 class MainMap : public cocos2d::Scene
 {
@@ -28,6 +29,7 @@ public:
     // 每帧更新
     void MainMap::updateCameraPosition(float dt);
 
+    BackpackManager* Bag;
 private:
     cocos2d::Sprite* mapSprite; // 地图
     Player player; // 玩家

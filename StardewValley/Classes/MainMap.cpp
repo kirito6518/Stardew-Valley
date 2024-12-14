@@ -20,7 +20,8 @@ bool MainMap::init()
 
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     // 原点是窗口左下角
-
+    // 加载背包
+    Bag = BackpackManager::getInstance();
     // 加载地图
     mapSprite = Sprite::create("Farm_Combat.png");
     mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
@@ -174,7 +175,7 @@ void MainMap::toMenu(Ref* ref)
 void MainMap::onBackpackButtonClicked(Ref* sender)
 {
     // 调用单例管理类显示背包层
-    BackpackManager::getInstance()->showBackpack(this);
+    Bag->showBackpack(this);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -225,6 +226,10 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 更新摄像机的位置
     this->setPosition(-targetCameraPosition);
+
+    // 更新背包位置
+    auto backpackSize = Bag->backpackLayer->backpackBgSprite->getContentSize();
+    Bag->backpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));

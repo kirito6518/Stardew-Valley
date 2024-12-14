@@ -2,6 +2,7 @@
 #include "BackpackLayer.h"
 #include "Item.h"
 
+
 USING_NS_CC;
 
 // 获取单例实例
@@ -14,10 +15,10 @@ BackpackManager* BackpackManager::getInstance()
 // 构造函数
 BackpackManager::BackpackManager()
 {
-    backpackLayer = BackpackLayer::create("ui/backpack.png", 40); // 创建背包层
+    backpackLayer = BackpackLayer::create("ui/backpack.png", 30); // 创建背包层，10*3格子
     backpackLayer->retain(); // 保留背包层，防止被释放
 
-    maxItems = 40;           // 设置背包物品上限
+    maxItems = 30;           // 设置背包物品上限
     currentItems = 0;        // 初始化当前物品数量
 }
 
