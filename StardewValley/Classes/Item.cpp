@@ -24,6 +24,7 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
         return false; // 如果基类初始化失败，返回 false
     }
 
+    // 初始化物品属性
     this->itemName = itemName; // 设置物品名称
     this->itemCategory = category; // 设置物品分类
     this->itemCount = 1; // 初始化物品计数为 1
@@ -42,36 +43,31 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     return true; // 初始化成功，返回 true
 }
 
+// 增加物品计数
 void Item::increaseCount(int amount)
 {
-    itemCount += amount;
+    itemCount += amount; // 增加物品计数
 }
 
+// 减少物品计数
 void Item::decreaseCount(int amount)
 {
-    itemCount -= amount;
-    if (itemCount <= 0)
+    itemCount -= amount; // 减少物品计数
+    if (itemCount <= 0) // 如果计数为 0
     {
-        BackpackManager::getInstance()->removeItem(this);
+        BackpackManager::getInstance()->removeItem(this); // 调用 BackpackManager 的 removeItem 方法移除物品
     }
 }
 
+// 使用物品，返回使用结果
 bool Item::useItem()
 {
     bool success = true; // 模拟使用成功
 
-    if (success)
+    if (success) // 如果使用成功
     {
-        decreaseCount();
+        decreaseCount(); // 减少物品计数
     }
 
-    return success;
+    return success; // 返回使用结果
 }
-
-
-/*暂定*/
-void Item::onItemClicked(Ref* sender)
-{
-    CCLOG("Item Name: %s, Count: %d", itemName.c_str(), itemCount);
-}
-/*暂定*/

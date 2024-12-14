@@ -15,6 +15,7 @@ enum class ItemCategory
     OTHER      // 其他
 };
 
+// Item 类，表示一个物品
 class Item : public cocos2d::Node
 {
 public:
@@ -24,17 +25,17 @@ public:
     // 初始化方法
     virtual bool init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category);
 
-    // 获取物品名称
+    // 获取物品名称（只读）
     const std::string& getName() const { return itemName; }
 
-    // 获取物品图标
+    // 获取物品图标（只读）
     Sprite* getIcon() const { return itemIcon; }
+
+    // 获取物品分类（只读）
+    ItemCategory getCategory() const { return itemCategory; }
 
     // 获取物品计数
     int getCount() const { return itemCount; }
-
-    // 获取物品分类
-    ItemCategory getCategory() const { return itemCategory; }
 
     // 增加物品计数
     void increaseCount(int amount = 1);
@@ -45,14 +46,11 @@ public:
     // 使用物品，返回使用结果
     bool useItem();
 
-    // 点击物品图标时的回调
-    void onItemClicked(Ref* sender);
-
 private:
     std::string itemName;       // 物品名称
-    Sprite* itemIcon;           // 物品图标
-    int itemCount;              // 物品计数
+    Sprite*  itemIcon;           // 物品图标
     ItemCategory itemCategory;  // 物品分类
+    int itemCount;                    // 物品计数
 };
 
 #endif // __ITEM_H__
