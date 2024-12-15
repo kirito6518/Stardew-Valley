@@ -33,14 +33,56 @@ bool MainMap::init()
     Bag = BackpackManager::getInstance();
 
     // 加载地图
-    mapSprite = Sprite::create("Farm_Combat.png");
+    mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
     mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
     mapSprite->setPosition(visibleSize / 2);
-
-    // 载入地图互动点和碰撞箱
-
     this->addChild(mapSprite, 0);
 
+    // 载入地图互动点和碰撞箱
+    // 上边界
+    upBoundary = Sprite::create("maps/upBoundary.png");// 1920 * 100的
+    upBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+    upBoundary->setPosition(visibleSize / 2 + Size(0, 780 - 50));
+    auto upBoundaryBox = PhysicsBody::createBox(upBoundary->getContentSize(), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+    upBoundaryBox->setDynamic(false);
+    upBoundary->setPhysicsBody(upBoundaryBox);
+    this->addChild(upBoundary, 0);
+
+    // 右边界
+    rightBoundary = Sprite::create("maps/rightBoundary.png");// 80 * 1560的
+    rightBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+    rightBoundary->setPosition(visibleSize / 2 + Size(960 - 40, 0));
+    auto rightBoundaryBox = PhysicsBody::createBox(rightBoundary->getContentSize(), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+    rightBoundaryBox->setDynamic(false);
+    rightBoundary->setPhysicsBody(rightBoundaryBox);
+    this->addChild(rightBoundary, 0);
+
+    // 左边界
+    leftBoundary = Sprite::create("maps/leftBoundary.png");// 80 * 1560的
+    leftBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+    leftBoundary->setPosition(visibleSize / 2 - Size(960 - 40, 0));
+    auto leftBoundaryBox = PhysicsBody::createBox(leftBoundary->getContentSize(), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+    leftBoundaryBox->setDynamic(false);
+    leftBoundary->setPhysicsBody(leftBoundaryBox);
+    this->addChild(leftBoundary, 0);
+
+    // 下边界左半部分
+    downBoundary_left = Sprite::create("maps/downBoundary_left.png");// 940 * 90的
+    downBoundary_left->setAnchorPoint(Vec2(0.0, 0.0));
+    downBoundary_left->setPosition(visibleSize / 2 - Size(960, 780));
+    auto downBoundary_leftBox = PhysicsBody::createBox(downBoundary_left->getContentSize(), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+    downBoundary_leftBox->setDynamic(false);
+    downBoundary_left->setPhysicsBody(downBoundary_leftBox);
+    this->addChild(downBoundary_left, 0);
+
+    // 下边界右半部分
+    downBoundary_right = Sprite::create("maps/downBoundary_right.png");// 940 * 90的
+    downBoundary_right->setAnchorPoint(Vec2(1.0, 0.0));
+    downBoundary_right->setPosition(visibleSize / 2 + Size(960, -780));
+    auto downBoundary_rightBox = PhysicsBody::createBox(downBoundary_right->getContentSize(), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+    downBoundary_rightBox->setDynamic(false);
+    downBoundary_right->setPhysicsBody(downBoundary_rightBox);
+    this->addChild(downBoundary_right, 0);
 
     /*此处为test*/
 #if 1
@@ -197,6 +239,7 @@ bool MainMap::init()
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+
     return true;
 }
 

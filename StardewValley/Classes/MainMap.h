@@ -36,6 +36,11 @@ public:
     BackpackManager* Bag;
 private:
     Sprite* mapSprite; // 地图
+    Sprite* upBoundary; // 地图上边界
+    Sprite* rightBoundary; // 地图右边界
+    Sprite* leftBoundary; // 地图左边界
+    Sprite* downBoundary_left; // 地图下边界左半部分
+    Sprite* downBoundary_right; // 地图下边界右半部分
     Player player; // 玩家
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字

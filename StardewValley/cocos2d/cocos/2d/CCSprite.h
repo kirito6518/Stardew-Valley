@@ -117,14 +117,14 @@ public:
     static Sprite* create();
 
     /**
-     * Creates a sprite with an image filename.
-     *
-     * After creation, the rect of sprite will be the size of the image,
-     * and the offset will be (0,0).
-     *
-     * @param   filename A path to image file, e.g., "scene1/monster.png".
-     * @return  An autoreleased sprite object.
-     */
+    *使用图像文件名创建精灵。
+    *
+    *创建后，子画面的矩形将是图像的大小，
+    *偏移量为（0,0）。
+    *
+    *@param filename图像文件的路径，例如“scene1/monster.png”。
+    *@return自动释放的精灵对象。
+    */
     static Sprite* create(const std::string& filename);
     
     /**
