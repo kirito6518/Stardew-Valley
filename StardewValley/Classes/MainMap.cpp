@@ -34,7 +34,7 @@ bool MainMap::init()
 #if 1
     // 创建一个物品精灵（假设玩家可以拾取）
     auto itemSprite = Sprite::create("icons/test.png");
-    std::string itemName = "Item 1";
+    std::string itemName = "Test";
     std::string itemImagePath = "icons/test.png";
     ItemCategory category = ItemCategory::Consumable;
     bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category);
@@ -259,14 +259,6 @@ void MainMap::updateCameraPosition(float dt) {
 
     int Spcount = 0;
     int Itemcount = 0;
-    const cocos2d::Vector<Item*>& Items = Bag->getItems();
-    for (auto Items : Items)
-    {
-        dx = Itemcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
-        dy = Itemcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
-        Items->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY + dy));
-        Itemcount++;
-    }
 
     const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
     for (auto Itemsprite : Itemsprites)
@@ -278,7 +270,10 @@ void MainMap::updateCameraPosition(float dt) {
     }
 
     // 重新绑定鼠标事件监听器
-    BackpackLayer->setupMouseListener();
+    BackpackLayer->setupCombinedMouseListener();
+
+
+
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));

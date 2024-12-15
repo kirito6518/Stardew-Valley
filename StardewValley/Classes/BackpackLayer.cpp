@@ -51,11 +51,16 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         "ui/close_pressed.png",
         CC_CALLBACK_1(BackpackLayer::hideBackpack, this));
 
+    if (!hideButton)
+    {
+        CCLOG("Failed to create hideButton!");
+        return false;
+    }
+
     hideButton->setAnchorPoint(Vec2(1, 0));
     hideButton->setPosition(Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
-    auto menu = Menu::create(hideButton, nullptr);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu);
+    this->addChild(hideButton);
+
 
     // 初始化背包属性
     this->maxItems = maxItems;
@@ -75,7 +80,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 #endif
 
     //添加鼠标事件监听器
-    setupMouseListener();
+    setupCombinedMouseListener();
 
     useButton = MenuItemFont::create("Use", [this](Ref* sender) {
         auto item = static_cast<Item*>(sender);
@@ -196,8 +201,12 @@ void BackpackLayer::hideItemDetails()
     useButton->setVisible(false);
 }
 
-void BackpackLayer::setupMouseListener()
+//鼠标监听事件与物品的交互
+void BackpackLayer::setupCombinedMouseListener()
 {
+    // 移除之前绑定的事件监听器
+    _eventDispatcher->removeEventListenersForTarget(this);
+
     auto mouseListener = EventListenerMouse::create();
 
     // 鼠标移动事件
@@ -249,6 +258,20 @@ void BackpackLayer::setupMouseListener()
         // 将鼠标坐标转换为相对于场景的坐标
         mousePosition -= cameraOffset;
 
+        // 检查是否点击了 hideButton
+        Vec2 hideButtonPosition = hideButton->getPosition();
+        Size hideButtonSize = hideButton->getContentSize();
+        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width / 2,
+            hideButtonPosition.y - hideButtonSize.height / 2,
+            hideButtonSize.width, hideButtonSize.height);
+
+        if (hideButtonBoundingBox.containsPoint(mousePosition))
+        {
+            // 如果点击了 hideButton，切换到按下状态的图片
+            hideButton->setNormalImage(Sprite::create("ui/close_pressed.png"));
+            return;
+        }
+
         // 遍历所有物品图标，检查鼠标是否点击了某个物品
         for (auto itemSprite : itemSprites)
         {
@@ -276,5 +299,37 @@ void BackpackLayer::setupMouseListener()
         useButton->setVisible(false);
         };
 
+    // 鼠标释放事件
+    mouseListener->onMouseUp = [this](Event* event) {
+        EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
+        Vec2 mousePosition = mouseEvent->getLocationInView();
+
+        // 获取摄像头的偏移量
+        Vec2 cameraOffset = this->getParent()->getPosition();
+
+        // 将鼠标坐标转换为相对于场景的坐标
+        mousePosition -= cameraOffset;
+
+        // 检查是否点击了 hideButton
+        Vec2 hideButtonPosition = hideButton->getPosition();
+        Size hideButtonSize = hideButton->getContentSize();
+        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width / 2,
+            hideButtonPosition.y - hideButtonSize.height / 2,
+            hideButtonSize.width, hideButtonSize.height);
+
+        if (hideButtonBoundingBox.containsPoint(mousePosition))
+        {
+            // 如果点击了 hideButton，切换回正常状态的图片并隐藏背包层
+            hideButton->setNormalImage(Sprite::create("ui/close_normal.png"));
+            hideBackpack(nullptr); // 隐藏背包层
+        }
+        else
+        {
+            // 如果触摸结束时不在按钮区域内，也切换回正常状态
+            hideButton->setNormalImage(Sprite::create("ui/close_normal.png"));
+        }
+        };
+
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
+

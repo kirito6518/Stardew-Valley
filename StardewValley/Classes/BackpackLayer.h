@@ -66,9 +66,11 @@ public:
     const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }
 
     //鼠标事件监听器与物品的交互
-    void setupMouseListener();
+    void setupCombinedMouseListener();
 
-    MenuItemImage* hideButton;
+
+    MenuItemImage* hideButton;//背包隐藏按钮
+
     cocos2d::Sprite* backpackBgSprite; ///< 背包背景精灵
 
 
