@@ -3,6 +3,7 @@
 #include "MainMap.h"
 #include "cocos2d.h"
 #include "Player.h"
+#include "chipmunk.h"
 
 USING_NS_CC;
 
@@ -13,21 +14,32 @@ Scene* MainMap::createScene()
 
 bool MainMap::init()
 {
-    if (!Scene::init())
+    // 带物理地创建
+    if (!Scene::initWithPhysics())
     {
         return false;
     }
-
-    const auto visibleSize = Director::getInstance()->getVisibleSize();
     // 原点是窗口左下角
+    const auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    // 获取物理世界
+    auto physicsWorld = this->getPhysicsWorld();
+    physicsWorld->setGravity(Vec2(0, 0));// 设置重力，无
+
+    // 启用调试绘制
+    physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+
     // 加载背包
     Bag = BackpackManager::getInstance();
+
     // 加载地图
     mapSprite = Sprite::create("Farm_Combat.png");
     mapSprite->setAnchorPoint(Vec2(0.5, 0.5));
     mapSprite->setPosition(visibleSize / 2);
-    this->addChild(mapSprite, 0);
 
+    // 载入地图互动点和碰撞箱
+
+    this->addChild(mapSprite, 0);
 
 
     /*此处为test*/
@@ -101,10 +113,12 @@ bool MainMap::init()
 
     // 添加一段文本
     toHollowWorldWord = Label::createWithTTF("Menu", "fonts/Marker Felt.ttf", 35);
+
     // 将标签放在按钮里
     x = visibleSize.width - toHollowWorldWord->getContentSize().width / 2;
     y = toHollowWorldWord->getContentSize().height / 2;
     toHollowWorldWord->setPosition(Vec2(x - 20, y + 5));
+
     // 将标签作为子标签添加到此图层
     this->addChild(toHollowWorldWord, 2);
 
@@ -166,6 +180,11 @@ bool MainMap::init()
 
     // 创建主角精灵
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
+
+    // 为玩家添加物理体
+    auto playerBody = PhysicsBody::createBox(player.playerSprite->getContentSize() / 2, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
+    playerBody->setDynamic(true); // 设置为动态物理体
+    player.playerSprite->setPhysicsBody(playerBody);// 设置物理体
     this->addChild(player.playerSprite, 1);
 
     // 注册键盘事件
@@ -202,18 +221,25 @@ void MainMap::updatePlayerPosition(float delta)
     player.update(delta);
 }
 
-// 每帧更新摄像头和按钮位置
+// 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
+
+    // 获取物理世界
+    auto physicsWorld = this->getPhysicsWorld();
+    if (physicsWorld)
+    {
+        physicsWorld->step(dt);
+    }
 
     // 获取玩家的位置
     const Vec2 playerPosition = player.playerSprite->getPosition();// 锚点是左下角的一个位置
 
-    // 输出玩家位置
-    CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
-
     //获取屏幕大小和地图大小
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const auto mapSize = mapSprite->getContentSize();
+
+    // 输出玩家位置
+    CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
@@ -271,9 +297,6 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 重新绑定鼠标事件监听器
     BackpackLayer->setupCombinedMouseListener();
-
-
-
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));

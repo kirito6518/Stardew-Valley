@@ -5,6 +5,8 @@
 #include "BackpackManager.h"
 #include "Player.h"
 #include "BackpackLayer.h"
+#include "chipmunk.h"
+
 
 USING_NS_CC;
 

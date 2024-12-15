@@ -2,6 +2,8 @@
 #define __Player_H__
 
 #include "cocos2d.h"
+#include "chipmunk.h"
+
 USING_NS_CC;
 class Player : public cocos2d::Sprite
 {

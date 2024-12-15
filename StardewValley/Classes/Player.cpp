@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "cocos2d.h"
+#include "chipmunk.h"
 
 USING_NS_CC;
 
