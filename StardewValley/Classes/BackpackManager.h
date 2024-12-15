@@ -38,11 +38,12 @@ public:
      * @brief 向背包中添加物品。
      * @param itemImagePath 物品图标的路径。
      * @param itemName 物品的名称。
+     * @param count 添加物品的数量，默认为1
      * @param category 物品的分类。
      * @return 返回是否成功添加物品。
      */
-    bool addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category);
-
+    bool addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int count=1);
+    
     /**
      * @brief 从背包中移除物品。
      * @param item 要移除的物品对象。
@@ -55,6 +56,9 @@ public:
      */
     bool isFull() const;
 
+    // 获取所有物品的向量
+    const cocos2d::Vector<Item*>& getItems() const { return items; }
+
     BackpackLayer* backpackLayer; ///< 背包层对象
 private:
     /**
@@ -66,7 +70,6 @@ private:
      * @brief 析构函数，释放资源。
      */
     ~BackpackManager();
-
     cocos2d::Vector<Item*> items; ///< 背包中的物品列表
     int maxItems; ///< 背包的最大物品数量
     int currentItems; ///< 当前背包中的物品数量

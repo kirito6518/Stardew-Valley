@@ -32,7 +32,7 @@ bool MainMap::init()
 
     /*此处为test*/
 #if 1
-    // 创建一个物品精灵（假设玩家可以点击拾取）
+    // 创建一个物品精灵（假设玩家可以拾取）
     auto itemSprite = Sprite::create("icons/test.png");
     std::string itemName = "Item 1";
     std::string itemImagePath = "icons/test.png";
@@ -243,11 +243,42 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 更新摄像机的位置
     this->setPosition(-targetCameraPosition);
+
+    //获取backpackLayer实例
+    auto BackpackLayer = Bag->backpackLayer;
  
     // 更新背包位置
-    auto backpackSize = Bag->backpackLayer->backpackBgSprite->getContentSize();
-    Bag->backpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
-    Bag->backpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
+    auto backpackSize = BackpackLayer->backpackBgSprite->getContentSize();
+    BackpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
+    BackpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
+
+
+    //更新物品图标的坐标值
+   
+    int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+
+    int Spcount = 0;
+    int Itemcount = 0;
+    const cocos2d::Vector<Item*>& Items = Bag->getItems();
+    for (auto Items : Items)
+    {
+        dx = Itemcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
+        dy = Itemcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
+        Items->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY + dy));
+        Itemcount++;
+    }
+
+    const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
+    for (auto Itemsprite : Itemsprites)
+    {
+        dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
+        dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
+        Itemsprite->setPosition(targetCameraPosition+Vec2(BackpackLayer->gridStartX+dx, BackpackLayer->gridStartY+dy));
+        Spcount++;
+    }
+
+    // 重新绑定鼠标事件监听器
+    BackpackLayer->setupMouseListener();
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));

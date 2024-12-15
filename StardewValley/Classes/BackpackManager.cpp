@@ -44,7 +44,7 @@ void BackpackManager::hideBackpack()
 }
 
 // 添加物品到背包
-bool BackpackManager::addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category)
+bool BackpackManager::addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int count)
 {
     if (isFull())
     {
@@ -58,7 +58,7 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
         if (item->getName() == itemName)
         {
             // 增加物品计数
-            item->increaseCount();
+            item->increaseCount(count);
             return true;
         }
     }
@@ -99,3 +99,5 @@ bool BackpackManager::isFull() const
 {
     return currentItems >= maxItems;
 }
+
+

@@ -62,8 +62,24 @@ public:
      */
     void hideItemDetails();
 
+    // 获取所有物品的向量
+    const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }
+
+    //鼠标事件监听器与物品的交互
+    void setupMouseListener();
+
     MenuItemImage* hideButton;
     cocos2d::Sprite* backpackBgSprite; ///< 背包背景精灵
+
+
+    int gridWidth; ///< 背包格子的宽度（列数）
+    int gridHeight; ///< 背包格子的高度（行数）
+    int gridSpacing; ///< 背包格子之间的间隔
+    float gridStartX; ///< 背包格子的起始 X 坐标
+    float gridStartY; ///< 背包格子的起始 Y 坐标
+
+    int maxItems; ///< 背包的最大物品数量
+    int currentItems; ///< 当前背包中的物品数量
 private:
     cocos2d::Vector<cocos2d::Sprite*> itemSprites; ///< 背包中的物品图标列表
     cocos2d::Label* itemNameLabel; ///< 物品名称标签
@@ -71,14 +87,7 @@ private:
     cocos2d::MenuItemFont* useButton; ///< 使用物品按钮
     cocos2d::Label* useResultLabel; ///< 使用物品结果标签
 
-    int maxItems; ///< 背包的最大物品数量
-    int currentItems; ///< 当前背包中的物品数量
 
-    int gridWidth; ///< 背包格子的宽度（列数）
-    int gridHeight; ///< 背包格子的高度（行数）
-    int gridSpacing; ///< 背包格子之间的间隔
-    float gridStartX; ///< 背包格子的起始 X 坐标
-    float gridStartY; ///< 背包格子的起始 Y 坐标
 };
 
 #endif // __BACKPACK_LAYER_H__
