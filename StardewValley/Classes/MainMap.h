@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "BackpackLayer.h"
 
+USING_NS_CC;
+
 class MainMap : public cocos2d::Scene
 {
 public:
@@ -31,7 +33,7 @@ public:
 
     BackpackManager* Bag;
 private:
-    cocos2d::Sprite* mapSprite; // 地图
+    Sprite* mapSprite; // 地图
     Player player; // 玩家
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
