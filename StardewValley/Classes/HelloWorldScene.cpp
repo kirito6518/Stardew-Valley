@@ -181,8 +181,8 @@ void HelloWorld::toAuthorlist(Ref* ref)
 //前往主地图场景
 void HelloWorld::toMainMap(Ref* ref)
 {
-    MainMapScene = MainMap::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(1.0f, MainMapScene));
+    mainMapScene = MainMap::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(1.0f, mainMapScene));
 }
 
 
