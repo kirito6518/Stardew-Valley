@@ -5,7 +5,7 @@
   SkeletonRenderer.cpp
   SkeletonTwoColorBatch.cpp
   spine-cocos2dx.cpp
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBatch.cpp(110,42): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonTwoColorBatch.cpp(237,42): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonTwoColorBatch.cpp(274,37): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBatch.cpp(110,42): warning C4018: “<”: 有符号/无符号不匹配
   libSpine.vcxproj -> C:\Users\76886\Desktop\Stardew-Valley\StardewValley\proj.win32\Debug.win32\libSpine.lib

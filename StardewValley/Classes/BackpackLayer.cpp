@@ -257,6 +257,7 @@ void BackpackLayer::setupCombinedMouseListener()
 
     // 鼠标点击事件
     mouseListener->onMouseDown = [this](Event* event) {
+        // CCLOG("Button!!!!!!!!!!!!!!!!!!!!!");
         EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
         Vec2 mousePosition = mouseEvent->getLocationInView();
 
@@ -273,8 +274,8 @@ void BackpackLayer::setupCombinedMouseListener()
         // 检查是否点击了 hideButton
         Vec2 hideButtonPosition = hideButton->getPosition();
         Size hideButtonSize = hideButton->getContentSize();
-        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width / 2,
-            hideButtonPosition.y - hideButtonSize.height / 2,
+        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width,
+            hideButtonPosition.y,
             hideButtonSize.width, hideButtonSize.height);
 
         if (hideButtonBoundingBox.containsPoint(mousePosition))
@@ -325,8 +326,8 @@ void BackpackLayer::setupCombinedMouseListener()
         // 检查是否点击了 hideButton
         Vec2 hideButtonPosition = hideButton->getPosition();
         Size hideButtonSize = hideButton->getContentSize();
-        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width / 2,
-            hideButtonPosition.y - hideButtonSize.height / 2,
+        Rect hideButtonBoundingBox = Rect(hideButtonPosition.x - hideButtonSize.width,
+            hideButtonPosition.y,
             hideButtonSize.width, hideButtonSize.height);
 
         if (hideButtonBoundingBox.containsPoint(mousePosition))

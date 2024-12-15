@@ -81,11 +81,11 @@ public:
      */
     bool isStopped() const { return _isStopped; }
     
-    /** Gets current target of the event.
-     * @return The target with which the event associates.
-     * @note It's only available when the event listener is associated with node.
-     *        It returns 0 when the listener is associated with fixed priority.
-     */
+    /** 获取事件的当前目标。
+    *@return事件关联的目标。
+    *@note只有当事件侦听器与节点关联时，它才可用。
+    *当侦听器与固定优先级相关联时，它返回0。
+    */
     Node* getCurrentTarget() { return _currentTarget; }
     
 protected:

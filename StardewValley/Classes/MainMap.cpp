@@ -267,13 +267,6 @@ void MainMap::updatePlayerPosition(float delta)
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
 
-    // 获取物理世界
-    auto physicsWorld = this->getPhysicsWorld();
-    if (physicsWorld)
-    {
-        physicsWorld->step(dt);
-    }
-
     // 获取玩家的位置
     const Vec2 playerPosition = player.playerSprite->getPosition();// 锚点是左下角的一个位置
 
