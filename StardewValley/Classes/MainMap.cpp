@@ -87,11 +87,26 @@ bool MainMap::init()
     /*此处为test*/
 #if 1
     // 创建一个物品精灵（假设玩家可以拾取）
-    auto itemSprite = Sprite::create("icons/test.png");
+    
     std::string itemName = "Test";
+    std::string itemName2 = "Test2";
     std::string itemImagePath = "icons/test.png";
     ItemCategory category = ItemCategory::Consumable;
     bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category);
+    bool success2 = BackpackManager::getInstance()->addItem(itemImagePath, "Test2", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Tes\nt3", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test4", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test5", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test6", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test7", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test8", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "123321", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test10", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test11", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
+    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
+
 
 #endif
     /*此处为test*/
@@ -327,7 +342,7 @@ void MainMap::updateCameraPosition(float dt) {
     {
         dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
         dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
-        Itemsprite->setPosition(targetCameraPosition+Vec2(BackpackLayer->gridStartX+dx, BackpackLayer->gridStartY+dy));
+        Itemsprite->setPosition(targetCameraPosition+Vec2(BackpackLayer->gridStartX+dx, BackpackLayer->gridStartY-dy));
         Spcount++;
     }
 

@@ -38,10 +38,10 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     }
 
     // 创建数量标签
-    itemCountLabel = Label::createWithSystemFont(std::to_string(itemCount), "fonts/Gen.ttf", 30);
+    itemCountLabel = Label::createWithTTF(std::to_string(itemCount), "fonts/Gen.ttf", 25);
     itemCountLabel->setAnchorPoint(Vec2(0.5, 0.5)); // 设置标签的锚点为中心
     itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 25, 20));// 设置标签在物品图标下方
-    itemIcon->addChild(itemCountLabel, 1); // 将标签添加到物品图标中
+    itemIcon->addChild(itemCountLabel, 3); // 将标签添加到物品图标中
 
 #if 0
     std::string countStr = std::to_string(itemCount);

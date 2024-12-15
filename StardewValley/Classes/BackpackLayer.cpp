@@ -41,7 +41,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     backpackBgSprite->setAnchorPoint(Vec2(0.5, 0.5));
     backpackBgSprite->setPosition(visibleSize / 2);
-    this->addChild(backpackBgSprite, 3);
+    this->addChild(backpackBgSprite, 2);
 
     //获取背包背景图尺寸及坐标
     auto backpackSize = backpackBgSprite->getContentSize();
@@ -70,12 +70,12 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
 #if 1
     // 初始化物品显示UI
-    itemNameLabel = Label::createWithSystemFont("", "Gen.ttf", 24);
+    itemNameLabel = Label::createWithTTF("", "fonts/Gen.ttf", 20);
     itemNameLabel->setAnchorPoint(Vec2(0, 1));
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel,3);
 
-    itemCountLabel = Label::createWithSystemFont("", "Arial", 24);
+    itemCountLabel = Label::createWithTTF("", "fonts/Gen.ttf", 24);
     itemCountLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2);
     itemCountLabel->setVisible(false);
     this->addChild(itemCountLabel,3);
@@ -98,7 +98,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     // 初始化背包格子布局
     gridWidth = 80;
     gridHeight = 80;
-    gridSpacing = 10;
+    gridSpacing = 8;
     gridStartX = (visibleSize.width - backpackSize.width) / 2;
     gridStartY = (visibleSize.height + backpackSize.height) / 2;
 
@@ -131,12 +131,12 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
         return false;
     }
 
-    dx = currentItems % 10 * (gridWidth + gridSpacing);
-    dy = currentItems / 10 * (gridHeight + gridSpacing);
+    dx = (currentItems % 10 )* (gridWidth + gridSpacing);
+    dy = (currentItems / 10) * (gridHeight + gridSpacing);
 
-    itemSprite->setPosition(Vec2(gridStartX + dx, gridStartY + dy));
+    itemSprite->setPosition(Vec2(gridStartX +dx, gridStartY -dy));
     // 将物品图标添加到背包层
-    this->addChild(itemSprite,3);
+    this->addChild(itemSprite,2);
     itemSprites.pushBack(itemSprite);
 
     // 为物品图标设置用户数据（即 Item 对象）
@@ -244,7 +244,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 {
                     // 显示物品名称
                     itemNameLabel->setString(item->getName());
-                    itemNameLabel->setPosition(itemPosition + Vec2(0, 20)); // 在物品位置上方显示
+                    itemNameLabel->setPosition(itemPosition + Vec2(0, 16)); // 在物品位置上方显示
                     itemNameLabel->setVisible(true);
                 }
                 return;
