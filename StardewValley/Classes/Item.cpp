@@ -37,6 +37,14 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
         return false; // 如果图标创建失败，返回 false
     }
 
+    std::string countStr = std::to_string(itemCount);
+    itemCountLabel = Label::createWithSystemFont(countStr, "Arial", 24);
+    itemCountLabel->setAnchorPoint(Vec2(0, 1));
+    if (itemIcon) {
+        auto itemPos=itemIcon->getPosition();
+        itemCountLabel->setPosition(Vec2(itemPos.x, itemPos.y - 80));
+        this->addChild(itemCountLabel, 4);
+    }
 
     return true; // 初始化成功，返回 true
 }
@@ -57,11 +65,10 @@ void Item::decreaseCount(int amount)
     }
 }
 
-// 使用物品，返回使用结果
-bool Item::useItem()
+// 使用物品，返回使用结果,默认使用失败
+bool Item::useItem(bool success)
 {
-    bool success = true; // 模拟使用成功
-
+ 
     if (success) // 如果使用成功
     {
         decreaseCount(); // 减少物品计数

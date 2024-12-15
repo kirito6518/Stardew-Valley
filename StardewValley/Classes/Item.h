@@ -58,7 +58,7 @@ public:
      * @brief 使用物品。
      * @return 返回使用物品是否成功。
      */
-    bool useItem();
+    bool useItem(bool success=false);
 
     /**
      * @brief 获取物品的名称。
@@ -78,10 +78,13 @@ public:
      */
     cocos2d::Sprite* getIcon() const { return itemIcon; }
 
+    void update updateCountLabel
+
 private:
     std::string itemName; ///< 物品的名称
     ItemCategory itemCategory; ///< 物品的分类
     int itemCount; ///< 物品的数量
+    cocos2d::Label* itemCountLabel; ///< 物品数量标签
     cocos2d::Sprite* itemIcon; ///< 物品的图标精灵
 };
 

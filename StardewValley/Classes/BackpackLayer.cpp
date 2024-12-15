@@ -43,7 +43,9 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     backpackBgSprite->setPosition(visibleSize / 2);
     this->addChild(backpackBgSprite, 3);
 
+    //获取背包背景图尺寸及坐标
     auto backpackSize = backpackBgSprite->getContentSize();
+    auto backpackPos = backpackBgSprite->getPosition();
 
     // 创建关闭按钮
     hideButton = MenuItemImage::create(
@@ -68,7 +70,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
 #if 1
     // 初始化物品显示UI
-    itemNameLabel = Label::createWithSystemFont("", "Arial", 24);
+    itemNameLabel = Label::createWithSystemFont("", "Gen.ttf", 24);
     itemNameLabel->setAnchorPoint(Vec2(0, 1));
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel,3);
@@ -79,44 +81,24 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     this->addChild(itemCountLabel,3);
 #endif
 
+    //加载物品使用按钮
+    useButton = MenuItemImage::create(
+        "ui/use_button_normal.png",  // 正常状态的图片
+        "ui/use_button_pressed.png", // 按下状态的图片
+        CC_CALLBACK_1(BackpackLayer::onUseButtonClicked, this)); // 点击回调函数
+
+    useButton->setAnchorPoint(Vec2(1, 1));  
+    useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));
+    this->addChild(useButton);
+    useButton->setVisible(false);
+    
     //添加鼠标事件监听器
     setupCombinedMouseListener();
-
-    useButton = MenuItemFont::create("Use", [this](Ref* sender) {
-        auto item = static_cast<Item*>(sender);
-        bool success = item->useItem();
-
-        if (success)
-        {
-            useResultLabel->setString("Use Success!");
-        }
-        else
-        {
-            useResultLabel->setString("Use Failed!");
-        }
-
-        useResultLabel->setVisible(true);
-
-        this->scheduleOnce([this](float dt) {
-            useResultLabel->setVisible(false);
-            }, 2.0f, "hide_use_result");
-        });
-
-    useButton->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 50);
-    useButton->setVisible(false);
-    auto useMenu = Menu::create(useButton, nullptr);
-    useMenu->setPosition(Vec2::ZERO);
-    this->addChild(useMenu);
-
-    useResultLabel = Label::createWithSystemFont("", "Arial", 24);
-    useResultLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 100);
-    useResultLabel->setVisible(false);
-    this->addChild(useResultLabel);
 
     // 初始化背包格子布局
     gridWidth = 80;
     gridHeight = 80;
-    gridSpacing = 20;
+    gridSpacing = 10;
     gridStartX = (visibleSize.width - backpackSize.width) / 2;
     gridStartY = (visibleSize.height + backpackSize.height) / 2;
 
@@ -201,11 +183,37 @@ void BackpackLayer::hideItemDetails()
     useButton->setVisible(false);
 }
 
-//鼠标监听事件与物品的交互
+//点击使用按钮的回调函数
+void BackpackLayer::onUseButtonClicked(Ref* sender)
+{
+    auto item = static_cast<Item*>(useButton->getUserData());
+    if (item)
+    {
+        bool success = item->useItem();
+
+        if (success)
+        {
+            useResultLabel->setString("Use Success!");
+        }
+        else
+        {
+            useResultLabel->setString("Use Failed!");
+        }
+
+        useResultLabel->setVisible(true);
+
+        this->scheduleOnce([this](float dt) {
+            useResultLabel->setVisible(false);
+            }, 2.0f, "hide_use_result");
+    }
+}
+
+//鼠标监听事件与背包内元素的交互
 void BackpackLayer::setupCombinedMouseListener()
 {
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
+
 
     auto mouseListener = EventListenerMouse::create();
 
@@ -252,6 +260,10 @@ void BackpackLayer::setupCombinedMouseListener()
         EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
         Vec2 mousePosition = mouseEvent->getLocationInView();
 
+        // 获取背包背景图尺寸及坐标
+        auto backpackSize = backpackBgSprite->getContentSize();
+        auto backpackPos = backpackBgSprite->getPosition();
+
         // 获取摄像头的偏移量
         Vec2 cameraOffset = this->getParent()->getPosition();
 
@@ -289,7 +301,7 @@ void BackpackLayer::setupCombinedMouseListener()
                     // 显示使用按钮
                     useButton->setUserData(item); // 将物品对象与使用按钮关联
                     useButton->setVisible(true);
-                    useButton->setPosition(itemPosition + Vec2(0, -50)); // 在物品图标下方显示
+                    useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));// 在物品图标下方显示
                 }
                 return;
             }
@@ -328,7 +340,30 @@ void BackpackLayer::setupCombinedMouseListener()
             // 如果触摸结束时不在按钮区域内，也切换回正常状态
             hideButton->setNormalImage(Sprite::create("ui/close_normal.png"));
         }
-        };
+
+
+    // 检查是否点击了 useButton
+        if (useButton) {
+            Vec2 useButtonPosition = useButton->getPosition();
+            Size useButtonSize = useButton->getContentSize();
+            Rect useButtonBoundingBox = Rect(useButtonPosition.x - useButtonSize.width / 2,
+                useButtonPosition.y - useButtonSize.height / 2,
+                useButtonSize.width, useButtonSize.height);
+
+            if (useButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 useButton，切换回正常状态的图片并执行使用逻辑
+                useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
+                useButton->activate(); // 执行使用逻辑
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮区域内，也切换回正常状态
+                useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
+            }
+        }
+   
+    };
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }

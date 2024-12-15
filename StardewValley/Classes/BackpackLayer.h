@@ -65,6 +65,9 @@ public:
     // 获取所有物品的向量
     const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }
 
+    //点击使用按钮的回调函数
+    void onUseButtonClicked(Ref* sender);
+
     //鼠标事件监听器与物品的交互
     void setupCombinedMouseListener();
 
@@ -86,7 +89,7 @@ private:
     cocos2d::Vector<cocos2d::Sprite*> itemSprites; ///< 背包中的物品图标列表
     cocos2d::Label* itemNameLabel; ///< 物品名称标签
     cocos2d::Label* itemCountLabel; ///< 物品数量标签
-    cocos2d::MenuItemFont* useButton; ///< 使用物品按钮
+    cocos2d::MenuItemImage* useButton; ///< 使用物品按钮
     cocos2d::Label* useResultLabel; ///< 使用物品结果标签
 
 
