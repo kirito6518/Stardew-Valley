@@ -37,31 +37,41 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
         return false; // 如果图标创建失败，返回 false
     }
 
+    // 创建数量标签
+    itemCountLabel = Label::createWithSystemFont(std::to_string(itemCount), "Arial", 18);
+    itemCountLabel->setAnchorPoint(Vec2(0.5, 0.5)); // 设置标签的锚点为中心
+    itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2, -5)); // 设置标签在物品图标下方
+    itemIcon->addChild(itemCountLabel, 1); // 将标签添加到物品图标中
+
+#if 0
     std::string countStr = std::to_string(itemCount);
     itemCountLabel = Label::createWithSystemFont(countStr, "Arial", 24);
     itemCountLabel->setAnchorPoint(Vec2(0, 1));
     if (itemIcon) {
         auto itemPos=itemIcon->getPosition();
-        itemCountLabel->setPosition(Vec2(itemPos.x, itemPos.y - 80));
+        itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2, -20));
         this->addChild(itemCountLabel, 4);
     }
-
+#endif
     return true; // 初始化成功，返回 true
 }
 
-// 增加物品计数
 void Item::increaseCount(int amount)
 {
     itemCount += amount; // 增加物品计数
+    updateCountLabel(); // 更新数量标签
 }
 
-// 减少物品计数
 void Item::decreaseCount(int amount)
 {
     itemCount -= amount; // 减少物品计数
     if (itemCount <= 0) // 如果计数为 0
     {
         BackpackManager::getInstance()->removeItem(this); // 调用 BackpackManager 的 removeItem 方法移除物品
+    }
+    else
+    {
+        updateCountLabel(); // 更新数量标签
     }
 }
 
@@ -75,4 +85,12 @@ bool Item::useItem(bool success)
     }
 
     return success; // 返回使用结果
+}
+
+void Item::updateCountLabel()
+{
+    if (itemCountLabel)
+    {
+        itemCountLabel->setString(std::to_string(itemCount));
+    }
 }

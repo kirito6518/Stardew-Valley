@@ -78,7 +78,7 @@ public:
      */
     cocos2d::Sprite* getIcon() const { return itemIcon; }
 
-    void update updateCountLabel
+    void updateCountLabel();
 
 private:
     std::string itemName; ///< 物品的名称
