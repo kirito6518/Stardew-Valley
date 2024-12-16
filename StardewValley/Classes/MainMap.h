@@ -47,6 +47,16 @@ private:
     Sprite* leftBoundary; // 地图左边界
     Sprite* downBoundary_left; // 地图下边界左半部分
     Sprite* downBoundary_right; // 地图下边界右半部分
+    Sprite* upWater; // 水池上半部分
+    Sprite* middleWater; // 水池中间部分
+    Sprite* downWater; // 水池下半部分
+    Sprite* fishing; // 钓鱼部分
+    Sprite* CropsLeft; // 农田左部分
+    Sprite* CropsRight; // 农田右部分
+    Sprite* home; // 房屋
+    Sprite* fence; // 栅栏
+    Sprite* road; // 路
+    Sprite* ranch;// 牧场
     Player player; // 玩家
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
