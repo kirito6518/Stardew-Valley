@@ -27,5 +27,5 @@ public:
 private:
     Season currentSeason; // 当前季节
     int daysInCurrentSeason; // 当前季节的天数
-    static const int DAYS_PER_SEASON = 10; // 每个季节持续10天
+    static const int DAYS_PER_SEASON = 15; // 每个季节持续10天
 };

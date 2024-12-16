@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "BackpackLayer.h"
 #include "chipmunk.h"
-
+#include "SeasonManager.h"
 
 USING_NS_CC;
 
@@ -32,8 +32,13 @@ public:
 
     // 每帧更新
     void MainMap::updateCameraPosition(float dt);
+    
+    //增加天数
+    void MainMap::addDay(float dt);
 
     BackpackManager* Bag;
+    SeasonManager seasonManager; // 声明 SeasonManager 实例
+    Label* seasonLabel; // 声明 季节显示的 Label
 private:
     Sprite* mapSprite; // 地图
     Sprite* upBoundary; // 地图上边界

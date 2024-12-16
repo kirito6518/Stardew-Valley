@@ -87,7 +87,7 @@ bool MainMap::init()
     /*此处为test*/
 #if 1
     // 创建一个物品精灵（假设玩家可以拾取）
-    
+
     std::string itemName = "Test";
     std::string itemName2 = "Test2";
     std::string itemImagePath = "icons/test.png";
@@ -244,6 +244,19 @@ bool MainMap::init()
     player.playerSprite->setPhysicsBody(playerBody);// 设置物理体
     this->addChild(player.playerSprite, 1);
 
+    {
+        // 初始化 SeasonManager
+        seasonManager = SeasonManager();
+
+        // 创建并添加季节显示的 Label
+        seasonLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 35);
+        seasonLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+        this->addChild(seasonLabel, 1);
+
+        // 设置定时器，每 4 秒调用一次 addDay 函数
+        this->schedule(schedule_selector(MainMap::addDay), 4.0f);
+    }
+
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
     keyboardListener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, &player);
@@ -355,4 +368,16 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldButton->getContentSize().width / 2, toHollowWorldButton->getContentSize().height / 2));
 
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
+
+    seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+}
+
+void MainMap::addDay(float dt)
+{
+    // 增加一天
+    seasonManager.updateSeason(1);
+
+    // 获取当前季节名称并更新 Label
+    std::string seasonName = seasonManager.getCurrentSeasonName();
+    seasonLabel->setString(seasonName);
 }
