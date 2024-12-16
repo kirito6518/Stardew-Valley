@@ -382,6 +382,28 @@ bool MainMap::init()
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    
+    {
+        // 初始化 NPC
+        npcManager.initNPCs();
+
+        // 获取屏幕的中心位置
+        const auto visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 screenCenter = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+
+        // 设置 NPC 的位置为屏幕中心
+        npcManager._npcs[0]->setLocation(screenCenter);
+
+        // 确保 NPC 的精灵锚点为 (0.5, 0.5)
+        npcManager._npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
+
+        // 调试输出 NPC 的位置和精灵尺寸
+        CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
+        CCLOG("NPC sprite size: (%f, %f)", npcManager._npcs[0]->getContentSize().width, npcManager._npcs[0]->getContentSize().height);
+
+        // 将 NPC 添加到场景中
+        this->addChild(npcManager._npcs[0], 1);
+    }
 
     return true;
 }
@@ -419,6 +441,9 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 输出玩家位置
     CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
+
+    // 检查玩家与 NPC 的交互
+    npcManager.checkPlayerInteraction(player.playerSprite->getPosition());
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);

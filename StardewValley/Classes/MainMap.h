@@ -7,6 +7,7 @@
 #include "BackpackLayer.h"
 #include "chipmunk.h"
 #include "SeasonManager.h"
+#include "NPCManager.h"
 
 USING_NS_CC;
 
@@ -61,6 +62,7 @@ private:
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
     MenuItemImage* backpackButton; // 开启背包的文字
+    NPCManager npcManager; // 声明 NPC 管理器实例
 };
 
 #endif // __MainMap_H__
