@@ -56,6 +56,9 @@ public:
 
     //使用物品逻辑
     bool useItem();
+
+    //清空物品
+    void clearItem();
  
     // 使用物品函数，接受一个回调函数来处理使用逻辑
     bool useItem(int count, UseItemCallback callback);
