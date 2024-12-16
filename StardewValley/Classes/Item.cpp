@@ -3,11 +3,23 @@
 
 USING_NS_CC;
 
+
+
+Item::~Item()
+{
+    if (itemIcon)
+    {
+        itemIcon->removeFromParent(); // 确保 itemIcon 从父节点中移除
+
+    }
+}
+
+
 // 创建物品
-Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category)
+Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
 {
     auto item = new (std::nothrow) Item(); // 创建一个新的 Item 对象
-    if (item && item->init(itemImagePath, itemName, category)) // 初始化物品
+    if (item && item->init(itemImagePath, itemName, category, amount)) // 初始化物品
     {
         item->autorelease(); // 自动释放对象
         return item; // 返回创建的物品
@@ -17,7 +29,7 @@ Item* Item::create(const std::string& itemImagePath, const std::string& itemName
 }
 
 // 初始化物品
-bool Item::init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category)
+bool Item::init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
 {
     if (!Node::init()) // 调用基类的初始化方法
     {
@@ -27,7 +39,7 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     // 初始化物品属性
     this->itemName = itemName; // 设置物品名称
     this->itemCategory = category; // 设置物品分类
-    this->itemCount = 1; // 初始化物品计数为 1
+    this->itemCount = amount; // 初始化物品计数
 
     // 创建物品图标
     itemIcon = Sprite::create(itemImagePath);
@@ -43,16 +55,6 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 25, 20));// 设置标签在物品图标下方
     itemIcon->addChild(itemCountLabel, 3); // 将标签添加到物品图标中
 
-#if 0
-    std::string countStr = std::to_string(itemCount);
-    itemCountLabel = Label::createWithSystemFont(countStr, "Arial", 24);
-    itemCountLabel->setAnchorPoint(Vec2(0, 1));
-    if (itemIcon) {
-        auto itemPos=itemIcon->getPosition();
-        itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2, -20));
-        this->addChild(itemCountLabel, 4);
-    }
-#endif
     return true; // 初始化成功，返回 true
 }
 
@@ -67,7 +69,9 @@ void Item::decreaseCount(int amount)
     itemCount -= amount; // 减少物品计数
     if (itemCount <= 0) // 如果计数为 0
     {
+        itemCount = 0;
         BackpackManager::getInstance()->removeItem(this); // 调用 BackpackManager 的 removeItem 方法移除物品
+        
     }
     else
     {
@@ -75,17 +79,20 @@ void Item::decreaseCount(int amount)
     }
 }
 
-// 使用物品，返回使用结果,默认使用失败
-bool Item::useItem(bool success)
+// 修改 useItem 函数，接受一个回调函数来处理使用逻辑
+bool Item::useItem()
 {
- 
-    if (success) // 如果使用成功
+    if (useItemCallback)
     {
-        decreaseCount(); // 减少物品计数
+        return useItemCallback(); // 调用外部提供的回调函数
     }
-
-    return success; // 返回使用结果
+    else
+    {
+        // 默认实现：使用失败
+        return false;
+    }
 }
+
 
 void Item::updateCountLabel()
 {

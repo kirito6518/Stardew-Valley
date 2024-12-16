@@ -2,6 +2,7 @@
 #define __ITEM_H__
 
 #include "cocos2d.h"
+#include <functional>
 
 /**
  * @enum ItemCategory
@@ -9,9 +10,14 @@
  */
 enum class ItemCategory
 {
-    Consumable, ///< 消耗品
-    Equipment,  ///< 装备
-    Quest       ///< 任务物品
+    Fish,          //鱼
+    Fishtool,     //渔具
+    Crops,        //作物
+    AnimalProduct,//动物产品
+    Food,         //食物
+    Consumable,   // 消耗品
+    Equipment,    //装备
+    Quest         //任务物品
 };
 
 /**
@@ -24,63 +30,50 @@ enum class ItemCategory
 class Item : public cocos2d::Node
 {
 public:
-    /**
-     * @brief 创建一个 Item 对象。
-     * @param itemImagePath 物品图标的路径。
-     * @param itemName 物品的名称。
-     * @param category 物品的分类。
-     * @return 返回创建的 Item 对象，如果创建失败则返回 nullptr。
-     */
-    static Item* create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category);
+    //析构函数
+    ~Item();
 
-    /**
-     * @brief 初始化 Item 对象。
-     * @param itemImagePath 物品图标的路径。
-     * @param itemName 物品的名称。
-     * @param category 物品的分类。
-     * @return 返回是否初始化成功。
-     */
-    bool init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category);
+    // 定义一个回调函数类型，用于处理使用逻辑
+    using UseItemCallback = std::function<bool()>;
 
-    /**
-     * @brief 增加物品的数量。
-     * @param amount 增加的数量，默认为 1。
-     */
+    // 设置自定义的 useItem 回调函数
+    void setUseItemCallback(UseItemCallback callback)
+    {
+        useItemCallback = callback;
+    }
+
+    //创建一个 Item 对象
+    static Item* create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount=1);
+
+    //初始化 Item 对象
+    bool init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category, int amount);
+
+    //增加物品的数量。
     void increaseCount(int amount = 1);
 
-    /**
-     * @brief 减少物品的数量。
-     * @param amount 减少的数量，默认为 1。
-     */
+    //增加物品的数量
     void decreaseCount(int amount = 1);
 
-    /**
-     * @brief 使用物品。
-     * @return 返回使用物品是否成功。
-     */
-    bool useItem(bool success=false);
+    //使用物品逻辑
+    bool useItem();
+ 
+    // 使用物品函数，接受一个回调函数来处理使用逻辑
+    bool useItem(int count, UseItemCallback callback);
 
-    /**
-     * @brief 获取物品的名称。
-     * @return 返回物品的名称。
-     */
+    //获取物品的名称
     const std::string& getName() const { return itemName; }
 
-    /**
-     * @brief 获取物品的数量。
-     * @return 返回物品的数量。
-     */
+    //获取物品的数量。
     int getCount() const { return itemCount; }
 
-    /**
-     * @brief 获取物品的图标精灵。
-     * @return 返回物品的图标精灵。
-     */
+    // 获取物品的图标精灵
     cocos2d::Sprite* getIcon() const { return itemIcon; }
 
     void updateCountLabel();
 
 private:
+    UseItemCallback useItemCallback; // 保存自定义的 useItem 回调函数
+
     std::string itemName; ///< 物品的名称
     ItemCategory itemCategory; ///< 物品的分类
     int itemCount; ///< 物品的数量

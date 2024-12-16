@@ -57,9 +57,13 @@ public:
     bool isFull() const;
 
     // 获取所有物品的向量
-    const cocos2d::Vector<Item*>& getItems() const { return items; }
+    const cocos2d::Vector<Item*>& getItems() { return items; }
+
+    //根据物品名字获得实例
+    Item* getItemByName(const std::string& itemName);
 
     BackpackLayer* backpackLayer; ///< 背包层对象
+
 private:
     /**
      * @brief 构造函数，初始化 BackpackManager。

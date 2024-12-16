@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Player.h"
 #include "chipmunk.h"
+#include "Item.h"
 
 USING_NS_CC;
 
@@ -91,8 +92,29 @@ bool MainMap::init()
     std::string itemName = "Test";
     std::string itemName2 = "Test2";
     std::string itemImagePath = "icons/test.png";
-    ItemCategory category = ItemCategory::Consumable;
-    bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category);
+    ItemCategory category = ItemCategory::Food;
+    bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category,6);
+    Item* item = Bag->getItemByName("Test");
+    if (item) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [item]() -> bool {
+            int countUsed = 2; // 假设每次使用 2 个物品
+            if (1)
+            {
+                item->decreaseCount(countUsed);
+                return true;
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        item->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        CCLOG("Item 'test' not found in backpack.");
+    }
+      
+
     bool success2 = BackpackManager::getInstance()->addItem(itemImagePath, "Test2", category);
     BackpackManager::getInstance()->addItem(itemImagePath, "Tes\nt3", category);
     BackpackManager::getInstance()->addItem(itemImagePath, "Test4", category);
@@ -103,9 +125,6 @@ bool MainMap::init()
     BackpackManager::getInstance()->addItem(itemImagePath, "123321", category);
     BackpackManager::getInstance()->addItem(itemImagePath, "Test10", category);
     BackpackManager::getInstance()->addItem(itemImagePath, "Test11", category);
-    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
-    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
-    BackpackManager::getInstance()->addItem(itemImagePath, "Test", category);
 
 
 #endif
@@ -329,6 +348,28 @@ void MainMap::updateCameraPosition(float dt) {
     BackpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
     BackpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
 
+
+#if 0
+    Item* item = Bag->getItemByName("Test");
+    if (item) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [item]() -> bool {
+            int countUsed = 2; // 假设每次使用 2 个物品
+            if (1)
+            {
+                item->decreaseCount(countUsed);
+                return true;
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        item->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        CCLOG("Item 'test' not found in backpack.");
+    }
+#endif
 
     //更新物品图标的坐标值
    
