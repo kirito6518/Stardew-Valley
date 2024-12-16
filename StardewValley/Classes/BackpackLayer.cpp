@@ -63,23 +63,40 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     hideButton->setPosition(Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
     this->addChild(hideButton);
 
-
     // 初始化背包属性
     this->maxItems = maxItems;
     this->currentItems = 0;
 
-#if 1
-    // 初始化物品显示UI
+    // 初始化物品名称标签
     itemNameLabel = Label::createWithTTF("", "fonts/Gen.ttf", 20);
     itemNameLabel->setAnchorPoint(Vec2(0, 1));
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel,3);
 
-    itemCountLabel = Label::createWithTTF("", "fonts/Gen.ttf", 24);
-    itemCountLabel->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-    itemCountLabel->setVisible(false);
-    this->addChild(itemCountLabel,3);
-#endif
+    //初始化使用结果标签
+    useResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    useResultLabel->setAnchorPoint(Vec2(0.5, 0.5));
+    useResultLabel->setVisible(false);
+    this->addChild(useResultLabel, 3);
+
+    //初始化销毁结果标签
+    destroyResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    destroyResultLabel->setAnchorPoint(Vec2(0.5, 0.5));
+    destroyResultLabel->setVisible(false);
+    this->addChild(destroyResultLabel, 3);
+
+    //初始化物品信息UI
+    itemDetaUI = Sprite::create("ui/itemDetaUI.png");
+    itemDetaUI->setAnchorPoint(Vec2(1, 1));
+    itemDetaUI->setVisible(false);
+    this->addChild(itemDetaUI, 0);
+
+    //初始化物品信息标签
+    itemDataLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    itemDataLabel->setAnchorPoint(Vec2(0, 1));
+    itemDataLabel->setVisible(false);
+    this->addChild(itemDataLabel, 3);
+
 
     //加载物品使用按钮
     useButton = MenuItemImage::create(
@@ -91,7 +108,21 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));
     this->addChild(useButton);
     useButton->setVisible(false);
-    
+    // 默认关闭 useButton 的鼠标事件监听
+    useButton->setEnabled(false);
+
+    //加载物品摧毁按钮
+    destroyButton= MenuItemImage::create(
+        "ui/destroyBotton_normal.png",  // 正常状态的图片
+        "ui/destroyBotton_pressed.png", // 按下状态的图片
+        CC_CALLBACK_1(BackpackLayer::onDestroyButtonClicked, this)); // 点击回调函数
+    destroyButton->setAnchorPoint(Vec2(1, 1));
+    destroyButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y - 40));
+    this->addChild(destroyButton);
+    destroyButton->setVisible(false);
+    // 默认关闭 destroyButton 的鼠标事件监听
+    destroyButton->setEnabled(false);
+
     //添加鼠标事件监听器
     setupCombinedMouseListener();
 
@@ -153,6 +184,16 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
 // 移除物品
 void BackpackLayer::removeItem(Sprite* itemSprite)
 {
+    //隐藏物品UI
+    itemDetaUI->setVisible(false);
+    itemDataLabel->setVisible(false);
+
+    //解除使用按钮和摧毁按钮的绑定及可见
+    useButton->setUserData(nullptr);
+    useButton->setVisible(false);
+    destroyButton->setUserData(nullptr);
+    destroyButton->setVisible(false);
+
     itemSprites.eraseObject(itemSprite);
     itemSprite->removeFromParent();
     currentItems--;
@@ -164,29 +205,12 @@ void BackpackLayer::hideBackpack(Ref* sender)
     BackpackManager::getInstance()->hideBackpack();
 }
 
-// 显示物品详情
-void BackpackLayer::showItemDetails(Item* item)
-{
-    itemNameLabel->setString(item->getName());
-    itemCountLabel->setString("Count: " + std::to_string(item->getCount()));
-
-    itemNameLabel->setVisible(true);
-    itemCountLabel->setVisible(true);
-    useButton->setVisible(true);
-}
-
-// 隐藏物品详情
-void BackpackLayer::hideItemDetails()
-{
-    itemNameLabel->setVisible(false);
-    itemCountLabel->setVisible(false);
-    useButton->setVisible(false);
-}
 
 //点击使用按钮的回调函数
 void BackpackLayer::onUseButtonClicked(Ref* sender)
 {
     auto item = static_cast<Item*>(useButton->getUserData());
+
     if (item)
     {
         bool success = item->useItem();
@@ -204,8 +228,22 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
 
         this->scheduleOnce([this](float dt) {
             useResultLabel->setVisible(false);
-            }, 2.0f, "hide_use_result");
+            }, 1.2f, "hide_use_result");
     }
+}
+
+void BackpackLayer::onDestroyButtonClicked(Ref* sender)
+{
+    //移除物品
+    auto item = static_cast<Item*>(destroyButton->getUserData());
+    int itemcount = item->getCount();
+    item->useItem();
+
+    destroyResultLabel->setString("Destroy Success!");
+    destroyResultLabel->setVisible(true);
+    this->scheduleOnce([this](float dt) {
+        destroyResultLabel->setVisible(false);
+        }, 1.2f, "hide_use_result");
 }
 
 //鼠标监听事件与背包内元素的交互
@@ -257,7 +295,7 @@ void BackpackLayer::setupCombinedMouseListener()
 
     // 鼠标点击事件
     mouseListener->onMouseDown = [this](Event* event) {
-        // CCLOG("Button!!!!!!!!!!!!!!!!!!!!!");
+
         EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
         Vec2 mousePosition = mouseEvent->getLocationInView();
 
@@ -285,6 +323,39 @@ void BackpackLayer::setupCombinedMouseListener()
             return;
         }
 
+
+        //  检查是否点击了 useButton
+        if (useButton->isVisible()) {
+            Vec2 useButtonPosition = useButton->getPosition();
+            Size useButtonSize = useButton->getContentSize();
+            Rect useButtonBoundingBox = Rect(useButtonPosition.x - useButtonSize.width,
+                useButtonPosition.y - useButtonSize.height,
+                useButtonSize.width, useButtonSize.height);
+
+            if (useButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 useButton，切换到按下状态的图片
+                useButton->setNormalImage(Sprite::create("ui/use_button_pressed.png"));
+                return;
+            }
+        }
+
+        //  检查是否点击了 destroyButton
+        if (destroyButton->isVisible()) {
+            Vec2 destroyButtonPosition = destroyButton->getPosition();
+            Size destroyButtonSize = destroyButton->getContentSize();
+            Rect destroyButtonBoundingBox = Rect(destroyButtonPosition.x - destroyButtonSize.width,
+                destroyButtonPosition.y - destroyButtonSize.height,
+                destroyButtonSize.width, destroyButtonSize.height);
+
+            if (destroyButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 useButton，切换到按下状态的图片
+                useButton->setNormalImage(Sprite::create("ui/destroy_button_pressed.png"));
+                return;
+            }
+        }
+
         // 遍历所有物品图标，检查鼠标是否点击了某个物品
         for (auto itemSprite : itemSprites)
         {
@@ -299,23 +370,51 @@ void BackpackLayer::setupCombinedMouseListener()
                 Item* item = static_cast<Item*>(itemSprite->getUserData());
                 if (item)
                 {
+
+                    //显示物品UI
+                    itemDetaUI->setVisible(true);
+                    itemDetaUI->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 , backpackPos.y + backpackSize.height/2));// 在背包左侧显示
+
+                    //显示物品信息标签
+                    itemDataLabel->setString(item->getName());
+                    itemDataLabel->setVisible(true);
+                    itemDataLabel->setPosition(Vec2(backpackPos.x - backpackSize.width / 2- itemDetaUI->getContentSize().width+25,
+                        backpackPos.y + backpackSize.height / 2-25));// 在背包左侧显示
+
                     // 显示使用按钮
                     useButton->setUserData(item); // 将物品对象与使用按钮关联
                     useButton->setVisible(true);
-                    useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));// 在物品图标下方显示
+                    useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 15, backpackPos.y + 25));// 在背包左侧显示
+                    useButton->setEnabled(true);// 开启 useButton 的鼠标事件监听
+
+                    // 显示摧毁按钮
+                    destroyButton->setUserData(item); // 将物品对象与使用按钮关联
+                    destroyButton->setVisible(true);
+                    destroyButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 15, backpackPos.y - 45));// 在背包左侧显示
+                    destroyButton->setEnabled(true);// 开启 destroyButton 的鼠标事件监听
+
                 }
                 return;
             }
         }
 
-        // 如果点击的不是物品图标，隐藏使用按钮
+        // 如果点击的不是物品图标，隐藏对应的物品UI并禁用相关鼠标事件监听
+        itemDetaUI->setVisible(false);
+        itemDataLabel->setVisible(false);
+        destroyButton->setVisible(false);
+        destroyButton->setEnabled(false);
         useButton->setVisible(false);
+        useButton->setEnabled(false);
         };
 
     // 鼠标释放事件
     mouseListener->onMouseUp = [this](Event* event) {
         EventMouse* mouseEvent = dynamic_cast<EventMouse*>(event);
         Vec2 mousePosition = mouseEvent->getLocationInView();
+
+        // 获取背包背景图尺寸及坐标
+        auto backpackSize = backpackBgSprite->getContentSize();
+        auto backpackPos = backpackBgSprite->getPosition();
 
         // 获取摄像头的偏移量
         Vec2 cameraOffset = this->getParent()->getPosition();
@@ -335,6 +434,15 @@ void BackpackLayer::setupCombinedMouseListener()
             // 如果点击了 hideButton，切换回正常状态的图片并隐藏背包层
             hideButton->setNormalImage(Sprite::create("ui/close_normal.png"));
             hideBackpack(nullptr); // 隐藏背包层
+
+            //隐藏物品UI
+            itemDetaUI->setVisible(false);
+            itemDataLabel->setVisible(false);
+            //解除使用按钮和摧毁按钮的绑定及可见
+            useButton->setUserData(nullptr);
+            useButton->setVisible(false);
+            destroyButton->setUserData(nullptr);
+            destroyButton->setVisible(false);
         }
         else
         {
@@ -343,18 +451,41 @@ void BackpackLayer::setupCombinedMouseListener()
         }
 
 
-    // 检查是否点击了 useButton
+    // 检查是否点击了 destroyButton
+        if (destroyButton) {
+            Vec2 destroyButtonPosition = destroyButton->getPosition();
+            Size destroyButtonSize = destroyButton->getContentSize();
+            Rect destroyButtonBoundingBox = Rect(destroyButtonPosition.x - destroyButtonSize.width,
+                destroyButtonPosition.y - destroyButtonSize.height,
+                destroyButtonSize.width, destroyButtonSize.height);
+
+            if (destroyButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 destroyButton，切换回正常状态的图片并执行使用逻辑
+                destroyButton->setNormalImage(Sprite::create("ui/destroyBotton_normal.png"));
+                destroyResultLabel->setPosition(backpackPos + Vec2(0, 50));
+                destroyButton->activate(); // 执行使用逻辑
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮区域内，也切换回正常状态
+                destroyButton->setNormalImage(Sprite::create("ui/destroyBotton_normal.png"));
+            }
+        }
+
+        // 检查是否点击了 useButton
         if (useButton) {
             Vec2 useButtonPosition = useButton->getPosition();
             Size useButtonSize = useButton->getContentSize();
-            Rect useButtonBoundingBox = Rect(useButtonPosition.x - useButtonSize.width / 2,
-                useButtonPosition.y - useButtonSize.height / 2,
+            Rect useButtonBoundingBox = Rect(useButtonPosition.x - useButtonSize.width,
+                useButtonPosition.y - useButtonSize.height,
                 useButtonSize.width, useButtonSize.height);
 
             if (useButtonBoundingBox.containsPoint(mousePosition))
             {
                 // 如果点击了 useButton，切换回正常状态的图片并执行使用逻辑
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
+                useResultLabel->setPosition(backpackPos + Vec2(0, 50));
                 useButton->activate(); // 执行使用逻辑
             }
             else
@@ -363,8 +494,10 @@ void BackpackLayer::setupCombinedMouseListener()
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
             }
         }
+
    
     };
+
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }

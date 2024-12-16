@@ -44,7 +44,7 @@ void BackpackManager::hideBackpack()
 }
 
 // 添加物品到背包
-bool BackpackManager::addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int count)
+bool BackpackManager::addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int amount)
 {
     if (isFull())
     {
@@ -58,13 +58,15 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
         if (item->getName() == itemName)
         {
             // 增加物品计数
-            item->increaseCount(count);
+            item->increaseCount(amount);
             return true;
         }
     }
 
     // 创建新物品
-    auto item = Item::create(itemImagePath, itemName, category);
+    auto item = Item::create(itemImagePath, itemName, category, amount);
+    item->retain();//防止其在被销毁时为空
+
     if (!item)
     {
         CCLOG("Failed to create item: %s", itemName.c_str());
@@ -89,6 +91,7 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
 // 移除物品
 void BackpackManager::removeItem(Item* item)
 {
+    
     items.eraseObject(item);
     static_cast<BackpackLayer*>(backpackLayer)->removeItem(item->getIcon());
     currentItems--;
@@ -98,6 +101,21 @@ void BackpackManager::removeItem(Item* item)
 bool BackpackManager::isFull() const
 {
     return currentItems >= maxItems;
+}
+
+Item* BackpackManager::getItemByName(const std::string& itemName) {
+    
+    // 遍历物品列表
+    for (auto item : items)
+    {
+        // 检查物品名称是否匹配
+        if (item->getName() == itemName)
+        {
+            return item; // 返回匹配的物品实例
+        }
+    }
+
+    return nullptr; // 如果没有找到匹配的物品，返回 nullptr
 }
 
 
