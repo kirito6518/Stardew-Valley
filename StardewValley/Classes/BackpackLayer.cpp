@@ -232,12 +232,13 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
     }
 }
 
+//点击摧毁按钮的回调函数
 void BackpackLayer::onDestroyButtonClicked(Ref* sender)
 {
     //移除物品
     auto item = static_cast<Item*>(destroyButton->getUserData());
     int itemcount = item->getCount();
-    item->useItem();
+    item->clearItem();
 
     destroyResultLabel->setString("Destroy Success!");
     destroyResultLabel->setVisible(true);

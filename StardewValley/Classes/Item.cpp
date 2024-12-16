@@ -79,7 +79,7 @@ void Item::decreaseCount(int amount)
     }
 }
 
-// 修改 useItem 函数，接受一个回调函数来处理使用逻辑
+//  useItem 函数，接受一个回调函数来处理使用逻辑
 bool Item::useItem()
 {
     if (useItemCallback)
@@ -91,6 +91,11 @@ bool Item::useItem()
         // 默认实现：使用失败
         return false;
     }
+}
+
+void Item::clearItem()
+{
+    decreaseCount(itemCount);
 }
 
 
