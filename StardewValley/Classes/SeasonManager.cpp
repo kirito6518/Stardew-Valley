@@ -1,7 +1,9 @@
 #include "SeasonManager.h"
 
+// 构造函数，初始化季节管理器
 SeasonManager::SeasonManager() : currentSeason(Spring), daysInCurrentSeason(0) {}
 
+// 更新季节
 void SeasonManager::updateSeason(int days) {
     daysInCurrentSeason += days;
     if (daysInCurrentSeason >= DAYS_PER_SEASON) {
@@ -10,10 +12,12 @@ void SeasonManager::updateSeason(int days) {
     }
 }
 
+// 获取当前季节
 SeasonManager::Season SeasonManager::getCurrentSeason() const {
     return currentSeason;
 }
 
+// 获取当前季节的名称
 std::string SeasonManager::getCurrentSeasonName() const {
     switch (currentSeason) {
     case Spring: return "Spring";

@@ -5,20 +5,43 @@
 #include <string>
 #include <unordered_map>
 
+// 动物类，继承自cocos2d::Node
 class Animal : public cocos2d::Node {
 public:
+    // 构造函数
     Animal(const std::string& name, const std::string& breedSeason);
 
+    // 判断动物是否可以生产产品
     bool canProduce() const;
+
+    // 更新动物的状态
     void update(int days);
+
+    // 收集动物的产品
     void collectProduct();
+
+    // 判断动物是否可以在当前季节繁殖
     bool canBreed(const std::string& currentSeason) const;
+
+    // 繁殖动物，生成一个新的动物对象
     Animal* breed() const;
+
+    // 喂食动物
     void feed();
+
+    // 判断动物是否饥饿
     bool isHungry() const;
+
+    // 获取动物名称
     std::string get_Name() const { return name; }
+
+    // 获取产品类型
     std::string getProductType() const { return productType; }
+
+    // 获取肥料数量
     int getFertilizerCount() const { return fertilizerCount; }
+
+    // 获取每次喂食量
     int getFeedAmount() const { return feedAmount; }
 
     // 显示饥饿动画
