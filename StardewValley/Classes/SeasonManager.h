@@ -24,6 +24,8 @@ public:
     // 获取当前季节的名称
     std::string getCurrentSeasonName() const;
 
+    // 获取当前季节已过去的天数
+    int getDaysInCurrentSeason() const { return daysInCurrentSeason; }
 private:
     Season currentSeason; // 当前季节
     int daysInCurrentSeason; // 当前季节的天数

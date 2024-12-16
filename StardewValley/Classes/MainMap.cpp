@@ -249,12 +249,17 @@ bool MainMap::init()
         seasonManager = SeasonManager();
 
         // 创建并添加季节显示的 Label
-        seasonLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 35);
+        seasonLabel = Label::createWithTTF("Spring", "fonts/Marker Felt.ttf", 35);
         seasonLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
         this->addChild(seasonLabel, 1);
 
+        // 创建并添加天数显示的 Label
+        dayLabel = Label::createWithTTF("Day 1", "fonts/Marker Felt.ttf", 35);
+        dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0)); // 设置在seasonLabel右侧
+        this->addChild(dayLabel, 1);
+
         // 设置定时器，每 4 秒调用一次 addDay 函数
-        this->schedule(schedule_selector(MainMap::addDay), 4.0f);
+        this->schedule(schedule_selector(MainMap::addDay), 3.0f);
     }
 
     // 注册键盘事件
@@ -370,6 +375,7 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
 
     seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+    dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
 }
 
 void MainMap::addDay(float dt)
@@ -380,4 +386,9 @@ void MainMap::addDay(float dt)
     // 获取当前季节名称并更新 Label
     std::string seasonName = seasonManager.getCurrentSeasonName();
     seasonLabel->setString(seasonName);
+
+    // 获取当前季节的天数并更新 dayLabel
+    int day = seasonManager.getDaysInCurrentSeason() + 1; // 天数从1开始
+    std::string dayText = "Day " + std::to_string(day);
+    dayLabel->setString(dayText);
 }
