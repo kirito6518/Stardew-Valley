@@ -39,7 +39,7 @@ bool MainMap::init()
     // 加载背包
     Bag = BackpackManager::getInstance();
     Bag->mainMap = this;
-    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);// 加载洋葱种子
+    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed);// 加载洋葱种子
     // 设置使用逻辑
     SetUseItemInMainMap();
 

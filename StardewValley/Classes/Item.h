@@ -12,9 +12,10 @@ enum class ItemCategory
 {
     Fish,         // 鱼
     Fishtool,     // 渔具
-    Crops,        // 作物（暂定为种子）
+    Seed,         // 种子
+    Crops,        // 作物产品
     AnimalProduct,// 动物产品（生肉和鸡蛋）
-    Food,         // 食物（成熟农作物）
+    Food,         // 食物
     Consumable,   // 消耗品
     Equipment,    // 装备
     Quest         // 任务物品
