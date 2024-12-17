@@ -55,7 +55,8 @@ public:
     // 碰撞开始监听器
     bool onContactBegin(PhysicsContact& contact);
 
-    void MainMap::updateFarm(float dt);
+    // 成长
+    void updateFarm(float dt);
 
     //增加天数
     void addDay(float dt);
@@ -95,11 +96,11 @@ private:
     PhysicsBody* cropsLeftBox;
     Sprite* cropsRight; // 农田右部分
     PhysicsBody* cropsRightBox;
-    Sprite* home; // 房屋
-    PhysicsBody* homeBox;
-    Sprite* fence; // 栅栏
+    Sprite* shop; // 房屋
+    PhysicsBody* shopBox;
     PhysicsBody* fenceBox;
     Sprite* road; // 路
+    Sprite* fence; // 栅栏
     PhysicsBody* roadBox;
     Sprite* ranch;// 牧场
     PhysicsBody* ranchBox;
@@ -113,7 +114,7 @@ private:
     NPCManager npcManager; // 声明 NPC 管理器实例
     FarmManager farmManager; // 声明 FarmManager 实例
 
-    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场
+    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
 
     Scene* caveScene; // 洞穴场景
 };

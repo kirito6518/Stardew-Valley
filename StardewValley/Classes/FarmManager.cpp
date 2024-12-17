@@ -57,3 +57,12 @@ void FarmManager::harvestCrop(const Vec2& position) {
 const std::vector<Crop*>& FarmManager::getCrops() const {
     return _crops;
 }
+
+bool FarmManager::isPositionOccupied(const Vec2& position) {
+    for (auto crop : _crops) {
+        if (crop->getPosition() == position) {
+            return true;
+        }
+    }
+    return false;
+}

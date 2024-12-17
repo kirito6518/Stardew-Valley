@@ -8,7 +8,7 @@
 #include "BackpackManager.h"
 #include "ItemManager.h"
 #include "ShopManager.h"
-
+#include "FarmManager.h"
 
 
 USING_NS_CC;
@@ -135,15 +135,6 @@ bool MainMap::init()
     downWater->setPhysicsBody(downWaterBox);
     this->addChild(downWater, 0);
 
-    // 房屋
-    home = Sprite::create("maps/home.png");// 240 * 336的
-    home->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
-    home->setPosition(visibleSize / 2 + Size(960, 780));
-    homeBox = PhysicsBody::createBox(home->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    homeBox->setDynamic(false);
-    home->setPhysicsBody(homeBox);
-    this->addChild(home, 0);
-
     // 栅栏
     fence = Sprite::create("maps/fence.png");// 24 * 720的
     fence->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
@@ -154,6 +145,17 @@ bool MainMap::init()
     this->addChild(fence, 0);
 
     // 下面的可以互动
+    // 房屋
+    shop = Sprite::create("maps/shop.png");// 240 * 336的
+    shop->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
+    shop->setPosition(visibleSize / 2 + Size(960, 780));
+    shopBox = PhysicsBody::createBox(shop->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    shopBox->setDynamic(false);
+    shopBox->setCollisionBitmask(0x01);
+    shopBox->setContactTestBitmask(0x01);
+    shop->setPhysicsBody(shopBox);
+    this->addChild(shop, 0);
+
     // 钓鱼部分
     fishing = Sprite::create("maps/fishing.png");// 96 * 96的
     fishing->setAnchorPoint(Vec2(0.5, 0.5));// 设置锚点
@@ -214,6 +216,7 @@ bool MainMap::init()
     cropsRight->setName("cropsRight");
     road->setName("road");
     ranch->setName("ranch");
+    shop->setName("shop");
 
     /*
     // 创建物品精灵
@@ -435,6 +438,7 @@ bool MainMap::init()
     return true;
 }
 
+// 成长
 void MainMap::updateFarm(float dt) {
     farmManager.update(dt);
 }
@@ -629,10 +633,12 @@ void  MainMap::SetUseItemInMainMap() {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
+            Vec2 plantingPosition;
             if (place == 1 || place == 2) {
                 int countUsed = 1; // 假设每次使用 1 个物品
                 if (place == 1) {// 如果在左边农场
-                    if (1) {//判断作物是否是0作物
+                    plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
                         farmManager.plantCrop("Onion1", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsLeft->getPosition()+Vec2(96,-96)));
                         this->addChild(farmManager._crops[0], 1);
@@ -640,7 +646,8 @@ void  MainMap::SetUseItemInMainMap() {
                     }
                 }
                 else if (place == 2) {// 如果在右边农场
-                    if (1) {//判断作物是否是0作物
+                    plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
                         farmManager.plantCrop("Onion2", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsRight->getPosition() + Vec2(96,-96)));
                         this->addChild(farmManager._crops[1], 1);
@@ -704,6 +711,11 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
+    }
+    else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
+        CCLOG("Player collided with shop!");
+        // 执行牧场逻辑
+        place = 6; // 设置位置为商店
     }
 
     // 返回 true 表示允许碰撞继续处理
