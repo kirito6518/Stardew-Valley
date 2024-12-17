@@ -52,6 +52,7 @@ public:
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
+
     Item* OnionSeed;// 洋葱种子
 private:
     Sprite* mapSprite; // 地图
@@ -88,6 +89,8 @@ private:
     PhysicsBody* ranchBox;
 
     Player player; // 玩家
+    PhysicsBody* playerBox;
+
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
     MenuItemImage* backpackButton; // 开启背包的文字

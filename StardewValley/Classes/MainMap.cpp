@@ -150,6 +150,8 @@ bool MainMap::init()
     fishing->setPosition(visibleSize / 2 + Size(-960 + 624, -780 + 408));
     fishingBox = PhysicsBody::createBox(fishing->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     fishingBox->setDynamic(false);
+    fishingBox->setCollisionBitmask(0x01);
+    fishingBox->setContactTestBitmask(0x01);
     fishing->setPhysicsBody(fishingBox);
     this->addChild(fishing, 0);
 
@@ -159,6 +161,8 @@ bool MainMap::init()
     CropsLeft->setPosition(visibleSize / 2 + Size(-960 + 1224, -780 + 336));
     CropsLeftBox = PhysicsBody::createBox(CropsLeft->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     CropsLeftBox->setDynamic(false);
+    CropsLeftBox->setCollisionBitmask(0x01);
+    CropsLeftBox->setContactTestBitmask(0x01);
     CropsLeft->setPhysicsBody(CropsLeftBox);
     this->addChild(CropsLeft, 0);
 
@@ -168,6 +172,8 @@ bool MainMap::init()
     CropsRight->setPosition(visibleSize / 2 + Size(-960 + 1464, -780 + 336));
     CropsRightBox = PhysicsBody::createBox(CropsRight->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     CropsRightBox->setDynamic(false);
+    CropsRightBox->setCollisionBitmask(0x01);
+    CropsRightBox->setContactTestBitmask(0x01);
     CropsRight->setPhysicsBody(CropsRightBox);
     this->addChild(CropsRight, 0);
 
@@ -177,6 +183,8 @@ bool MainMap::init()
     road->setPosition(visibleSize / 2 + Size(48, -780));
     roadBox = PhysicsBody::createBox(road->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     roadBox->setDynamic(false);
+    roadBox->setCollisionBitmask(0x01);
+    roadBox->setContactTestBitmask(0x01);
     road->setPhysicsBody(roadBox);
     this->addChild(road, 0);
 
@@ -186,6 +194,8 @@ bool MainMap::init()
     ranch->setPosition(visibleSize / 2 + Size(-960 + 24 * 30, 60));
     ranchBox = PhysicsBody::createBox(ranch->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     ranchBox->setDynamic(false);
+    ranchBox->setCollisionBitmask(0x01);
+    ranchBox->setContactTestBitmask(0x01);
     ranch->setPhysicsBody(ranchBox);
     this->addChild(ranch, 0);
 
@@ -348,9 +358,11 @@ bool MainMap::init()
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
 
     // 为玩家添加物理体
-    auto playerBody = PhysicsBody::createBox(player.playerSprite->getContentSize() / 4, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
-    playerBody->setDynamic(true); // 设置为动态物理体
-    player.playerSprite->setPhysicsBody(playerBody);// 设置物理体
+    playerBox = PhysicsBody::createBox(player.playerSprite->getContentSize() / 4, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
+    playerBox->setDynamic(true); // 设置为动态物理体
+    playerBox->setCollisionBitmask(0x01);
+    playerBox->setContactTestBitmask(0x01);
+    player.playerSprite->setPhysicsBody(playerBox);// 设置物理体
     this->addChild(player.playerSprite, 1);
 
     {
@@ -400,8 +412,8 @@ bool MainMap::init()
         npcManager._npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
 
         // 调试输出 NPC 的位置和精灵尺寸
-        CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
-        CCLOG("NPC sprite size: (%f, %f)", npcManager._npcs[0]->getContentSize().width, npcManager._npcs[0]->getContentSize().height);
+        // CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
+        // CCLOG("NPC sprite size: (%f, %f)", npcManager._npcs[0]->getContentSize().width, npcManager._npcs[0]->getContentSize().height);
 
         // 将 NPC 添加到场景中
         this->addChild(npcManager._npcs[0], 1);
@@ -586,32 +598,33 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
     auto nodeB = bodyB->getNode();
 
     // 输出碰撞信息
-    CCLOG("Collision between: %s and %s", nodeA->getName().c_str(), nodeB->getName().c_str());
+    // CCLOG("Collision between: %s and %s", nodeA->getName().c_str(), nodeB->getName().c_str());
 
     // 在这里添加碰撞后的逻辑
     // 例如：判断碰撞的物体是否是玩家和某个特定物体
-    if (nodeA->getName() == "player" && nodeB->getName() == "fishing") {
-        CCLOG("Player collided with fishing area!");
+    if (nodeB->getName() == "fishing" || nodeA->getName() == "fishing") {
+        // CCLOG("Player collided with fishing area!");
         // 执行钓鱼逻辑
         place = 3; // 设置位置为钓鱼点
     }
-    else if (nodeA->getName() == "player" && nodeB->getName() == "CropsLeft") {
-        CCLOG("Player collided with left farm!");
+    else if (nodeB->getName() == "CropsLeft" || nodeA->getName() == "CropsLeft") {
+        // CCLOG("Player collided with left farm!");
         // 执行左农场逻辑
         place = 1; // 设置位置为左农场
+        backpackButton->activate();
     }
-    else if (nodeA->getName() == "player" && nodeB->getName() == "CropsRight") {
-        CCLOG("Player collided with right farm!");
+    else if (nodeB->getName() == "CropsRight" || nodeA->getName() == "CropsRight") {
+        // CCLOG("Player collided with right farm!");
         // 执行右农场逻辑
         place = 2; // 设置位置为右农场
     }
-    else if (nodeA->getName() == "player" && nodeB->getName() == "road") {
-        CCLOG("Player collided with road!");
+    else if (nodeB->getName() == "road" || nodeA->getName() == "road") {
+        // CCLOG("Player collided with road!");
         // 执行路逻辑
         place = 4; // 设置位置为路
     }
-    else if (nodeA->getName() == "player" && nodeB->getName() == "ranch") {
-        CCLOG("Player collided with ranch!");
+    else if (nodeB->getName() == "ranch" || nodeA->getName() == "ranch") {
+        // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
     }
