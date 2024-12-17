@@ -120,7 +120,7 @@ bool HelloWorld::init()
     {
         // 添加一段文本
         // 使用自己的字库
-        auto label = Label::createWithTTF("Load", "fonts/Marker Felt.ttf", 40);
+        auto label = Label::createWithTTF("Help", "fonts/Marker Felt.ttf", 40);
         // 将标签放在按钮里
         const float x = visibleSize.width / 4 + label->getContentSize().width / 2;
         const float y = label->getContentSize().height / 2;
