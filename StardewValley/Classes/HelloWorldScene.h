@@ -24,7 +24,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
-    Scene* mainMapScene;
+    Scene* mainMapScene; // Ö÷µØÍ¼³¡¾°
 };
 
 #endif // __HELLOWORLD_SCENE_H__

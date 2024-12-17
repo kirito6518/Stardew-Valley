@@ -69,7 +69,11 @@
     <ClCompile Include="..\Classes\SeasonManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="..\Classes\ItemManager.cpp">
+=======
+    <ClCompile Include="..\Classes\Cave.cpp">
+>>>>>>> Stashed changes
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,7 +135,11 @@
     <ClInclude Include="..\Classes\SeasonManager.h">
       <Filter>src</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="..\Classes\ItemManager.h">
+=======
+    <ClInclude Include="..\Classes\Cave.h">
+>>>>>>> Stashed changes
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

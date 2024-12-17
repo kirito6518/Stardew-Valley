@@ -8,6 +8,8 @@
 #include "chipmunk.h"
 #include "SeasonManager.h"
 #include "NPCManager.h"
+#include "FarmManager.h"
+#include "Cave.h"
 
 
 USING_NS_CC;
@@ -33,17 +35,17 @@ public:
     CREATE_FUNC(MainMap);
 
     // 每帧更新
-    void MainMap::updatePlayerPosition(float dt);
+    void updatePlayerPosition(float dt);
 
     // 每帧更新
-    void MainMap::updateCameraPosition(float dt);
+    void updateCameraPosition(float dt);
 
     // 碰撞开始监听器
-    bool MainMap::onContactBegin(PhysicsContact& contact);
+    bool onContactBegin(PhysicsContact& contact);
 
     
     //增加天数
-    void MainMap::addDay(float dt);
+    void addDay(float dt);
 
 
     // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
@@ -53,6 +55,8 @@ public:
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
+
+    FarmManager* farmManager; // 农场管理器
 
     Item* OnionSeed;// 洋葱种子
 
@@ -99,6 +103,8 @@ private:
     NPCManager npcManager; // 声明 NPC 管理器实例
 
     int place;// 设置位置,0是在空地，1是在左农场，2是在右农场
+
+    Scene* caveScene; // 洞穴场景
 };
 
 #endif // __MainMap_H__

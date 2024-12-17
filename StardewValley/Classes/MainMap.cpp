@@ -631,6 +631,12 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with road!");
         // 执行路逻辑
         place = 4; // 设置位置为路
+
+        // 创建新场景
+        caveScene = Cave::createScene();
+
+        // 将新场景推入场景栈
+        Director::getInstance()->pushScene(caveScene);
     }
     else if (nodeB->getName() == "ranch" || nodeA->getName() == "ranch") {
         // CCLOG("Player collided with ranch!");

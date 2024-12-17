@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AuthorListScene.cpp" />
     <ClCompile Include="..\Classes\BackpackLayer.cpp" />
     <ClCompile Include="..\Classes\BackpackManager.cpp" />
+    <ClCompile Include="..\Classes\Cave.cpp" />
     <ClCompile Include="..\Classes\Crop.cpp" />
     <ClCompile Include="..\Classes\Event.cpp" />
     <ClCompile Include="..\Classes\FarmManager.cpp" />
@@ -177,6 +178,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AuthorListScene.h" />
     <ClInclude Include="..\Classes\BackpackLayer.h" />
     <ClInclude Include="..\Classes\BackpackManager.h" />
+    <ClInclude Include="..\Classes\Cave.h" />
     <ClInclude Include="..\Classes\Crop.h" />
     <ClInclude Include="..\Classes\Event.h" />
     <ClInclude Include="..\Classes\FarmManager.h" />
