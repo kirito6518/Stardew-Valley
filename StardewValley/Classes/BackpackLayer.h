@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "Item.h"
-#include "MainMap.h"
 
 
 USING_NS_CC;

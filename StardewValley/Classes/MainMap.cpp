@@ -367,9 +367,6 @@ void MainMap::onBackpackButtonClicked(Ref* sender)
     // 调用单例管理类显示背包层
     Bag->showBackpack(this);
 
-    // 设置 MainMap 的指针
-    Bag->setMainMap(this);
-
     // 禁用 MainMap 场景的时间更新
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));

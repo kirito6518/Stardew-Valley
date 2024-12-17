@@ -14,7 +14,7 @@ USING_NS_CC;
  * BackpackManager 是一个单例类，用于管理背包的显示和物品的添加、移除。它负责与 BackpackLayer 进行交互，
  * 并提供添加物品、移除物品、检查背包是否已满等功能。
  */
-class BackpackManager
+class BackpackManager : public cocos2d::Layer
 {
 public:
     /**
@@ -63,7 +63,7 @@ public:
     Item* getItemByName(const std::string& itemName);
 
     BackpackLayer* backpackLayer; ///< 背包层对象
-
+    Scene* mainMap;
 private:
     /**
      * @brief 构造函数，初始化 BackpackManager。
