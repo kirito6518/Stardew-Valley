@@ -30,6 +30,15 @@ public:
 
 	Sprite* caveSprite; // 地图
 
+	Sprite* caveUpBoundary; // 地图上边界
+	PhysicsBody* caveUpBoundaryBox;
+	Sprite* caveRightBoundary; // 地图右边界
+	PhysicsBody* caveRightBoundaryBox;
+	Sprite* caveLeftBoundary; // 地图左边界
+	PhysicsBody* caveLeftBoundaryBox;
+	Sprite* caveDownBoundary; // 地图下边界
+	PhysicsBody* caveDownBoundaryBox;
+
 	Player player; // 玩家
 	PhysicsBody* playerBox;
 	Sprite* black; // 黑暗矿洞 

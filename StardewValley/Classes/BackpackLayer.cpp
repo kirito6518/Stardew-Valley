@@ -113,7 +113,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     // 默认关闭 useButton 的鼠标事件监听
     useButton->setEnabled(false);
 
-    //加载物品摧毁按钮
+    //加载物品售卖按钮
     destroyButton= MenuItemImage::create(
         "ui/sell_button_normal.png",  // 正常状态的图片
         "ui/sell_button_pressed.png", // 按下状态的图片

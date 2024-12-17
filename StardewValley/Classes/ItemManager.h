@@ -31,6 +31,7 @@ public:
     void setSellableItems(const std::unordered_set<std::string>& sellableItemNames);
 
 private:
+    ItemManager::ItemManager();//构造函数
     static ItemManager* instance; // 单例实例
     std::unordered_map<std::string, Item*> items; // 全局物品实例映射
 };

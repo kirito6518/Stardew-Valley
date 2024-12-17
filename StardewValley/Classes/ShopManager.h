@@ -40,7 +40,7 @@ public:
      * @param amount 添加物品的数量，默认为1
      * @return 返回是否成功添加物品。
      */
-    bool addItem(Item* item, int amount = 1);
+    bool addItem(Item* item);
 
     /**
      * @brief 从商店中移除物品。

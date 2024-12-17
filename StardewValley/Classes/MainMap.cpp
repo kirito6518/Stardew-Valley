@@ -7,6 +7,8 @@
 #include "Item.h"
 #include "BackpackManager.h"
 #include "ItemManager.h"
+#include "ShopManager.h"
+#include "FarmManager.h"
 
 
 USING_NS_CC;
@@ -45,6 +47,9 @@ bool MainMap::init()
     BackpackManager::getInstance();
     getInitBackpack();
     BackpackManager::getInstance()->mainMap = this;
+
+    //加载商店
+    ShopManager::getInstance();
 
 
     // 加载使用逻辑
@@ -130,15 +135,6 @@ bool MainMap::init()
     downWater->setPhysicsBody(downWaterBox);
     this->addChild(downWater, 0);
 
-    // 房屋
-    home = Sprite::create("maps/home.png");// 240 * 336的
-    home->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
-    home->setPosition(visibleSize / 2 + Size(960, 780));
-    homeBox = PhysicsBody::createBox(home->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    homeBox->setDynamic(false);
-    home->setPhysicsBody(homeBox);
-    this->addChild(home, 0);
-
     // 栅栏
     fence = Sprite::create("maps/fence.png");// 24 * 720的
     fence->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
@@ -149,6 +145,17 @@ bool MainMap::init()
     this->addChild(fence, 0);
 
     // 下面的可以互动
+    // 房屋
+    shop = Sprite::create("maps/shop.png");// 240 * 336的
+    shop->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
+    shop->setPosition(visibleSize / 2 + Size(960, 780));
+    shopBox = PhysicsBody::createBox(shop->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    shopBox->setDynamic(false);
+    shopBox->setCollisionBitmask(0x01);
+    shopBox->setContactTestBitmask(0x01);
+    shop->setPhysicsBody(shopBox);
+    this->addChild(shop, 0);
+
     // 钓鱼部分
     fishing = Sprite::create("maps/fishing.png");// 96 * 96的
     fishing->setAnchorPoint(Vec2(0.5, 0.5));// 设置锚点
@@ -209,6 +216,7 @@ bool MainMap::init()
     cropsRight->setName("cropsRight");
     road->setName("road");
     ranch->setName("ranch");
+    shop->setName("shop");
 
     /*
     // 创建物品精灵
@@ -434,6 +442,7 @@ bool MainMap::init()
     return true;
 }
 
+// 成长
 void MainMap::updateFarm(float dt) {
     farmManager.update(dt);
 }
@@ -475,6 +484,7 @@ void MainMap::clearBackpack()
     }
 }
 
+//加载初始背包
 void MainMap::getInitBackpack() 
 {
     clearBackpack();
@@ -483,6 +493,24 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     BackpackManager::getInstance()->addItem(initItem, 3);
+}
+
+//显示商店
+void MainMap::toShop()
+{
+    // 调用单例管理类显示背包层
+    ShopManager::getInstance()->showShop(this);
+
+    // 禁用 MainMap 场景的时间更新
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+}
+
+//隐藏商店界面
+void MainMap::hideShop(Ref* sender) {
+    // 重新启用 MainMap 场景的时间更新
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -573,6 +601,7 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 重新绑定鼠标事件监听器
     BackpackLayer->setupCombinedMouseListener();
+    ShopManager::getInstance()->shopLayer->setupCombinedMouseListener();
 
     // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
@@ -686,6 +715,11 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
+    }
+    else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
+        CCLOG("Player collided with shop!");
+        // 执行牧场逻辑
+        place = 6; // 设置位置为商店
     }
 
     // 返回 true 表示允许碰撞继续处理
