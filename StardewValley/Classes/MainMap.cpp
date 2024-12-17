@@ -39,6 +39,12 @@ bool MainMap::init()
     // 加载背包
     Bag = BackpackManager::getInstance();
     Bag->mainMap = this;
+    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);// 加载洋葱种子
+    // 设置使用逻辑
+    SetUseItemInMainMap();
+
+    // 初始放入背包物品(测试)
+    Bag->addItem(OnionSeed, 1);
 
     // 加载地图
     mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
@@ -209,19 +215,6 @@ bool MainMap::init()
         CCLOG("Item 'test' not found in backpack.");
     }
     */
-<<<<<<< Updated upstream
-    // 初始放入背包物品(测试)
-#if 1
-    Item* OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
-    bool success = BackpackManager::getInstance()->addItem(OnionSeed, 1);// 洋葱种子
-#endif
-=======
-    // 设置使用逻辑
-    SetUseItemInMainMap();
-
-    // 初始放入背包物品
-    bool success2 = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops, 1);// 洋葱种子
->>>>>>> Stashed changes
 
     // 添加一个按钮，左键点击后切回主屏幕
     toHollowWorldButton = MenuItemImage::create(
@@ -573,18 +566,15 @@ void MainMap::addDay(float dt)
 void  MainMap::SetUseItemInMainMap() {
 
     // 创建物品精灵
-    Item* OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
-    bool success = BackpackManager::getInstance()->addItem(OnionSeed, 1);// 洋葱种子
-    Item* item = Bag->getItemByName("Onion\nSeed");
-    if (item) {
+    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
+    if (OnionSeed) {
         // 定义一个自定义的 useItem 逻辑
-        auto customUseItemLogic = [this,item]() -> bool {
-            int countUsed = 1; // 假设每次使用 1 个物品
-            if (1)
-            {
-                item->decreaseCount(countUsed);
+        auto customUseItemLogic = [this]() -> bool {
+            if (place == 1 || place == 2) {
+                int countUsed = 1; // 假设每次使用 1 个物品
+                OnionSeed->decreaseCount(countUsed);
                 if (place == 1) {// 如果在左边农场
-
+                    CCLOG("Collision between:1");
                 }
                 else if (place == 2) {// 如果在右边农场
 
@@ -595,7 +585,7 @@ void  MainMap::SetUseItemInMainMap() {
             };
 
         // 设置回调函数
-        item->setUseItemCallback(customUseItemLogic);
+        OnionSeed->setUseItemCallback(customUseItemLogic);
     }
     else {
         CCLOG("Item 'test' not found in backpack.");

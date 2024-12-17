@@ -4,17 +4,6 @@
 USING_NS_CC;
 
 
-
-Item::~Item()
-{
-    if (itemIcon)
-    {
-        itemIcon->removeFromParent(); // 确保 itemIcon 从父节点中移除
-
-    }
-}
-
-
 // 创建物品
 Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
 {

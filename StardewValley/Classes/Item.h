@@ -30,8 +30,6 @@ enum class ItemCategory
 class Item : public cocos2d::Node
 {
 public:
-    //析构函数
-    ~Item();
 
     // 定义一个回调函数类型，用于处理使用逻辑
     using UseItemCallback = std::function<bool()>;
