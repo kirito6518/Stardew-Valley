@@ -34,7 +34,7 @@ public:
     void removeItem(cocos2d::Sprite* itemSprite);
 
     // 隐藏商店界面
-    void hideShop(cocos2d::Ref* sender);
+    void hideShop(Ref* sender);
 
     // 获取所有物品的向量
     const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }

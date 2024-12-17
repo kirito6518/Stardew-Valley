@@ -43,6 +43,9 @@ public:
     //隐藏商店界面
     void hideShop(Ref* sender);
 
+    //加载初始商店
+    void getInitShop();
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 

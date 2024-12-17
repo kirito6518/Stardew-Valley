@@ -8,7 +8,9 @@
 #include "BackpackManager.h"
 #include "ItemManager.h"
 #include "ShopManager.h"
+#include"ShopLayer.h"
 #include "FarmManager.h"
+
 
 
 USING_NS_CC;
@@ -50,7 +52,8 @@ bool MainMap::init()
 
     //加载商店
     ShopManager::getInstance();
-
+    getInitShop();
+    ShopManager::getInstance()->mainMap = this;
 
     // 加载使用逻辑
     SetUseItemInMainMap();
@@ -509,6 +512,14 @@ void MainMap::hideShop(Ref* sender) {
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
 }
 
+//
+void MainMap::getInitShop()
+{
+    Item* initItem;
+    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+}
+
 // 每0.2s更新玩家位置和动画
 void MainMap::updatePlayerPosition(float delta)
 {
@@ -579,21 +590,51 @@ void MainMap::updateCameraPosition(float dt) {
     BackpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
     BackpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
 
-    //更新物品图标的坐标值
-   
-    int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+    //获取shopLayer实例
+    ShopLayer* shoplayer = ShopManager::getInstance()->shopLayer;
 
-    int Spcount = 0;
-    int Itemcount = 0;
+    //更新商店位置
+    shoplayer->shopBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
+    auto shopBgSize = shoplayer->shopBgSprite->getContentSize();
+    auto shopBgPos = shoplayer->shopBgSprite->getPosition();
+    shoplayer->shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y + shopBgSize.height / 2));
+    shoplayer->closeButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + shopBgSize.width / 2, visibleSize.height / 2 + shopBgSize.height / 2));
 
-    const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
-    for (auto Itemsprite : Itemsprites)
+    //更新背包物品图标的坐标值
     {
-        dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
-        dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
-        Itemsprite->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY - dy));
-        Spcount++;
+        int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+
+        int Spcount = 0;
+        int Itemcount = 0;
+
+        const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
+        for (auto Itemsprite : Itemsprites)
+        {
+            dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
+            dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
+            Itemsprite->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY - dy));
+            Spcount++;
+        }
     }
+
+    //更新商店物品图标坐标值
+    {
+        int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+
+        int Spcount = 0;
+        int Itemcount = 0;
+
+        const cocos2d::Vector<Sprite*>& Itemsprites = shoplayer->getItemSprites();
+        for (auto Itemsprite : Itemsprites)
+        {
+            dx = Spcount % 10 * (shoplayer->gridWidth + shoplayer->gridSpacing);
+            dy = Spcount / 10 * (shoplayer->gridHeight + shoplayer->gridSpacing);
+            Itemsprite->setPosition(targetCameraPosition + Vec2(shoplayer->gridStartX + dx, shoplayer->gridStartY - dy));
+            Spcount++;
+        }
+    }
+
+
 
     // 重新绑定鼠标事件监听器
     BackpackLayer->setupCombinedMouseListener();
@@ -716,6 +757,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         CCLOG("Player collided with shop!");
         // 执行牧场逻辑
         place = 6; // 设置位置为商店
+        toShop();
     }
 
     // 返回 true 表示允许碰撞继续处理

@@ -28,7 +28,7 @@ ShopManager::ShopManager()
 
     maxItems = 30;           // 设置商店物品上限
     currentItems = 0;        // 初始化当前物品数量
-    addItem(ItemManager::getInstance()->getItem("Onion\nSeed"));
+
 }
 
 // 析构函数

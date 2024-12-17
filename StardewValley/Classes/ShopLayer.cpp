@@ -48,19 +48,17 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     shopBgSprite->setPosition(visibleSize / 2);
     this->addChild(shopBgSprite, 2);
 
-    //获取商店背景图片信息
-    auto shopBgPos =shopBgSprite->getPosition();
-    auto shopBgSize=shopBgSprite->getContentSize();
+    // 获取商店背景图尺寸及坐标
+    auto shopSize = shopBgSprite->getContentSize();
+    auto shopPos = shopBgSprite->getPosition();
+
 
     // 加载商店招牌图片
     shopSprite = Sprite::create("ui/shop.png");
     shopSprite->setAnchorPoint(Vec2(0.5, 0.5));
-    shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y+ shopBgSize.height/2));
+    shopSprite->setAnchorPoint(Vec2(0.5, 0));
+    shopSprite->setPosition(Vec2(shopPos.x, shopPos.y+ shopSize.height/2));
     this->addChild(shopSprite, 2);
-
-    // 获取商店背景图尺寸及坐标
-    auto shopSize = shopBgSprite->getContentSize();
-    auto shopPos = shopBgSprite->getPosition();
 
     // 创建关闭按钮
     closeButton = MenuItemImage::create(
