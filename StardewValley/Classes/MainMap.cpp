@@ -559,20 +559,24 @@ void MainMap::addDay(float dt)
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
 void  MainMap::SetUseItemInMainMap() {
-    // 设置洋葱
+    // 设置洋葱种子
     if (OnionSeed) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             if (place == 1 || place == 2) {
                 int countUsed = 1; // 假设每次使用 1 个物品
-                OnionSeed->decreaseCount(countUsed);
                 if (place == 1) {// 如果在左边农场
-                    CCLOG("Collision between:1");
+                    if (1) {//判断作物是否是0作物
+                        OnionSeed->decreaseCount(countUsed);
+                        return true;
+                    }
                 }
                 else if (place == 2) {// 如果在右边农场
-
+                    if (1) {//判断作物是否是0作物
+                        OnionSeed->decreaseCount(countUsed);
+                        return true;
+                    }
                 }
-                return true;
             }
             return false;
             };
@@ -617,6 +621,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with right farm!");
         // 执行右农场逻辑
         place = 2; // 设置位置为右农场
+        backpackButton->activate();
     }
     else if (nodeB->getName() == "road" || nodeA->getName() == "road") {
         // CCLOG("Player collided with road!");
