@@ -554,7 +554,6 @@ void MainMap::addDay(float dt)
     std::string dayText = "Day " + std::to_string(day);
     dayLabel->setString(dayText);
 }
-}
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
 void  MainMap::SetUseItemInMainMap() {

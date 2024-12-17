@@ -130,9 +130,9 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     // 初始化背包格子布局
     gridWidth = 80;
     gridHeight = 80;
-    gridSpacing = 8;
-    gridStartX = (visibleSize.width - backpackSize.width) / 2;
-    gridStartY = (visibleSize.height + backpackSize.height) / 2;
+    gridSpacing = 10;
+    gridStartX = (visibleSize.width - backpackSize.width) / 2+10;
+    gridStartY = (visibleSize.height + backpackSize.height) / 2-10;
 
     return true;
 }
