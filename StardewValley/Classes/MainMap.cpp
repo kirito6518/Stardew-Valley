@@ -6,6 +6,7 @@
 #include "chipmunk.h"
 #include "Item.h"
 #include "BackpackManager.h"
+#include "ItemManager.h"
 
 
 USING_NS_CC;
@@ -41,19 +42,13 @@ bool MainMap::init()
     physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 加载背包
-    Bag = BackpackManager::getInstance();
-    Bag->mainMap = this;
+    BackpackManager::getInstance();
+    getInitBackpack();
+    BackpackManager::getInstance()->mainMap = this;
 
-    // 加载背包物品
-    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed,0,1);// 加载洋葱种子
 
     // 加载使用逻辑
     SetUseItemInMainMap();
-
-// 初始放入背包物品(测试)
-#if 1
-    Bag->addItem(OnionSeed, 1);
-#endif
 
 
     // 加载地图
@@ -450,7 +445,7 @@ void MainMap::toMenu(Ref* ref)
 void MainMap::onBackpackButtonClicked(Ref* sender)
 {
     // 调用单例管理类显示背包层
-    Bag->showBackpack(this);
+    BackpackManager::getInstance()->showBackpack(this);
 
     // 禁用 MainMap 场景的时间更新
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
@@ -464,6 +459,26 @@ void MainMap::hideBackpack(Ref* sender)
     // 重新启用 MainMap 场景的时间更新
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+}
+
+//清空背包物品
+void MainMap::clearBackpack()
+{
+    auto items = BackpackManager::getInstance()->getItems();
+    for (auto item : items) {
+
+        item->clearItem();//清空物品数量
+    }
+}
+
+void MainMap::getInitBackpack() 
+{
+    clearBackpack();
+    Item* initItem;
+    initItem = ItemManager::getInstance()->getItem("Coin");
+    BackpackManager::getInstance()->addItem(initItem, 3);
+    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -529,7 +544,7 @@ void MainMap::updateCameraPosition(float dt) {
     this->setPosition(-targetCameraPosition);
 
     //获取backpackLayer实例
-    auto BackpackLayer = Bag->backpackLayer;
+    auto BackpackLayer = BackpackManager::getInstance()->backpackLayer;
  
     // 更新背包位置
     auto backpackSize = BackpackLayer->backpackBgSprite->getContentSize();
@@ -583,10 +598,12 @@ void MainMap::addDay(float dt)
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
 void  MainMap::SetUseItemInMainMap() {
+    
     // 设置洋葱种子
-    if (OnionSeed) {
+    if (ItemManager::getInstance()->getItem("Onion\nSeed")) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
+            auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
             if (place == 1 || place == 0) {
                 int countUsed = 1; // 假设每次使用 1 个物品
                 if (place == 1) {// 如果在左边农场
@@ -597,7 +614,7 @@ void  MainMap::SetUseItemInMainMap() {
                         return true;
                     }
                 }
-                else if (place == 0) {// 如果在右边农场
+                else if (place == 2) {// 如果在右边农场
                     if (1) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
                         farmManager.plantCrop("Onion", "crops/Onion1.png", 100, 7, 10, Vec2(CropsLeft->getPosition() + Vec2(96,-96)));
@@ -610,7 +627,7 @@ void  MainMap::SetUseItemInMainMap() {
             };
 
         // 设置回调函数
-        OnionSeed->setUseItemCallback(customUseItemLogic);
+        ItemManager::getInstance()->getItem("Onion\nSeed")->setUseItemCallback(customUseItemLogic);
     }
     else {
         CCLOG("Item 'test' not found in backpack.");

@@ -2,16 +2,20 @@
 #include "BackpackLayer.h"
 #include "Item.h"
 
-
-
 USING_NS_CC;
+
+// 初始化单例实例
+BackpackManager* BackpackManager::instance = nullptr;
 
 // 获取单例实例
 BackpackManager* BackpackManager::getInstance()
 {
 
-    static BackpackManager instance;
-    return &instance;
+    if (!instance)
+    {
+        instance = new BackpackManager();
+    }
+    return instance;
 }
 
 // 构造函数
@@ -22,9 +26,11 @@ BackpackManager::BackpackManager()
 
     maxItems = 30;           // 设置背包物品上限
     currentItems = 0;        // 初始化当前物品数量
+    
+    Item::create("tool/coin.png", "Coin", ItemCategory::Seed, 1, 1);// 加载金币
+    Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
 
-    Coin = Item::create("tool/coin.png", "Coin", ItemCategory::Tool, 1, 1);
-    addItem(Coin, 3);//初始拥有3金币
+
 }
 
 // 析构函数
@@ -126,6 +132,16 @@ Item* BackpackManager::getItemByName(const std::string& itemName) {
     }
 
     return nullptr; // 如果没有找到匹配的物品，返回 nullptr
+}
+
+//清除BackpackManager
+void BackpackManager::destroyInstance()
+{
+    if (instance)
+    {
+        delete instance;
+        instance = nullptr; // 将实例指针置为 nullptr，防止野指针
+    }
 }
 
 

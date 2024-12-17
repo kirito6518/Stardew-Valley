@@ -42,6 +42,16 @@ void ItemManager::clearAllItems()
     items.clear();
 }
 
+//清除ItemManager
+void ItemManager::destroyInstance()
+{
+    if (instance)
+    {
+        delete instance;
+        instance = nullptr; // 将实例指针置为 nullptr，防止野指针
+    }
+}
+
 // 设置售卖物品列表
 void ItemManager::setSellableItems(const std::unordered_set<std::string>& sellableItemNames)
 {

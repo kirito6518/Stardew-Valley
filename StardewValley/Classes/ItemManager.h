@@ -20,6 +20,10 @@ public:
     // 获取一个 Item 实例
     Item* getItem(const std::string& itemName);
 
+    //清除ItemManager
+    void destroyInstance();
+
+
     // 清空所有 Item 实例
     void clearAllItems();
 

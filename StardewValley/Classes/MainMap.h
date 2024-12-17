@@ -31,6 +31,12 @@ public:
     // 隐藏背包
     void hideBackpack(Ref* sender);
 
+    //清空背包物品
+    void clearBackpack();
+
+    //加载初始背包
+    void getInitBackpack();
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 
@@ -52,11 +58,11 @@ public:
     // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
     void SetUseItemInMainMap();
 
-    BackpackManager* Bag;
+
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
-    Item* OnionSeed;// 洋葱种子
+
 
 private:
     Sprite* mapSprite; // 地图

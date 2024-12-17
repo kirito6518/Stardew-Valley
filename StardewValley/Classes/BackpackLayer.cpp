@@ -197,7 +197,7 @@ void BackpackLayer::removeItem(Sprite* itemSprite)
     destroyButton->setVisible(false);
 
     itemSprites.eraseObject(itemSprite);
-    itemSprite->removeFromParent();
+    itemSprite->removeFromParentAndCleanup(false);
     currentItems--;
 }
 
@@ -244,7 +244,7 @@ void BackpackLayer::onDestroyButtonClicked(Ref* sender)
     int itemcount = item->getCount();
     if (item->getitemCategory() != ItemCategory::Tool) {//如果物品不属于工具类（即可被卖出）
         if (this->getParent() != nullptr) {
-            auto itemCoin = static_cast<MainMap*>(this->getParent())->Bag->getItemByName("Coin");
+            auto itemCoin = BackpackManager::getInstance()->getItemByName("Coin");
             int money = (item->getsellingPrice()) * itemcount;
             itemCoin->increaseCount(money);
         }

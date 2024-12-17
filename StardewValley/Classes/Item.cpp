@@ -44,12 +44,15 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
         CCLOG("Failed to load item image: %s", itemImagePath.c_str());
         return false; // 如果图标创建失败，返回 false
     }
+    itemIcon->retain(); // 保留 itemIcon
 
     // 创建数量标签
     itemCountLabel = Label::createWithTTF(std::to_string(itemCount), "fonts/Gen.ttf", 25);
     itemCountLabel->setAnchorPoint(Vec2(0.5, 0.5)); // 设置标签的锚点为中心
     itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 23, 5));// 设置标签在物品图标下方
     itemIcon->addChild(itemCountLabel, 3); // 将标签添加到物品图标中
+    itemCountLabel->retain(); // 保留 itemCountLabel
+
 
 
     // 将物品实例注册到 ItemManager

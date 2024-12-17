@@ -3,6 +3,7 @@
 #include "SimpleAudioEngine.h"
 #include "AuthorListScene.h"
 #include "MainMap.h"
+#include "BackpackManager.h"
 
 USING_NS_CC;
 //´´½¨³¡¾°
