@@ -39,6 +39,17 @@ bool Cave::init()
     caveSprite->setPosition(visibleSize / 2);
     this->addChild(caveSprite, 0);
 
+    // 创建梯子
+    ladder = Sprite::create("maps/ladder.png"); // 24 * 120的
+    ladder->setAnchorPoint(Vec2(0.0f,1.0f)); // 左上角
+    ladder->setPosition(visibleSize / 2 + Size(0, 624)); // 初始位置在屏幕上方
+    ladderBox = PhysicsBody::createBox(ladder->getContentSize(), PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
+    ladderBox->setDynamic(false); // 设置为动态物理体
+    ladderBox->setCollisionBitmask(0x01);
+    ladderBox->setContactTestBitmask(0x01);
+    ladder->setPhysicsBody(ladderBox);// 设置物理体
+    this->addChild(ladder, 1);
+
     // 创建主角精灵
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕上方
 
@@ -49,6 +60,9 @@ bool Cave::init()
     playerBox->setContactTestBitmask(0x01);
     player.playerSprite->setPhysicsBody(playerBox);// 设置物理体
     this->addChild(player.playerSprite, 1);
+
+    ladder->setName("ladder");
+
 
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
@@ -89,7 +103,7 @@ void Cave::updateCameraPosition(float dt) {
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
 
     // 限制摄像机的移动范围
-    float maxX = mapSize.width - visibleSize.width;
+    float maxX = 0;
     float maxY = mapSize.height - visibleSize.height;
 
     // 确保摄像机的 x 坐标在范围内
@@ -130,6 +144,9 @@ bool Cave::onContactBegin(PhysicsContact& contact) {
     // CCLOG("Collision between: %s and %s", nodeA->getName().c_str(), nodeB->getName().c_str());
 
     // 在这里添加碰撞后的逻辑
-   
+    if (nodeB->getName() == "ladder" || nodeA->getName() == "ladder") {
+        // CCLOG("Player collided with ladder area!");
+        Director::getInstance()->popScene(); // 返回上一个场景
+    }
     return true;
 }

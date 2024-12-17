@@ -22,6 +22,9 @@ bool MainMap::init()
     {
         return false;
     }
+
+    caveScene = nullptr;
+
     // 原点是窗口左下角
     const auto visibleSize = Director::getInstance()->getVisibleSize();
 
@@ -458,13 +461,20 @@ void MainMap::updatePlayerPosition(float delta)
 {
     // 更新玩家的位置和动画
     player.update(delta);
-
-    // 将 place 置为零
-    place = 0;
 }
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
+
+    // 如果已经触发了洞穴场景且刚刚传送回来
+    if (caveScene && place == 4) {
+        player.playerSprite->setPosition(Vec2(640, -430 + 96 + 24));
+        // 初始化属性
+        player.isWPressed = player.isAPressed = player.isSPressed = player.isDPressed = false; // 初始化键盘状态
+    }
+
+    // 将 place 置为零
+    place = 0;
 
     // 获取玩家的位置
     const Vec2 playerPosition = player.playerSprite->getPosition();// 锚点是左下角的一个位置
@@ -619,22 +629,20 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with left farm!");
         // 执行左农场逻辑
         place = 1; // 设置位置为左农场
-        backpackButton->activate();
+        backpackButton->activate(); // 打开背包
     }
     else if (nodeB->getName() == "CropsRight" || nodeA->getName() == "CropsRight") {
         // CCLOG("Player collided with right farm!");
         // 执行右农场逻辑
         place = 2; // 设置位置为右农场
-        backpackButton->activate();
+        backpackButton->activate(); // 打开背包
     }
     else if (nodeB->getName() == "road" || nodeA->getName() == "road") {
         // CCLOG("Player collided with road!");
         // 执行路逻辑
         place = 4; // 设置位置为路
-
         // 创建新场景
         caveScene = Cave::createScene();
-
         // 将新场景推入场景栈
         Director::getInstance()->pushScene(caveScene);
     }

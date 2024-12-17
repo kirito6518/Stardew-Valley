@@ -33,6 +33,9 @@ public:
 	Player player; // 玩家
 	PhysicsBody* playerBox;
 
+	Sprite* ladder; //回去的梯子
+	PhysicsBody* ladderBox;
+
 	Vector<Sprite*> Mines; // 矿物
 	Vector<PhysicsBody*> MinesBox;
 

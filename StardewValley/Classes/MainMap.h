@@ -102,7 +102,7 @@ private:
     MenuItemImage* backpackButton; // 开启背包的文字
     NPCManager npcManager; // 声明 NPC 管理器实例
 
-    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场
+    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场
 
     Scene* caveScene; // 洞穴场景
 };
