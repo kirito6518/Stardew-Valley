@@ -39,6 +39,17 @@ bool Cave::init()
     caveSprite->setPosition(visibleSize / 2);
     this->addChild(caveSprite, 0);
 
+    // 载入地图互动点和碰撞箱
+    // 
+    // 上边界
+    caveUpBoundary = Sprite::create("maps/caveUpBoundary.png");// 1920 * 96的
+    caveUpBoundary->setAnchorPoint(Vec2(0.5, 1.0));
+    caveUpBoundary->setPosition(visibleSize / 2 + Size(0, 1248 / 2));
+    caveUpBoundaryBox = PhysicsBody::createBox(caveUpBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    caveUpBoundaryBox->setDynamic(false);
+    caveUpBoundary->setPhysicsBody(caveUpBoundaryBox);
+    this->addChild(caveUpBoundary, 0);
+
     // 创建梯子
     ladder = Sprite::create("maps/ladder.png"); // 24 * 120的
     ladder->setAnchorPoint(Vec2(0.0f,1.0f)); // 左上角
@@ -51,7 +62,7 @@ bool Cave::init()
     this->addChild(ladder, 1);
 
     // 创建主角精灵
-    player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕上方
+    player.playerSprite->setPosition(visibleSize / 2 + Size(24 + 12, 384)); // 初始位置在屏幕上方
 
     // 为玩家添加物理体
     playerBox = PhysicsBody::createBox(player.playerSprite->getContentSize() / 4, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力

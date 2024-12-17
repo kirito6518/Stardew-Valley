@@ -430,6 +430,7 @@ bool MainMap::init()
     return true;
 }
 
+// 成长
 void MainMap::updateFarm(float dt) {
     farmManager.update(dt);
 }

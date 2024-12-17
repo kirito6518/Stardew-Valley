@@ -49,7 +49,8 @@ public:
     // 碰撞开始监听器
     bool onContactBegin(PhysicsContact& contact);
 
-    void MainMap::updateFarm(float dt);
+    // 成长
+    void updateFarm(float dt);
 
     //增加天数
     void addDay(float dt);
