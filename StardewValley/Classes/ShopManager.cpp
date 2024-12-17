@@ -4,17 +4,24 @@
 
 USING_NS_CC;
 
+
+// 初始化单例实例
+ShopManager* ShopManager::instance = nullptr;
+
 // 获取单例实例
 ShopManager* ShopManager::getInstance()
 {
-    static ShopManager instance;
-    return &instance;
+    if (!instance)
+    {
+        instance = new ShopManager();
+    }
+    return instance;
 }
 
 // 构造函数
 ShopManager::ShopManager()
 {
-    shopLayer = ShopLayer::create("ui/shop.png", 30); // 创建商店层，10*3格子
+    shopLayer = ShopLayer::create("ui/backpack.png", 30); // 创建商店层，10*3格子
     shopLayer->retain(); // 保留商店层，防止被释放
 
     maxItems = 30;           // 设置商店物品上限
@@ -52,28 +59,12 @@ bool ShopManager::addItem(Item* newitem, int amount)
 
     if (isFull())
     {
-        log("Shop is full! Cannot add more items.");
+        //log("Shop is full! Cannot add more items.");
         return false;
     }
 
     bool ifHaveSame = false;
 
-    // 检查是否已有相同物品
-    for (auto item : items)
-    {
-        if (item->getName() == newitem->getName())
-        {
-            ifHaveSame = true;
-            // 增加物品计数
-            newitem->increaseCount(amount);
-            return true;
-        }
-    }
-
-    if (!ifHaveSame) {
-        // 增加物品计数
-        newitem->increaseCount(amount);
-    }
 
     newitem->retain(); // 防止其在被销毁时为空
 

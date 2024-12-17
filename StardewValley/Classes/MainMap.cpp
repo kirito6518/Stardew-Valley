@@ -478,7 +478,7 @@ void MainMap::getInitBackpack()
     initItem = ItemManager::getInstance()->getItem("Coin");
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
-    BackpackManager::getInstance()->addItem(initItem, 1);
+    BackpackManager::getInstance()->addItem(initItem, 2);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -604,7 +604,7 @@ void  MainMap::SetUseItemInMainMap() {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
-            if (place == 1 || place == 0) {
+            if (place == 1 || place == 2) {
                 int countUsed = 1; // 假设每次使用 1 个物品
                 if (place == 1) {// 如果在左边农场
                     if (1) {//判断作物是否是0作物
