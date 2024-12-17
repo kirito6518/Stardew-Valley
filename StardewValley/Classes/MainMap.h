@@ -54,6 +54,7 @@ public:
     Label* dayLabel; // 声明 天数显示的 Label
 
     Item* OnionSeed;// 洋葱种子
+
 private:
     Sprite* mapSprite; // 地图
 
