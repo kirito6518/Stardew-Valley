@@ -1,6 +1,8 @@
 #include "ShopManager.h"
 #include "ShopLayer.h"
 #include "Item.h"
+#include "BackpackManager.h"
+#include "ItemManager.h"
 
 USING_NS_CC;
 
@@ -26,6 +28,7 @@ ShopManager::ShopManager()
 
     maxItems = 30;           // 设置商店物品上限
     currentItems = 0;        // 初始化当前物品数量
+    addItem(ItemManager::getInstance()->getItem("Onion\nSeed"));
 }
 
 // 析构函数
@@ -50,7 +53,7 @@ void ShopManager::hideShop()
 }
 
 // 添加物品到商店
-bool ShopManager::addItem(Item* newitem, int amount)
+bool ShopManager::addItem(Item* newitem)
 {
     if (!newitem)
     {
@@ -102,6 +105,22 @@ bool ShopManager::buyItem(Item* item)
 {
     // 这里可以实现购买逻辑，例如检查玩家是否有足够的金币，然后从玩家背包中扣除金币并添加物品
     // 具体实现由你来完成
+
+    int coinCount =0;
+    Item* coin = BackpackManager::getInstance()->getItemByName("Coin");
+    if (coin) {
+        coinCount = coin->getCount();
+    }
+    else {
+        return false;
+    }
+    int Price = ItemManager::getInstance()->getItem(item->getName())->getbuyingPrice();
+    if (coinCount >= Price) {
+
+        coin->decreaseCount(Price);
+        return true;
+    }
+
     return true;
 }
 

@@ -13,6 +13,11 @@ ItemManager* ItemManager::getInstance()
     return instance;
 }
 
+ItemManager::ItemManager()
+{
+    
+}
+
 // 添加一个 Item 实例
 void ItemManager::addItem(const std::string& itemName, Item* item)
 {

@@ -101,7 +101,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     this->addChild(buyResultLabel, 3);
 
     // 初始化物品信息UI
-    itemDetailUI = Sprite::create("ui/itemDetailUI.png");
+    itemDetailUI = Sprite::create("ui/itemDetaUI.png");
     itemDetailUI->setAnchorPoint(Vec2(1, 1));
     itemDetailUI->setVisible(false);
     this->addChild(itemDetailUI, 0);
@@ -117,9 +117,8 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
         "ui/buy_button_normal.png",  // 正常状态的图片
         "ui/buy_button_pressed.png", // 按下状态的图片
         CC_CALLBACK_1(ShopLayer::onBuyButtonClicked, this)); // 点击回调函数
-
     buyButton->setAnchorPoint(Vec2(1, 1));
-    buyButton->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 20, shopPos.y + 20));
+    buyButton->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 20, shopPos.y - 40));
     this->addChild(buyButton, 2);
     buyButton->setVisible(false);
     // 默认关闭 buyButton 的鼠标事件监听
@@ -203,7 +202,8 @@ void ShopLayer::hideShop(Ref* sender)
     ShopManager::getInstance()->hideShop();
 
     // 调用 mainmap 的恢复时间更新的函数
-    //dynamic_cast<MainMap*>(ShopManager::getInstance()->mainMap)->hideShop(sender);
+   dynamic_cast<MainMap*>(ShopManager::getInstance()->mainMap)->hideShop(sender);
+
 }
 
 // 点击购买按钮的回调函数
@@ -221,7 +221,7 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
         }
         else
         {
-            buyResultLabel->setString("Buy Failed!");
+            buyResultLabel->setString("You Don't Have enough Coins Left!");
         }
 
         buyResultLabel->setVisible(true);
@@ -270,10 +270,7 @@ void ShopLayer::setupCombinedMouseListener()
                     itemNameLabel->setPosition(itemPosition + Vec2(0, 16)); // 在物品位置上方显示
                     itemNameLabel->setVisible(true);
 
-                    // 显示物品价格
-                    itemPriceLabel->setString("Price: " + std::to_string(item->getbuyingPrice()));
-                    itemPriceLabel->setPosition(itemPosition + Vec2(0, -16)); // 在物品位置下方显示
-                    itemPriceLabel->setVisible(true);
+                   
                 }
                 return;
             }
@@ -353,10 +350,16 @@ void ShopLayer::setupCombinedMouseListener()
                     itemDetailLabel->setPosition(Vec2(shopPos.x - shopSize.width / 2 - itemDetailUI->getContentSize().width + 25,
                         shopPos.y + shopSize.height / 2 - 25)); // 在商店左侧显示
 
+                    // 显示物品价格
+                    std::string label = "Price: \n" + std::to_string(item->getbuyingPrice()) + "Coins";
+                    itemPriceLabel->setString(label);
+                    itemPriceLabel->setPosition(Vec2(shopPos.x - shopSize.width / -15,shopPos.y + shopSize.height / 2 - 25)); // 在商店左侧显示
+                    itemPriceLabel->setVisible(true);
+
                     // 显示购买按钮
                     buyButton->setUserData(item); // 将物品对象与购买按钮关联
                     buyButton->setVisible(true);
-                    buyButton->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 15, shopPos.y + 25)); // 在商店左侧显示
+                    buyButton->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 15, shopPos.y - 40)); // 在商店左侧显示
                     buyButton->setEnabled(true); // 开启 buyButton 的鼠标事件监听
                 }
                 return;

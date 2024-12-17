@@ -37,6 +37,12 @@ public:
     //加载初始背包
     void getInitBackpack();
 
+    //进入商店
+    void toShop();
+
+    //隐藏商店界面
+    void hideShop(Ref* sender);
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 

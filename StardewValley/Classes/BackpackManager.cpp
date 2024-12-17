@@ -27,7 +27,7 @@ BackpackManager::BackpackManager()
     maxItems = 30;           // 设置背包物品上限
     currentItems = 0;        // 初始化当前物品数量
     
-    Item::create("tool/coin.png", "Coin", ItemCategory::Seed, 1, 1);// 加载金币
+    Item::create("tool/coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
 
 
