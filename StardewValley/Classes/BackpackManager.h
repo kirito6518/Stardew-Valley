@@ -74,23 +74,17 @@ public:
 
 private:
 
-
     static BackpackManager* instance; // 单例实例
-    /**
-     * @brief 构造函数，初始化 BackpackManager。
-     */
+    
+    //构造函数，初始化 BackpackManager。
     BackpackManager();
 
-    /**
-     * @brief 析构函数，释放资源。
-     */
+    //析构函数，释放资源
     ~BackpackManager();
+
     cocos2d::Vector<Item*> items; ///< 背包中的物品列表
     int maxItems; ///< 背包的最大物品数量
     int currentItems; ///< 当前背包中的物品数量
-
-
-
 
 };
 

@@ -6,6 +6,11 @@
 
 USING_NS_CC;
 
+void getSellableItemNames() 
+{
+    std::unordered_set<std::string> sellableItemNames = { "Onion\nSeed" };
+}
+
 // 创建商店层
 ShopLayer* ShopLayer::create(const std::string& shopBgPath, int maxItems)
 {
@@ -27,6 +32,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
         return false;
     }
 
+    //获取窗口数据
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -34,13 +40,23 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     shopBgSprite = Sprite::create(shopBgPath);
     if (!shopBgSprite)
     {
-        CCLOG("Failed to load shop background image: %s", shopBgPath.c_str());
+        //CCLOG("Failed to load shop background image: %s", shopBgPath.c_str());
         return false;
     }
 
     shopBgSprite->setAnchorPoint(Vec2(0.5, 0.5));
     shopBgSprite->setPosition(visibleSize / 2);
     this->addChild(shopBgSprite, 2);
+
+    //获取商店背景图片信息
+    auto shopBgPos =shopBgSprite->getPosition();
+    auto shopBgSize=shopBgSprite->getContentSize();
+
+    // 加载商店招牌图片
+    shopSprite = Sprite::create("ui/shop.png");
+    shopSprite->setAnchorPoint(Vec2(0.5, 0.5));
+    shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y+ shopBgSize.height/2));
+    this->addChild(shopSprite, 2);
 
     // 获取商店背景图尺寸及坐标
     auto shopSize = shopBgSprite->getContentSize();
@@ -54,7 +70,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
 
     if (!closeButton)
     {
-        CCLOG("Failed to create closeButton!");
+        //CCLOG("Failed to create closeButton!");
         return false;
     }
 
@@ -73,7 +89,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     this->addChild(itemNameLabel, 3);
 
     // 初始化物品价格标签
-    itemPriceLabel = Label::createWithTTF("", "fonts/Gen.ttf", 20);
+    itemPriceLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
     itemPriceLabel->setAnchorPoint(Vec2(0, 1));
     itemPriceLabel->setVisible(false);
     this->addChild(itemPriceLabel, 3);

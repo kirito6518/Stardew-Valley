@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Item.h"
+#include "ItemManager.h"
 
 USING_NS_CC;
 
@@ -16,6 +17,10 @@ USING_NS_CC;
 class ShopLayer : public cocos2d::Layer
 {
 public:
+
+    //获取局部可售卖物品列表
+    void getSellableItemNames();
+
     // 创建一个 ShopLayer 对象
     static ShopLayer* create(const std::string& shopBgPath, int maxItems);
 
@@ -43,6 +48,7 @@ public:
     MenuItemImage* closeButton; // 商店关闭按钮
 
     cocos2d::Sprite* shopBgSprite; ///< 商店背景精灵
+    cocos2d::Sprite* shopSprite;//商店招牌图片
 
     int gridWidth; ///< 商店格子的宽度（列数）
     int gridHeight; ///< 商店格子的高度（行数）
@@ -54,6 +60,10 @@ public:
     int currentItems; ///< 当前商店中的物品数量
 
 private:
+
+    // 定义局部的售卖物品列表
+    std::unordered_set<std::string> sellableItemNames ;
+
     cocos2d::Vector<cocos2d::Sprite*> itemSprites; ///< 商店中的物品图标列表
     cocos2d::Label* itemNameLabel; ///< 物品名称标签
     cocos2d::Label* itemPriceLabel; ///< 物品价格标签

@@ -72,6 +72,9 @@ public:
     Scene* mainMap;
 
 private:
+
+    static ShopManager* instance; // 单例实例
+
     /**
      * @brief 构造函数，初始化 ShopManager。
      */
