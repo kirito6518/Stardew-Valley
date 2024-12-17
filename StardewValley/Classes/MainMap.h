@@ -9,6 +9,7 @@
 #include "SeasonManager.h"
 #include "NPCManager.h"
 
+
 USING_NS_CC;
 
 class MainMap : public cocos2d::Scene

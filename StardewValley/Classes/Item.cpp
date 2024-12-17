@@ -1,15 +1,17 @@
 #include "Item.h"
 #include "BackpackManager.h"
+#include"ItemManager.h"
 
 USING_NS_CC;
 
 const int itemAmountMax = 99;
 
 // 创建物品
-Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
+Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,
+                   int sellingPrice, int buyingPrice, int amount)
 {
     auto item = new (std::nothrow) Item(); // 创建一个新的 Item 对象
-    if (item && item->init(itemImagePath, itemName, category, amount)) // 初始化物品
+    if (item && item->init(itemImagePath, itemName, category, sellingPrice, buyingPrice, amount)) // 初始化物品
     {
         item->autorelease(); // 自动释放对象
         return item; // 返回创建的物品
@@ -19,7 +21,8 @@ Item* Item::create(const std::string& itemImagePath, const std::string& itemName
 }
 
 // 初始化物品
-bool Item::init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
+bool Item::init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,
+                int sellingPrice,int buyingPrice,int amount)
 {
     if (!Node::init()) // 调用基类的初始化方法
     {
@@ -29,6 +32,9 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     // 初始化物品属性
     this->itemName = itemName; // 设置物品名称
     this->itemCategory = category; // 设置物品分类
+
+    this->sellingPrice = sellingPrice;//设置物品卖出价格
+    this->buyingPrice = buyingPrice; //设置物品买入价格  
     this->itemCount = amount; // 初始化物品计数
 
     // 创建物品图标
@@ -45,7 +51,28 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 23, 5));// 设置标签在物品图标下方
     itemIcon->addChild(itemCountLabel, 3); // 将标签添加到物品图标中
 
+
+    // 将物品实例注册到 ItemManager
+    ItemManager::getInstance()->addItem(itemName, this);
+
+
     return true; // 初始化成功，返回 true
+}
+
+// 设置物品类型
+void Item::setItemType(ItemType type)
+{
+    itemType = type;
+    updateLabelVisibility();
+}
+
+// 更新标签的可见性
+void Item::updateLabelVisibility()
+{
+    if (itemCountLabel)
+    {
+        itemCountLabel->setVisible(itemType == ItemType::Usable);
+    }
 }
 
 void Item::increaseCount(int amount)

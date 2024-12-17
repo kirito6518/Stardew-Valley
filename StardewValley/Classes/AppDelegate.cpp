@@ -1,6 +1,7 @@
 ﻿#include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
+
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
 
@@ -74,6 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // Set the design resolution
     glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+
 
 
     // 自动适配图片大小

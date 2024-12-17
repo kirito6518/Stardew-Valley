@@ -1,48 +1,34 @@
-#ifndef ITEM_MANAGER_H
-#define ITEM_MANAGER_H
+#ifndef __ITEM_MANAGER_H__
+#define __ITEM_MANAGER_H__
 
 #include "Item.h"
-#include "cocos2d.h"
-USING_NS_CC;
+#include <unordered_map>
+#include <unordered_set>
 
-class ItemManager : public cocos2d::Ref
+class ItemManager
 {
 public:
-    static ItemManager* getInstance()
-    {
-        static ItemManager instance;
-        return &instance;
-    }
+    // 获取单例实例
+    static ItemManager* getInstance();
 
-    void addItem(Item* item)
-    {
-        if (item)
-        {
-            item->retain(); // 增加引用计数
-            items.pushBack(item);
-        }
-    }
+    // 添加一个 Item 实例
+    void addItem(const std::string& itemName, Item* item);
 
-    void removeItem(Item* item)
-    {
-        if (item)
-        {
-            items.eraseObject(item);
-            item->release(); // 减少引用计数
-        }
-    }
+    // 移除一个 Item 实例
+    void removeItem(const std::string& itemName);
 
-    ~ItemManager()
-    {
-        // 在析构函数中释放所有 Item 实例
-        for (auto item : items)
-        {
-            item->release();
-        }
-    }
+    // 获取一个 Item 实例
+    Item* getItem(const std::string& itemName);
+
+    // 清空所有 Item 实例
+    void clearAllItems();
+
+    // 设置售卖物品列表
+    void setSellableItems(const std::unordered_set<std::string>& sellableItemNames);
 
 private:
-    cocos2d::Vector<Item*> items;
+    static ItemManager* instance; // 单例实例
+    std::unordered_map<std::string, Item*> items; // 全局物品实例映射
 };
 
 #endif // __ITEM_MANAGER_H__

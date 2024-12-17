@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "BackpackManager.h"
 
+
 USING_NS_CC;
 
 Scene* MainMap::createScene()
@@ -39,12 +40,15 @@ bool MainMap::init()
     // 加载背包
     Bag = BackpackManager::getInstance();
     Bag->mainMap = this;
-    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed);// 加载洋葱种子
+    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed,0,1);// 加载洋葱种子
     // 设置使用逻辑
     SetUseItemInMainMap();
 
-    // 初始放入背包物品(测试)
+// 初始放入背包物品(测试)
+#if 1
     Bag->addItem(OnionSeed, 1);
+#endif
+
 
     // 加载地图
     mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
