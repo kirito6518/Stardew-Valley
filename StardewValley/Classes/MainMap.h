@@ -8,6 +8,7 @@
 #include "chipmunk.h"
 #include "SeasonManager.h"
 #include "NPCManager.h"
+#include "FarmManager.h"
 
 USING_NS_CC;
 
@@ -40,7 +41,8 @@ public:
     // 碰撞开始监听器
     bool MainMap::onContactBegin(PhysicsContact& contact);
 
-    
+    void MainMap::updateFarm(float dt);
+
     //增加天数
     void MainMap::addDay(float dt);
 
@@ -52,7 +54,6 @@ public:
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
-
     Item* OnionSeed;// 洋葱种子
 private:
     Sprite* mapSprite; // 地图
@@ -89,12 +90,11 @@ private:
     PhysicsBody* ranchBox;
 
     Player player; // 玩家
-    PhysicsBody* playerBox;
-
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
     MenuItemImage* backpackButton; // 开启背包的文字
     NPCManager npcManager; // 声明 NPC 管理器实例
+    FarmManager farmManager; // 声明 FarmManager 实例
 
     int place;// 设置位置,0是在空地，1是在左农场，2是在右农场
 };

@@ -358,7 +358,7 @@ bool MainMap::init()
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
 
     // 为玩家添加物理体
-    playerBox = PhysicsBody::createBox(player.playerSprite->getContentSize() / 4, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
+    auto playerBox = PhysicsBody::createBox(player.playerSprite->getContentSize() / 4, PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
     playerBox->setDynamic(true); // 设置为动态物理体
     playerBox->setCollisionBitmask(0x01);
     playerBox->setContactTestBitmask(0x01);
@@ -379,7 +379,7 @@ bool MainMap::init()
         dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0)); // 设置在seasonLabel右侧
         this->addChild(dayLabel, 1);
 
-        // 设置定时器，每 4 秒调用一次 addDay 函数
+        // 设置定时器，每 3 秒调用一次 addDay 函数
         this->schedule(schedule_selector(MainMap::addDay), 3.0f);
     }
 
@@ -418,8 +418,15 @@ bool MainMap::init()
         // 将 NPC 添加到场景中
         this->addChild(npcManager._npcs[0], 1);
     }
+    // 初始化农田
+    farmManager.initFarm();
+    this->schedule(schedule_selector(MainMap::updateFarm), 1.0f);
 
     return true;
+}
+
+void MainMap::updateFarm(float dt) {
+    farmManager.update(dt);
 }
 
 // 切换到主菜单
@@ -563,17 +570,21 @@ void  MainMap::SetUseItemInMainMap() {
     if (OnionSeed) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
-            if (place == 1 || place == 2) {
+            if (place == 1 || place == 0) {
                 int countUsed = 1; // 假设每次使用 1 个物品
                 if (place == 1) {// 如果在左边农场
                     if (1) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Onion", "crops/Onion1.png", 100, 7, 10, Vec2(CropsLeft->getPosition()+Vec2(96,-96)));
+                        this->addChild(farmManager._crops[0], 1);
                         return true;
                     }
                 }
-                else if (place == 2) {// 如果在右边农场
+                else if (place == 0) {// 如果在右边农场
                     if (1) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Onion", "crops/Onion1.png", 100, 7, 10, Vec2(CropsLeft->getPosition() + Vec2(96,-96)));
+                        this->addChild(farmManager._crops[0], 1);
                         return true;
                     }
                 }
@@ -587,8 +598,6 @@ void  MainMap::SetUseItemInMainMap() {
     else {
         CCLOG("Item 'test' not found in backpack.");
     }
-
-
 }
 
 // 碰撞开始监听器
