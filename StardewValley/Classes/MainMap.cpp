@@ -604,24 +604,24 @@ void  MainMap::SetUseItemInMainMap() {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
+            Vec2 plantingPosition;
             if (place == 1 || place == 2) {
                 int countUsed = 1; // 假设每次使用 1 个物品
-                bool left = 0, right = 0;
-                if (place == 1 && left == 0) {// 如果在左边农场
-                    if (1) {//判断作物是否是0作物
+                if (place == 1) {// 如果在左边农场
+                    plantingPosition = CropsLeft->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
                         farmManager.plantCrop("Onion1", "crops/Onion1.png", 100, 7, 10, Vec2(CropsLeft->getPosition()+Vec2(96,-96)));
                         this->addChild(farmManager._crops[0], 1);
-                        left = 1;
                         return true;
                     }
                 }
-                else if (place == 2 && right == 0) {// 如果在右边农场
-                    if (1) {//判断作物是否是0作物
+                else if (place == 2) {// 如果在右边农场
+                    plantingPosition = CropsRight->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
                         farmManager.plantCrop("Onion2", "crops/Onion1.png", 100, 7, 10, Vec2(CropsRight->getPosition() + Vec2(96,-96)));
                         this->addChild(farmManager._crops[1], 1);
-                        right = 1;
                         return true;
                     }
                 }

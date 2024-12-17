@@ -27,6 +27,8 @@ public:
     // 收获作物
     void harvestCrop(const Vec2& position);
 
+    bool isPositionOccupied(const Vec2& position);
+
     // 获取作物列表
     const std::vector<Crop*>& getCrops() const;
     std::vector<Crop*> _crops; // 作物列表
