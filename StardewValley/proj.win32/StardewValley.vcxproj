@@ -150,28 +150,46 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\Animal.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\AuthorListScene.cpp" />
     <ClCompile Include="..\Classes\BackpackLayer.cpp" />
     <ClCompile Include="..\Classes\BackpackManager.cpp" />
     <ClCompile Include="..\Classes\Crop.cpp" />
+    <ClCompile Include="..\Classes\Event.cpp" />
+    <ClCompile Include="..\Classes\FarmManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\MainMap.cpp" />
+    <ClCompile Include="..\Classes\NPC.cpp" />
+    <ClCompile Include="..\Classes\NPCManager.cpp" />
+    <ClCompile Include="..\Classes\NPCRelationship.cpp" />
+    <ClCompile Include="..\Classes\NPCTask.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
+    <ClCompile Include="..\Classes\ResourceManager.cpp" />
+    <ClCompile Include="..\Classes\SeasonManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\Animal.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\AuthorListScene.h" />
     <ClInclude Include="..\Classes\BackpackLayer.h" />
     <ClInclude Include="..\Classes\BackpackManager.h" />
     <ClInclude Include="..\Classes\Crop.h" />
+    <ClInclude Include="..\Classes\Event.h" />
+    <ClInclude Include="..\Classes\FarmManager.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\ItemManager.h" />
     <ClInclude Include="..\Classes\MainMap.h" />
+    <ClInclude Include="..\Classes\NPC.h" />
+    <ClInclude Include="..\Classes\NPCManager.h" />
+    <ClInclude Include="..\Classes\NPCRelationship.h" />
+    <ClInclude Include="..\Classes\NPCTask.h" />
     <ClInclude Include="..\Classes\Player.h" />
+    <ClInclude Include="..\Classes\ResourceManager.h" />
+    <ClInclude Include="..\Classes\SeasonManager.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

@@ -493,29 +493,6 @@ void MainMap::updateCameraPosition(float dt) {
     BackpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
     BackpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
 
-
-#if 0
-    Item* item = Bag->getItemByName("Test");
-    if (item) {
-        // 定义一个自定义的 useItem 逻辑
-        auto customUseItemLogic = [item]() -> bool {
-            int countUsed = 2; // 假设每次使用 2 个物品
-            if (1)
-            {
-                item->decreaseCount(countUsed);
-                return true;
-            }
-            return false;
-            };
-
-        // 设置回调函数
-        item->setUseItemCallback(customUseItemLogic);
-    }
-    else {
-        CCLOG("Item 'test' not found in backpack.");
-    }
-#endif
-
     //更新物品图标的坐标值
    
     int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
@@ -559,7 +536,6 @@ void MainMap::addDay(float dt)
     int day = seasonManager.getDaysInCurrentSeason() + 1; // 天数从1开始
     std::string dayText = "Day " + std::to_string(day);
     dayLabel->setString(dayText);
-}
 }
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
