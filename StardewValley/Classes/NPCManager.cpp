@@ -28,7 +28,7 @@ void NPCManager::checkPlayerInteraction(const cocos2d::Vec2& playerPosition) {
         float distance = playerPosition.distance(npc->getLocation());
 
         // 调试输出距离
-        CCLOG("Player-NPC distance: %f", distance);
+        // CCLOG("Player-NPC distance: %f", distance);
 
         // 检查玩家是否靠近 NPC
         if (distance < 50) { // 假设交互距离为 50 像素
