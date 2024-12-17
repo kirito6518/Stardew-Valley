@@ -32,6 +32,7 @@ public:
 
 	Player player; // 玩家
 	PhysicsBody* playerBox;
+	Sprite* black; // 黑暗矿洞 
 
 	Sprite* ladder; //回去的梯子
 	PhysicsBody* ladderBox;

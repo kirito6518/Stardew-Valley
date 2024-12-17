@@ -43,8 +43,11 @@ bool MainMap::init()
     // 加载背包
     Bag = BackpackManager::getInstance();
     Bag->mainMap = this;
+
+    // 加载背包物品
     OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed,0,1);// 加载洋葱种子
-    // 设置使用逻辑
+
+    // 加载使用逻辑
     SetUseItemInMainMap();
 
 // 初始放入背包物品(测试)
@@ -468,7 +471,7 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 如果已经触发了洞穴场景且刚刚传送回来
     if (caveScene && place == 4) {
-        player.playerSprite->setPosition(Vec2(640, -430 + 96 + 24));
+        player.playerSprite->setPosition(Vec2(640, -430 + 96 + 48));
         // 初始化属性
         player.isWPressed = player.isAPressed = player.isSPressed = player.isDPressed = false; // 初始化键盘状态
     }

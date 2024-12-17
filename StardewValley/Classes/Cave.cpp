@@ -42,7 +42,7 @@ bool Cave::init()
     // 创建梯子
     ladder = Sprite::create("maps/ladder.png"); // 24 * 120的
     ladder->setAnchorPoint(Vec2(0.0f,1.0f)); // 左上角
-    ladder->setPosition(visibleSize / 2 + Size(0, 624)); // 初始位置在屏幕上方
+    ladder->setPosition(visibleSize / 2 + Size(24, 552)); // 初始位置在屏幕上方
     ladderBox = PhysicsBody::createBox(ladder->getContentSize(), PhysicsMaterial(0.1f, 0.0f, 0.0f));// 密度 弹性 摩擦力
     ladderBox->setDynamic(false); // 设置为动态物理体
     ladderBox->setCollisionBitmask(0x01);
@@ -62,6 +62,12 @@ bool Cave::init()
     this->addChild(player.playerSprite, 1);
 
     ladder->setName("ladder");
+
+    // 创建黑暗背景
+    black = Sprite::create("black.png"); // 2000 * 2000的
+    black->setAnchorPoint(Vec2(0.5f, 0.5f)); // 中心
+    black->setPosition(visibleSize / 2); // 初始位置在屏幕上方
+    this->addChild(black, 2);
 
 
     // 注册键盘事件
@@ -91,6 +97,7 @@ void Cave::updateCameraPosition(float dt) {
 
     // 获取玩家的位置
     const Vec2 playerPosition = player.playerSprite->getPosition();// 锚点是左下角的一个位置
+    black->setPosition(playerPosition); // 同步黑暗
 
     //获取屏幕大小和地图大小
     const auto visibleSize = Director::getInstance()->getVisibleSize();
