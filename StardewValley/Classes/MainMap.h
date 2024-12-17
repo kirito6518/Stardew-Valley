@@ -85,10 +85,10 @@ private:
     PhysicsBody* downWaterBox;
     Sprite* fishing; // 钓鱼部分
     PhysicsBody* fishingBox;
-    Sprite* CropsLeft; // 农田左部分
-    PhysicsBody* CropsLeftBox;
-    Sprite* CropsRight; // 农田右部分
-    PhysicsBody* CropsRightBox;
+    Sprite* cropsLeft; // 农田左部分
+    PhysicsBody* cropsLeftBox;
+    Sprite* cropsRight; // 农田右部分
+    PhysicsBody* cropsRightBox;
     Sprite* home; // 房屋
     PhysicsBody* homeBox;
     Sprite* fence; // 栅栏

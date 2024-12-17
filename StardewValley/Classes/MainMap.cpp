@@ -161,26 +161,26 @@ bool MainMap::init()
     this->addChild(fishing, 0);
 
     // 农田左部分
-    CropsLeft = Sprite::create("maps/Crops.png");// 192 * 192的
-    CropsLeft->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
-    CropsLeft->setPosition(visibleSize / 2 + Size(-960 + 1224, -780 + 336));
-    CropsLeftBox = PhysicsBody::createBox(CropsLeft->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    CropsLeftBox->setDynamic(false);
-    CropsLeftBox->setCollisionBitmask(0x01);
-    CropsLeftBox->setContactTestBitmask(0x01);
-    CropsLeft->setPhysicsBody(CropsLeftBox);
-    this->addChild(CropsLeft, 0);
+    cropsLeft = Sprite::create("maps/Crops.png");// 192 * 192的
+    cropsLeft->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
+    cropsLeft->setPosition(visibleSize / 2 + Size(-960 + 1224, -780 + 336));
+    cropsLeftBox = PhysicsBody::createBox(cropsLeft->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    cropsLeftBox->setDynamic(false);
+    cropsLeftBox->setCollisionBitmask(0x01);
+    cropsLeftBox->setContactTestBitmask(0x01);
+    cropsLeft->setPhysicsBody(cropsLeftBox);
+    this->addChild(cropsLeft, 0);
 
     // 农田右部分
-    CropsRight = Sprite::create("maps/Crops.png");// 192 * 192的
-    CropsRight->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
-    CropsRight->setPosition(visibleSize / 2 + Size(-960 + 1464, -780 + 336));
-    CropsRightBox = PhysicsBody::createBox(CropsRight->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    CropsRightBox->setDynamic(false);
-    CropsRightBox->setCollisionBitmask(0x01);
-    CropsRightBox->setContactTestBitmask(0x01);
-    CropsRight->setPhysicsBody(CropsRightBox);
-    this->addChild(CropsRight, 0);
+    cropsRight = Sprite::create("maps/Crops.png");// 192 * 192的
+    cropsRight->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
+    cropsRight->setPosition(visibleSize / 2 + Size(-960 + 1464, -780 + 336));
+    cropsRightBox = PhysicsBody::createBox(cropsRight->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    cropsRightBox->setDynamic(false);
+    cropsRightBox->setCollisionBitmask(0x01);
+    cropsRightBox->setContactTestBitmask(0x01);
+    cropsRight->setPhysicsBody(cropsRightBox);
+    this->addChild(cropsRight, 0);
 
     // 路
     road = Sprite::create("maps/road.png");// 96 * 96的
@@ -205,8 +205,8 @@ bool MainMap::init()
     this->addChild(ranch, 0);
 
     fishing->setName("fishing");
-    CropsLeft->setName("CropsLeft");
-    CropsRight->setName("CropsRight");
+    cropsLeft->setName("cropsLeft");
+    cropsRight->setName("cropsRight");
     road->setName("road");
     ranch->setName("ranch");
 
@@ -611,7 +611,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = CropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion1.png", 100, 7, 10, Vec2(CropsLeft->getPosition()+Vec2(96,-96)));
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsLeft->getPosition()+Vec2(96,-96)));
                         this->addChild(farmManager._crops[0], 1);
                         return true;
                     }
@@ -620,7 +620,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = CropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion2", "crops/Onion1.png", 100, 7, 10, Vec2(CropsRight->getPosition() + Vec2(96,-96)));
+                        farmManager.plantCrop("Onion2", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsRight->getPosition() + Vec2(96,-96)));
                         this->addChild(farmManager._crops[1], 1);
                         return true;
                     }
@@ -657,13 +657,13 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // 执行钓鱼逻辑
         place = 3; // 设置位置为钓鱼点
     }
-    else if (nodeB->getName() == "CropsLeft" || nodeA->getName() == "CropsLeft") {
+    else if (nodeB->getName() == "cropsLeft" || nodeA->getName() == "cropsLeft") {
         // CCLOG("Player collided with left farm!");
         // 执行左农场逻辑
         place = 1; // 设置位置为左农场
         backpackButton->activate(); // 打开背包
     }
-    else if (nodeB->getName() == "CropsRight" || nodeA->getName() == "CropsRight") {
+    else if (nodeB->getName() == "cropsRight" || nodeA->getName() == "cropsRight") {
         // CCLOG("Player collided with right farm!");
         // 执行右农场逻辑
         place = 2; // 设置位置为右农场
