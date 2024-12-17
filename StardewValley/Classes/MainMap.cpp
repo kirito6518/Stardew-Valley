@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "chipmunk.h"
 #include "Item.h"
+#include "BackpackManager.h"
 
 USING_NS_CC;
 
@@ -32,6 +33,7 @@ bool MainMap::init()
 
     // 加载背包
     Bag = BackpackManager::getInstance();
+    Bag->mainMap = this;
 
     // 加载地图
     mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
@@ -203,7 +205,7 @@ bool MainMap::init()
     }
     */
     // 初始放入背包物品
-    bool success2 = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);// 洋葱种子
+    bool success2 = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops, 1);// 洋葱种子
 
     // 添加一个按钮，左键点击后切回主屏幕
     toHollowWorldButton = MenuItemImage::create(
@@ -341,6 +343,9 @@ bool MainMap::init()
     keyboardListener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, &player);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
+    // 初始化位置
+    place = 0;
+
     // 每多少s更新主角位置
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
@@ -361,6 +366,22 @@ void MainMap::onBackpackButtonClicked(Ref* sender)
 {
     // 调用单例管理类显示背包层
     Bag->showBackpack(this);
+
+    // 设置 MainMap 的指针
+    Bag->setMainMap(this);
+
+    // 禁用 MainMap 场景的时间更新
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+
+}
+
+// 隐藏背包
+void MainMap::hideBackpack(Ref* sender)
+{
+    // 重新启用 MainMap 场景的时间更新
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -368,6 +389,9 @@ void MainMap::updatePlayerPosition(float delta)
 {
     // 更新玩家的位置和动画
     player.update(delta);
+
+    // 将 place 置为零
+    place = 0;
 }
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
@@ -468,4 +492,38 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldButton->getContentSize().width / 2, toHollowWorldButton->getContentSize().height / 2));
 
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
+}
+
+// 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
+void  MainMap::SetUseItemInMainMap() {
+
+    // 创建物品精灵
+    bool success = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops, 0);// 洋葱种子
+    Item* item = Bag->getItemByName("Onion\nSeed");
+    if (item) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this,item]() -> bool {
+            int countUsed = 1; // 假设每次使用 1 个物品
+            if (1)
+            {
+                item->decreaseCount(countUsed);
+                if (place == 1) {// 如果在左边农场
+
+                }
+                else if (place == 2) {// 如果在右边农场
+
+                }
+                return true;
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        item->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        CCLOG("Item 'test' not found in backpack.");
+    }
+
+
 }
