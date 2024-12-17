@@ -4,6 +4,7 @@
 #include "AppDelegate.h"
 #include "MainMap.h"
 
+
 USING_NS_CC;
 
 
@@ -107,19 +108,19 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     useButton->setAnchorPoint(Vec2(1, 1));  
     useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));
-    this->addChild(useButton);
+    this->addChild(useButton,2);
     useButton->setVisible(false);
     // 默认关闭 useButton 的鼠标事件监听
     useButton->setEnabled(false);
 
     //加载物品摧毁按钮
     destroyButton= MenuItemImage::create(
-        "ui/destroyBotton_normal.png",  // 正常状态的图片
-        "ui/destroyBotton_pressed.png", // 按下状态的图片
+        "ui/sell_button_normal.png",  // 正常状态的图片
+        "ui/sell_button_pressed.png", // 按下状态的图片
         CC_CALLBACK_1(BackpackLayer::onDestroyButtonClicked, this)); // 点击回调函数
     destroyButton->setAnchorPoint(Vec2(1, 1));
     destroyButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y - 40));
-    this->addChild(destroyButton);
+    this->addChild(destroyButton,2);
     destroyButton->setVisible(false);
     // 默认关闭 destroyButton 的鼠标事件监听
     destroyButton->setEnabled(false);
@@ -235,19 +236,33 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
     }
 }
 
-//点击摧毁按钮的回调函数
+//点击卖出按钮的回调函数
 void BackpackLayer::onDestroyButtonClicked(Ref* sender)
 {
     //移除物品
     auto item = static_cast<Item*>(destroyButton->getUserData());
     int itemcount = item->getCount();
-    item->clearItem();
+    if (item->getitemCategory() != ItemCategory::Tool) {//如果物品不属于工具类（即可被卖出）
+        if (this->getParent() != nullptr) {
+            auto itemCoin = static_cast<MainMap*>(this->getParent())->Bag->getItemByName("Coin");
+            int money = (item->getsellingPrice()) * itemcount;
+            itemCoin->increaseCount(money);
+        }
 
-    destroyResultLabel->setString("Destroy Success!");
+        item->clearItem();//移除物品
+
+        destroyResultLabel->setString("Sell Success!");
+
+    }
+    else {
+        destroyResultLabel->setString("Sell Failed!");     
+    }
+
     destroyResultLabel->setVisible(true);
     this->scheduleOnce([this](float dt) {
         destroyResultLabel->setVisible(false);
         }, 1.2f, "hide_use_result");
+  
 }
 
 //鼠标监听事件与背包内元素的交互
@@ -354,8 +369,8 @@ void BackpackLayer::setupCombinedMouseListener()
 
             if (destroyButtonBoundingBox.containsPoint(mousePosition))
             {
-                // 如果点击了 useButton，切换到按下状态的图片
-                useButton->setNormalImage(Sprite::create("ui/destroy_button_pressed.png"));
+                // 如果点击了 destroyButton，切换到按下状态的图片
+                destroyButton->setNormalImage(Sprite::create("ui/sell_button_pressed.png"));
                 return;
             }
         }
@@ -466,14 +481,14 @@ void BackpackLayer::setupCombinedMouseListener()
             if (destroyButtonBoundingBox.containsPoint(mousePosition))
             {
                 // 如果点击了 destroyButton，切换回正常状态的图片并执行使用逻辑
-                destroyButton->setNormalImage(Sprite::create("ui/destroyBotton_normal.png"));
+                destroyButton->setNormalImage(Sprite::create("ui/sell_button_normal.png"));
                 destroyResultLabel->setPosition(backpackPos + Vec2(0, 50));
                 destroyButton->activate(); // 执行使用逻辑
             }
             else
             {
                 // 如果触摸结束时不在按钮区域内，也切换回正常状态
-                destroyButton->setNormalImage(Sprite::create("ui/destroyBotton_normal.png"));
+                destroyButton->setNormalImage(Sprite::create("ui/sell_button_normal.png"));
             }
         }
 

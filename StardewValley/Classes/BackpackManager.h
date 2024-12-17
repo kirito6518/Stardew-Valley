@@ -63,7 +63,11 @@ public:
     Item* getItemByName(const std::string& itemName);
 
     BackpackLayer* backpackLayer; ///< 背包层对象
+
     Scene* mainMap;
+
+    Item* Coin;
+
 private:
     /**
      * @brief 构造函数，初始化 BackpackManager。

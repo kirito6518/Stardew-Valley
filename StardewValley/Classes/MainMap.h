@@ -10,6 +10,7 @@
 #include "NPCManager.h"
 #include "FarmManager.h"
 
+
 USING_NS_CC;
 
 class MainMap : public cocos2d::Scene
@@ -55,6 +56,7 @@ public:
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
     Item* OnionSeed;// 洋葱种子
+
 private:
     Sprite* mapSprite; // 地图
 

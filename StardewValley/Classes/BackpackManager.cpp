@@ -3,11 +3,13 @@
 #include "Item.h"
 
 
+
 USING_NS_CC;
 
 // 获取单例实例
 BackpackManager* BackpackManager::getInstance()
 {
+
     static BackpackManager instance;
     return &instance;
 }
@@ -20,6 +22,9 @@ BackpackManager::BackpackManager()
 
     maxItems = 30;           // 设置背包物品上限
     currentItems = 0;        // 初始化当前物品数量
+
+    Coin = Item::create("tool/coin.png", "Coin", ItemCategory::Tool, 1, 1);
+    addItem(Coin, 3);//初始拥有3金币
 }
 
 // 析构函数

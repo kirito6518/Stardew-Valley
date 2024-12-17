@@ -160,6 +160,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\FarmManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
+    <ClCompile Include="..\Classes\ItemManager.cpp" />
     <ClCompile Include="..\Classes\MainMap.cpp" />
     <ClCompile Include="..\Classes\NPC.cpp" />
     <ClCompile Include="..\Classes\NPCManager.cpp" />

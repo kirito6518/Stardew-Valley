@@ -69,6 +69,9 @@
     <ClCompile Include="..\Classes\SeasonManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ItemManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -101,9 +104,6 @@
     <ClInclude Include="..\Classes\Crop.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ItemManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Animal.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -129,6 +129,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SeasonManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ItemManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
