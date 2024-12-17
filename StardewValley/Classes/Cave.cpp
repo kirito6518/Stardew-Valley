@@ -40,15 +40,42 @@ bool Cave::init()
     this->addChild(caveSprite, 0);
 
     // 载入地图互动点和碰撞箱
-    // 
+
     // 上边界
-    caveUpBoundary = Sprite::create("maps/caveUpBoundary.png");// 1920 * 96的
+    caveUpBoundary = Sprite::create("maps/caveUpBoundary.png");// 1152 * 168的
     caveUpBoundary->setAnchorPoint(Vec2(0.5, 1.0));
     caveUpBoundary->setPosition(visibleSize / 2 + Size(0, 1248 / 2));
     caveUpBoundaryBox = PhysicsBody::createBox(caveUpBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     caveUpBoundaryBox->setDynamic(false);
     caveUpBoundary->setPhysicsBody(caveUpBoundaryBox);
     this->addChild(caveUpBoundary, 0);
+
+    // 右边界
+    caveRightBoundary = Sprite::create("maps/caveRightBoundary.png");// 120 * 1248的
+    caveRightBoundary->setAnchorPoint(Vec2(1.0, 0.5));
+    caveRightBoundary->setPosition(visibleSize / 2 + Size(1152 / 2, 0));
+    caveRightBoundaryBox = PhysicsBody::createBox(caveRightBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    caveRightBoundaryBox->setDynamic(false);
+    caveRightBoundary->setPhysicsBody(caveRightBoundaryBox);
+    this->addChild(caveRightBoundary, 0);
+
+    // 左边界
+    caveLeftBoundary = Sprite::create("maps/caveLeftBoundary.png");// 72 * 1248的
+    caveLeftBoundary->setAnchorPoint(Vec2(0.0, 0.5));
+    caveLeftBoundary->setPosition(visibleSize / 2 + Size(-1152 / 2, 0));
+    caveLeftBoundaryBox = PhysicsBody::createBox(caveLeftBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    caveLeftBoundaryBox->setDynamic(false);
+    caveLeftBoundary->setPhysicsBody(caveLeftBoundaryBox);
+    this->addChild(caveLeftBoundary, 0);
+
+    // 下边界
+    caveDownBoundary = Sprite::create("maps/caveDownBoundary.png");// 1152 * 48的
+    caveDownBoundary->setAnchorPoint(Vec2(0.5, 0.0));
+    caveDownBoundary->setPosition(visibleSize / 2 + Size(0, -1248 / 2));
+    caveDownBoundaryBox = PhysicsBody::createBox(caveDownBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    caveDownBoundaryBox->setDynamic(false);
+    caveDownBoundary->setPhysicsBody(caveDownBoundaryBox);
+    this->addChild(caveDownBoundary, 0);
 
     // 创建梯子
     ladder = Sprite::create("maps/ladder.png"); // 24 * 120的
