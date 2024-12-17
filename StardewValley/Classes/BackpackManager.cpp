@@ -57,21 +57,26 @@ bool BackpackManager::addItem(Item* newitem,int amount)
         return false;
     }
 
+    bool ifHaveSame = false;
+
     // 检查是否已有相同物品
     for (auto item : items)
     {
         if (item->getName() == newitem->getName())
         {
+            ifHaveSame = true;
             // 增加物品计数
-            item->increaseCount(amount);
+            newitem->increaseCount(amount);
             return true;
         }
     }
 
+    if (!ifHaveSame) {
+        // 增加物品计数
+        newitem->increaseCount(amount);
+    }
 
     newitem->retain();//防止其在被销毁时为空
-
-    
 
     // 添加物品到背包
     items.pushBack(newitem);

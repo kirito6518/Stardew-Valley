@@ -3,6 +3,7 @@
 
 USING_NS_CC;
 
+const int itemAmountMax = 99;
 
 // 创建物品
 Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
@@ -41,7 +42,7 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     // 创建数量标签
     itemCountLabel = Label::createWithTTF(std::to_string(itemCount), "fonts/Gen.ttf", 25);
     itemCountLabel->setAnchorPoint(Vec2(0.5, 0.5)); // 设置标签的锚点为中心
-    itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 25, 20));// 设置标签在物品图标下方
+    itemCountLabel->setPosition(Vec2(itemIcon->getContentSize().width / 2 + 23, 5));// 设置标签在物品图标下方
     itemIcon->addChild(itemCountLabel, 3); // 将标签添加到物品图标中
 
     return true; // 初始化成功，返回 true
@@ -50,6 +51,9 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
 void Item::increaseCount(int amount)
 {
     itemCount += amount; // 增加物品计数
+    if (itemCount >= itemAmountMax) {
+        itemCount = itemAmountMax;
+    }
     updateCountLabel(); // 更新数量标签
 }
 
