@@ -7,6 +7,7 @@ std::unordered_map<std::string, int> Animal::hungerThresholds;
 std::unordered_map<std::string, int> Animal::feedAmounts;
 std::unordered_map<std::string, int> Animal::lifespans;
 
+// 构造函数，初始化动物对象
 Animal::Animal(const std::string& name, const std::string& breedSeason)
     : name(name), breedSeason(breedSeason), daysSinceLastProduct(0), fertilizerCount(0), daysSinceLastFed(0),
     productType(productTypes[name]), hungerThreshold(hungerThresholds[name]), feedAmount(feedAmounts[name]), lifespan(lifespans[name]) {
@@ -15,10 +16,12 @@ Animal::Animal(const std::string& name, const std::string& breedSeason)
     this->addChild(sprite);
 }
 
+// 判断动物是否可以生产产品
 bool Animal::canProduce() const {
     return daysSinceLastProduct >= productTimes[name];
 }
 
+// 更新动物的状态，包括天数和饥饿状态
 void Animal::update(int days) {
     daysSinceLastProduct += days;
     daysSinceLastFed += days;
@@ -27,6 +30,7 @@ void Animal::update(int days) {
     }
 }
 
+// 收集动物的产品
 void Animal::collectProduct() {
     if (canProduce()) {
         daysSinceLastProduct = 0;
@@ -34,22 +38,27 @@ void Animal::collectProduct() {
     }
 }
 
+// 判断动物是否可以在当前季节繁殖
 bool Animal::canBreed(const std::string& currentSeason) const {
     return currentSeason == breedSeason && daysSinceLastFed < hungerThreshold;
 }
 
+// 繁殖动物，生成一个新的动物对象
 Animal* Animal::breed() const {
     return new Animal(name, breedSeason);
 }
 
+// 喂食动物，重置饥饿天数
 void Animal::feed() {
     daysSinceLastFed = 0;
 }
 
+// 判断动物是否饥饿
 bool Animal::isHungry() const {
     return daysSinceLastFed >= hungerThreshold;
 }
 
+// 显示饥饿动画
 void Animal::showHungryAnimation() {
     // 创建饥饿动画的精灵
     auto hungrySprite = cocos2d::Sprite::create("hungry.png");

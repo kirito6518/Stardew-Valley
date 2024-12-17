@@ -353,6 +353,24 @@ bool MainMap::init()
     player.playerSprite->setPhysicsBody(playerBody);// 设置物理体
     this->addChild(player.playerSprite, 1);
 
+    {
+        // 初始化 SeasonManager
+        seasonManager = SeasonManager();
+
+        // 创建并添加季节显示的 Label
+        seasonLabel = Label::createWithTTF("Spring", "fonts/Marker Felt.ttf", 35);
+        seasonLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+        this->addChild(seasonLabel, 1);
+
+        // 创建并添加天数显示的 Label
+        dayLabel = Label::createWithTTF("Day 1", "fonts/Marker Felt.ttf", 35);
+        dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0)); // 设置在seasonLabel右侧
+        this->addChild(dayLabel, 1);
+
+        // 设置定时器，每 4 秒调用一次 addDay 函数
+        this->schedule(schedule_selector(MainMap::addDay), 3.0f);
+    }
+
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
     keyboardListener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, &player);
@@ -366,6 +384,28 @@ bool MainMap::init()
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    
+    {
+        // 初始化 NPC
+        npcManager.initNPCs();
+
+        // 获取屏幕的中心位置
+        const auto visibleSize = Director::getInstance()->getVisibleSize();
+        Vec2 screenCenter = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+
+        // 设置 NPC 的位置为屏幕中心
+        npcManager._npcs[0]->setLocation(screenCenter);
+
+        // 确保 NPC 的精灵锚点为 (0.5, 0.5)
+        npcManager._npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
+
+        // 调试输出 NPC 的位置和精灵尺寸
+        CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
+        CCLOG("NPC sprite size: (%f, %f)", npcManager._npcs[0]->getContentSize().width, npcManager._npcs[0]->getContentSize().height);
+
+        // 将 NPC 添加到场景中
+        this->addChild(npcManager._npcs[0], 1);
+    }
 
     return true;
 }
@@ -419,6 +459,9 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 输出玩家位置
     // CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
+
+    // 检查玩家与 NPC 的交互
+    npcManager.checkPlayerInteraction(player.playerSprite->getPosition());
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
@@ -505,6 +548,25 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldButton->getContentSize().width / 2, toHollowWorldButton->getContentSize().height / 2));
 
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
+
+    seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+    dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
+}
+
+void MainMap::addDay(float dt)
+{
+    // 增加一天
+    seasonManager.updateSeason(1);
+
+    // 获取当前季节名称并更新 Label
+    std::string seasonName = seasonManager.getCurrentSeasonName();
+    seasonLabel->setString(seasonName);
+
+    // 获取当前季节的天数并更新 dayLabel
+    int day = seasonManager.getDaysInCurrentSeason() + 1; // 天数从1开始
+    std::string dayText = "Day " + std::to_string(day);
+    dayLabel->setString(dayText);
+}
 }
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
