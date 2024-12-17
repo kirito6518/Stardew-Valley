@@ -188,6 +188,13 @@ bool MainMap::init()
     ranchBox->setDynamic(false);
     ranch->setPhysicsBody(ranchBox);
     this->addChild(ranch, 0);
+
+    fishing->setName("fishing");
+    CropsLeft->setName("CropsLeft");
+    CropsRight->setName("CropsRight");
+    road->setName("road");
+    ranch->setName("ranch");
+
     /*
     // 创建物品精灵
     std::string itemName = "Test";
@@ -540,9 +547,7 @@ void MainMap::addDay(float dt)
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
 void  MainMap::SetUseItemInMainMap() {
-
-    // 创建物品精灵
-    OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
+    // 设置洋葱
     if (OnionSeed) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
