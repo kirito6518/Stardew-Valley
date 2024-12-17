@@ -42,7 +42,7 @@ public:
      * @param category 物品的分类。
      * @return 返回是否成功添加物品。
      */
-    bool addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int count=1);
+    bool addItem(Item* item,int count=1);
     
     /**
      * @brief 从背包中移除物品。

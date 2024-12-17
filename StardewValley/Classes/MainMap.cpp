@@ -204,8 +204,11 @@ bool MainMap::init()
         CCLOG("Item 'test' not found in backpack.");
     }
     */
-    // 初始放入背包物品
-    bool success2 = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops, 1);// 洋葱种子
+    // 初始放入背包物品(测试)
+#if 1
+    Item* OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
+    bool success = BackpackManager::getInstance()->addItem(OnionSeed, 1);// 洋葱种子
+#endif
 
     // 添加一个按钮，左键点击后切回主屏幕
     toHollowWorldButton = MenuItemImage::create(
@@ -495,7 +498,8 @@ void MainMap::updateCameraPosition(float dt) {
 void  MainMap::SetUseItemInMainMap() {
 
     // 创建物品精灵
-    bool success = BackpackManager::getInstance()->addItem("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops, 0);// 洋葱种子
+    Item* OnionSeed = Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Crops);
+    bool success = BackpackManager::getInstance()->addItem(OnionSeed, 1);// 洋葱种子
     Item* item = Bag->getItemByName("Onion\nSeed");
     if (item) {
         // 定义一个自定义的 useItem 逻辑

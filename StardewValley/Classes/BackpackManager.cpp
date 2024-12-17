@@ -44,8 +44,13 @@ void BackpackManager::hideBackpack()
 }
 
 // 添加物品到背包
-bool BackpackManager::addItem(const std::string& itemImagePath, const std::string& itemName, ItemCategory category ,int amount)
+bool BackpackManager::addItem(Item* newitem,int amount)
 {
+    if (!newitem)
+    {
+        return false;
+    }
+
     if (isFull())
     {
         log("Backpack is full! Cannot add more items.");
@@ -55,7 +60,7 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
     // 检查是否已有相同物品
     for (auto item : items)
     {
-        if (item->getName() == itemName)
+        if (item->getName() == newitem->getName())
         {
             // 增加物品计数
             item->increaseCount(amount);
@@ -63,22 +68,17 @@ bool BackpackManager::addItem(const std::string& itemImagePath, const std::strin
         }
     }
 
-    // 创建新物品
-    auto item = Item::create(itemImagePath, itemName, category, amount);
-    item->retain();//防止其在被销毁时为空
 
-    if (!item)
-    {
-        CCLOG("Failed to create item: %s", itemName.c_str());
-        return false;
-    }
+    newitem->retain();//防止其在被销毁时为空
+
+    
 
     // 添加物品到背包
-    items.pushBack(item);
+    items.pushBack(newitem);
 
     // 获取物品图标并设置用户数据
-    auto itemSprite = item->getIcon();
-    itemSprite->setUserData(item); // 将 Item 对象与物品图标关联
+    auto itemSprite = newitem->getIcon();
+    itemSprite->setUserData(newitem); // 将 Item 对象与物品图标关联
 
     // 将物品图标添加到背包层
     static_cast<BackpackLayer*>(backpackLayer)->addItem(itemSprite);
