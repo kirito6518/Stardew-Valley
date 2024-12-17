@@ -25,6 +25,9 @@ public:
     // 背包按钮的回调函数
     void onBackpackButtonClicked(Ref* sender);
 
+    // 隐藏背包
+    void hideBackpack(Ref* sender);
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 
@@ -36,6 +39,10 @@ public:
     
     //增加天数
     void MainMap::addDay(float dt);
+
+
+    // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
+    void SetUseItemInMainMap();
 
     BackpackManager* Bag;
     SeasonManager seasonManager; // 声明 SeasonManager 实例
@@ -63,6 +70,7 @@ private:
     Label* toHollowWorldWord; // 返回菜单按钮的文字
     MenuItemImage* backpackButton; // 开启背包的文字
     NPCManager npcManager; // 声明 NPC 管理器实例
+    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场
 };
 
 #endif // __MainMap_H__
