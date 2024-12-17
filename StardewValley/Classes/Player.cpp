@@ -125,7 +125,7 @@ int Player::getDirectionIndex(const cocos2d::Vec2& from, const cocos2d::Vec2& to
 // 键盘按下事件处理
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    CCLOG("Key pressed: %d", keyCode); // 输出按键代码
+    // CCLOG("Key pressed: %d", keyCode); // 输出按键代码
     switch (keyCode)
     {
         case EventKeyboard::KeyCode::KEY_W:
@@ -148,7 +148,7 @@ void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 // 键盘释放事件处理
 void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    CCLOG("Key released: %d", keyCode); // 输出按键代码
+    // CCLOG("Key released: %d", keyCode); // 输出按键代码
     switch (keyCode)
     {
         case EventKeyboard::KeyCode::KEY_W:

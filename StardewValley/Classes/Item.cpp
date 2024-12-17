@@ -4,7 +4,6 @@
 USING_NS_CC;
 
 
-
 // 创建物品
 Item* Item::create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,int amount)
 {
