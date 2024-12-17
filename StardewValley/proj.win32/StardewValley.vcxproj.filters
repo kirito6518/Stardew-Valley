@@ -1,151 +1,170 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
+      <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AuthorListScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainMap.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BackpackLayer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BackpackManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Item.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Crop.cpp">
-      <Filter>src</Filter>
+      <Filter>app</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Animal.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop.cpp">
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\FarmManager.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NPC.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NPCManager.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NPCRelationship.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NPCTask.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ResourceManager.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SeasonManager.cpp">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
+    <ClCompile Include="..\Classes\BackpackLayer.cpp">
+      <Filter>myLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackpackManager.cpp">
+      <Filter>myLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp">
+      <Filter>Item work</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\ItemManager.cpp">
-=======
+      <Filter>Item work</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMap.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Cave.cpp">
->>>>>>> Stashed changes
-      <Filter>src</Filter>
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AuthorListScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopLayer.cpp">
+      <Filter>myLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopManager.cpp">
+      <Filter>myLayers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
-      <Filter>win32</Filter>
+      <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AuthorListScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainMap.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BackpackLayer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BackpackManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Player.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Item.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Crop.h">
-      <Filter>src</Filter>
+      <Filter>app</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Animal.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop.h">
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Event.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FarmManager.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NPC.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NPCManager.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NPCRelationship.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NPCTask.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManager.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SeasonManager.h">
-      <Filter>src</Filter>
+      <Filter>works</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
+    <ClInclude Include="..\Classes\BackpackLayer.h">
+      <Filter>myLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackpackManager.h">
+      <Filter>myLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item.h">
+      <Filter>Item work</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\ItemManager.h">
-=======
+      <Filter>Item work</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMap.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Cave.h">
->>>>>>> Stashed changes
-      <Filter>src</Filter>
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AuthorListScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopLayer.h">
+      <Filter>myLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopManager.h">
+      <Filter>myLayers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="main">
+      <UniqueIdentifier>{8855feaa-c03a-41c4-a636-c4db06673939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{e15123cf-3b3e-45f8-8abc-1aa0aef345ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="works">
+      <UniqueIdentifier>{653b5932-43f8-45cb-bee1-46f1f122f58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="myLayers">
+      <UniqueIdentifier>{aabc4a83-cc94-4d40-aa86-97e63666682e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item work">
+      <UniqueIdentifier>{6194fa75-bdeb-4f30-8d61-3516b8b99290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{036efc9e-a3d6-4559-8796-c55d73b349d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <ResourceCompile Include="game.rc">
-      <Filter>resource</Filter>
+      <Filter>works</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
