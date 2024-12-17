@@ -8,6 +8,11 @@ void NPCManager::initNPCs() {
     npc1->setRelationship(0);
     npc1->setLocation(cocos2d::Vec2(200, 200)); // 设置 NPC 的初始位置
     _npcs.push_back(npc1); // 将 NPC 添加到 NPC 列表中
+
+    NPC* npc2 = new NPC(2, "ZY", "npc_zy.png");
+    npc2->setDialogue("Hello,Welcome to my shop!!!");
+    npc2->setLocation(cocos2d::Vec2(400, 400)); // 设置 NPC 的初始位置
+    _npcs.push_back(npc2); // 将 NPC 添加到 NPC 列表中
 }
 
 // 初始化任务列表

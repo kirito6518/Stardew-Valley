@@ -420,12 +420,15 @@ bool MainMap::init()
         // 获取屏幕的中心位置
         const auto visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 screenCenter = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+        Vec2 shop = Vec2(visibleSize.width +90 , visibleSize.height + 70);
 
         // 设置 NPC 的位置为屏幕中心
         npcManager._npcs[0]->setLocation(screenCenter);
+        npcManager._npcs[1]->setLocation(shop);
 
         // 确保 NPC 的精灵锚点为 (0.5, 0.5)
         npcManager._npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
+        npcManager._npcs[1]->setAnchorPoint(Vec2(0.5, 0.5));
 
         // 调试输出 NPC 的位置和精灵尺寸
         // CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
@@ -433,6 +436,7 @@ bool MainMap::init()
 
         // 将 NPC 添加到场景中
         this->addChild(npcManager._npcs[0], 1);
+        this->addChild(npcManager._npcs[1], 1);
     }
     // 初始化农田
     farmManager.initFarm();
