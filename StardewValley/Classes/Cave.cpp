@@ -64,7 +64,7 @@ bool Cave::init()
     ladder->setName("ladder");
 
     // 创建黑暗背景
-    black = Sprite::create("black.png"); // 2000 * 2000的
+    black = Sprite::create("black.png"); // 4000 * 2000的
     black->setAnchorPoint(Vec2(0.5f, 0.5f)); // 中心
     black->setPosition(visibleSize / 2); // 初始位置在屏幕上方
     this->addChild(black, 2);
