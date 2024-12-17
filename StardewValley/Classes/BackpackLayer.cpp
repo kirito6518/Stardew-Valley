@@ -2,6 +2,7 @@
 #include "BackpackManager.h"
 #include "Item.h"
 #include "AppDelegate.h"
+#include "MainMap.h"
 
 USING_NS_CC;
 
@@ -203,8 +204,10 @@ void BackpackLayer::removeItem(Sprite* itemSprite)
 void BackpackLayer::hideBackpack(Ref* sender)
 {
     BackpackManager::getInstance()->hideBackpack();
-}
 
+    // 调用mainmap的恢复时间更新的函数
+    dynamic_cast<MainMap*>(BackpackManager::getInstance()->mainMap)->hideBackpack(sender);
+}
 
 //点击使用按钮的回调函数
 void BackpackLayer::onUseButtonClicked(Ref* sender)

@@ -71,10 +71,10 @@
     <ClInclude Include="..\Classes\Item.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
+    <ClInclude Include="..\Classes\Crop.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Crop.h">
+    <ClInclude Include="..\Classes\ItemManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
