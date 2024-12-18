@@ -43,11 +43,20 @@ public:
     //点击使用按钮的回调函数
     void onUseButtonClicked(Ref* sender);
 
+    //点击yes按钮的回调函数
+    void onYesButtonClicked(Ref* sender);
+
+    //点击no按钮的回调函数
+    void onNoButtonClicked(Ref* sender);
+
     //点击摧毁按钮的回调函数
     void onDestroyButtonClicked(Ref* sender);
 
     //鼠标事件监听器与物品的交互
     void setupCombinedMouseListener();
+
+    //获取确定UI
+    void getDetermineUI();
 
 
     MenuItemImage* hideButton;//背包隐藏按钮
@@ -77,6 +86,11 @@ private:
 
     cocos2d::Sprite* itemDetaUI;//显示物品详情的界面
     cocos2d::Label* itemDataLabel;//显示物品详情（名称）的标签
+
+    cocos2d::Sprite* determineUI;//确认是否售出的UI
+    cocos2d::Label* getCoinCount;//售出可获得金币数
+    cocos2d::MenuItemImage* yesButton;//yes按钮
+    cocos2d::MenuItemImage* noButton;//no按钮
 
 
 };

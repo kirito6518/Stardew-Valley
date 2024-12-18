@@ -126,6 +126,45 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     // 默认关闭 destroyButton 的鼠标事件监听
     destroyButton->setEnabled(false);
 
+    //初始化确认是否售出的UI
+    determineUI = Sprite::create("ui/determineUI.png");
+    determineUI->setAnchorPoint(Vec2(0.5, 0.5));
+    determineUI->setPosition(backpackPos);
+    determineUI->setVisible(false);
+    this->addChild(determineUI, 3);
+
+    //初始化售出可获得金币数
+    getCoinCount = Label::createWithTTF("", "fonts/Gen.ttf", 20);
+    getCoinCount->setAnchorPoint(Vec2(0, 0));
+    getCoinCount->setPosition(backpackPos+Vec2(50,-50));
+    getCoinCount->setVisible(false);
+    this->addChild(getCoinCount, 5);
+
+    //初始化yes按钮
+    yesButton = MenuItemImage::create(
+        "ui/yes_normal.png",  // 正常状态的图片
+        "ui/yes_pressed.png", // 按下状态的图片
+        CC_CALLBACK_1(BackpackLayer::onYesButtonClicked, this)); // 点击回调函数
+    yesButton->setAnchorPoint(Vec2(0, 0));
+    yesButton->setPosition(backpackPos+Vec2(-100,-60));
+    this->addChild(yesButton, 4);
+    yesButton->setVisible(false);
+    // 默认关闭 destroyButton 的鼠标事件监听
+    yesButton->setEnabled(false);
+
+    //初始化no按钮
+    noButton = MenuItemImage::create(
+        "ui/no_normal.png",  // 正常状态的图片
+        "ui/no_pressed.png", // 按下状态的图片
+        CC_CALLBACK_1(BackpackLayer::onNoButtonClicked, this)); // 点击回调函数
+    noButton->setAnchorPoint(Vec2(0, 0));
+    noButton->setPosition(backpackPos + Vec2(100, -60));
+    this->addChild(noButton, 4);
+    noButton->setVisible(false);
+    // 默认关闭 destroyButton 的鼠标事件监听
+    noButton->setEnabled(false);
+
+
     //添加鼠标事件监听器
     setupCombinedMouseListener();
 
@@ -235,6 +274,12 @@ void BackpackLayer::renewPosition()
         Itemsprite->setPosition(backpackPos + Vec2(-backpackSize.width / 2 + dx + 8, backpackSize.height / 2 - dy - 10));
         Spcount++;
     }
+
+    determineUI->setPosition(backpackPos);
+    getCoinCount->setPosition(backpackPos + Vec2(90, -22));
+    yesButton->setPosition(backpackPos + Vec2(-150, -90));
+    noButton->setPosition(backpackPos + Vec2(30, -90));
+
 }
 
 //点击使用按钮的回调函数
@@ -267,14 +312,14 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
     }
 }
 
-//点击卖出按钮的回调函数
-void BackpackLayer::onDestroyButtonClicked(Ref* sender)
+//点击yes按钮的回调函数
+void BackpackLayer::onYesButtonClicked(Ref* sender)
 {
-
     useResultLabel->setVisible(false);
 
-    //移除物品
-    auto item = static_cast<Item*>(destroyButton->getUserData());
+    //卖出物品
+    auto item = static_cast<Item*>(destroyButton->getUserData());//获取对应物品
+
     int itemcount = item->getCount();
     if (item->getitemCategory() != ItemCategory::Tool) {//如果物品不属于工具类（即可被卖出）
         if (this->getParent() != nullptr) {
@@ -292,16 +337,66 @@ void BackpackLayer::onDestroyButtonClicked(Ref* sender)
 
     }
     else {
-        destroyResultLabel->setString("You Can't Sell This Item!");     
+        destroyResultLabel->setString("You Can't Sell This Item!");
     }
 
     this->renewPosition();//更新物品位置
 
+    //显示结果标签
     destroyResultLabel->setVisible(true);
     this->scheduleOnce([this](float dt) {
         destroyResultLabel->setVisible(false);
         }, 1.0f, "hide_use_result");
-  
+
+    //退出对应UI并取消鼠标绑定
+    determineUI->setVisible(false);
+    yesButton->setVisible(false);
+    noButton->setVisible(false);
+    getCoinCount->setVisible(false);
+    yesButton->setEnabled(true);
+    noButton->setEnabled(true);
+}
+
+//点击no按钮的回调函数
+void BackpackLayer::onNoButtonClicked(Ref* sender)
+{
+
+    //退出对应UI并取消鼠标绑定
+    determineUI->setVisible(false);
+    yesButton->setVisible(false);
+    noButton->setVisible(false);
+    getCoinCount->setVisible(false);
+    yesButton->setEnabled(true);
+    noButton->setEnabled(true);
+
+}
+
+//点击卖出按钮的回调函数
+void BackpackLayer::onDestroyButtonClicked(Ref* sender)
+{
+
+    useResultLabel->setVisible(false);
+
+    // 隐藏对应的物品提示信息并禁用相关鼠标事件监听
+    useResultLabel->setVisible(false);
+    destroyResultLabel->setVisible(false);
+    destroyButton->setEnabled(false);
+    useButton->setEnabled(false);
+
+    auto item = static_cast<Item*>(destroyButton->getUserData());//获取对应物品
+
+    std::string getCoinCountStr = std::to_string(item->getsellingPrice());
+    getCoinCount->setString(getCoinCountStr);
+
+    //显示对应UI并启用相关鼠标事件监听
+    determineUI->setVisible(true);
+    getCoinCount->setVisible(true);
+    yesButton->setVisible(true);
+    noButton->setVisible(true);
+    yesButton->setEnabled(true);
+    noButton->setEnabled(true);
+
+
 }
 
 //鼠标监听事件与背包内元素的交互
@@ -402,6 +497,7 @@ void BackpackLayer::setupCombinedMouseListener()
             }
         }
 
+
         //  检查是否点击了 destroyButton
         if (destroyButton->isVisible()) {
             Vec2 destroyButtonPosition = destroyButton->getPosition();
@@ -417,6 +513,36 @@ void BackpackLayer::setupCombinedMouseListener()
                 return;
             }
         }
+
+        //  检查是否点击了 yesButton
+        if (yesButton->isVisible()) {
+            Vec2 yesButtonPosition = yesButton->getPosition();
+            Size yesButtonSize = yesButton->getContentSize();
+            Rect yesButtonBoundingBox = Rect(yesButtonPosition.x, yesButtonPosition.y, yesButtonSize.width, yesButtonSize.height);
+
+            if (yesButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了yesButton，切换到按下状态的图片
+                yesButton->setNormalImage(Sprite::create("ui/yes_pressed.png"));
+                return;
+            }
+        }
+
+        //  检查是否点击了 noButton
+        if (noButton->isVisible()) {
+            Vec2 noButtonPosition = noButton->getPosition();
+            Size noButtonSize = noButton->getContentSize();
+            Rect noButtonBoundingBox = Rect(noButtonPosition.x, noButtonPosition.y, noButtonSize.width, noButtonSize.height);
+
+            if (noButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了yesButton，切换到按下状态的图片
+                noButton->setNormalImage(Sprite::create("ui/no_pressed.png"));
+                return;
+            }
+        }
+
+        
 
         // 遍历所有物品图标，检查鼠标是否点击了某个物品
         for (auto itemSprite : itemSprites)
@@ -502,11 +628,16 @@ void BackpackLayer::setupCombinedMouseListener()
             //隐藏物品UI
             itemDetaUI->setVisible(false);
             itemDataLabel->setVisible(false);
+            getCoinCount->setVisible(false);
+            determineUI->setVisible(false);
+            yesButton->setVisible(false);
+            noButton->setVisible(false);
             //解除使用按钮和摧毁按钮的绑定及可见
             useButton->setUserData(nullptr);
             useButton->setVisible(false);
             destroyButton->setUserData(nullptr);
             destroyButton->setVisible(false);
+            
         }
         else
         {
@@ -527,7 +658,13 @@ void BackpackLayer::setupCombinedMouseListener()
             {
                 // 如果点击了 destroyButton，切换回正常状态的图片并执行使用逻辑
                 destroyButton->setNormalImage(Sprite::create("ui/sell_button_normal.png"));
-                destroyResultLabel->setPosition(backpackPos + Vec2(0, 50));
+                destroyResultLabel->setPosition(backpackPos + Vec2(0, 40));
+
+                determineUI->setVisible(true);
+                yesButton->setVisible(true);
+                noButton->setVisible(true);
+                getCoinCount->setVisible(true);
+
                 destroyButton->activate(); // 执行使用逻辑
             }
             else
@@ -549,13 +686,52 @@ void BackpackLayer::setupCombinedMouseListener()
             {
                 // 如果点击了 useButton，切换回正常状态的图片并执行使用逻辑
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
-                useResultLabel->setPosition(backpackPos + Vec2(0, 50));
+                useResultLabel->setPosition(backpackPos + Vec2(0, 40));
                 useButton->activate(); // 执行使用逻辑
             }
             else
             {
                 // 如果触摸结束时不在按钮区域内，也切换回正常状态
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
+            }
+        }
+
+        // 检查是否点击了 yesButton
+        if (yesButton) {
+            Vec2 yesButtonPosition = yesButton->getPosition();
+            Size yesButtonSize = yesButton->getContentSize();
+            Rect yesButtonBoundingBox = Rect(yesButtonPosition.x, yesButtonPosition.y, yesButtonSize.width, yesButtonSize.height);
+
+            if (yesButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 yesButton，切换回正常状态的图片并执行使用逻辑
+                yesButton->setNormalImage(Sprite::create("ui/yes_normal.png"));
+
+                yesButton->activate(); // 执行使用逻辑
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮区域内，也切换回正常状态
+                yesButton->setNormalImage(Sprite::create("ui/yes_normal.png"));
+            }
+        }
+
+        // 检查是否点击了 noButton
+        if (noButton) {
+            Vec2 noButtonPosition = noButton->getPosition();
+            Size noButtonSize = noButton->getContentSize();
+            Rect noButtonBoundingBox = Rect(noButtonPosition.x, noButtonPosition.y, noButtonSize.width, noButtonSize.height);
+
+            if (noButtonBoundingBox.containsPoint(mousePosition))
+            {
+                // 如果点击了 noButton，切换回正常状态的图片并执行使用逻辑
+                noButton->setNormalImage(Sprite::create("ui/no_normal.png"));
+                noButton->activate(); // 执行使用逻辑
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮区域内，也切换回正常状态
+                noButton->setNormalImage(Sprite::create("ui/no_normal.png"));
             }
         }
 
@@ -566,3 +742,9 @@ void BackpackLayer::setupCombinedMouseListener()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
 
+//显示对应UI
+void BackpackLayer::getDetermineUI()
+{
+
+  
+}
