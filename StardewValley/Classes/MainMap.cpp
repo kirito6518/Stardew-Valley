@@ -12,7 +12,6 @@
 #include "ShopItem.h"
 #include "ShopItemManager.h"
 #include "FarmManager.h"
-#include "Cave.h"
 
 
 
@@ -529,7 +528,7 @@ void MainMap::updatePlayerPosition(float delta)
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
 
-    // 进入洞穴时触发
+    // 如果已经触发了洞穴场景且刚刚传送回来
     if (caveScene && place == 4) {
         player.playerSprite->setPosition(Vec2(640, -430 + 96 + 48));
         // 初始化属性
@@ -895,7 +894,6 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         place = 4; // 设置位置为路
         // 创建新场景
         caveScene = Cave::createScene();
-        dynamic_cast<Cave*>(caveScene)->mainMap = this;
         // 将新场景推入场景栈
         Director::getInstance()->pushScene(caveScene);
     }
@@ -914,34 +912,4 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
 
     // 返回 true 表示允许碰撞继续处理
     return true;
-}
-
-// 回到mainmap时触发
-void MainMap::BackFromCave() {
-
-    auto gemBring = dynamic_cast<Cave*>(caveScene)->gem;
-    Item* initItem;
-    if (gemBring == 0) {
-
-    }
-    else if (gemBring == 1) {
-        initItem = ItemManager::getInstance()->getItem("GemA");
-        BackpackManager::getInstance()->addItem(initItem, 1);
-    }
-    else if (gemBring == 2) {
-        initItem = ItemManager::getInstance()->getItem("GemB");
-        BackpackManager::getInstance()->addItem(initItem, 1);
-    }
-    else if (gemBring == 3) {
-        initItem = ItemManager::getInstance()->getItem("GemC");
-        BackpackManager::getInstance()->addItem(initItem, 1);
-    }
-    else if (gemBring == 4) {
-        initItem = ItemManager::getInstance()->getItem("GemD");
-        BackpackManager::getInstance()->addItem(initItem, 1);
-    }
-    else if (gemBring == 5) {
-        initItem = ItemManager::getInstance()->getItem("GemE");
-        BackpackManager::getInstance()->addItem(initItem, 1);
-    }
 }
