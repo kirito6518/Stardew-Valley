@@ -1,41 +1,41 @@
-#ifndef __ITEM_H__
+ï»¿#ifndef __ITEM_H__
 #define __ITEM_H__
 
 #include "cocos2d.h"
 #include <functional>
 
-//ÎïÆ··ÖÀàÃ¶¾Ù£¬¶¨ÒåÁËÎïÆ·µÄÀàĞÍ¡£
+//ç‰©å“åˆ†ç±»æšä¸¾ï¼Œå®šä¹‰äº†ç‰©å“çš„ç±»å‹ã€‚
 enum class ItemCategory
 {
-    Tool,         // ¹¤¾ß
-    Fish,         // Óã
-    Seed,         // ÖÖ×Ó
-    Crops,        // ×÷Îï²úÆ·
-    AnimalProduct,// ¶¯Îï²úÆ·£¨ÉúÈâºÍ¼¦µ°£©
-    Food,         // Ê³Îï
-    Consumable,   // ÏûºÄÆ·
-    Equipment,    // ×°±¸
-    Quest,        // ÈÎÎñÎïÆ·
-    Mine          // ¿óÎï     
+    Tool,         // å·¥å…·
+    Fish,         // é±¼
+    Seed,         // ç§å­
+    Crops,        // ä½œç‰©äº§å“
+    AnimalProduct,// åŠ¨ç‰©äº§å“ï¼ˆç”Ÿè‚‰å’Œé¸¡è›‹ï¼‰
+    Food,         // é£Ÿç‰©
+    Consumable,   // æ¶ˆè€—å“
+    Equipment,    // è£…å¤‡
+    Quest,        // ä»»åŠ¡ç‰©å“
+    Mine          // çŸ¿ç‰©     
 };
 
 
 
 /**
  * @class Item
- * @brief ÎïÆ·Àà£¬±íÊ¾±³°üÖĞµÄµ¥¸öÎïÆ·¡£
+ * @brief ç‰©å“ç±»ï¼Œè¡¨ç¤ºèƒŒåŒ…ä¸­çš„å•ä¸ªç‰©å“ã€‚
  *
- * Item Àà±íÊ¾±³°üÖĞµÄµ¥¸öÎïÆ·£¬°üº¬ÁËÎïÆ·µÄÃû³Æ¡¢·ÖÀà¡¢ÊıÁ¿¡¢Í¼±êµÈĞÅÏ¢¡£
- * ËüÌá¹©ÁËÔö¼Ó¡¢¼õÉÙÎïÆ·ÊıÁ¿µÄ·½·¨£¬ÒÔ¼°Ê¹ÓÃÎïÆ·µÄ¹¦ÄÜ¡£
+ * Item ç±»è¡¨ç¤ºèƒŒåŒ…ä¸­çš„å•ä¸ªç‰©å“ï¼ŒåŒ…å«äº†ç‰©å“çš„åç§°ã€åˆ†ç±»ã€æ•°é‡ã€å›¾æ ‡ç­‰ä¿¡æ¯ã€‚
+ * å®ƒæä¾›äº†å¢åŠ ã€å‡å°‘ç‰©å“æ•°é‡çš„æ–¹æ³•ï¼Œä»¥åŠä½¿ç”¨ç‰©å“çš„åŠŸèƒ½ã€‚
  */
 class Item : public cocos2d::Node
 {
 public:
 
-    // ¶¨ÒåÒ»¸ö»Øµ÷º¯ÊıÀàĞÍ£¬ÓÃÓÚ´¦ÀíÊ¹ÓÃÂß¼­
+    // å®šä¹‰ä¸€ä¸ªå›è°ƒå‡½æ•°ç±»å‹ï¼Œç”¨äºå¤„ç†ä½¿ç”¨é€»è¾‘
     using UseItemCallback = std::function<bool()>;
 
-    // ÉèÖÃ×Ô¶¨ÒåµÄ useItem »Øµ÷º¯Êı
+    // è®¾ç½®è‡ªå®šä¹‰çš„ useItem å›è°ƒå‡½æ•°
     void setUseItemCallback(UseItemCallback callback)
     {
         useItemCallback = callback;
@@ -43,60 +43,60 @@ public:
 
 
 
-    //´´½¨Ò»¸ö Item ¶ÔÏó
+    //åˆ›å»ºä¸€ä¸ª Item å¯¹è±¡
     static Item* create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,
                            int sellingPrice=0, int buyingPrice=0,int amount=0);
 
-    //³õÊ¼»¯ Item ¶ÔÏó
+    //åˆå§‹åŒ– Item å¯¹è±¡
     bool init(const std::string& itemImagePath, const std::string& itemName, ItemCategory category, 
               int sellingPrice, int buyingPrice,int amount);
 
-    //Ôö¼ÓÎïÆ·µÄÊıÁ¿¡£
+    //å¢åŠ ç‰©å“çš„æ•°é‡ã€‚
     void increaseCount(int amount = 1);
 
-    //¼õÉÙÎïÆ·µÄÊıÁ¿
+    //å‡å°‘ç‰©å“çš„æ•°é‡
     void decreaseCount(int amount = 1);
 
-    //Ê¹ÓÃÎïÆ·Âß¼­
+    //ä½¿ç”¨ç‰©å“é€»è¾‘
     bool useItem();
 
-    //Çå¿ÕÎïÆ·
+    //æ¸…ç©ºç‰©å“
     void clearItem();
  
-    // Ê¹ÓÃÎïÆ·º¯Êı£¬½ÓÊÜÒ»¸ö»Øµ÷º¯ÊıÀ´´¦ÀíÊ¹ÓÃÂß¼­
+    // ä½¿ç”¨ç‰©å“å‡½æ•°ï¼Œæ¥å—ä¸€ä¸ªå›è°ƒå‡½æ•°æ¥å¤„ç†ä½¿ç”¨é€»è¾‘
     bool useItem(int count, UseItemCallback callback);
 
-    //»ñÈ¡ÎïÆ·µÄÃû³Æ
+    //è·å–ç‰©å“çš„åç§°
     const std::string& getName() const { return itemName; }
 
-    //»ñÈ¡ÎïÆ·µÄÊıÁ¿¡£
+    //è·å–ç‰©å“çš„æ•°é‡ã€‚
     int getCount() const { return itemCount; }
 
-    //»ñÈ¡ÎïÆ·Âô³ö¼Û¸ñ
+    //è·å–ç‰©å“å–å‡ºä»·æ ¼
     int getsellingPrice() const { return sellingPrice; }
 
-    //»ñÈ¡ÎïÆ·ÂòÈë¼Û¸ñ
+    //è·å–ç‰©å“ä¹°å…¥ä»·æ ¼
     int getbuyingPrice() const { return buyingPrice; }
 
-    //»ñÈ¡ÎïÆ··ÖÀà
+    //è·å–ç‰©å“åˆ†ç±»
     ItemCategory getitemCategory() const { return itemCategory; }
 
-    // »ñÈ¡ÎïÆ·µÄÍ¼±ê¾«Áé
+    // è·å–ç‰©å“çš„å›¾æ ‡ç²¾çµ
     cocos2d::Sprite* getIcon() const { return itemIcon; }
 
     void updateCountLabel();
 
 private:
-    UseItemCallback useItemCallback; // ±£´æ×Ô¶¨ÒåµÄ useItem »Øµ÷º¯Êı
+    UseItemCallback useItemCallback; // ä¿å­˜è‡ªå®šä¹‰çš„ useItem å›è°ƒå‡½æ•°
 
-    std::string itemName; ///< ÎïÆ·µÄÃû³Æ
-    ItemCategory itemCategory; ///< ÎïÆ·µÄ·ÖÀà
+    std::string itemName; ///< ç‰©å“çš„åç§°
+    ItemCategory itemCategory; ///< ç‰©å“çš„åˆ†ç±»
 
-    int sellingPrice;//ÎïÆ·Âô³ö¼Û¸ñ
-    int buyingPrice;//ÎïÆ·ÂòÈë¼Û¸ñ
-    int itemCount; ///< ÎïÆ·µÄÊıÁ¿
-    cocos2d::Label* itemCountLabel; ///< ÎïÆ·ÊıÁ¿±êÇ©
-    cocos2d::Sprite* itemIcon; ///< ÎïÆ·µÄÍ¼±ê¾«Áé
+    int sellingPrice;//ç‰©å“å–å‡ºä»·æ ¼
+    int buyingPrice;//ç‰©å“ä¹°å…¥ä»·æ ¼
+    int itemCount; ///< ç‰©å“çš„æ•°é‡
+    cocos2d::Label* itemCountLabel; ///< ç‰©å“æ•°é‡æ ‡ç­¾
+    cocos2d::Sprite* itemIcon; ///< ç‰©å“çš„å›¾æ ‡ç²¾çµ
 
 
 
