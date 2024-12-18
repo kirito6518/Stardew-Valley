@@ -30,6 +30,7 @@ ShopManager::ShopManager()
     currentItems = 0;        // 初始化当前物品数量
 
     //此处加载所有商店中会出现的物品
+    // 第一个数字为卖出价格，第二个数字为买入价格
     ShopItem::create("crops/OnionSeed.png", "Onion\nSeed", 0, 1);
 }
 

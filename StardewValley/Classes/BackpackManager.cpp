@@ -91,9 +91,10 @@ bool BackpackManager::addItem(Item* newitem,int amount)
     if (!ifHaveSame) {
         // 增加物品计数
         newitem->increaseCount(amount);
+        newitem->retain();//防止其在被销毁时为空
     }
 
-    newitem->retain();//防止其在被销毁时为空
+   
 
     // 添加物品到背包
     items.pushBack(newitem);

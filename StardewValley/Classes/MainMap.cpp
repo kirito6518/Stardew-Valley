@@ -615,23 +615,6 @@ void MainMap::updateCameraPosition(float dt) {
     shoplayer->shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y + shopBgSize.height / 2));
     shoplayer->closeButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + shopBgSize.width / 2, visibleSize.height / 2 + shopBgSize.height / 2));
 
-    //更新背包物品图标的坐标值
-    {
-        int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
-
-        int Spcount = 0;
-        int Itemcount = 0;
-
-        const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
-        for (auto Itemsprite : Itemsprites)
-        {
-            dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
-            dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
-            Itemsprite->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY - dy));
-            Spcount++;
-        }
-    }
-
     //更新商店物品图标坐标值
     {
         int dx, dy;   //物品坐标相对于背包初始坐标的偏移量

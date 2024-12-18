@@ -37,6 +37,9 @@ public:
     // 获取所有物品的向量
     const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }
 
+    //更新背包内物品位置
+    void renewPosition();
+
     //点击使用按钮的回调函数
     void onUseButtonClicked(Ref* sender);
 
@@ -45,7 +48,6 @@ public:
 
     //鼠标事件监听器与物品的交互
     void setupCombinedMouseListener();
-
 
 
     MenuItemImage* hideButton;//背包隐藏按钮

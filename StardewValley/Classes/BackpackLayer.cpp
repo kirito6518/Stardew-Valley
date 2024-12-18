@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "AppDelegate.h"
 #include "MainMap.h"
+#include "ItemManager.h"
 
 
 USING_NS_CC;
@@ -71,7 +72,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     // 初始化物品名称标签
     itemNameLabel = Label::createWithTTF("", "fonts/Gen.ttf", 20);
-    itemNameLabel->setAnchorPoint(Vec2(0, 1));
+    itemNameLabel->setAnchorPoint(Vec2(0.5, 1));
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel,3);
 
@@ -94,7 +95,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     this->addChild(itemDetaUI, 0);
 
     //初始化物品信息标签
-    itemDataLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    itemDataLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
     itemDataLabel->setAnchorPoint(Vec2(0, 1));
     itemDataLabel->setVisible(false);
     this->addChild(itemDataLabel, 3);
@@ -210,9 +211,37 @@ void BackpackLayer::hideBackpack(Ref* sender)
     dynamic_cast<MainMap*>(BackpackManager::getInstance()->mainMap)->hideBackpack(sender);
 }
 
+//更新背包内物品位置
+void BackpackLayer::renewPosition()
+{
+    //获取背包背景图尺寸及坐标
+    auto backpackSize = backpackBgSprite->getContentSize();
+    auto backpackPos = backpackBgSprite->getPosition();
+
+    //更新背包内物品位置
+    int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+    int Spcount = 0;
+    int Itemcount = 0;
+    auto parent = this->getParent();
+    Vec2 cameraOffset = Vec2(0, 0);
+    if (parent) {
+        cameraOffset = parent->getPosition();
+    }
+    const cocos2d::Vector<Sprite*>& Itemsprites = getItemSprites();
+    for (auto Itemsprite : Itemsprites)
+    {
+        dx = Spcount % 10 * (gridWidth + gridSpacing);
+        dy = Spcount / 10 * (gridHeight + gridSpacing);
+        Itemsprite->setPosition(backpackPos + Vec2(-backpackSize.width / 2 + dx + 8, backpackSize.height / 2 - dy - 10));
+        Spcount++;
+    }
+}
+
 //点击使用按钮的回调函数
 void BackpackLayer::onUseButtonClicked(Ref* sender)
 {
+    destroyResultLabel->setVisible(false);
+
     auto item = static_cast<Item*>(useButton->getUserData());
 
     if (item)
@@ -230,6 +259,8 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
 
         useResultLabel->setVisible(true);
 
+        this->renewPosition();//更新物品位置
+
         this->scheduleOnce([this](float dt) {
             useResultLabel->setVisible(false);
             }, 1.0f, "hide_use_result");
@@ -239,14 +270,20 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
 //点击卖出按钮的回调函数
 void BackpackLayer::onDestroyButtonClicked(Ref* sender)
 {
+
+    useResultLabel->setVisible(false);
+
     //移除物品
     auto item = static_cast<Item*>(destroyButton->getUserData());
     int itemcount = item->getCount();
     if (item->getitemCategory() != ItemCategory::Tool) {//如果物品不属于工具类（即可被卖出）
         if (this->getParent() != nullptr) {
-            auto itemCoin = BackpackManager::getInstance()->getItemByName("Coin");
+            auto itemCoin = ItemManager::getInstance()->getItem("Coin");
             int money = (item->getsellingPrice()) * itemcount;
             itemCoin->increaseCount(money);
+            if (itemCoin->getCount() > 0) {
+                BackpackManager::getInstance()->addItem(itemCoin, 0);
+            }
         }
 
         item->clearItem();//移除物品
@@ -257,6 +294,8 @@ void BackpackLayer::onDestroyButtonClicked(Ref* sender)
     else {
         destroyResultLabel->setString("You Can't Sell This Item!");     
     }
+
+    this->renewPosition();//更新物品位置
 
     destroyResultLabel->setVisible(true);
     this->scheduleOnce([this](float dt) {
@@ -271,6 +310,8 @@ void BackpackLayer::setupCombinedMouseListener()
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
 
+    //更新背包内物品位置
+    this->renewPosition();
 
     auto mouseListener = EventListenerMouse::create();
 
@@ -290,6 +331,8 @@ void BackpackLayer::setupCombinedMouseListener()
         {
             // 获取物品精灵的当前坐标
             Vec2 itemPosition = itemSprite->getPosition();
+            //获取物品精灵尺寸
+            Vec2 itemSize = itemSprite->getContentSize();
             // 计算物品精灵的边界框
             Rect itemBoundingBox = Rect(itemPosition.x, itemPosition.y - gridHeight, gridWidth, gridHeight);
 
@@ -301,7 +344,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 {
                     // 显示物品名称
                     itemNameLabel->setString(item->getName());
-                    itemNameLabel->setPosition(itemPosition + Vec2(0, 16)); // 在物品位置上方显示
+                    itemNameLabel->setPosition(itemPosition + Vec2(itemSize.x/2, 25)); // 在物品位置上方显示
                     itemNameLabel->setVisible(true);
                 }
                 return;
@@ -418,13 +461,15 @@ void BackpackLayer::setupCombinedMouseListener()
         }
 
         // 如果点击的不是物品图标，隐藏对应的物品UI并禁用相关鼠标事件监听
+        useResultLabel->setVisible(false);
+        destroyResultLabel -> setVisible(false);
         itemDetaUI->setVisible(false);
         itemDataLabel->setVisible(false);
         destroyButton->setVisible(false);
         destroyButton->setEnabled(false);
         useButton->setVisible(false);
         useButton->setEnabled(false);
-        };
+    };
 
     // 鼠标释放事件
     mouseListener->onMouseUp = [this](Event* event) {
