@@ -37,6 +37,18 @@ BackpackManager::BackpackManager()
     Item::create("tool/Fork.png", "Fork", ItemCategory::Tool, 1, 1);// 加载叉子
     Item::create("tool/Pickaxe.png", "Pickaxe", ItemCategory::Tool, 1, 1);// 加载镐子
     Item::create("tool/WaterPot.png", "WaterPot", ItemCategory::Tool, 1, 1);// 加载水瓶
+
+    Item::create("tool/GemA.png", "GemA", ItemCategory::Mine, 5, 5);// 加载宝石A
+    Item::create("tool/GemB.png", "GemB", ItemCategory::Mine, 10, 10);// 加载宝石B
+    Item::create("tool/GemC.png", "GemC", ItemCategory::Mine, 15, 15);// 加载宝石C
+    Item::create("tool/GemD.png", "GemD", ItemCategory::Mine, 20, 20);// 加载宝石D
+    Item::create("tool/GemE.png", "GemE", ItemCategory::Mine, 25, 25);// 加载宝石E
+
+    Item::create("tool/FishA.png", "FishA", ItemCategory::Fish, 3, 3);// 加载鱼A
+    Item::create("tool/FishB.png", "FishB", ItemCategory::Fish, 3, 3);// 加载鱼B
+    Item::create("tool/FishC.png", "FishC", ItemCategory::Fish, 3, 3);// 加载鱼C
+    Item::create("tool/FishD.png", "FishD", ItemCategory::Fish, 3, 3);// 加载鱼D
+    Item::create("tool/FishE.png", "FishE", ItemCategory::Fish, 3, 3);// 加载鱼E
 }
 
 // 析构函数
