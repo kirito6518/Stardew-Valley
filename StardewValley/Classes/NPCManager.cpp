@@ -1,7 +1,22 @@
 #include "NPCManager.h"
 #include "AppDelegate.h"
 
-void NPCManager::initNPCs() {
+// 单例实例
+NPCManager* NPCManager::instance = nullptr;
+
+// 获取单例实例
+NPCManager* NPCManager::getInstance()
+{
+    if (!instance)
+    {
+        instance = new NPCManager();
+    }
+    return instance;
+}
+
+//构造函数，在此处初始化所有NPC
+NPCManager::NPCManager()
+{
     // 创建一个 NPC 对象
     NPC* npc1 = new NPC(1, "Bob", "npc_bob.png");
     npc1->setDialogue("Hello, Gz and Lkc. You are two big god!!!");
@@ -29,12 +44,15 @@ void NPCManager::initNPCs() {
     npcBodys.push_back(npc2Body); // 将 NPC物理体 添加到 NPC物理体 列表中
 }
 
+
+#if 0 //暂时注释掉任务部分
 // 初始化任务列表
 void NPCManager::initTasks() {
     // 创建一个任务对象
     NPCTask* task1 = new NPCTask(1, "收集木材", "收集10块木材", "收集", 100);
     _tasks.push_back(task1);
 }
+#endif
 
 // 每帧更新游戏逻辑
 void NPCManager::update(float dt) {
