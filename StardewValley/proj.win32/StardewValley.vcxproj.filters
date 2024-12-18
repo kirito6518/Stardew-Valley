@@ -43,6 +43,9 @@
     <ClCompile Include="..\Classes\MainMap.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Cave.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\AuthorListScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -73,7 +76,6 @@
     <ClCompile Include="..\Classes\FishingManager.cpp">
       <Filter>fishing</Filter>
     </ClCompile>
-<<<<<<< Updated upstream
     <ClCompile Include="..\Classes\NPCTask.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
@@ -82,13 +84,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TaskManager.cpp">
       <Filter>myLayers</Filter>
-=======
-    <ClCompile Include="..\Classes\Cave.cpp">
-      <Filter>Cave</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BringMine.cpp">
-      <Filter>Cave</Filter>
->>>>>>> Stashed changes
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +129,9 @@
     <ClInclude Include="..\Classes\MainMap.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Cave.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\AuthorListScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -164,7 +162,6 @@
     <ClInclude Include="..\Classes\FishingManager.h">
       <Filter>fishing</Filter>
     </ClInclude>
-<<<<<<< Updated upstream
     <ClInclude Include="..\Classes\NPCTask.h">
       <Filter>NPC</Filter>
     </ClInclude>
@@ -173,13 +170,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TaskManager.h">
       <Filter>myLayers</Filter>
-=======
-    <ClInclude Include="..\Classes\Cave.h">
-      <Filter>Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BringMine.h">
-      <Filter>Cave</Filter>
->>>>>>> Stashed changes
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +199,6 @@
     </Filter>
     <Filter Include="fishing">
       <UniqueIdentifier>{f82d75fe-696b-4ed5-8ef9-f87687f18f77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cave">
-      <UniqueIdentifier>{13393b65-09e4-4492-a72f-df881e6dae83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

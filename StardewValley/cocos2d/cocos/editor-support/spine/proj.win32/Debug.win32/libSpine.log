@@ -37,8 +37,8 @@
   Triangulator.c
   VertexAttachment.c
   VertexEffect.c
-C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBinary.c(310,24): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonJson.c(97,12): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBinary.c(310,24): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBinary.c(372,24): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBinary.c(484,26): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\76886\Desktop\Stardew-Valley\StardewValley\cocos2d\cocos\editor-support\spine\SkeletonBinary.c(649,2): warning C4018: “<”: 有符号/无符号不匹配

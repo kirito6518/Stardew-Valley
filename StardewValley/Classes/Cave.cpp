@@ -2,8 +2,6 @@
 #include "chipmunk.h"
 #include "cocos2d.h"
 #include "Cave.h"
-#include "BringMine.h"
-#include "MainMap.h"
 
 USING_NS_CC;
 
@@ -22,16 +20,7 @@ bool Cave::init()
     // 初始化随机数系统
     srand((unsigned)(time(0)));
 
-    gem = 0;
-
-    // 初始化Layer
-    chooseMineLayer = ChooseMineLayer::getInstance();
-
-    // 检查 chooseMineLayer 是否为 nullptr
-    if (chooseMineLayer == nullptr) {
-        CCLOG("Failed to create ChooseMineLayer instance!");
-        return false;
-    }
+    numOfMines = 0;
 
     // 原点是窗口左下角
     const auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -53,18 +42,6 @@ bool Cave::init()
     caveSprite->setAnchorPoint(Vec2(0.5, 0.5));
     caveSprite->setPosition(visibleSize / 2);
     this->addChild(caveSprite, 0);
-
-    // 加载宝石
-    gemSprite1 = Sprite::create("mineral/GemA.png");
-    gemSprite1->retain();
-    gemSprite2 = Sprite::create("mineral/GemB.png");
-    gemSprite2->retain();
-    gemSprite3 = Sprite::create("mineral/GemC.png");
-    gemSprite3->retain();
-    gemSprite4 = Sprite::create("mineral/GemD.png");
-    gemSprite4->retain();
-    gemSprite5 = Sprite::create("mineral/GemE.png");
-    gemSprite5->retain();
 
     // 载入地图互动点和碰撞箱
 
@@ -134,8 +111,8 @@ bool Cave::init()
     black->setPosition(visibleSize / 2); // 初始位置在屏幕上方
     this->addChild(black, 2);
 
-    // 生成矿物
     CreateMine();
+
 
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
@@ -171,7 +148,7 @@ void Cave::updateCameraPosition(float dt) {
     const auto mapSize = caveSprite->getContentSize();
 
     // 输出玩家位置
-    // CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
+    CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
@@ -202,13 +179,6 @@ void Cave::updateCameraPosition(float dt) {
     // 更新摄像机的位置
     this->setPosition(-targetCameraPosition);
 
-    // 更新宝石位置
-    Gem(targetCameraPosition);
-
-    chooseMineLayer->chooseLayer->setPosition(targetCameraPosition + visibleSize / 2);
-    chooseMineLayer->yesButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(-240, -136));
-    chooseMineLayer->noButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(+240, -136));
-
 }
 
 // 碰撞开始监听器
@@ -228,27 +198,6 @@ bool Cave::onContactBegin(PhysicsContact& contact) {
     if (nodeB->getName() == "ladder" || nodeA->getName() == "ladder") {
         // CCLOG("Player collided with ladder area!");
         Director::getInstance()->popScene(); // 返回上一个场景
-        dynamic_cast<MainMap*>(mainMap)->BackFromCave();
-    }
-    else if (nodeB->getName() == "ShardE" || nodeA->getName() == "ShardE") {
-        OpenLayer();
-        chooseMineLayer->chooseMine = 5;
-    }
-    else if (nodeB->getName() == "ShardD" || nodeA->getName() == "ShardD") {
-        OpenLayer();
-        chooseMineLayer->chooseMine = 4;
-    }
-    else if (nodeB->getName() == "ShardC" || nodeA->getName() == "ShardC") {
-        OpenLayer();
-        chooseMineLayer->chooseMine = 3;
-    }
-    else if (nodeB->getName() == "ShardB" || nodeA->getName() == "ShardB") {
-        OpenLayer();
-        chooseMineLayer->chooseMine = 2;
-    }
-    else if (nodeB->getName() == "ShardA" || nodeA->getName() == "ShardA") {
-        OpenLayer();
-        chooseMineLayer->chooseMine = 1;
     }
     return true;
 }
@@ -298,12 +247,12 @@ void Cave::CreateMine() {
     int minX = 144 + 60;
     int maxX = 1080 - 60;
     int minY = 192 + 60;
-    int maxY = 816 - 60 - 72;
+    int maxY = 816 - 60;
 
     for (int i = minX; i <= maxX; i = i + 168) {
         for (int j = minY; j <= maxY; j = j + 120) {
-            auto num = rand() % 5 + 1;
-            if (num == 5 && mines.size() <= 10) { // 五分之一的概率生成矿物
+            auto num = rand() % 4 + 1;
+            if (num == 4 && numOfMines <= 10) { // 四分之一的概率生成矿物
                 Sprite* mine = Sprite::create();
                 PhysicsBody* mineBox = PhysicsBody::create();
                 // 生成矿物
@@ -311,84 +260,8 @@ void Cave::CreateMine() {
                 // 存入
                 mines.push_back(mine);
                 minesBox.push_back(mineBox);
+                numOfMines++;
             }
         }
-    }
-}
-
-// 打开选项
-void Cave::OpenLayer() {
-
-    // 检查 chooseMineLayer 是否已经有父节点
-    if (chooseMineLayer->getParent() == nullptr) {
-        chooseMineLayer->cave = this;
-        this->addChild(chooseMineLayer, 3);
-    }
-    // 禁用 Cave 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition));
-}
-
-//隐藏选项
-void Cave::HideLayer(Ref* sender){
-    // 移除 chooseMineLayer
-    if (chooseMineLayer->getParent()) {
-        this->removeChild(chooseMineLayer);
-    }
-    // 重新启用 cave 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition), 0);
-}
-
-// 在屏幕下方显示可以带走的宝石
-void Cave::Gem(Vec2 targetCameraPosition) {
-    // 移除已经添加的宝石精灵
-    if (gemSprite1->getParent()) {
-        this->removeChild(gemSprite1);
-    }
-    if (gemSprite2->getParent()) {
-        this->removeChild(gemSprite2);
-    }
-    if (gemSprite3->getParent()) {
-        this->removeChild(gemSprite3);
-    }
-    if (gemSprite4->getParent()) {
-        this->removeChild(gemSprite4);
-    }
-    if (gemSprite5->getParent()) {
-        this->removeChild(gemSprite5);
-    }
-
-    // 根据 gem 编号添加对应的宝石精灵
-    const auto visibleSize = Director::getInstance()->getVisibleSize();
-    switch (gem) {
-        case 1:
-            gemSprite1->setAnchorPoint(Vec2(0.5, 0.0));
-            gemSprite1->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2, 0));
-            this->addChild(gemSprite1, 3);
-            break;
-        case 2:
-            gemSprite2->setAnchorPoint(Vec2(0.5, 0.0));
-            gemSprite2->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2, 0));
-            this->addChild(gemSprite2, 3);
-            break;
-        case 3:
-            gemSprite3->setAnchorPoint(Vec2(0.5, 0.0));
-            gemSprite3->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2, 0));
-            this->addChild(gemSprite3, 3);
-            break;
-        case 4:
-            gemSprite4->setAnchorPoint(Vec2(0.5, 0.0));
-            gemSprite4->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2, 0));
-            this->addChild(gemSprite4, 3);
-            break;
-        case 5:
-            gemSprite5->setAnchorPoint(Vec2(0.5, 0.0));
-            gemSprite5->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2, 0));
-            this->addChild(gemSprite5, 3);
-            break;
-        default:
-            // 如果 gem 为 0，不添加任何宝石
-            break;
     }
 }
