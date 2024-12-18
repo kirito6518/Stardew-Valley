@@ -17,23 +17,22 @@ ItemManager* ItemManager::getInstance()
 // 添加一个 Item 实例
 void ItemManager::addItem(const std::string& itemName, Item* item)
 {
-    items[itemName] = item;
+    items.pushBack(item);
 }
 
-// 移除一个 Item 实例
-void ItemManager::removeItem(const std::string& itemName)
-{
-    items.erase(itemName);
-}
 
 // 获取一个 Item 实例
 Item* ItemManager::getItem(const std::string& itemName)
 {
-    auto it = items.find(itemName);
-    if (it != items.end())
-    {
-        return it->second;
+    Item* findItem=nullptr;
+    for (auto item : items) {
+        if (item->getName() == itemName)
+        {
+            findItem = item;
+            return findItem;
+        }
     }
+
     return nullptr;
 }
 

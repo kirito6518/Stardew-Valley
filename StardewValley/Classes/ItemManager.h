@@ -2,7 +2,7 @@
 #define __ITEM_MANAGER_H__
 
 #include "Item.h"
-
+USING_NS_CC;
 
 class ItemManager
 {
@@ -13,8 +13,6 @@ public:
     // 添加一个 Item 实例
     void addItem(const std::string& itemName, Item* item);
 
-    // 移除一个 Item 实例
-    void removeItem(const std::string& itemName);
 
     // 获取一个 Item 实例
     Item* getItem(const std::string& itemName);
@@ -30,7 +28,7 @@ public:
 private:
 
     static ItemManager* instance; // 单例实例
-    std::unordered_map<std::string, Item*> items; // 全局物品实例映射
+    cocos2d::Vector<Item*> items; ///< 物品列表
 };
 
 #endif // __ITEM_MANAGER_H__

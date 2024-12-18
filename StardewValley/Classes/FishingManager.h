@@ -16,7 +16,7 @@ public:
 	// 构造函数，启动随机数系统
 	FishingManager();
 
-	// 随机给予
+	// 随机给予钓鱼物品
 	void Fishing();
 
 	// 打开箱子随机给予金币
