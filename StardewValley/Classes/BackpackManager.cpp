@@ -34,8 +34,9 @@ BackpackManager::BackpackManager()
     Item::create("tool/Coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
     Item::create("tool/FishingGear.png", "Fishing\nGear", ItemCategory::Tool, 1, 1);// 加载钓鱼竿
-
-
+    Item::create("tool/Hoe.png", "Hoe", ItemCategory::Tool, 1, 1);// 加载叉子
+    Item::create("tool/Pickaxe.png", "Pickaxe", ItemCategory::Tool, 1, 1);// 加载镐子
+    Item::create("tool/WaterPot.png", "WaterPot", ItemCategory::Tool, 1, 1);// 加载水瓶
 }
 
 // 析构函数

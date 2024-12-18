@@ -65,7 +65,7 @@ public:
     void addDay(float dt);
 
 
-    // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
+    // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
     void SetUseItemInMainMap();
 
 
