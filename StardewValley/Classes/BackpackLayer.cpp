@@ -743,10 +743,3 @@ void BackpackLayer::setupCombinedMouseListener()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
-
-//œ‘ æ∂‘”¶UI
-void BackpackLayer::getDetermineUI()
-{
-
-  
-}

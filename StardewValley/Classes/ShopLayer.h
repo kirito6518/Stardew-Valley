@@ -52,7 +52,6 @@ public:
     int gridSpacing; ///< 商店格子之间的间隔
     float gridStartX; ///< 商店格子的起始 X 坐标
     float gridStartY; ///< 商店格子的起始 Y 坐标
-
     int maxItems; ///< 商店的最大物品数量
     int currentItems; ///< 当前商店中的物品数量
 

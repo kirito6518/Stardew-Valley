@@ -3,6 +3,7 @@
 
 #include "ShopItem.h"
 
+
 class ShopItemManager
 {
 public:
@@ -11,9 +12,6 @@ public:
 
     // 添加一个 ShopItem 实例
     void addShopItem(const std::string& itemName, ShopItem* item);
-
-    // 移除一个 ShopItem 实例
-    void removeShopItem(const std::string& itemName);
 
     // 获取一个 ShopItem 实例
     ShopItem* getShopItem(const std::string& itemName);
@@ -26,7 +24,7 @@ public:
 
 private:
     static ShopItemManager* instance; // 单例实例
-    std::unordered_map<std::string, ShopItem*> shopItems; // 所有 ShopItem 实例的映射
+    cocos2d::Vector<ShopItem*> shopItems; // 所有 ShopItem 实例的
 };
 
 #endif // __SHOP_ITEM_MANAGER_H__

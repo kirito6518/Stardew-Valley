@@ -55,9 +55,6 @@ public:
     //鼠标事件监听器与物品的交互
     void setupCombinedMouseListener();
 
-    //获取确定UI
-    void getDetermineUI();
-
 
     MenuItemImage* hideButton;//背包隐藏按钮
 

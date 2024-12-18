@@ -16,23 +16,23 @@ ShopItemManager* ShopItemManager::getInstance()
 // 添加一个 ShopItem 实例
 void ShopItemManager::addShopItem(const std::string& itemName, ShopItem* item)
 {
-    shopItems[itemName] = item;
+    shopItems.pushBack(item);
 }
 
-// 移除一个 ShopItem 实例
-void ShopItemManager::removeShopItem(const std::string& itemName)
-{
-    shopItems.erase(itemName);
-}
+
 
 // 获取一个 ShopItem 实例
 ShopItem* ShopItemManager::getShopItem(const std::string& itemName)
 {
-    auto it = shopItems.find(itemName);
-    if (it != shopItems.end())
-    {
-        return it->second;
+    ShopItem* findItem = nullptr;
+    for (auto item : shopItems) {
+        if (item->getName() == itemName)
+        {
+            findItem = item;
+            return findItem;
+        }
     }
+
     return nullptr;
 }
 
