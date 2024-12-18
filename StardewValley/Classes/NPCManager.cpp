@@ -6,13 +6,27 @@ void NPCManager::initNPCs() {
     NPC* npc1 = new NPC(1, "Bob", "npc_bob.png");
     npc1->setDialogue("Hello, Gz and Lkc. You are two big god!!!");
     npc1->setRelationship(0);
-    npc1->setLocation(cocos2d::Vec2(200, 200)); // 设置 NPC 的初始位置
+    npc1->setLocation(cocos2d::Vec2(400, 200)); // 设置 NPC 的初始位置
     _npcs.push_back(npc1); // 将 NPC 添加到 NPC 列表中
+    auto npc1Body = PhysicsBody::createBox(npc1->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    npc1Body->setDynamic(false);
+    npc1Body->setCollisionBitmask(0x01);
+    npc1Body->setContactTestBitmask(0x01);
+    npc1->setPhysicsBody(npc1Body);
+    npc1->setName("npc1");
+    npcBodys.push_back(npc1Body); // 将 NPC物理体 添加到 NPC物理体 列表中
 
     NPC* npc2 = new NPC(2, "ZY", "npc_zy.png");
     npc2->setDialogue("Hello,Welcome to my shop!!!");
     npc2->setLocation(cocos2d::Vec2(400, 400)); // 设置 NPC 的初始位置
     _npcs.push_back(npc2); // 将 NPC 添加到 NPC 列表中
+    auto npc2Body = PhysicsBody::createBox(npc2->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+    npc2Body->setDynamic(false);
+    npc2Body->setCollisionBitmask(0x01);
+    npc2Body->setContactTestBitmask(0x01);
+    npc2->setPhysicsBody(npc2Body);
+    npc2->setName("npc2");
+    npcBodys.push_back(npc2Body); // 将 NPC物理体 添加到 NPC物理体 列表中
 }
 
 // 初始化任务列表

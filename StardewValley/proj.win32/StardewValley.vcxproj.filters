@@ -19,21 +19,6 @@
     <ClCompile Include="..\Classes\FarmManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\NPC.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\NPCManager.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\NPCRelationship.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\NPCTask.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ResourceManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
@@ -76,6 +61,24 @@
     <ClCompile Include="..\Classes\ShopItemManager.cpp">
       <Filter>Item work</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\NPC.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPCManager.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPCRelationship.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NPCTask.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FishingManager.cpp">
+      <Filter>fishing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -94,21 +97,6 @@
       <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FarmManager.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\NPC.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\NPCManager.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\NPCRelationship.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\NPCTask.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Player.h">
       <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManager.h">
@@ -153,6 +141,24 @@
     <ClInclude Include="..\Classes\ShopItemManager.h">
       <Filter>Item work</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\NPC.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPCManager.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPCRelationship.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NPCTask.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FishingManager.h">
+      <Filter>fishing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">
@@ -172,6 +178,15 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{036efc9e-a3d6-4559-8796-c55d73b349d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NPC">
+      <UniqueIdentifier>{e7aa165c-dea9-42db-afee-8c5a264310db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="player">
+      <UniqueIdentifier>{928f6f5c-4cbb-40b2-9eba-e55c72ee6fc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fishing">
+      <UniqueIdentifier>{f82d75fe-696b-4ed5-8ef9-f87687f18f77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

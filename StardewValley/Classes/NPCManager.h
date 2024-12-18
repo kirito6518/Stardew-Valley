@@ -5,6 +5,10 @@
 #include <vector>
 #include "NPC.h"
 #include "NPCTask.h"
+#include <cocos2d.h>
+#include "chipmunk.h"
+
+USING_NS_CC;
 
 // NPC管理器类：负责管理NPC、任务和交互逻辑
 class NPCManager {
@@ -20,9 +24,10 @@ public:
     void checkPlayerInteraction(const cocos2d::Vec2& playerPosition);
 
     std::vector<NPC*> _npcs; // NPC列表
+    std::vector<PhysicsBody*> npcBodys; // npc的物理体
     std::vector<NPCTask*> _tasks; // 任务列表
 private:
   
 };
 
-#endif // NPCMANAGER_H
+#endif // NPCMANAGER_
