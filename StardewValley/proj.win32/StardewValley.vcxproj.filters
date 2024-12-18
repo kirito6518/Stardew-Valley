@@ -43,9 +43,6 @@
     <ClCompile Include="..\Classes\MainMap.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Cave.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AuthorListScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -84,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TaskManager.cpp">
       <Filter>myLayers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BringMine.cpp">
+      <Filter>Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Cave.cpp">
+      <Filter>Cave</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +132,6 @@
     <ClInclude Include="..\Classes\MainMap.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Cave.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AuthorListScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -171,6 +171,12 @@
     <ClInclude Include="..\Classes\TaskManager.h">
       <Filter>myLayers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\BringMine.h">
+      <Filter>Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Cave.h">
+      <Filter>Cave</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">
@@ -199,6 +205,9 @@
     </Filter>
     <Filter Include="fishing">
       <UniqueIdentifier>{f82d75fe-696b-4ed5-8ef9-f87687f18f77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cave">
+      <UniqueIdentifier>{499522a6-1814-453f-acf5-4de7d0d9399c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
