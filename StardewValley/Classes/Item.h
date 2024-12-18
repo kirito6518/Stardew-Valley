@@ -7,7 +7,7 @@
 //物品分类枚举，定义了物品的类型。
 enum class ItemCategory
 {
-    Tool,         //工具
+    Tool,         // 工具
     Fish,         // 鱼
     Seed,         // 种子
     Crops,        // 作物产品
@@ -15,7 +15,8 @@ enum class ItemCategory
     Food,         // 食物
     Consumable,   // 消耗品
     Equipment,    // 装备
-    Quest         // 任务物品
+    Quest,        // 任务物品
+    Mine          // 矿物     
 };
 
 
