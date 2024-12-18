@@ -429,10 +429,10 @@ bool MainMap::init()
 
         // 获取屏幕的中心位置
         const auto visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 screenCenter = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-        Vec2 shop = Vec2(visibleSize.width +90 , visibleSize.height + 70);
+        Vec2 screenCenter = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
+        Vec2 shop = Vec2(visibleSize.width + 96, visibleSize.height + 48);
 
-        // 设置 NPC 的位置为屏幕中心
+        // 设置 NPC 的位置
         npcManager._npcs[0]->setLocation(screenCenter);
         npcManager._npcs[1]->setLocation(shop);
 
@@ -500,8 +500,6 @@ void MainMap::getInitBackpack()
 {
     clearBackpack();
     Item* initItem;
-    initItem = ItemManager::getInstance()->getItem("Coin");
-    BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
@@ -512,7 +510,8 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("WaterPot");
     BackpackManager::getInstance()->addItem(initItem, 1);
-
+    initItem = ItemManager::getInstance()->getItem("Box");
+    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 //显示商店
@@ -771,6 +770,43 @@ void  MainMap::SetUseItemInMainMap() {
         // CCLOG("Item 'test' not found in backpack.");
     }
 
+    // 设置钓鱼竿
+    if (ItemManager::getInstance()->getItem("Fishing\nGear")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto FishingGear = ItemManager::getInstance()->getItem("Fishing\nGear");
+            if (place == 3) {// 如果在钓鱼点
+                fishingManager->Fishing();
+                return true;
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Fishing\nGear")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    // 设置神秘箱子
+    if (ItemManager::getInstance()->getItem("Box")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto Box = ItemManager::getInstance()->getItem("Box");
+            int countUsed = 1;
+            Box->decreaseCount(countUsed);
+            fishingManager->OpenBox();
+            return true;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Box")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
 }
 
 // 碰撞开始监听器
@@ -792,7 +828,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with fishing area!");
         // 执行钓鱼逻辑
         place = 3; // 设置位置为钓鱼点
-
+        backpackButton->activate(); // 打开背包
     }
     else if (nodeB->getName() == "cropsLeft" || nodeA->getName() == "cropsLeft") {
         // CCLOG("Player collided with left farm!");
@@ -822,8 +858,8 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
 
     }
     else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
-        CCLOG("Player collided with shop!");
-        // 执行牧场逻辑
+        // CCLOG("Player collided with shop!");
+        // 执行商店逻辑
         place = 6; // 设置位置为商店
         toShop();
     }

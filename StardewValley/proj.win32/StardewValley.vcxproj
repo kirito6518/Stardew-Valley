@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Crop.cpp" />
     <ClCompile Include="..\Classes\Event.cpp" />
     <ClCompile Include="..\Classes\FarmManager.cpp" />
+    <ClCompile Include="..\Classes\FishingManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\ItemManager.cpp" />
@@ -186,6 +187,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Crop.h" />
     <ClInclude Include="..\Classes\Event.h" />
     <ClInclude Include="..\Classes\FarmManager.h" />
+    <ClInclude Include="..\Classes\FishingManager.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\ItemManager.h" />

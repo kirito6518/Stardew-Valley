@@ -36,7 +36,7 @@ private:
 
     std::string itemName; ///< 物品的名称
     cocos2d::Sprite* itemIcon; ///< 物品的图标精灵
-
+    cocos2d::Label* itemCountLabel; ///< 物品数量标签，在商店中，所有物品数量都为1
     int sellingPrice;///< 物品的卖出价格
     int buyingPrice;///< 物品的买入价格
 };
