@@ -498,6 +498,8 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     BackpackManager::getInstance()->addItem(initItem, 3);
+    initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
+    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 //显示商店
@@ -654,6 +656,7 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
 
     seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+
     dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
 }
 
