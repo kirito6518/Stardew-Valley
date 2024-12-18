@@ -530,11 +530,13 @@ void MainMap::hideShop(Ref* sender) {
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
 }
 
-//
+//加载初始商店
 void MainMap::getInitShop()
 {
     ShopItem* initItem;
     initItem = ShopItemManager::getInstance()->getShopItem("Onion\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("Bait");
     ShopManager::getInstance()->addItem(initItem);
 }
 
@@ -777,8 +779,13 @@ void  MainMap::SetUseItemInMainMap() {
         auto customUseItemLogic = [this]() -> bool {
             auto FishingGear = ItemManager::getInstance()->getItem("Fishing\nGear");
             if (place == 3) {// 如果在钓鱼点
-                fishingManager->Fishing();
-                return true;
+                Item* initItem;
+                initItem = ItemManager::getInstance()->getItem("Bait");
+                if (initItem->getCount() > 0) {
+                    initItem->decreaseCount(1);
+                    fishingManager->Fishing();
+                    return true;
+                }
             }
             return false;
             };
