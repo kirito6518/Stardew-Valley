@@ -244,7 +244,7 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
             if (coinYouHave) {
                 leftCoinCount = coinYouHave->getCount();
             }
-            std::string itemLeftLabel2Str = ": " + std::to_string(leftCoinCount);
+            std::string itemLeftLabel2Str = ":  " + std::to_string(leftCoinCount);
             itemLeftLabel2->setString(itemLeftLabel2Str);
             buyResultLabel->setString("Buy Success!");
         }
@@ -287,7 +287,7 @@ void ShopLayer::setupCombinedMouseListener()
     if (coinYouHave) {
         leftCoinCount = coinYouHave->getCount();
     }
-    std::string itemLeftLabel2Str = ": " + std::to_string(leftCoinCount);
+    std::string itemLeftLabel2Str = ":  " + std::to_string(leftCoinCount);
     itemLeftLabel2->setString(itemLeftLabel2Str);
     
     auto mouseListener = EventListenerMouse::create();
@@ -420,6 +420,7 @@ void ShopLayer::setupCombinedMouseListener()
         }
 
         // 如果点击的不是物品图标，隐藏对应的物品UI并禁用相关鼠标事件监听
+        buyResultLabel->setVisible(false);
         needCoin->setVisible(false);
         itemDetailUI->setVisible(false);
         itemDetailLabel->setVisible(false);
@@ -459,6 +460,8 @@ void ShopLayer::setupCombinedMouseListener()
             // 隐藏物品UI
             itemDetailUI->setVisible(false);
             itemDetailLabel->setVisible(false);
+            needCoin->setVisible(false);
+            itemPriceLabel->setVisible(false);
             // 解除购买按钮的绑定及可见
             buyButton->setUserData(nullptr);
             buyButton->setVisible(false);
