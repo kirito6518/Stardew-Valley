@@ -514,8 +514,6 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Onion");
     BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Coin");
-    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 //显示商店
