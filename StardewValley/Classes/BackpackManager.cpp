@@ -29,8 +29,9 @@ BackpackManager::BackpackManager()
     
 
     //此处统一加载所有可能放入背包的物品
-    Item::create("tool/coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
+    Item::create("tool/Coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
+    Item::create("tool/FishingGear.png", "Fishing\nGear", ItemCategory::Tool, 1, 1);// 加载钓鱼竿
 
 
 }
