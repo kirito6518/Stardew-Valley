@@ -384,8 +384,10 @@ void BackpackLayer::onDestroyButtonClicked(Ref* sender)
     useButton->setEnabled(false);
 
     auto item = static_cast<Item*>(destroyButton->getUserData());//获取对应物品
+    int itemcount = item->getCount();
+    int money = (item->getsellingPrice()) * itemcount;
 
-    std::string getCoinCountStr = std::to_string(item->getsellingPrice());
+    std::string getCoinCountStr = std::to_string(money);
     getCoinCount->setString(getCoinCountStr);
 
     //显示对应UI并启用相关鼠标事件监听
