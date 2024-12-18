@@ -65,15 +65,17 @@ public:
     //增加天数
     void addDay(float dt);
 
-
     // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
     void SetUseItemInMainMap();
 
+    // 回到mainmap时触发
+    void BackFromCave();
 
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
     FishingManager* fishingManager; // 声明钓鱼管理器
+    Scene* caveScene; // 洞穴场景
 
 private:
     Sprite* mapSprite; // 地图
@@ -117,9 +119,8 @@ private:
     MenuItemImage* backpackButton; // 开启背包的文字
     FarmManager farmManager; // 声明 FarmManager 实例
 
-    int place;// 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
+    int place; // 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
 
-    Scene* caveScene; // 洞穴场景
 };
 
 #endif // __MainMap_H__
