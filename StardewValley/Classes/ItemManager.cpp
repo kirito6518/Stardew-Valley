@@ -13,10 +13,6 @@ ItemManager* ItemManager::getInstance()
     return instance;
 }
 
-ItemManager::ItemManager()
-{
-    
-}
 
 // 添加一个 Item 实例
 void ItemManager::addItem(const std::string& itemName, Item* item)
@@ -57,14 +53,3 @@ void ItemManager::destroyInstance()
     }
 }
 
-// 设置售卖物品列表
-void ItemManager::setSellableItems(const std::unordered_set<std::string>& sellableItemNames)
-{
-    for (const auto& itemName : sellableItemNames)
-    {
-        if (items.find(itemName) != items.end())
-        {
-            items[itemName]->setItemType(ItemType::Sellable);
-        }
-    }
-}

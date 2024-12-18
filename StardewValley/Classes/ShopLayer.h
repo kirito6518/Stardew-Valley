@@ -2,8 +2,8 @@
 #define __SHOP_LAYER_H__
 
 #include "cocos2d.h"
-#include "Item.h"
-#include "ItemManager.h"
+#include "ShopItem.h" 
+
 
 USING_NS_CC;
 
@@ -18,9 +18,6 @@ class ShopLayer : public cocos2d::Layer
 {
 public:
 
-    //获取局部可售卖物品列表
-    void getSellableItemNames();
-
     // 创建一个 ShopLayer 对象
     static ShopLayer* create(const std::string& shopBgPath, int maxItems);
 
@@ -34,7 +31,7 @@ public:
     void removeItem(cocos2d::Sprite* itemSprite);
 
     // 隐藏商店界面
-    void hideShop(cocos2d::Ref* sender);
+    void hideShop(Ref* sender);
 
     // 获取所有物品的向量
     const cocos2d::Vector<Sprite*>& getItemSprites() const { return itemSprites; }
@@ -61,12 +58,15 @@ public:
 
 private:
 
-    // 定义局部的售卖物品列表
-    std::unordered_set<std::string> sellableItemNames ;
-
     cocos2d::Vector<cocos2d::Sprite*> itemSprites; ///< 商店中的物品图标列表
     cocos2d::Label* itemNameLabel; ///< 物品名称标签
+    cocos2d::Sprite* needCoin;//所需金币精灵
     cocos2d::Label* itemPriceLabel; ///< 物品价格标签
+
+    cocos2d::Sprite* LeftUI;//剩余金币ui
+    cocos2d::Sprite* leftCoin;//剩余金币精灵
+    cocos2d::Label* itemLeftLabel1;//剩余金币标签1
+    cocos2d::Label* itemLeftLabel2;//剩余金币标签2
 
     cocos2d::MenuItemImage* buyButton; ///< 购买物品按钮
     cocos2d::Label* buyResultLabel; ///< 购买物品结果标签

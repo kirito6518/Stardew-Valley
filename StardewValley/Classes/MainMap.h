@@ -43,6 +43,9 @@ public:
     //隐藏商店界面
     void hideShop(Ref* sender);
 
+    //加载初始商店
+    void getInitShop();
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 
@@ -62,7 +65,7 @@ public:
     void addDay(float dt);
 
 
-    // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
+    // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
     void SetUseItemInMainMap();
 
 

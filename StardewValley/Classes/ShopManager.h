@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "ShopLayer.h"
-#include "Item.h"
+#include "ShopItem.h"  
 
 USING_NS_CC;
 
@@ -40,13 +40,13 @@ public:
      * @param amount 添加物品的数量，默认为1
      * @return 返回是否成功添加物品。
      */
-    bool addItem(Item* item);
+    bool addItem(ShopItem* item); 
 
     /**
      * @brief 从商店中移除物品。
      * @param item 要移除的物品对象。
      */
-    void removeItem(Item* item);
+    void removeItem(ShopItem* item); 
 
     /**
      * @brief 检查商店是否已满。
@@ -59,13 +59,13 @@ public:
      * @param item 要购买的物品对象。
      * @return 返回是否成功购买物品。
      */
-    bool buyItem(Item* item);
+    bool buyItem(ShopItem* item);
 
     // 获取所有物品的向量
-    const cocos2d::Vector<Item*>& getItems() { return items; }
+    const cocos2d::Vector<ShopItem*>& getItems() { return items; } 
 
     // 根据物品名字获得实例
-    Item* getItemByName(const std::string& itemName);
+    ShopItem* getItemByName(const std::string& itemName); 
 
     ShopLayer* shopLayer; ///< 商店层对象
 
@@ -85,7 +85,7 @@ private:
      */
     ~ShopManager();
 
-    cocos2d::Vector<Item*> items; ///< 商店中的物品列表
+    cocos2d::Vector<ShopItem*> items; ///< 商店中的物品列表 
     int maxItems; ///< 商店的最大物品数量
     int currentItems; ///< 当前商店中的物品数量
 };

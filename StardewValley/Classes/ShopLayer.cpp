@@ -1,15 +1,10 @@
 #include "ShopLayer.h"
 #include "ShopManager.h"
-#include "Item.h"
+#include "ShopItem.h"  
 #include "AppDelegate.h"
 #include "MainMap.h"
 
 USING_NS_CC;
-
-void getSellableItemNames() 
-{
-    std::unordered_set<std::string> sellableItemNames = { "Onion\nSeed" };
-}
 
 // 创建商店层
 ShopLayer* ShopLayer::create(const std::string& shopBgPath, int maxItems)
@@ -48,19 +43,39 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     shopBgSprite->setPosition(visibleSize / 2);
     this->addChild(shopBgSprite, 2);
 
-    //获取商店背景图片信息
-    auto shopBgPos =shopBgSprite->getPosition();
-    auto shopBgSize=shopBgSprite->getContentSize();
+    // 获取商店背景图尺寸及坐标
+    auto shopSize = shopBgSprite->getContentSize();
+    auto shopPos = shopBgSprite->getPosition();
 
     // 加载商店招牌图片
     shopSprite = Sprite::create("ui/shop.png");
     shopSprite->setAnchorPoint(Vec2(0.5, 0.5));
-    shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y+ shopBgSize.height/2));
-    this->addChild(shopSprite, 2);
+    shopSprite->setAnchorPoint(Vec2(0.5, 0));
+    shopSprite->setPosition(Vec2(shopPos.x, shopPos.y + shopSize.height / 2));
+    this->addChild(shopSprite, 0);
 
-    // 获取商店背景图尺寸及坐标
-    auto shopSize = shopBgSprite->getContentSize();
-    auto shopPos = shopBgSprite->getPosition();
+    //初始化剩余ui
+    LeftUI = Sprite::create("ui/leftUI.png");
+    LeftUI->setAnchorPoint(Vec2(0, 1));
+    LeftUI->setPosition(Vec2(shopPos.x-shopSize.width/2, shopPos.y - shopSize.height / 2));
+    this->addChild(LeftUI, 0);
+
+    //初始化剩余金币精灵
+    leftCoin = Sprite::create("tool/coin.png");
+    leftCoin->setScale(0.6f);
+    leftCoin->setAnchorPoint(Vec2(0, 1));
+    leftCoin->setPosition(Vec2(shopPos.x, shopPos.y + shopSize.height / 2));
+    this->addChild(leftCoin, 2);
+
+    //初始化剩余金币标签（前）
+    itemLeftLabel1 = Label::createWithTTF("Your Remaining", "fonts/Gen.ttf", 25);
+    itemLeftLabel1->setAnchorPoint(Vec2(0, 1));
+    this->addChild(itemLeftLabel1, 2);
+
+    //初始化剩余金币标签（后）
+    itemLeftLabel2 = Label::createWithTTF("", "fonts/Gen.ttf", 25);
+    itemLeftLabel2->setAnchorPoint(Vec2(0, 1));
+    this->addChild(itemLeftLabel2, 2);
 
     // 创建关闭按钮
     closeButton = MenuItemImage::create(
@@ -88,14 +103,21 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     itemNameLabel->setVisible(false);
     this->addChild(itemNameLabel, 3);
 
+    //初始化所需金币精灵
+    needCoin = Sprite::create("tool/coin.png");
+    needCoin->setScale(0.7f);
+    needCoin->setAnchorPoint(Vec2(1, 1));
+    needCoin->setVisible(false);
+    this->addChild(needCoin, 2);
+
     // 初始化物品价格标签
-    itemPriceLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
-    itemPriceLabel->setAnchorPoint(Vec2(0, 1));
+    itemPriceLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
+    itemPriceLabel->setAnchorPoint(Vec2(1, 1));
     itemPriceLabel->setVisible(false);
     this->addChild(itemPriceLabel, 3);
 
     // 初始化购买结果标签
-    buyResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    buyResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
     buyResultLabel->setAnchorPoint(Vec2(0.5, 0.5));
     buyResultLabel->setVisible(false);
     this->addChild(buyResultLabel, 3);
@@ -111,6 +133,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
     itemDetailLabel->setAnchorPoint(Vec2(0, 1));
     itemDetailLabel->setVisible(false);
     this->addChild(itemDetailLabel, 3);
+    
 
     // 加载购买按钮
     buyButton = MenuItemImage::create(
@@ -119,8 +142,8 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
         CC_CALLBACK_1(ShopLayer::onBuyButtonClicked, this)); // 点击回调函数
     buyButton->setAnchorPoint(Vec2(1, 1));
     buyButton->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 20, shopPos.y - 40));
-    this->addChild(buyButton, 2);
-    buyButton->setVisible(false);
+    this->addChild(buyButton, 3);
+
     // 默认关闭 buyButton 的鼠标事件监听
     buyButton->setEnabled(false);
 
@@ -169,8 +192,8 @@ bool ShopLayer::addItem(Sprite* itemSprite)
     this->addChild(itemSprite, 2);
     itemSprites.pushBack(itemSprite);
 
-    // 为物品图标设置用户数据（即 Item 对象）
-    Item* item = static_cast<Item*>(itemSprite->getUserData());
+    // 为物品图标设置用户数据（即 ShopItem 对象）
+    ShopItem* item = static_cast<ShopItem*>(itemSprite->getUserData());  
     if (item)
     {
         itemSprite->setUserData(item);
@@ -202,14 +225,13 @@ void ShopLayer::hideShop(Ref* sender)
     ShopManager::getInstance()->hideShop();
 
     // 调用 mainmap 的恢复时间更新的函数
-   dynamic_cast<MainMap*>(ShopManager::getInstance()->mainMap)->hideShop(sender);
-
+    dynamic_cast<MainMap*>(ShopManager::getInstance()->mainMap)->hideShop(sender);
 }
 
 // 点击购买按钮的回调函数
 void ShopLayer::onBuyButtonClicked(Ref* sender)
 {
-    auto item = static_cast<Item*>(buyButton->getUserData());
+    auto item = static_cast<ShopItem*>(buyButton->getUserData());  
 
     if (item)
     {
@@ -217,6 +239,13 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
 
         if (success)
         {
+            int leftCoinCount = 0;
+            auto coinYouHave = BackpackManager::getInstance()->getItemByName("Coin");
+            if (coinYouHave) {
+                leftCoinCount = coinYouHave->getCount();
+            }
+            std::string itemLeftLabel2Str = ": " + std::to_string(leftCoinCount);
+            itemLeftLabel2->setString(itemLeftLabel2Str);
             buyResultLabel->setString("Buy Success!");
         }
         else
@@ -228,7 +257,7 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
 
         this->scheduleOnce([this](float dt) {
             buyResultLabel->setVisible(false);
-            }, 1.2f, "hide_buy_result");
+            }, 1.0f, "hide_buy_result");
     }
 }
 
@@ -238,6 +267,29 @@ void ShopLayer::setupCombinedMouseListener()
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
 
+    // 获取商店背景图尺寸及坐标
+    auto shopSize = shopBgSprite->getContentSize();
+    auto shopPos = shopBgSprite->getPosition();
+
+    //更新剩余ui图标位置
+    LeftUI->setPosition(Vec2(shopPos.x - shopSize.width / 2, shopPos.y - shopSize.height / 2));
+
+    //获取剩余ui图标最新信息
+    auto LeftUIPos = LeftUI->getPosition();
+    auto LeftUISize = LeftUI->getContentSize();
+
+    //继续更新剩余ui图标位置
+    itemLeftLabel1->setPosition(LeftUIPos+Vec2(20,-14));
+    leftCoin->setPosition(LeftUIPos + Vec2(245,-9));
+    itemLeftLabel2->setPosition(LeftUIPos + Vec2(300, -14));
+    int leftCoinCount=0;
+    auto coinYouHave = BackpackManager::getInstance()->getItemByName("Coin");
+    if (coinYouHave) {
+        leftCoinCount = coinYouHave->getCount();
+    }
+    std::string itemLeftLabel2Str = ": " + std::to_string(leftCoinCount);
+    itemLeftLabel2->setString(itemLeftLabel2Str);
+    
     auto mouseListener = EventListenerMouse::create();
 
     // 鼠标移动事件
@@ -262,23 +314,20 @@ void ShopLayer::setupCombinedMouseListener()
             if (itemBoundingBox.containsPoint(mousePosition))
             {
                 // 获取物品对象
-                Item* item = static_cast<Item*>(itemSprite->getUserData());
+                ShopItem* item = static_cast<ShopItem*>(itemSprite->getUserData());  
                 if (item)
                 {
                     // 显示物品名称
                     itemNameLabel->setString(item->getName());
-                    itemNameLabel->setPosition(itemPosition + Vec2(0, 16)); // 在物品位置上方显示
+                    itemNameLabel->setPosition(itemPosition + Vec2(0, 30)); // 在物品位置上方显示
                     itemNameLabel->setVisible(true);
-
-                   
                 }
                 return;
             }
         }
 
-        // 如果鼠标不在任何物品上，隐藏物品名称和价格
+        // 如果鼠标不在任何物品上，隐藏物品名称
         itemNameLabel->setVisible(false);
-        itemPriceLabel->setVisible(false);
         };
 
     // 鼠标点击事件
@@ -337,7 +386,7 @@ void ShopLayer::setupCombinedMouseListener()
             if (itemBoundingBox.containsPoint(mousePosition))
             {
                 // 获取物品对象
-                Item* item = static_cast<Item*>(itemSprite->getUserData());
+                ShopItem* item = static_cast<ShopItem*>(itemSprite->getUserData());
                 if (item)
                 {
                     // 显示物品UI
@@ -351,10 +400,14 @@ void ShopLayer::setupCombinedMouseListener()
                         shopPos.y + shopSize.height / 2 - 25)); // 在商店左侧显示
 
                     // 显示物品价格
-                    std::string label = "Price: \n" + std::to_string(item->getbuyingPrice()) + "Coins";
+                    std::string label = " :  "+ std::to_string(item->getBuyingPrice());
                     itemPriceLabel->setString(label);
-                    itemPriceLabel->setPosition(Vec2(shopPos.x - shopSize.width / -15,shopPos.y + shopSize.height / 2 - 25)); // 在商店左侧显示
+                    itemPriceLabel->setPosition(Vec2(shopPos.x - shopSize.width /2 -55, shopPos.y +3)); // 在商店左侧显示
                     itemPriceLabel->setVisible(true);
+
+                    //显示所需金币图标
+                    needCoin->setPosition(Vec2(shopPos.x - shopSize.width / 2 - 85, shopPos.y +7));// 在商店左侧显示
+                    needCoin->setVisible(true);
 
                     // 显示购买按钮
                     buyButton->setUserData(item); // 将物品对象与购买按钮关联
@@ -367,8 +420,10 @@ void ShopLayer::setupCombinedMouseListener()
         }
 
         // 如果点击的不是物品图标，隐藏对应的物品UI并禁用相关鼠标事件监听
+        needCoin->setVisible(false);
         itemDetailUI->setVisible(false);
         itemDetailLabel->setVisible(false);
+        itemPriceLabel->setVisible(false);
         buyButton->setVisible(false);
         buyButton->setEnabled(false);
         };

@@ -8,7 +8,11 @@
 #include "BackpackManager.h"
 #include "ItemManager.h"
 #include "ShopManager.h"
+#include"ShopLayer.h"
+#include "ShopItem.h"
+#include "ShopItemManager.h"
 #include "FarmManager.h"
+
 
 
 USING_NS_CC;
@@ -56,6 +60,8 @@ bool MainMap::init()
 
     //加载商店
     ShopManager::getInstance();
+    getInitShop();
+    ShopManager::getInstance()->mainMap = this;
 
     // 加载使用逻辑
     SetUseItemInMainMap();
@@ -498,6 +504,15 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     BackpackManager::getInstance()->addItem(initItem, 3);
+    initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Fork");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Pickaxe");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("WaterPot");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+
 }
 
 //显示商店
@@ -516,6 +531,14 @@ void MainMap::hideShop(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+}
+
+//
+void MainMap::getInitShop()
+{
+    ShopItem* initItem;
+    initItem = ShopItemManager::getInstance()->getShopItem("Onion\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
 }
 
 // 每0.2s更新玩家位置和动画
@@ -588,21 +611,34 @@ void MainMap::updateCameraPosition(float dt) {
     BackpackLayer->hideButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
     BackpackLayer->backpackBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
 
-    //更新物品图标的坐标值
-   
-    int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+    //获取shopLayer实例
+    ShopLayer* shoplayer = ShopManager::getInstance()->shopLayer;
 
-    int Spcount = 0;
-    int Itemcount = 0;
+    //更新商店位置
+    shoplayer->shopBgSprite->setPosition(targetCameraPosition + visibleSize / 2);
+    auto shopBgSize = shoplayer->shopBgSprite->getContentSize();
+    auto shopBgPos = shoplayer->shopBgSprite->getPosition();
+    shoplayer->shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y + shopBgSize.height / 2));
+    shoplayer->closeButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + shopBgSize.width / 2, visibleSize.height / 2 + shopBgSize.height / 2));
 
-    const cocos2d::Vector<Sprite*>& Itemsprites = BackpackLayer->getItemSprites();
-    for (auto Itemsprite : Itemsprites)
+    //更新商店物品图标坐标值
     {
-        dx = Spcount % 10 * (BackpackLayer->gridWidth + BackpackLayer->gridSpacing);
-        dy = Spcount / 10 * (BackpackLayer->gridHeight + BackpackLayer->gridSpacing);
-        Itemsprite->setPosition(targetCameraPosition + Vec2(BackpackLayer->gridStartX + dx, BackpackLayer->gridStartY - dy));
-        Spcount++;
+        int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
+
+        int Spcount = 0;
+        int Itemcount = 0;
+
+        const cocos2d::Vector<Sprite*>& Itemsprites = shoplayer->getItemSprites();
+        for (auto Itemsprite : Itemsprites)
+        {
+            dx = Spcount % 10 * (shoplayer->gridWidth + shoplayer->gridSpacing);
+            dy = Spcount / 10 * (shoplayer->gridHeight + shoplayer->gridSpacing);
+            Itemsprite->setPosition(targetCameraPosition + Vec2(shoplayer->gridStartX + dx, shoplayer->gridStartY - dy));
+            Spcount++;
+        }
     }
+
+
 
     // 重新绑定鼠标事件监听器
     BackpackLayer->setupCombinedMouseListener();
@@ -616,6 +652,7 @@ void MainMap::updateCameraPosition(float dt) {
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
 
     seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+
     dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
 }
 
@@ -634,8 +671,10 @@ void MainMap::addDay(float dt)
     dayLabel->setString(dayText);
 }
 
-// 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
-void MainMap::SetUseItemInMainMap() {
+// 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
+void  MainMap::SetUseItemInMainMap() {
+    
+    // 设置洋葱种子
     if (ItemManager::getInstance()->getItem("Onion\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
@@ -664,8 +703,69 @@ void MainMap::SetUseItemInMainMap() {
         ItemManager::getInstance()->getItem("Onion\nSeed")->setUseItemCallback(customUseItemLogic);
     }
     else {
-        CCLOG("Item 'Onion\\nSeed' not found in backpack.");
+        // CCLOG("Item 'test' not found in backpack.");
     }
+
+    //设置叉子
+    if (ItemManager::getInstance()->getItem("Fork")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto Fork = ItemManager::getInstance()->getItem("Fork");
+            if (place == 1 || place == 2) {
+                if (place == 1) {// 如果在左边农场
+                    if (1) {//判断作物是否是成熟作物
+                        // 加入收割逻辑
+                        // 背包增加物品
+                        return true;
+                    }
+                }
+                else if (place == 2) {// 如果在右边农场
+                    if (1) {//判断作物是否是成熟作物
+                        // 加入收割逻辑
+                        // 背包增加物品
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Fork")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    //设置水瓶
+    if (ItemManager::getInstance()->getItem("WaterPot")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto WaterPot = ItemManager::getInstance()->getItem("WaterPot");
+            if (place == 1 || place == 2) {
+                if (place == 1) {// 如果在左边农场
+                    if (1) {//判断作物是否是第一到第三阶段作物
+                        // 修改植物浇水参数
+                        return true;
+                    }
+                }
+                else if (place == 2) {// 如果在右边农场
+                    if (1) {//判断作物是否是第一到第三阶段作物
+                        // 修改植物浇水参数
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("WaterPot")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
 }
 
 // 碰撞开始监听器
@@ -687,6 +787,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with fishing area!");
         // 执行钓鱼逻辑
         place = 3; // 设置位置为钓鱼点
+
     }
     else if (nodeB->getName() == "cropsLeft" || nodeA->getName() == "cropsLeft") {
         // CCLOG("Player collided with left farm!");
@@ -713,11 +814,13 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
+
     }
     else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
         CCLOG("Player collided with shop!");
         // 执行牧场逻辑
         place = 6; // 设置位置为商店
+        toShop();
     }
 
     // 返回 true 表示允许碰撞继续处理

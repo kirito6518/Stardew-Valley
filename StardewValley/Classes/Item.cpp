@@ -62,21 +62,7 @@ bool Item::init(const std::string& itemImagePath, const std::string& itemName, I
     return true; // 初始化成功，返回 true
 }
 
-// 设置物品类型
-void Item::setItemType(ItemType type)
-{
-    itemType = type;
-    updateLabelVisibility();
-}
 
-// 更新标签的可见性
-void Item::updateLabelVisibility()
-{
-    if (itemCountLabel)
-    {
-        itemCountLabel->setVisible(itemType == ItemType::Usable);
-    }
-}
 
 void Item::increaseCount(int amount)
 {
