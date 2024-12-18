@@ -17,6 +17,10 @@ bool Cave::init()
     {
         return false;
     }
+    // 初始化随机数系统
+    srand((unsigned)(time(0)));
+
+    numOfMines = 0;
 
     // 原点是窗口左下角
     const auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -107,6 +111,8 @@ bool Cave::init()
     black->setPosition(visibleSize / 2); // 初始位置在屏幕上方
     this->addChild(black, 2);
 
+    CreateMine();
+
 
     // 注册键盘事件
     auto keyboardListener = EventListenerKeyboard::create();
@@ -142,7 +148,7 @@ void Cave::updateCameraPosition(float dt) {
     const auto mapSize = caveSprite->getContentSize();
 
     // 输出玩家位置
-    // CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
+    CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
@@ -194,4 +200,68 @@ bool Cave::onContactBegin(PhysicsContact& contact) {
         Director::getInstance()->popScene(); // 返回上一个场景
     }
     return true;
+}
+
+// 添加一个矿物
+void Cave::AddMine(Sprite* mine, PhysicsBody* mineBox, Vec2 position) {
+
+    auto num = rand() % 25 + 1;
+    
+    if (num == 1) { // 添加水晶E
+        mine = Sprite::create("mineral/ShardE.png"); // 60 * 60的
+        mine->setName("ShardE");
+    }
+    else if (num >= 2 && num <= 4) { // 添加水晶D
+        mine = Sprite::create("mineral/ShardD.png"); // 60 * 60的
+        mine->setName("ShardD");
+    }
+    else if (num >= 5 && num <= 9) { // 添加水晶C
+        mine = Sprite::create("mineral/ShardC.png"); // 60 * 60的
+        mine->setName("ShardC");
+    }
+    else if (num >= 10 && num <= 16) { // 添加水晶B
+        mine = Sprite::create("mineral/ShardB.png"); // 60 * 60的
+        mine->setName("ShardB");
+    }
+    else if (num >= 17 && num <= 25) { // 添加水晶A
+        mine = Sprite::create("mineral/ShardA.png"); // 60 * 60的
+        mine->setName("ShardA");
+    }
+    mine->setAnchorPoint(Vec2(0.5f, 0.5f)); // 中间
+    mine->setPosition(position); // 初始位置
+    mineBox = PhysicsBody::createBox(mine->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));// 密度 弹性 摩擦力
+    mineBox->setDynamic(false); // 设置为动态物理体
+    mineBox->setCollisionBitmask(0x01);
+    mineBox->setContactTestBitmask(0x01);
+    mine->setPhysicsBody(mineBox);// 设置物理体
+    this->addChild(mine, 1);
+}
+
+// 随机生成矿物
+void Cave::CreateMine() {
+    // 获得屏幕尺寸和地图尺寸
+    const auto visibleSize = Director::getInstance()->getVisibleSize();
+    const auto mapSize = caveSprite->getContentSize();
+
+    // 生成范围
+    int minX = 144 + 60;
+    int maxX = 1080 - 60;
+    int minY = 192 + 60;
+    int maxY = 816 - 60;
+
+    for (int i = minX; i <= maxX; i = i + 168) {
+        for (int j = minY; j <= maxY; j = j + 120) {
+            auto num = rand() % 4 + 1;
+            if (num == 4 && numOfMines <= 10) { // 四分之一的概率生成矿物
+                Sprite* mine = Sprite::create();
+                PhysicsBody* mineBox = PhysicsBody::create();
+                // 生成矿物
+                AddMine(mine, mineBox, Vec2(i, j));
+                // 存入
+                mines.push_back(mine);
+                minesBox.push_back(mineBox);
+                numOfMines++;
+            }
+        }
+    }
 }

@@ -4,14 +4,19 @@
 #include "cocos2d.h"
 #include "chipmunk.h"
 #include "Player.h"
+#include "Item.h"
+#include "BackpackManager.h"
+#include "ItemManager.h"
+#include <vector>
+#include <cstring>
 
 USING_NS_CC;
 
 //洞穴场景
-class Cave : public cocos2d::Scene {
+class Cave : public Scene {
 public:
 
-	static cocos2d::Scene* createScene();
+	static Scene* createScene();
 
 	// 初始化
 	virtual bool init();
@@ -27,6 +32,12 @@ public:
 
 	// 碰撞开始监听器
 	bool onContactBegin(PhysicsContact& contact);
+
+	// 添加一个矿物
+	void AddMine(Sprite* mine, PhysicsBody* minesBox, Vec2 position);
+
+	// 随机生成矿物
+	void CreateMine();
 
 	Sprite* caveSprite; // 地图
 
@@ -46,9 +57,11 @@ public:
 	Sprite* ladder; //回去的梯子
 	PhysicsBody* ladderBox;
 
-	Vector<Sprite*> Mines; // 矿物
-	Vector<PhysicsBody*> MinesBox;
+	std::vector<Sprite*> mines; // 矿物，最多十株
+	std::vector<PhysicsBody*> minesBox;
+	int numOfMines; // 矿物数目
 
+	int place; // 位置，0空地，7矿物
 };
 
 #endif // CAVE_H
