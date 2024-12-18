@@ -8,31 +8,99 @@ Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGro
 
     // 初始化状态标签
     _statusLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 20);
-    _statusLabel->setPosition(this->getContentSize() / 2);
+    _statusLabel->setPosition(Vec2(0, -this->getContentSize().height / 2 + 10)); // 调整位置
+    _statusLabel->setColor(Color3B::BLACK); // 设置文字颜色
     this->addChild(_statusLabel);
 }
 
 Crop::~Crop() {}
 
+
 void Crop::update(float dt) {
-    // 更新生长时间
     _growthTime += dt;
 
-    // 判断生长阶段
-    if (_growthTime < _maxGrowthTime / 4) {
-        _growthStage = 1; // 幼苗阶段
+    if (_growthTime < _maxGrowthTime / 3.0f) {
+        _growthStage = 1;
     }
-    else if (_growthTime < _maxGrowthTime * 3 / 4) {
-        _growthStage = 2; // 成熟阶段
+    else if (_growthTime < _maxGrowthTime * 2.0f / 3.0f) {
+        _growthStage = 2;
+    }
+    else if (_growthTime < _maxGrowthTime) {
+        _growthStage = 3;
     }
     else {
-        _growthStage = 3; // 可收获阶段
+        _growthStage = 4;
+    }
+
+    switch (_growthStage) {
+    case 1:
+        this->setTexture("crops/Onion-1.png");
+        break;
+    case 2:
+        this->setTexture("crops/Onion-2.png");
+        break;
+    case 3:
+        this->setTexture("crops/Onion-3.png");
+        break;
+    case 4:
+        this->setTexture("crops/Onion-harvest.png");
+        break;
+    }
+
+    // 更新状态标签
+    if (_waterDays > 0) {
+        _statusLabel->setString("缺水");
+    }
+    else if (_fertilizerDays > 0) {
+        _statusLabel->setString("缺肥");
+    }
+    else if (_growthStage == 4) {
+        _statusLabel->setString("可收获");
+    }
+    else {
+        _statusLabel->setString("");
+    }
+}
+/**
+void Crop::update(float dt) {
+
+    _growthTime += dt;
+
+    if (_growthTime < _maxGrowthTime / 3) {
+        _growthStage = 1;
+    }
+    else if (_growthTime < _maxGrowthTime * 2 / 3) {
+        _growthStage = 2;
+    }
+    else if (_growthTime < _maxGrowthTime) {
+        _growthStage = 3;
+    }
+    else {
+        _growthStage = 4;
+    }
+
+    switch (_growthStage) {
+    case 1:
+        this->setTexture("crops/Onion-1.png");
+        break;
+    case 2:
+        this->setTexture("crops/Onion-2.png");
+        break;
+    case 3:
+        this->setTexture("crops/Onion-3.png");
+        break;
+    case 4:
+        this->setTexture("crops/Onion-harvest.png");
+        break;
     }
 
     // 更新缺水状态
     if (_waterDays > 0) {
         _waterDays--;
-        if (_waterDays > 7) {
+        if (_waterDays == 0) {
+            // 恢复浇水状态
+        }
+        else if (_waterDays > 7) {
             _yield -= 30; // 缺水超过7天，产量减少30
         }
     }
@@ -40,7 +108,10 @@ void Crop::update(float dt) {
     // 更新缺肥状态
     if (_fertilizerDays > 0) {
         _fertilizerDays--;
-        if (_fertilizerDays > 10) {
+        if (_fertilizerDays == 0) {
+            // 恢复施肥状态
+        }
+        else if (_fertilizerDays > 10) {
             _yield -= 50; // 缺肥超过10天，产量减少50
         }
         else if (_fertilizerDays > 15) {
@@ -55,13 +126,14 @@ void Crop::update(float dt) {
     else if (_fertilizerDays > 0) {
         _statusLabel->setString("缺肥");
     }
-    else if (_growthStage == 3) {
+    else if (_growthStage == 4) {
         _statusLabel->setString("可收获");
     }
     else {
         _statusLabel->setString("");
     }
 }
+**/
 
 void Crop::water() {
     _waterDays = 0; // 浇水后缺水状态清零

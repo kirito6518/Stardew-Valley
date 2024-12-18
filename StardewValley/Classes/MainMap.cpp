@@ -35,6 +35,12 @@ bool MainMap::init()
     auto physicsWorld = this->getPhysicsWorld();
     physicsWorld->setGravity(Vec2(0, 0));// 设置重力，无
 
+    // 在 MainMap 的构造函数或初始化函数中
+    farmManager = FarmManager();
+    farmManager.setMainMap(this);
+    farmManager.initFarm();
+    this->schedule(schedule_selector(MainMap::updateFarm), 1.0f); // 每秒更新一次
+
     // 设置碰撞监听器
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(MainMap::onContactBegin, this);
@@ -51,7 +57,6 @@ bool MainMap::init()
     //加载商店
     ShopManager::getInstance();
 
-
     // 加载使用逻辑
     SetUseItemInMainMap();
 
@@ -63,161 +68,163 @@ bool MainMap::init()
     this->addChild(mapSprite, 0);
 
     // 载入地图互动点和碰撞箱
-    // 上边界
-    upBoundary = Sprite::create("maps/upBoundary.png");// 1920 * 96的
-    upBoundary->setAnchorPoint(Vec2(0.5, 0.5));
-    upBoundary->setPosition(visibleSize / 2 + Size(0, 780 - 48));
-    upBoundaryBox = PhysicsBody::createBox(upBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    upBoundaryBox->setDynamic(false);
-    upBoundary->setPhysicsBody(upBoundaryBox);
-    this->addChild(upBoundary, 0);
+    {
+        // 上边界
+        upBoundary = Sprite::create("maps/upBoundary.png");// 1920 * 96的
+        upBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+        upBoundary->setPosition(visibleSize / 2 + Size(0, 780 - 48));
+        upBoundaryBox = PhysicsBody::createBox(upBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        upBoundaryBox->setDynamic(false);
+        upBoundary->setPhysicsBody(upBoundaryBox);
+        this->addChild(upBoundary, 0);
 
-    // 右边界
-    rightBoundary = Sprite::create("maps/rightBoundary.png");// 72 * 1560的
-    rightBoundary->setAnchorPoint(Vec2(0.5, 0.5));
-    rightBoundary->setPosition(visibleSize / 2 + Size(960 - 36, 0));
-    rightBoundaryBox = PhysicsBody::createBox(rightBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    rightBoundaryBox->setDynamic(false);
-    rightBoundary->setPhysicsBody(rightBoundaryBox);
-    this->addChild(rightBoundary, 0);
+        // 右边界
+        rightBoundary = Sprite::create("maps/rightBoundary.png");// 72 * 1560的
+        rightBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+        rightBoundary->setPosition(visibleSize / 2 + Size(960 - 36, 0));
+        rightBoundaryBox = PhysicsBody::createBox(rightBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        rightBoundaryBox->setDynamic(false);
+        rightBoundary->setPhysicsBody(rightBoundaryBox);
+        this->addChild(rightBoundary, 0);
 
-    // 左边界
-    leftBoundary = Sprite::create("maps/leftBoundary.png");// 72 * 1560的
-    leftBoundary->setAnchorPoint(Vec2(0.5, 0.5));
-    leftBoundary->setPosition(visibleSize / 2 - Size(960 - 36, 0));
-    leftBoundaryBox = PhysicsBody::createBox(leftBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    leftBoundaryBox->setDynamic(false);
-    leftBoundary->setPhysicsBody(leftBoundaryBox);
-    this->addChild(leftBoundary, 0);
+        // 左边界
+        leftBoundary = Sprite::create("maps/leftBoundary.png");// 72 * 1560的
+        leftBoundary->setAnchorPoint(Vec2(0.5, 0.5));
+        leftBoundary->setPosition(visibleSize / 2 - Size(960 - 36, 0));
+        leftBoundaryBox = PhysicsBody::createBox(leftBoundary->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        leftBoundaryBox->setDynamic(false);
+        leftBoundary->setPhysicsBody(leftBoundaryBox);
+        this->addChild(leftBoundary, 0);
 
-    // 下边界左半部分
-    downBoundary_left = Sprite::create("maps/downBoundary_left.png");// 936 * 96的
-    downBoundary_left->setAnchorPoint(Vec2(0.0, 0.0));
-    downBoundary_left->setPosition(visibleSize / 2 - Size(960, 780));
-    downBoundary_leftBox = PhysicsBody::createBox(downBoundary_left->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    downBoundary_leftBox->setDynamic(false);
-    downBoundary_left->setPhysicsBody(downBoundary_leftBox);
-    this->addChild(downBoundary_left, 0);
+        // 下边界左半部分
+        downBoundary_left = Sprite::create("maps/downBoundary_left.png");// 936 * 96的
+        downBoundary_left->setAnchorPoint(Vec2(0.0, 0.0));
+        downBoundary_left->setPosition(visibleSize / 2 - Size(960, 780));
+        downBoundary_leftBox = PhysicsBody::createBox(downBoundary_left->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        downBoundary_leftBox->setDynamic(false);
+        downBoundary_left->setPhysicsBody(downBoundary_leftBox);
+        this->addChild(downBoundary_left, 0);
 
-    // 下边界右半部分
-    downBoundary_right = Sprite::create("maps/downBoundary_right.png");// 936 * 96的
-    downBoundary_right->setAnchorPoint(Vec2(1.0, 0.0));
-    downBoundary_right->setPosition(visibleSize / 2 + Size(960, -780));
-    downBoundary_rightBox = PhysicsBody::createBox(downBoundary_right->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    downBoundary_rightBox->setDynamic(false);
-    downBoundary_right->setPhysicsBody(downBoundary_rightBox);
-    this->addChild(downBoundary_right, 0);
+        // 下边界右半部分
+        downBoundary_right = Sprite::create("maps/downBoundary_right.png");// 936 * 96的
+        downBoundary_right->setAnchorPoint(Vec2(1.0, 0.0));
+        downBoundary_right->setPosition(visibleSize / 2 + Size(960, -780));
+        downBoundary_rightBox = PhysicsBody::createBox(downBoundary_right->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        downBoundary_rightBox->setDynamic(false);
+        downBoundary_right->setPhysicsBody(downBoundary_rightBox);
+        this->addChild(downBoundary_right, 0);
 
-    // 水池上半部分
-    upWater = Sprite::create("maps/upWater.png");// 672 * 456的
-    upWater->setAnchorPoint(Vec2(0.0, 0.5));// 设置锚点
-    upWater->setPosition(visibleSize / 2 + Size(-960, -120));
-    upWaterBox = PhysicsBody::createBox(upWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    upWaterBox->setDynamic(false);
-    upWater->setPhysicsBody(upWaterBox);
-    this->addChild(upWater, 0);
+        // 水池上半部分
+        upWater = Sprite::create("maps/upWater.png");// 672 * 456的
+        upWater->setAnchorPoint(Vec2(0.0, 0.5));// 设置锚点
+        upWater->setPosition(visibleSize / 2 + Size(-960, -120));
+        upWaterBox = PhysicsBody::createBox(upWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        upWaterBox->setDynamic(false);
+        upWater->setPhysicsBody(upWaterBox);
+        this->addChild(upWater, 0);
 
-    // 水池中间部分
-    middleWater = Sprite::create("maps/middleWater.png");// 648 * 96的
-    middleWater->setAnchorPoint(Vec2(0.0, 0.5));// 设置锚点
-    middleWater->setPosition(visibleSize / 2 + Size(-960, -780 + 408));
-    middleWaterBox = PhysicsBody::createBox(middleWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    middleWaterBox->setDynamic(false);
-    middleWater->setPhysicsBody(middleWaterBox);
-    this->addChild(middleWater, 0);
+        // 水池中间部分
+        middleWater = Sprite::create("maps/middleWater.png");// 648 * 96的
+        middleWater->setAnchorPoint(Vec2(0.0, 0.5));// 设置锚点
+        middleWater->setPosition(visibleSize / 2 + Size(-960, -780 + 408));
+        middleWaterBox = PhysicsBody::createBox(middleWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        middleWaterBox->setDynamic(false);
+        middleWater->setPhysicsBody(middleWaterBox);
+        this->addChild(middleWater, 0);
 
-    // 水池下半部分
-    downWater = Sprite::create("maps/downWater.png");// 672 * 378的
-    downWater->setAnchorPoint(Vec2(0.0, 0.0));// 设置锚点
-    downWater->setPosition(visibleSize / 2 + Size(-960, -780));
-    downWaterBox = PhysicsBody::createBox(downWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    downWaterBox->setDynamic(false);
-    downWater->setPhysicsBody(downWaterBox);
-    this->addChild(downWater, 0);
+        // 水池下半部分
+        downWater = Sprite::create("maps/downWater.png");// 672 * 378的
+        downWater->setAnchorPoint(Vec2(0.0, 0.0));// 设置锚点
+        downWater->setPosition(visibleSize / 2 + Size(-960, -780));
+        downWaterBox = PhysicsBody::createBox(downWater->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        downWaterBox->setDynamic(false);
+        downWater->setPhysicsBody(downWaterBox);
+        this->addChild(downWater, 0);
 
-    // 栅栏
-    fence = Sprite::create("maps/fence.png");// 24 * 720的
-    fence->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
-    fence->setPosition(visibleSize / 2 + Size(-960 + 24 * 29, 780));
-    auto fenceBox = PhysicsBody::createBox(fence->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    fenceBox->setDynamic(false);
-    fence->setPhysicsBody(fenceBox);
-    this->addChild(fence, 0);
+        // 栅栏
+        fence = Sprite::create("maps/fence.png");// 24 * 720的
+        fence->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
+        fence->setPosition(visibleSize / 2 + Size(-960 + 24 * 29, 780));
+        auto fenceBox = PhysicsBody::createBox(fence->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        fenceBox->setDynamic(false);
+        fence->setPhysicsBody(fenceBox);
+        this->addChild(fence, 0);
 
-    // 下面的可以互动
-    // 房屋
-    shop = Sprite::create("maps/shop.png");// 240 * 336的
-    shop->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
-    shop->setPosition(visibleSize / 2 + Size(960, 780));
-    shopBox = PhysicsBody::createBox(shop->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    shopBox->setDynamic(false);
-    shopBox->setCollisionBitmask(0x01);
-    shopBox->setContactTestBitmask(0x01);
-    shop->setPhysicsBody(shopBox);
-    this->addChild(shop, 0);
+        // 下面的可以互动
+        // 房屋
+        shop = Sprite::create("maps/shop.png");// 240 * 336的
+        shop->setAnchorPoint(Vec2(1.0, 1.0));// 设置锚点
+        shop->setPosition(visibleSize / 2 + Size(960, 780));
+        shopBox = PhysicsBody::createBox(shop->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        shopBox->setDynamic(false);
+        shopBox->setCollisionBitmask(0x01);
+        shopBox->setContactTestBitmask(0x01);
+        shop->setPhysicsBody(shopBox);
+        this->addChild(shop, 0);
 
-    // 钓鱼部分
-    fishing = Sprite::create("maps/fishing.png");// 96 * 96的
-    fishing->setAnchorPoint(Vec2(0.5, 0.5));// 设置锚点
-    fishing->setPosition(visibleSize / 2 + Size(-960 + 624, -780 + 408));
-    fishingBox = PhysicsBody::createBox(fishing->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    fishingBox->setDynamic(false);
-    fishingBox->setCollisionBitmask(0x01);
-    fishingBox->setContactTestBitmask(0x01);
-    fishing->setPhysicsBody(fishingBox);
-    this->addChild(fishing, 0);
+        // 钓鱼部分
+        fishing = Sprite::create("maps/fishing.png");// 96 * 96的
+        fishing->setAnchorPoint(Vec2(0.5, 0.5));// 设置锚点
+        fishing->setPosition(visibleSize / 2 + Size(-960 + 624, -780 + 408));
+        fishingBox = PhysicsBody::createBox(fishing->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        fishingBox->setDynamic(false);
+        fishingBox->setCollisionBitmask(0x01);
+        fishingBox->setContactTestBitmask(0x01);
+        fishing->setPhysicsBody(fishingBox);
+        this->addChild(fishing, 0);
 
-    // 农田左部分
-    cropsLeft = Sprite::create("maps/Crops.png");// 192 * 192的
-    cropsLeft->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
-    cropsLeft->setPosition(visibleSize / 2 + Size(-960 + 1224, -780 + 336));
-    cropsLeftBox = PhysicsBody::createBox(cropsLeft->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    cropsLeftBox->setDynamic(false);
-    cropsLeftBox->setCollisionBitmask(0x01);
-    cropsLeftBox->setContactTestBitmask(0x01);
-    cropsLeft->setPhysicsBody(cropsLeftBox);
-    this->addChild(cropsLeft, 0);
+        // 农田左部分
+        cropsLeft = Sprite::create("maps/Crops.png");// 192 * 192的
+        cropsLeft->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
+        cropsLeft->setPosition(visibleSize / 2 + Size(-960 + 1224, -780 + 336));
+        cropsLeftBox = PhysicsBody::createBox(cropsLeft->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        cropsLeftBox->setDynamic(false);
+        cropsLeftBox->setCollisionBitmask(0x01);
+        cropsLeftBox->setContactTestBitmask(0x01);
+        cropsLeft->setPhysicsBody(cropsLeftBox);
+        this->addChild(cropsLeft, 0);
 
-    // 农田右部分
-    cropsRight = Sprite::create("maps/Crops.png");// 192 * 192的
-    cropsRight->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
-    cropsRight->setPosition(visibleSize / 2 + Size(-960 + 1464, -780 + 336));
-    cropsRightBox = PhysicsBody::createBox(cropsRight->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    cropsRightBox->setDynamic(false);
-    cropsRightBox->setCollisionBitmask(0x01);
-    cropsRightBox->setContactTestBitmask(0x01);
-    cropsRight->setPhysicsBody(cropsRightBox);
-    this->addChild(cropsRight, 0);
+        // 农田右部分
+        cropsRight = Sprite::create("maps/Crops.png");// 192 * 192的
+        cropsRight->setAnchorPoint(Vec2(0.0, 1.0));// 设置锚点
+        cropsRight->setPosition(visibleSize / 2 + Size(-960 + 1464, -780 + 336));
+        cropsRightBox = PhysicsBody::createBox(cropsRight->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        cropsRightBox->setDynamic(false);
+        cropsRightBox->setCollisionBitmask(0x01);
+        cropsRightBox->setContactTestBitmask(0x01);
+        cropsRight->setPhysicsBody(cropsRightBox);
+        this->addChild(cropsRight, 0);
 
-    // 路
-    road = Sprite::create("maps/road.png");// 96 * 96的
-    road->setAnchorPoint(Vec2(1.0, 0.0));// 设置锚点
-    road->setPosition(visibleSize / 2 + Size(48, -780));
-    roadBox = PhysicsBody::createBox(road->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    roadBox->setDynamic(false);
-    roadBox->setCollisionBitmask(0x01);
-    roadBox->setContactTestBitmask(0x01);
-    road->setPhysicsBody(roadBox);
-    this->addChild(road, 0);
+        // 路
+        road = Sprite::create("maps/road.png");// 96 * 96的
+        road->setAnchorPoint(Vec2(1.0, 0.0));// 设置锚点
+        road->setPosition(visibleSize / 2 + Size(48, -780));
+        roadBox = PhysicsBody::createBox(road->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        roadBox->setDynamic(false);
+        roadBox->setCollisionBitmask(0x01);
+        roadBox->setContactTestBitmask(0x01);
+        road->setPhysicsBody(roadBox);
+        this->addChild(road, 0);
 
-    // 牧场
-    ranch = Sprite::create("maps/ranch.png");// 96 * 96的
-    ranch->setAnchorPoint(Vec2(1.0, 0.0));// 设置锚点
-    ranch->setPosition(visibleSize / 2 + Size(-960 + 24 * 30, 60));
-    ranchBox = PhysicsBody::createBox(ranch->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
-    ranchBox->setDynamic(false);
-    ranchBox->setCollisionBitmask(0x01);
-    ranchBox->setContactTestBitmask(0x01);
-    ranch->setPhysicsBody(ranchBox);
-    this->addChild(ranch, 0);
+        // 牧场
+        ranch = Sprite::create("maps/ranch.png");// 96 * 96的
+        ranch->setAnchorPoint(Vec2(1.0, 0.0));// 设置锚点
+        ranch->setPosition(visibleSize / 2 + Size(-960 + 24 * 30, 60));
+        ranchBox = PhysicsBody::createBox(ranch->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
+        ranchBox->setDynamic(false);
+        ranchBox->setCollisionBitmask(0x01);
+        ranchBox->setContactTestBitmask(0x01);
+        ranch->setPhysicsBody(ranchBox);
+        this->addChild(ranch, 0);
 
-    fishing->setName("fishing");
-    cropsLeft->setName("cropsLeft");
-    cropsRight->setName("cropsRight");
-    road->setName("road");
-    ranch->setName("ranch");
-    shop->setName("shop");
+        fishing->setName("fishing");
+        cropsLeft->setName("cropsLeft");
+        cropsRight->setName("cropsRight");
+        road->setName("road");
+        ranch->setName("ranch");
+        shop->setName("shop");
 
+    }
     /*
     // 创建物品精灵
     std::string itemName = "Test";
@@ -435,9 +442,7 @@ bool MainMap::init()
         this->addChild(npcManager._npcs[0], 1);
         this->addChild(npcManager._npcs[1], 1);
     }
-    // 初始化农田
-    farmManager.initFarm();
-    this->schedule(schedule_selector(MainMap::updateFarm), 1.0f);
+    
 
     return true;
 }
@@ -630,43 +635,36 @@ void MainMap::addDay(float dt)
 }
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
-void  MainMap::SetUseItemInMainMap() {
-    
-    // 设置洋葱种子
+void MainMap::SetUseItemInMainMap() {
     if (ItemManager::getInstance()->getItem("Onion\nSeed")) {
-        // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
             Vec2 plantingPosition;
             if (place == 1 || place == 2) {
-                int countUsed = 1; // 假设每次使用 1 个物品
-                if (place == 1) {// 如果在左边农场
+                int countUsed = 1;
+                if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
-                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsLeft->getPosition()+Vec2(96,-96)));
-                        this->addChild(farmManager._crops[0], 1);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
                         return true;
                     }
                 }
-                else if (place == 2) {// 如果在右边农场
+                else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
-                    if (!farmManager.isPositionOccupied(plantingPosition)) {//判断作物是否是0作物
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion2", "crops/Onion-1.png", 100, 7, 10, Vec2(cropsRight->getPosition() + Vec2(96,-96)));
-                        this->addChild(farmManager._crops[1], 1);
+                        farmManager.plantCrop("Onion2", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
                         return true;
                     }
                 }
             }
             return false;
             };
-
-        // 设置回调函数
         ItemManager::getInstance()->getItem("Onion\nSeed")->setUseItemCallback(customUseItemLogic);
     }
     else {
-        CCLOG("Item 'test' not found in backpack.");
+        CCLOG("Item 'Onion\\nSeed' not found in backpack.");
     }
 }
 

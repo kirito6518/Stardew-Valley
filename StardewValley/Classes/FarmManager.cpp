@@ -1,4 +1,5 @@
 #include "FarmManager.h"
+#include "MainMap.h"
 
 FarmManager::FarmManager() {}
 
@@ -18,10 +19,20 @@ void FarmManager::update(float dt) {
     }
 }
 
+void FarmManager::setMainMap(MainMap* mainMap) {
+    this->mainMap = mainMap;
+}
+
 void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, const Vec2& position) {
     Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays);
     crop->setPosition(position);
     _crops.push_back(crop);
+    if (mainMap) {
+        mainMap->addChild(crop, 1);
+    }
+    else {
+        CCLOG("mainMap is nullptr when adding crop.");
+    }
 }
 
 void FarmManager::waterCrop(const Vec2& position) {
@@ -46,6 +57,9 @@ void FarmManager::harvestCrop(const Vec2& position) {
     for (auto it = _crops.begin(); it != _crops.end(); ++it) {
         if ((*it)->getPosition() == position) {
             if ((*it)->harvest()) {
+                // 获取收获的物品并添加到背包
+                int yield = (*it)->getYield();
+                // BackpackManager::addItem("Onion", yield);
                 delete* it;
                 _crops.erase(it);
             }

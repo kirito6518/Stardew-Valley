@@ -4,6 +4,8 @@
 #include "Crop.h"
 #include <vector>
 
+class MainMap; // 向前声明 MainMap 类
+
 class FarmManager {
 public:
     FarmManager();
@@ -29,12 +31,15 @@ public:
 
     bool isPositionOccupied(const Vec2& position);
 
+    // 其他函数声明
+    void setMainMap(MainMap* mainMap);
+
     // 获取作物列表
     const std::vector<Crop*>& getCrops() const;
     std::vector<Crop*> _crops; // 作物列表
-
-private:
     
+private:
+    MainMap* mainMap;
 };
 
 #endif // FARMMANAGER_H
