@@ -18,12 +18,6 @@ enum class ItemCategory
     Quest         // 任务物品
 };
 
-//设置物品属性
-enum class ItemType
-{
-    Usable,       // 可使用物品
-    Sellable      // 售卖物品
-};
 
 
 /**
@@ -46,11 +40,7 @@ public:
         useItemCallback = callback;
     }
 
-    // 设置物品属性
-    void setItemType(ItemType type);
 
-    // 更新标签的可见性
-    void updateLabelVisibility();
 
     //创建一个 Item 对象
     static Item* create(const std::string& itemImagePath, const std::string& itemName, ItemCategory category,
@@ -107,7 +97,7 @@ private:
     cocos2d::Label* itemCountLabel; ///< 物品数量标签
     cocos2d::Sprite* itemIcon; ///< 物品的图标精灵
 
-    ItemType itemType = ItemType::Usable; ///< 物品的类型，默认为可使用物品
+
 
 };
 

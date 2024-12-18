@@ -2,8 +2,7 @@
 #define __ITEM_MANAGER_H__
 
 #include "Item.h"
-#include <unordered_map>
-#include <unordered_set>
+
 
 class ItemManager
 {
@@ -27,11 +26,9 @@ public:
     // 清空所有 Item 实例
     void clearAllItems();
 
-    // 设置售卖物品列表
-    void setSellableItems(const std::unordered_set<std::string>& sellableItemNames);
 
 private:
-    ItemManager::ItemManager();//构造函数
+
     static ItemManager* instance; // 单例实例
     std::unordered_map<std::string, Item*> items; // 全局物品实例映射
 };

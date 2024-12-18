@@ -170,6 +170,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\ResourceManager.cpp" />
     <ClCompile Include="..\Classes\SeasonManager.cpp" />
+    <ClCompile Include="..\Classes\ShopItem.cpp" />
+    <ClCompile Include="..\Classes\ShopItemManager.cpp" />
     <ClCompile Include="..\Classes\ShopLayer.cpp" />
     <ClCompile Include="..\Classes\ShopManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -195,6 +197,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\ResourceManager.h" />
     <ClInclude Include="..\Classes\SeasonManager.h" />
+    <ClInclude Include="..\Classes\ShopItem.h" />
+    <ClInclude Include="..\Classes\ShopItemManager.h" />
     <ClInclude Include="..\Classes\ShopLayer.h" />
     <ClInclude Include="..\Classes\ShopManager.h" />
     <ClInclude Include="main.h" />

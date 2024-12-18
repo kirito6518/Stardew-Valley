@@ -28,7 +28,8 @@ BackpackManager::BackpackManager()
     currentItems = 0;        // 初始化当前物品数量
     
 
-    //此处统一加载所有可能放入背包的物品
+    //此处统一加载所有可能放入背包的物品,
+    // 第一个数字为卖出价格，第二个数字为买入价格，第三个数字为初始个数（缺省为0）
     Item::create("tool/coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
 

@@ -225,14 +225,14 @@ void BackpackLayer::onUseButtonClicked(Ref* sender)
         }
         else
         {
-            useResultLabel->setString("Use Failed!");
+            useResultLabel->setString("You Can't Use This Item Now!");
         }
 
         useResultLabel->setVisible(true);
 
         this->scheduleOnce([this](float dt) {
             useResultLabel->setVisible(false);
-            }, 1.2f, "hide_use_result");
+            }, 1.0f, "hide_use_result");
     }
 }
 
@@ -255,13 +255,13 @@ void BackpackLayer::onDestroyButtonClicked(Ref* sender)
 
     }
     else {
-        destroyResultLabel->setString("Sell Failed!");     
+        destroyResultLabel->setString("You Can't Sell This Item!");     
     }
 
     destroyResultLabel->setVisible(true);
     this->scheduleOnce([this](float dt) {
         destroyResultLabel->setVisible(false);
-        }, 1.2f, "hide_use_result");
+        }, 1.0f, "hide_use_result");
   
 }
 

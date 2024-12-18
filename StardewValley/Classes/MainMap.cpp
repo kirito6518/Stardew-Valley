@@ -9,6 +9,8 @@
 #include "ItemManager.h"
 #include "ShopManager.h"
 #include"ShopLayer.h"
+#include "ShopItem.h"
+#include "ShopItemManager.h"
 #include "FarmManager.h"
 
 
@@ -519,8 +521,8 @@ void MainMap::hideShop(Ref* sender) {
 //
 void MainMap::getInitShop()
 {
-    Item* initItem;
-    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    ShopItem* initItem;
+    initItem = ShopItemManager::getInstance()->getShopItem("Onion\nSeed");
     ShopManager::getInstance()->addItem(initItem);
 }
 

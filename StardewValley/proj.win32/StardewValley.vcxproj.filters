@@ -70,6 +70,12 @@
     <ClCompile Include="..\Classes\ShopManager.cpp">
       <Filter>myLayers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ShopItem.cpp">
+      <Filter>Item work</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItemManager.cpp">
+      <Filter>Item work</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -140,6 +146,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ShopManager.h">
       <Filter>myLayers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItem.h">
+      <Filter>Item work</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItemManager.h">
+      <Filter>Item work</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
