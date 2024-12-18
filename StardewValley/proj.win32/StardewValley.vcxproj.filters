@@ -67,16 +67,12 @@
     <ClCompile Include="..\Classes\NPCRelationship.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\NPCTask.cpp">
-      <Filter>NPC</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\FishingManager.cpp">
       <Filter>fishing</Filter>
     </ClCompile>
-<<<<<<< HEAD
 <<<<<<< Updated upstream
     <ClCompile Include="..\Classes\NPCTask.cpp">
       <Filter>NPC</Filter>
@@ -94,8 +90,6 @@
       <Filter>Cave</Filter>
 >>>>>>> Stashed changes
     </ClCompile>
-=======
->>>>>>> parent of d54e089 (将NPCManager改为单例类，同时增加任务的初步系统)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -164,16 +158,12 @@
     <ClInclude Include="..\Classes\NPCRelationship.h">
       <Filter>NPC</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\NPCTask.h">
-      <Filter>NPC</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FishingManager.h">
       <Filter>fishing</Filter>
     </ClInclude>
-<<<<<<< HEAD
 <<<<<<< Updated upstream
     <ClInclude Include="..\Classes\NPCTask.h">
       <Filter>NPC</Filter>
@@ -191,8 +181,6 @@
       <Filter>Cave</Filter>
 >>>>>>> Stashed changes
     </ClInclude>
-=======
->>>>>>> parent of d54e089 (将NPCManager改为单例类，同时增加任务的初步系统)
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">

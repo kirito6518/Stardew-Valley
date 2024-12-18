@@ -1,43 +1,61 @@
 #include "NPCTask.h"
+#include "BackpackManager.h" 
 
-// 构造函数：初始化任务的ID、名字、描述、类型和奖励
-NPCTask::NPCTask(int id, const std::string& name, const std::string& description, const std::string& type, int reward)
-    : _id(id), _name(name), _description(description), _type(type), _reward(reward), _status("未接受") {
+// 注释掉 GameTimeManager 的引用
+#if 0
+#include "GameTimeManager.h" // 假设有一个管理游戏时间的类
+#endif
+
+NPCTask::NPCTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount)
+    : npcName(npcName), description(description), requiredItem(requiredItem), requiredItemCount(requiredItemCount), completed(false), cooldownTime(0.0f), cooldownEndTime(0.0f)
+{
 }
 
-NPCTask::~NPCTask() {}
-
-// 设置任务的状态
-void NPCTask::setStatus(const std::string& status) {
-    _status = status;
+bool NPCTask::canComplete() const
+{
+    // 检查背包中是否有足够的所需物品
+    auto item = BackpackManager::getInstance()->getItemByName(requiredItem);
+    return item != nullptr && item->getCount() >= requiredItemCount;
 }
 
-// 获取任务的状态
-std::string NPCTask::getStatus() const {
-    return _status;
+void NPCTask::complete()
+{
+    if (canComplete())
+    {
+        // 从背包中移除所需物品
+        //BackpackManager::getInstance()->removeItem(requiredItem, requiredItemCount);
+
+        // 标记任务为已完成
+        completed = true;
+
+        // 设置任务冷却时间
+        setCooldown(60.0f); // 假设冷却时间为 60 秒
+    }
 }
 
-// 获取任务的ID
-int NPCTask::getId() const {
-    return _id;
+void NPCTask::setCooldown(float cooldownTime)
+{
+    this->cooldownTime = cooldownTime;
+
+    // 模拟当前时间
+    float currentTime = 0.0f; // 假设当前时间为 0
+    this->cooldownEndTime = currentTime + cooldownTime;
 }
 
-// 获取任务的名字
-std::string NPCTask::getName() const {
-    return _name;
+bool NPCTask::isOnCooldown() const
+{
+    // 模拟当前时间
+    float currentTime = 0.0f; // 假设当前时间为 0
+    return currentTime < cooldownEndTime;
 }
 
-// 获取任务的描述
-std::string NPCTask::getDescription() const {
-    return _description;
-}
-
-// 获取任务的类型
-std::string NPCTask::getType() const {
-    return _type;
-}
-
-// 获取任务的奖励
-int NPCTask::getReward() const {
-    return _reward;
+float NPCTask::getRemainingCooldown() const
+{
+    // 模拟当前时间
+    float currentTime = 0.0f; // 假设当前时间为 0
+    if (currentTime < cooldownEndTime)
+    {
+        return cooldownEndTime - currentTime;
+    }
+    return 0.0f;
 }

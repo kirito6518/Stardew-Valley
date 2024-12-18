@@ -232,33 +232,7 @@ bool MainMap::init()
         shop->setName("shop");
 
     }
-    /*
-    // 创建物品精灵
-    std::string itemName = "Test";
-    std::string itemName2 = "Test2";
-    std::string itemImagePath = "icons/test.png";
-    ItemCategory category = ItemCategory::Food;
-    bool success = BackpackManager::getInstance()->addItem(itemImagePath, itemName, category,6);
-    Item* item = Bag->getItemByName("Test");
-    if (item) {
-        // 定义一个自定义的 useItem 逻辑
-        auto customUseItemLogic = [item]() -> bool {
-            int countUsed = 2; // 假设每次使用 2 个物品
-            if (1)
-            {
-                item->decreaseCount(countUsed);
-                return true;
-            }
-            return false;
-            };
-
-        // 设置回调函数
-        item->setUseItemCallback(customUseItemLogic);
-    }
-    else {
-        CCLOG("Item 'test' not found in backpack.");
-    }
-    */
+   
 
     // 添加一个按钮，左键点击后切回主屏幕
     toHollowWorldButton = MenuItemImage::create(
@@ -426,7 +400,7 @@ bool MainMap::init()
     
     {
         // 初始化 NPC
-        npcManager.initNPCs();
+        NPCManager::getInstance();
 
         // 获取屏幕的中心位置
         const auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -434,20 +408,20 @@ bool MainMap::init()
         Vec2 shop = Vec2(visibleSize.width + 96, visibleSize.height + 48);
 
         // 设置 NPC 的位置
-        npcManager._npcs[0]->setLocation(screenCenter);
-        npcManager._npcs[1]->setLocation(shop);
+        NPCManager::getInstance()->_npcs[0]->setLocation(screenCenter);
+        NPCManager::getInstance()->_npcs[1]->setLocation(shop);
 
         // 确保 NPC 的精灵锚点为 (0.5, 0.5)
-        npcManager._npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
-        npcManager._npcs[1]->setAnchorPoint(Vec2(0.5, 0.5));
+        NPCManager::getInstance()->_npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
+        NPCManager::getInstance()->_npcs[1]->setAnchorPoint(Vec2(0.5, 0.5));
 
         // 调试输出 NPC 的位置和精灵尺寸
         // CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
         // CCLOG("NPC sprite size: (%f, %f)", npcManager._npcs[0]->getContentSize().width, npcManager._npcs[0]->getContentSize().height);
 
         // 将 NPC 添加到场景中
-        this->addChild(npcManager._npcs[0], 1);
-        this->addChild(npcManager._npcs[1], 1);
+        this->addChild(NPCManager::getInstance()->_npcs[0], 1);
+        this->addChild(NPCManager::getInstance()->_npcs[1], 1);
     }
     
 
@@ -576,7 +550,7 @@ void MainMap::updateCameraPosition(float dt) {
     // CCLOG("player position: (%f,%f)", playerPosition.x, playerPosition.y);
 
     // 检查玩家与 NPC 的交互
-    npcManager.checkPlayerInteraction(player.playerSprite->getPosition());
+    NPCManager::getInstance()->checkPlayerInteraction(player.playerSprite->getPosition());
 
     // 计算摄像机左下角的目标位置，使玩家保持在屏幕中心
     Vec2 targetCameraPosition = playerPosition - Vec2(visibleSize.width / 2, visibleSize.height / 2);
