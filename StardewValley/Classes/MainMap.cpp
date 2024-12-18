@@ -500,8 +500,6 @@ void MainMap::getInitBackpack()
 {
     clearBackpack();
     Item* initItem;
-    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
-    BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Fork");
@@ -511,10 +509,6 @@ void MainMap::getInitBackpack()
     initItem = ItemManager::getInstance()->getItem("WaterPot");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Box");
-    BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Onion");
-    BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Coin");
     BackpackManager::getInstance()->addItem(initItem, 1);
 }
 

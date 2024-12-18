@@ -51,7 +51,7 @@ BackpackManager::BackpackManager()
     Item::create("fish/FishE.png", "FishE", ItemCategory::Fish, 3, 3);// 加载鱼E
     Item::create("fish/Box.png", "Box", ItemCategory::Tool, 0, 0);// 加载箱子
 
-    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 5, 6);//加载洋葱果实
+    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 1, 2);//加载洋葱果实
 }
 
 // 析构函数
