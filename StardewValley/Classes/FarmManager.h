@@ -27,7 +27,7 @@ public:
     void fertilizeCrop(const Vec2& position);
 
     // 收获作物
-    void harvestCrop(const Vec2& position);
+    bool harvestCrop(const Vec2& position);
 
     bool isPositionOccupied(const Vec2& position);
 

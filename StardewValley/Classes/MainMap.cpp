@@ -706,24 +706,27 @@ void  MainMap::SetUseItemInMainMap() {
         // CCLOG("Item 'test' not found in backpack.");
     }
 
-    //设置叉子
+    // 设置叉子
     if (ItemManager::getInstance()->getItem("Fork")) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto Fork = ItemManager::getInstance()->getItem("Fork");
             if (place == 1 || place == 2) {
-                if (place == 1) {// 如果在左边农场
-                    if (1) {//判断作物是否是成熟作物
-                        // 加入收割逻辑
-                        // 背包增加物品
-                        return true;
-                    }
+                Vec2 targetPosition;
+                if (place == 1) { // 在左边农场
+                    targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
                 }
-                else if (place == 2) {// 如果在右边农场
-                    if (1) {//判断作物是否是成熟作物
-                        // 加入收割逻辑
-                        // 背包增加物品
-                        return true;
+                else if (place == 2) { // 在右边农场
+                    targetPosition = cropsRight->getPosition() + Vec2(96, -96);
+                }
+
+                for (auto crop : farmManager.getCrops()) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() == 4) {
+                        if (farmManager.harvestCrop(targetPosition)) {
+                            // 这里可以添加背包增加洋葱的逻辑，暂时保留注释
+                            // BackpackManager::addItem("Onion", crop->getYield());
+                            return true;
+                        }
                     }
                 }
             }
@@ -737,21 +740,23 @@ void  MainMap::SetUseItemInMainMap() {
         // CCLOG("Item 'test' not found in backpack.");
     }
 
-    //设置水瓶
+    // 设置水瓶
     if (ItemManager::getInstance()->getItem("WaterPot")) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
             auto WaterPot = ItemManager::getInstance()->getItem("WaterPot");
             if (place == 1 || place == 2) {
-                if (place == 1) {// 如果在左边农场
-                    if (1) {//判断作物是否是第一到第三阶段作物
-                        // 修改植物浇水参数
-                        return true;
-                    }
+                Vec2 targetPosition;
+                if (place == 1) { // 在左边农场
+                    targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
                 }
-                else if (place == 2) {// 如果在右边农场
-                    if (1) {//判断作物是否是第一到第三阶段作物
-                        // 修改植物浇水参数
+                else if (place == 2) { // 在右边农场
+                    targetPosition = cropsRight->getPosition() + Vec2(96, -96);
+                }
+
+                for (auto crop : farmManager.getCrops()) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getWaterDays() > 0) {
+                        crop->water();
                         return true;
                     }
                 }

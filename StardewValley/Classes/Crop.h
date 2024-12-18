@@ -34,6 +34,8 @@ public:
     // 设置作物位置
     void setPosition(const Vec2& position);
 
+    int getWaterDays() const;
+
     // 获取作物位置
     Vec2 get_Position() const;
 
@@ -46,6 +48,8 @@ private:
     int _maxWaterDays; // 最大缺水天数
     int _fertilizerDays; // 当前缺肥天数
     int _maxFertilizerDays; // 最大缺肥天数
+    float _lastWaterTime;
+    float _lastFertilizerTime;
     int _yield; // 当前产量
     Label* _statusLabel; // 状态标签（显示缺水或缺肥）
 };

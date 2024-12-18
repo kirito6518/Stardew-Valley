@@ -2,15 +2,19 @@
 
 Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays)
     : _cropName(cropName), _growthStage(0), _growthTime(0), _maxGrowthTime(maxGrowthTime),
-    _waterDays(0), _maxWaterDays(maxWaterDays), _fertilizerDays(0), _maxFertilizerDays(maxFertilizerDays), _yield(100) {
+    _waterDays(0), _maxWaterDays(maxWaterDays), _fertilizerDays(0), _maxFertilizerDays(maxFertilizerDays), _lastWaterTime(0.0f), _lastFertilizerTime(0.0f), _yield(100) {
     // 初始化作物精灵
     this->initWithFile(imagePath);
 
     // 初始化状态标签
     _statusLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 20);
-    _statusLabel->setPosition(Vec2(0, -this->getContentSize().height / 2 + 10)); // 调整位置
-    _statusLabel->setColor(Color3B::BLACK); // 设置文字颜色
-    this->addChild(_statusLabel);
+    _statusLabel->setPosition(Vec2(96, -this->getContentSize().height / 2 + 300)); // 调整位置
+    _statusLabel->setColor(Color3B::WHITE); // 设置文字颜色为红色
+    this->addChild(_statusLabel, 1); // 设置层级为1
+
+    // 调试日志
+    CCLOG("Crop position: %f, %f", this->getPosition().x, this->getPosition().y);
+    CCLOG("Label position: %f, %f", _statusLabel->getPosition().x, _statusLabel->getPosition().y);
 }
 
 Crop::~Crop() {}
@@ -47,15 +51,31 @@ void Crop::update(float dt) {
         break;
     }
 
-    // 更新状态标签
-    if (_waterDays > 0) {
-        _statusLabel->setString("缺水");
+
+    if (_lastWaterTime + _maxWaterDays < _growthTime) {
+        _waterDays = static_cast<int>(_growthTime - (_lastWaterTime + _maxWaterDays));
     }
-    else if (_fertilizerDays > 0) {
-        _statusLabel->setString("缺肥");
+    else {
+        _waterDays = 0;
+    }
+
+    // 更新缺肥天数
+    if (_lastFertilizerTime + _maxFertilizerDays < _growthTime) {
+        _fertilizerDays = static_cast<int>(_growthTime - (_lastFertilizerTime + _maxFertilizerDays));
+    }
+    else {
+        _fertilizerDays = 0;
+    }
+
+    // 更新状态标签
+    if (_waterDays > 0 && _growthStage != 4) {
+        _statusLabel->setString("Water shortage");
+    }
+    else if (_fertilizerDays > 0 && _growthStage != 4) {
+        _statusLabel->setString("");
     }
     else if (_growthStage == 4) {
-        _statusLabel->setString("可收获");
+        _statusLabel->setString("Harvestable");
     }
     else {
         _statusLabel->setString("");
@@ -136,15 +156,15 @@ void Crop::update(float dt) {
 **/
 
 void Crop::water() {
-    _waterDays = 0; // 浇水后缺水状态清零
+    _lastWaterTime = _growthTime;
 }
 
 void Crop::fertilize() {
-    _fertilizerDays = 0; // 施肥后缺肥状态清零
+    _lastFertilizerTime = _growthTime;
 }
 
 bool Crop::harvest() {
-    if (_growthStage == 3) {
+    if (_growthStage == 4) {
         // 收获作物
         _growthStage = 0;
         _growthTime = 0;
@@ -155,6 +175,10 @@ bool Crop::harvest() {
 
 int Crop::getGrowthStage() const {
     return _growthStage;
+}
+
+int Crop::getWaterDays() const {
+    return _waterDays;
 }
 
 int Crop::getYield() const {

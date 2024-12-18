@@ -53,19 +53,22 @@ void FarmManager::fertilizeCrop(const Vec2& position) {
     }
 }
 
-void FarmManager::harvestCrop(const Vec2& position) {
+bool FarmManager::harvestCrop(const Vec2& position) {
     for (auto it = _crops.begin(); it != _crops.end(); ++it) {
         if ((*it)->getPosition() == position) {
             if ((*it)->harvest()) {
-                // 获取收获的物品并添加到背包
+                // 收获逻辑
                 int yield = (*it)->getYield();
                 // BackpackManager::addItem("Onion", yield);
+                (*it)->removeFromParent();
                 delete* it;
                 _crops.erase(it);
+                return true;
             }
             break;
         }
     }
+    return false;
 }
 
 const std::vector<Crop*>& FarmManager::getCrops() const {
