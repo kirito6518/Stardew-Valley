@@ -512,6 +512,10 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Box");
     BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Onion");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Coin");
+    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 //显示商店
@@ -722,6 +726,9 @@ void  MainMap::SetUseItemInMainMap() {
                 for (auto crop : farmManager.getCrops()) {
                     if (crop->getPosition() == targetPosition && crop->getGrowthStage() == 4) {
                         if (farmManager.harvestCrop(targetPosition)) {
+                            Item* initItem;
+                            initItem = ItemManager::getInstance()->getItem("Onion");
+                            BackpackManager::getInstance()->addItem(initItem, 10);
                             // 这里可以添加背包增加洋葱的逻辑，暂时保留注释
                             // BackpackManager::addItem("Onion", crop->getYield());
                             return true;
