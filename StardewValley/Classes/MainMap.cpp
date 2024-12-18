@@ -510,6 +510,8 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Box");
     BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
+    BackpackManager::getInstance()->addItem(initItem, 1);
 }
 
 //显示商店
@@ -537,6 +539,8 @@ void MainMap::getInitShop()
     initItem = ShopItemManager::getInstance()->getShopItem("Onion\nSeed");
     ShopManager::getInstance()->addItem(initItem);
     initItem = ShopItemManager::getInstance()->getShopItem("Bait");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("Fertilizer");
     ShopManager::getInstance()->addItem(initItem);
 }
 
@@ -815,6 +819,66 @@ void  MainMap::SetUseItemInMainMap() {
         // CCLOG("Item 'test' not found in backpack.");
     }
 
+    // 设置除虫工具
+    if (ItemManager::getInstance()->getItem("Anti\nInsect")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto AntiInsect = ItemManager::getInstance()->getItem("Anti\nInsect");
+            if (place == 1 || place == 2) {
+                Vec2 targetPosition;
+                if (place == 1) { // 在左边农场
+                    targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
+                }
+                else if (place == 2) { // 在右边农场
+                    targetPosition = cropsRight->getPosition() + Vec2(96, -96);
+                }
+                // 除虫
+                if (1) { // 判断是否虫害
+                    // 除虫逻辑
+                    return true;
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Anti\nInsect")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    // 设置肥料
+    if (ItemManager::getInstance()->getItem("Fertilizer")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto Fertilizer = ItemManager::getInstance()->getItem("Fertilizer");
+            if (place == 1 || place == 2) {
+                Vec2 targetPosition;
+                if (place == 1) { // 在左边农场
+                    targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
+                }
+                else if (place == 2) { // 在右边农场
+                    targetPosition = cropsRight->getPosition() + Vec2(96, -96);
+                }
+                // 添加是否缺肥的判断
+                for (auto crop : farmManager.getCrops()) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getWaterDays() > 0) {
+                        crop->fertilize();
+                        Fertilizer->decreaseCount(1);
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Fertilizer")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
 }
 
 // 碰撞开始监听器

@@ -36,6 +36,8 @@ BackpackManager::BackpackManager()
     Item::create("tool/Fork.png", "Fork", ItemCategory::Tool, 1, 1);// 加载叉子（不可以卖）
     Item::create("tool/Pickaxe.png", "Pickaxe", ItemCategory::Tool, 1, 1);// 加载镐子（不可以卖）
     Item::create("tool/WaterPot.png", "WaterPot", ItemCategory::Tool, 1, 1);// 加载水瓶（不可以卖）
+    Item::create("tool/AntiInsect.png", "Anti\nInsect", ItemCategory::Tool, 0, 0);// 加载除虫工具（不可以卖）
+    Item::create("tool/Fertilizer.png", "Fertilizer", ItemCategory::Tool, 0, 0);// 加载肥料（不可以卖）
 
     Item::create("mineral/GemA.png", "GemA", ItemCategory::Mine, 5, 5);// 加载宝石A
     Item::create("mineral/GemB.png", "GemB", ItemCategory::Mine, 10, 10);// 加载宝石B
