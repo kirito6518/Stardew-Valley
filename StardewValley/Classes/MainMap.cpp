@@ -500,7 +500,7 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
     BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Hoe");
+    initItem = ItemManager::getInstance()->getItem("Fork");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Pickaxe");
     BackpackManager::getInstance()->addItem(initItem, 1);
@@ -723,10 +723,10 @@ void  MainMap::SetUseItemInMainMap() {
     }
 
     //设置叉子
-    if (ItemManager::getInstance()->getItem("Hoe")) {
+    if (ItemManager::getInstance()->getItem("Fork")) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
-            auto Hoe = ItemManager::getInstance()->getItem("Hoe");
+            auto Fork = ItemManager::getInstance()->getItem("Fork");
             if (place == 1 || place == 2) {
                 if (place == 1) {// 如果在左边农场
                     if (1) {//判断作物是否是成熟作物
@@ -747,7 +747,7 @@ void  MainMap::SetUseItemInMainMap() {
             };
 
         // 设置回调函数
-        ItemManager::getInstance()->getItem("Hoe")->setUseItemCallback(customUseItemLogic);
+        ItemManager::getInstance()->getItem("Fork")->setUseItemCallback(customUseItemLogic);
     }
     else {
         // CCLOG("Item 'test' not found in backpack.");
@@ -781,6 +781,7 @@ void  MainMap::SetUseItemInMainMap() {
     else {
         // CCLOG("Item 'test' not found in backpack.");
     }
+
 }
 
 // 碰撞开始监听器
