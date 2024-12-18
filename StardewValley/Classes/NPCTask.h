@@ -1,49 +1,33 @@
 #ifndef NPCTASK_H
 #define NPCTASK_H
 
-#include "cocos2d.h"
+#include <string>
 
-USING_NS_CC;
-
-class NPCTask : public Node {
+// 任务类：表示一个任务
+class NPCTask {
 public:
-    NPCTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount);
+    // 构造函数：初始化任务的ID、名字、描述、类型和奖励
+    NPCTask(int id, const std::string& name, const std::string& description, const std::string& type, int reward);
+    ~NPCTask(); // 析构函数
 
-    // 获取 NPC 名称
-    std::string getNPCName() const { return npcName; }
+    // 设置和获取任务的状态
+    void setStatus(const std::string& status);
+    std::string getStatus() const;
 
-    // 获取任务描述
-    std::string getDescription() const { return description; }
-
-    // 获取所需物品名称
-    std::string getRequiredItem() const { return requiredItem; }
-
-    // 获取所需物品数量
-    int getRequiredItemCount() const { return requiredItemCount; }
-
-    // 检查任务是否可以完成
-    bool canComplete() const;
-
-    // 完成任务
-    void complete();
-
-    // 设置任务冷却时间
-    void setCooldown(float cooldownTime);
-
-    // 检查任务是否在冷却中
-    bool isOnCooldown() const;
-
-    // 获取任务冷却剩余时间
-    float getRemainingCooldown() const;
+    // 获取任务的ID、名字、描述、类型和奖励
+    int getId() const;
+    std::string getName() const;
+    std::string getDescription() const;
+    std::string getType() const;
+    int getReward() const;
 
 private:
-    std::string npcName;          // NPC 名称
-    std::string description;      // 任务描述
-    std::string requiredItem;     // 所需物品名称
-    int requiredItemCount;        // 所需物品数量
-    bool completed;               // 任务是否已完成
-    float cooldownTime;           // 任务冷却时间
-    float cooldownEndTime;        // 任务冷却结束时间
+    int _id; // 任务的唯一ID
+    std::string _name; // 任务的名字
+    std::string _description; // 任务的描述
+    std::string _type; // 任务的类型（如收集、修复等）
+    int _reward; // 任务的奖励
+    std::string _status; // 任务的状态（未接受、进行中、已完成）
 };
 
 #endif // NPCTASK_H

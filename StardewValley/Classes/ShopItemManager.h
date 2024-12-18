@@ -24,7 +24,7 @@ public:
 
 private:
     static ShopItemManager* instance; // 单例实例
-    cocos2d::Vector<ShopItem*> shopItems; // 所有 ShopItem 实例
+    cocos2d::Vector<ShopItem*> shopItems; // 所有 ShopItem 实例的
 };
 
 #endif // __SHOP_ITEM_MANAGER_H__
