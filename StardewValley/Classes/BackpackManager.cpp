@@ -31,12 +31,13 @@ BackpackManager::BackpackManager()
     //此处统一加载所有可能放入背包的物品,
     // 第一个数字为卖出价格，第二个数字为买入价格，第三个数字为初始个数（缺省为0）
 
-    Item::create("tool/Coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币
-    Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
-    Item::create("tool/FishingGear.png", "Fishing\nGear", ItemCategory::Tool, 1, 1);// 加载钓鱼竿
-    Item::create("tool/Fork.png", "Fork", ItemCategory::Tool, 1, 1);// 加载叉子
-    Item::create("tool/Pickaxe.png", "Pickaxe", ItemCategory::Tool, 1, 1);// 加载镐子
-    Item::create("tool/WaterPot.png", "WaterPot", ItemCategory::Tool, 1, 1);// 加载水瓶
+    Item::create("tool/Coin.png", "Coin", ItemCategory::Tool, 1, 1);// 加载金币（不可以卖）
+    Item::create("tool/FishingGear.png", "Fishing\nGear", ItemCategory::Tool, 1, 1);// 加载钓鱼竿（不可以卖）
+    Item::create("tool/Fork.png", "Fork", ItemCategory::Tool, 1, 1);// 加载叉子（不可以卖）
+    Item::create("tool/Pickaxe.png", "Pickaxe", ItemCategory::Tool, 1, 1);// 加载镐子（不可以卖）
+    Item::create("tool/WaterPot.png", "WaterPot", ItemCategory::Tool, 1, 1);// 加载水瓶（不可以卖）
+    Item::create("tool/AntiInsect.png", "Anti\nInsect", ItemCategory::Tool, 0, 0);// 加载除虫工具（不可以卖）
+    Item::create("tool/Fertilizer.png", "Fertilizer", ItemCategory::Tool, 0, 0);// 加载肥料（不可以卖）
 
     Item::create("mineral/GemA.png", "GemA", ItemCategory::Mine, 5, 5);// 加载宝石A
     Item::create("mineral/GemB.png", "GemB", ItemCategory::Mine, 10, 10);// 加载宝石B
@@ -44,14 +45,16 @@ BackpackManager::BackpackManager()
     Item::create("mineral/GemD.png", "GemD", ItemCategory::Mine, 20, 20);// 加载宝石D
     Item::create("mineral/GemE.png", "GemE", ItemCategory::Mine, 25, 25);// 加载宝石E
 
-    Item::create("fish/FishA.png", "FishA", ItemCategory::Fish, 3, 3);// 加载鱼A
-    Item::create("fish/FishB.png", "FishB", ItemCategory::Fish, 3, 3);// 加载鱼B
-    Item::create("fish/FishC.png", "FishC", ItemCategory::Fish, 3, 3);// 加载鱼C
-    Item::create("fish/FishD.png", "FishD", ItemCategory::Fish, 3, 3);// 加载鱼D
-    Item::create("fish/FishE.png", "FishE", ItemCategory::Fish, 3, 3);// 加载鱼E
-    Item::create("fish/Box.png", "Box", ItemCategory::Tool, 0, 0);// 加载箱子
+    Item::create("fish/FishA.png", "FishA", ItemCategory::Fish, 2, 2);// 加载鱼A
+    Item::create("fish/FishB.png", "FishB", ItemCategory::Fish, 2, 2);// 加载鱼B
+    Item::create("fish/FishC.png", "FishC", ItemCategory::Fish, 2, 2);// 加载鱼C
+    Item::create("fish/FishD.png", "FishD", ItemCategory::Fish, 2, 2);// 加载鱼D
+    Item::create("fish/FishE.png", "FishE", ItemCategory::Fish, 2, 2);// 加载鱼E
+    Item::create("fish/Bait.png", "Bait", ItemCategory::Tool, 0, 1);// 加载饵料（不可以卖）
+    Item::create("fish/Box.png", "Box", ItemCategory::Tool, 0, 0);// 加载箱子（不可以卖）
 
-    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 5, 6);//加载洋葱果实
+    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 1, 2);//加载洋葱果实
+    Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
 }
 
 // 析构函数
