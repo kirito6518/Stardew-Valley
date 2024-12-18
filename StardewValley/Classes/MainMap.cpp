@@ -500,6 +500,13 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 3);
     initItem = ItemManager::getInstance()->getItem("Fishing\nGear");
     BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Fork");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Pickaxe");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("WaterPot");
+    BackpackManager::getInstance()->addItem(initItem, 1);
+
 }
 
 //显示商店
@@ -675,7 +682,7 @@ void MainMap::addDay(float dt)
     dayLabel->setString(dayText);
 }
 
-// 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场
+// 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
 void  MainMap::SetUseItemInMainMap() {
     
     // 设置洋葱种子
@@ -712,8 +719,69 @@ void  MainMap::SetUseItemInMainMap() {
         ItemManager::getInstance()->getItem("Onion\nSeed")->setUseItemCallback(customUseItemLogic);
     }
     else {
-        CCLOG("Item 'test' not found in backpack.");
+        // CCLOG("Item 'test' not found in backpack.");
     }
+
+    //设置叉子
+    if (ItemManager::getInstance()->getItem("Fork")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto Fork = ItemManager::getInstance()->getItem("Fork");
+            if (place == 1 || place == 2) {
+                if (place == 1) {// 如果在左边农场
+                    if (1) {//判断作物是否是成熟作物
+                        // 加入收割逻辑
+                        // 背包增加物品
+                        return true;
+                    }
+                }
+                else if (place == 2) {// 如果在右边农场
+                    if (1) {//判断作物是否是成熟作物
+                        // 加入收割逻辑
+                        // 背包增加物品
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("Fork")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    //设置水瓶
+    if (ItemManager::getInstance()->getItem("WaterPot")) {
+        // 定义一个自定义的 useItem 逻辑
+        auto customUseItemLogic = [this]() -> bool {
+            auto WaterPot = ItemManager::getInstance()->getItem("WaterPot");
+            if (place == 1 || place == 2) {
+                if (place == 1) {// 如果在左边农场
+                    if (1) {//判断作物是否是第一到第三阶段作物
+                        // 修改植物浇水参数
+                        return true;
+                    }
+                }
+                else if (place == 2) {// 如果在右边农场
+                    if (1) {//判断作物是否是第一到第三阶段作物
+                        // 修改植物浇水参数
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+
+        // 设置回调函数
+        ItemManager::getInstance()->getItem("WaterPot")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
 }
 
 // 碰撞开始监听器
@@ -735,6 +803,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with fishing area!");
         // 执行钓鱼逻辑
         place = 3; // 设置位置为钓鱼点
+
     }
     else if (nodeB->getName() == "cropsLeft" || nodeA->getName() == "cropsLeft") {
         // CCLOG("Player collided with left farm!");
@@ -761,6 +830,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
+
     }
     else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
         CCLOG("Player collided with shop!");
