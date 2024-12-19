@@ -55,6 +55,8 @@ BackpackManager::BackpackManager()
 
     Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 1, 2);//加载洋葱果实
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
+
+    Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 2, 3);//加载猪肉
 }
 
 // 析构函数

@@ -13,7 +13,8 @@
 #include "ShopItemManager.h"
 #include "FarmManager.h"
 #include "Cave.h"
-#include "SimpleAudioEngine.h"
+#include "AnimalManager.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -65,9 +66,13 @@ bool MainMap::init()
     getInitShop();
     ShopManager::getInstance()->mainMap = this;
 
+    // 加载动物管理器
+    AnimalManager::getInstance();
+    AnimalManager::getInstance()->mainMap = this;
+    AnimalManager::getInstance()->AddAnimal("Pig");
+
     // 加载使用逻辑
     SetUseItemInMainMap();
-
 
     // 加载地图
     mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
@@ -525,10 +530,13 @@ void MainMap::updatePlayerPosition(float delta)
 {
     // 更新玩家的位置和动画
     player.update(delta);
+
 }
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
+
+    AnimalManager::getInstance()->update(dt); // 更新动物时间
 
     // 进入洞穴时触发
     if (caveScene && place == 4) {
