@@ -13,8 +13,6 @@ public:
     // 获取 NPC 名称
     std::string getNPCName() const { return npcName; }
 
-    // 获取任务描述
-    std::string getDescription() const { return description; }
 
     // 获取所需物品名称
     std::string getRequiredItem() const { return needItemName; }
@@ -40,11 +38,13 @@ public:
     //更新任务状态
     void renewTask();
 
+    //获取该任务是否存在
+    bool getHaveTask() {return haveTask;}
 private:
     
     ShopItem* needItem;           //所需物品
+    bool haveTask;                //判断是否有任务
     std::string npcName;          // NPC 名称
-    std::string description;      // 任务描述
     std::string needItemName;     // 所需物品名称
     int requiredItemCount;        // 所需物品数量
     float cooldownTime;           // 任务冷却时间

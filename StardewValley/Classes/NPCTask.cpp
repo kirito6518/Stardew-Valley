@@ -1,6 +1,7 @@
 #include "NPCTask.h"
 #include "BackpackManager.h" 
 #include "ShopItemManager.h"
+#include "ShopItem.h"
 
 
 // 注释掉 GameTimeManager 的引用
@@ -9,9 +10,17 @@
 #endif
 
 NPCTask::NPCTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount)
-    : npcName(npcName), description(description), needItemName(needItemName), requiredItemCount(requiredItemCount), cooldownTime(0.0f), cooldownEndTime(0.0f)
+    : npcName(npcName), needItemName(needItemName), requiredItemCount(requiredItemCount), cooldownTime(0.0f), cooldownEndTime(0.0f)
 {
-
+    haveTask = true;
+    auto item = ShopItemManager::getInstance()->getShopItem(needItemName);
+    if (item) {
+        needItem = item;
+    }
+    else {
+        needItem = nullptr;
+    }
+    
     //此处写一个随机函数，利用物品唯一标识符随机获得所需物品及所需个数
 
 }
@@ -80,10 +89,12 @@ float NPCTask::getRemainingCooldown() const
     return 0.0f;
 }
 
+
+
 //更新任务状态
 void NPCTask::renewTask()
 {
     //先判断是否处于任务冷却中
-    //若是，设置ShopItem* needItem（所需物品）为 “1”
-    //若否，利用物品唯一标识符随机生成所需物品和数量
+    //若是，设置haveItem为 false
+    //若否，设置haveItem为ture ,并利用物品唯一标识符随机生成所需物品和数量
 }

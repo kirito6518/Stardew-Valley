@@ -25,8 +25,8 @@ TaskManager::TaskManager()
     taskLayer->retain(); // 保留任务列表层，防止被释放
 
     //所有会出现在任务栏的物品都在此处加载
-    //默认在正常名字后加1，利用第一个数字作为其唯一标识符
-    ShopItem::create("crops/Onion.png", "1",0);//意为当前无任务
+    //默认在正常名字后加1，并利用第一个数字作为其唯一标识符
+
 
     ShopItem::create("crops/Onion.png", "Onion1",1);
 
