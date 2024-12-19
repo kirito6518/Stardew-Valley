@@ -7,16 +7,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Animal.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Crop.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FarmManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ResourceManager.cpp">
@@ -88,6 +79,18 @@
     <ClCompile Include="..\Classes\Cave.cpp">
       <Filter>Cave</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Animal.cpp">
+      <Filter>animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop.cpp">
+      <Filter>crops</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FarmManager.cpp">
+      <Filter>crops</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimalManager.cpp">
+      <Filter>animal</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -96,16 +99,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>app</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Animal.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Crop.h">
-      <Filter>works</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Event.h">
-      <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FarmManager.h">
       <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManager.h">
@@ -177,6 +171,18 @@
     <ClInclude Include="..\Classes\Cave.h">
       <Filter>Cave</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Animal.h">
+      <Filter>animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop.h">
+      <Filter>crops</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FarmManager.h">
+      <Filter>crops</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimalManager.h">
+      <Filter>animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">
@@ -208,6 +214,12 @@
     </Filter>
     <Filter Include="Cave">
       <UniqueIdentifier>{499522a6-1814-453f-acf5-4de7d0d9399c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="animal">
+      <UniqueIdentifier>{1457aff6-6bc1-4673-8f14-24e24966a8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="crops">
+      <UniqueIdentifier>{44227196-9dc1-43cd-b04f-51e29aea0a58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
