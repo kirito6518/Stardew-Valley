@@ -1,5 +1,5 @@
 #include "AnimalManager.h"
-#include <string>
+#include <cstring>
 #include "cocos2d.h"
 #include <ctime>
 #include "ItemManager.h"
@@ -49,7 +49,7 @@ bool AnimalManager::init() {
     const auto visibleSize = Director::getInstance()->getVisibleSize();
 
     timeRecord = (unsigned int)time(nullptr);
-    Time = 60; // 设置生长时间为 60 秒
+    Time = 30; // 设置生长时间为 60 秒
 
     ranchLayer = Sprite::create("ui/RanchLayer.png"); // 800 * 464
     ranchLayer->setAnchorPoint(Vec2(0.5, 0.5));
@@ -166,6 +166,59 @@ bool AnimalManager::init() {
         // 添加按钮到层
         this->addChild(BuyButtonPig, 3);
     }
+    {
+        // 创建猪的屠宰按钮
+        KillButtonPig = MenuItemImage::create(
+            "ui/KillAdultNormal.png",
+            "ui/KillAdultSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        KillButtonPig->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto KillButtonPigListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        KillButtonPigListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                KillButtonPig->setNormalImage(Sprite::create("ui/KillAdultSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        KillButtonPigListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                KillButtonPig->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                RemoveAnimal("Pig");
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                KillButtonPig->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(KillButtonPigListener, KillButtonPig);
+
+        // 添加按钮到层
+        this->addChild(KillButtonPig, 3);
+    }
     // 初始化猪
     animals[0] = new Animal("Pig", "Pork", 0, 0, 0);
 
@@ -182,6 +235,15 @@ bool AnimalManager::init() {
     for (int i = 0; i < 4; i++) {
         std::string name = animals[i]->name;
         CreateAnimations(name);
+    }
+
+    // 加载数目
+    for (int i = 0; i < 4; i++) {
+        // 创建最新的
+        animalNum[i]= Label::createWithTTF("", "fonts/Gen.ttf", 1);
+        animalNum[i]->setAnchorPoint(Vec2(0.5f, 0.5f));
+        animalNum[i]->setPosition(ranchLayer->getPosition() + Vec2(280, 140 - 120 * i));
+        this->addChild(animalNum[i], 3);
     }
 
     return true;
@@ -235,6 +297,7 @@ bool AnimalManager::AddAnimal(const std::string& name) {
             mainMap->addChild(newSprite, 1); // 层数为 1
             animals[i]->sprites.push_back(newSprite);
             newSprite->runAction(RepeatForever::create(Animate::create(animals[i]->animations)));
+            CreateNumber(); // 更新
             return true;
             break;
         }
@@ -258,6 +321,7 @@ bool AnimalManager::RemoveAnimal(const std::string& name) {
                     }
                     animals[i]->sprites.pop_back();
                 }
+                CreateNumber(); // 更新
                 return true;
                 break;
             }
@@ -295,9 +359,10 @@ void AnimalManager::UpdateAnimals(float dt) {
             }
         }
     }
+    CreateNumber();
     AnimalManager::getInstance()->outButton->setPosition(ranchLayer->getPosition() + Vec2(348, 205));
     AnimalManager::getInstance()->BuyButtonPig->setPosition(ranchLayer->getPosition() + Vec2(140,140));
-
+    AnimalManager::getInstance()->KillButtonPig->setPosition(ranchLayer->getPosition() + Vec2(280, 140));
 }
 
 // 删除一个老年个体（老死）
@@ -343,4 +408,19 @@ Vec2 AnimalManager::GenerateRandomPosition() {
 
     // 返回生成的随机浮点数对，使用 Vec2
     return Vec2(x, y);
+}
+
+// 生成四种动物的数目，每帧更新
+void AnimalManager::CreateNumber() {
+    for (int i = 0; i < 4; i++) {
+        // 移除上一个
+        if (animalNum[i]->getParent()) {
+            this->removeChild(animalNum[i]);
+        }
+        // 创建最新的
+        animalNum[i] = Label::createWithTTF(std::to_string(animals[i]->numOfChild)+ "           " + std::to_string(animals[i]->numOfAdult) + "           " + std::to_string(animals[i]->numOfOld), "fonts/Gen.ttf", 20);
+        animalNum[i]->setAnchorPoint(Vec2(0.5f, 0.5f));
+        animalNum[i]->setPosition(ranchLayer->getPosition() + Vec2(-75, 140 - 80 * i));
+        this->addChild(animalNum[i], 3);
+    }
 }

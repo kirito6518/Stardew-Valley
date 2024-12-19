@@ -38,6 +38,9 @@ public:
     // 生成一对随机浮点数 (x, y)，并返回 Vec2
     Vec2 GenerateRandomPosition();
 
+    // 生成四种动物的数目
+    void CreateNumber();
+
     Sprite* ranchLayer; // 牧场界面
     MenuItemImage* outButton; // 退出按钮
 
@@ -51,6 +54,7 @@ public:
     MenuItemImage* KillButtonChicken; // 屠宰
 
     Animal* animals[4]; // 四种动物，0是猪，1是牛，2是羊，3是鸡
+    Label* animalNum[4]; // 四种动物的数量显示
 
     unsigned int timeRecord; // 记录上次记录的时间，从而规划动物的长大
     unsigned int Time; // 每个阶段的生长时间
