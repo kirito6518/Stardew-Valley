@@ -1,31 +1,48 @@
-#ifndef TASKMANAGER_H
-#define TASKMANAGER_H
+#ifndef __TASK_MANAGER_H__
+#define __TASK_MANAGER_H__
 
 #include "cocos2d.h"
+#include "TaskLayer.h"
 #include "NPCTask.h"
 
 USING_NS_CC;
 
-class TaskManager {
+/**
+ * @class TaskManager
+ * @brief 任务管理器类，负责管理任务的生成、移除和完成。
+ *
+ * TaskManager 是一个单例类，用于管理任务的生成、移除和完成。它负责与 TaskLayer 进行交互，
+ * 并提供添加任务、移除任务、检查任务是否完成等功能。
+ */
+class TaskManager : public cocos2d::Layer
+{
 public:
+    //获取 TaskManager 的单例实例
     static TaskManager* getInstance();
-    void destroyInstance();
 
-    // 添加一个任务
-    void addTask(NPCTask* task);
+    //显示任务列表界面
+    void showTaskList(Node* parent);
 
-    // 获取一个任务
-    NPCTask* getTask(const std::string& npcName);
+    //隐藏任务列表界面
+    void hideTaskList();
 
-    // 清空所有任务
-    void clearAllTasks();
-
-    // 生成一个新的任务
-    void generateNewTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount);
+    //根据NPC名字更新其任务
+    void renewTask(const std::string& npcName);
 
 private:
-    static TaskManager* instance;
-    Vector<NPCTask*> tasks;
+    static TaskManager* instance; ///< 单例实例
+    TaskLayer* taskLayer; ///< 任务列表层对象
+    Vector < NPCTask*> tasks; ///< 任务列表
+
+    /**
+     * @brief 构造函数，初始化 TaskManager。
+     */
+    TaskManager();
+
+    /**
+     * @brief 析构函数，释放资源。
+     */
+    ~TaskManager();
 };
 
-#endif // TASKMANAGER_H
+#endif // __TASK_MANAGER_H__

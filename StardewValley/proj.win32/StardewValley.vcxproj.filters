@@ -191,9 +191,6 @@
     <Filter Include="app">
       <UniqueIdentifier>{e15123cf-3b3e-45f8-8abc-1aa0aef345ff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="works">
-      <UniqueIdentifier>{653b5932-43f8-45cb-bee1-46f1f122f58b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="myLayers">
       <UniqueIdentifier>{aabc4a83-cc94-4d40-aa86-97e63666682e}</UniqueIdentifier>
     </Filter>
@@ -220,6 +217,9 @@
     </Filter>
     <Filter Include="crops">
       <UniqueIdentifier>{44227196-9dc1-43cd-b04f-51e29aea0a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="works">
+      <UniqueIdentifier>{653b5932-43f8-45cb-bee1-46f1f122f58b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

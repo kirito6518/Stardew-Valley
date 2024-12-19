@@ -1,6 +1,11 @@
 #include "TaskManager.h"
+#include "TaskLayer.h"
+#include "ShopItem.h"
+#include "ShopItemManager.h"
 
-// 单例实例
+USING_NS_CC;
+
+// 初始化单例实例
 TaskManager* TaskManager::instance = nullptr;
 
 // 获取单例实例
@@ -13,43 +18,43 @@ TaskManager* TaskManager::getInstance()
     return instance;
 }
 
-// 添加一个任务
-void TaskManager::addTask(NPCTask* task)
+// 构造函数
+TaskManager::TaskManager()
 {
-    tasks.pushBack(task);
+    taskLayer = TaskLayer::create();
+    taskLayer->retain(); // 保留任务列表层，防止被释放
+
+    //所有会出现在任务栏的物品都在此处加载
+    //默认在正常名字后加1，利用第一个数字作为其唯一标识符
+    ShopItem::create("crops/Onion.png", "1",0);//意为当前无任务
+
+    ShopItem::create("crops/Onion.png", "Onion1",1);
+
 }
 
-// 获取一个任务
-NPCTask* TaskManager::getTask(const std::string& npcName)
+// 析构函数
+TaskManager::~TaskManager()
 {
-    for (auto task : tasks) {
-        if (task->getNPCName() == npcName)
-        {
-            return task;
-        }
-    }
-    return nullptr;
+    taskLayer->release(); // 释放任务列表层
 }
 
-// 清空所有任务
-void TaskManager::clearAllTasks()
+// 显示任务列表
+void TaskManager::showTaskList(Node* parent)
 {
-    tasks.clear();
-}
-
-// 生成一个新的任务
-void TaskManager::generateNewTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount)
-{
-    NPCTask* task = new NPCTask(npcName, description, requiredItem, requiredItemCount);
-    addTask(task);
-}
-
-// 销毁 TaskManager 实例
-void TaskManager::destroyInstance()
-{
-    if (instance)
+    if (taskLayer->getParent() == nullptr)
     {
-        delete instance;
-        instance = nullptr; // 确保实例被设置为 nullptr，避免重复删除
+        parent->addChild(taskLayer, 4); // 将任务列表层添加到当前场景
     }
+}
+
+// 隐藏任务列表
+void TaskManager::hideTaskList()
+{
+    taskLayer->removeFromParentAndCleanup(false); // 从父节点移除，但保留对象
+}
+
+// 根据NPC名字更新其任务
+void TaskManager::renewTask(const std::string& npcName)
+{
+   
 }
