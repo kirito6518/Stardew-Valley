@@ -16,7 +16,7 @@ class ShopItem : public cocos2d::Node
 public:
 
     // 创建一个 ShopItem 对象
-    static ShopItem* create(const std::string& itemImagePath, const std::string& itemName, int sellingPrice, int buyingPrice);
+    static ShopItem* create(const std::string& itemImagePath, const std::string& itemName, int sellingPrice=0, int buyingPrice=0);
 
     // 初始化 ShopItem 对象
     bool init(const std::string& itemImagePath, const std::string& itemName, int sellingPrice, int buyingPrice);

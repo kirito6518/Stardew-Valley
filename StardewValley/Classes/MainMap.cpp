@@ -37,6 +37,9 @@ bool MainMap::init()
     // 原点是窗口左下角
     const auto visibleSize = Director::getInstance()->getVisibleSize();
 
+    //加载音效
+    SimpleAudioEngine::getInstance()->setEffectsVolume(0.8f);
+
     // 获取物理世界
     auto physicsWorld = this->getPhysicsWorld();
     physicsWorld->setGravity(Vec2(0, 0));// 设置重力，无

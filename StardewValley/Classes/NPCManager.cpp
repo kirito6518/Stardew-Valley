@@ -31,7 +31,7 @@ NPCManager::NPCManager()
     npc1->setName("npc1");
     npcBodys.push_back(npc1Body); // 将 NPC物理体 添加到 NPC物理体 列表中
 
-    NPC* npc2 = new NPC(2, "ZY", "npc_zy.png");
+    NPC* npc2 = new NPC(2, "Alice", "npc_zy.png");
     npc2->setDialogue("Hello,Welcome to my shop!!!");
     npc2->setLocation(cocos2d::Vec2(400, 400)); // 设置 NPC 的初始位置
     _npcs.push_back(npc2); // 将 NPC 添加到 NPC 列表中
