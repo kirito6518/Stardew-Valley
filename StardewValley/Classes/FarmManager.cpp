@@ -23,8 +23,9 @@ void FarmManager::setMainMap(MainMap* mainMap) {
     this->mainMap = mainMap;
 }
 
-void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, const Vec2& position) {
-    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays);
+void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position) {
+    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays, maxPestDays);
+    crop->setFarmManager(this);
     crop->setPosition(position);
     _crops.push_back(crop);
     if (mainMap) {
@@ -53,19 +54,42 @@ void FarmManager::fertilizeCrop(const Vec2& position) {
     }
 }
 
-bool FarmManager::harvestCrop(const Vec2& position) {
-    for (auto it = _crops.begin(); it != _crops.end(); ++it) {
+void FarmManager::controlPest(const Vec2& position) {
+    for (auto crop : _crops) {
+        if (crop->getPosition() == position) {
+            crop->controlPest();
+            break;
+        }
+    }
+}
+
+void FarmManager::removeCrop(Crop* crop) {
+    for (auto it = _crops.begin(); it != _crops.end(); ) {
+        if (*it == crop) {
+            it = _crops.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+}
+
+bool FarmManager::harvestCrop(const Vec2& position, int& yield) {
+    for (auto it = _crops.begin(); it != _crops.end();) {
         if ((*it)->getPosition() == position) {
             if ((*it)->harvest()) {
-                // ÊÕ»ñÂß¼­
-                int yield = (*it)->getYield();
-                // BackpackManager::addItem("Onion", yield);
+                yield = (*it)->getYield();
                 (*it)->removeFromParent();
                 delete* it;
-                _crops.erase(it);
+                it = _crops.erase(it);
                 return true;
             }
-            break;
+            else {
+                ++it;
+            }
+        }
+        else {
+            ++it;
         }
     }
     return false;

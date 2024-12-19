@@ -487,7 +487,14 @@ void MainMap::getInitBackpack()
     initItem = ItemManager::getInstance()->getItem("Box");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
-    BackpackManager::getInstance()->addItem(initItem, 1);
+    BackpackManager::getInstance()->addItem(initItem, 20);
+    initItem = ItemManager::getInstance()->getItem("Coin");
+    BackpackManager::getInstance()->addItem(initItem, 99);
+    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    BackpackManager::getInstance()->addItem(initItem, 20);
+    initItem = ItemManager::getInstance()->getItem("Fertilizer");
+    BackpackManager::getInstance()->addItem(initItem, 20);
+
 }
 
 //显示商店
@@ -664,7 +671,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
                         return true;
                     }
                 }
@@ -672,7 +679,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion2", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
                         return true;
                     }
                 }
@@ -699,17 +706,13 @@ void  MainMap::SetUseItemInMainMap() {
                     targetPosition = cropsRight->getPosition() + Vec2(96, -96);
                 }
 
-                for (auto crop : farmManager.getCrops()) {
-                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() == 4) {
-                        if (farmManager.harvestCrop(targetPosition)) {
-                            Item* initItem;
-                            initItem = ItemManager::getInstance()->getItem("Onion");
-                            BackpackManager::getInstance()->addItem(initItem, 10);
-                            // 这里可以添加背包增加洋葱的逻辑，暂时保留注释
-                            // BackpackManager::addItem("Onion", crop->getYield());
-                            return true;
-                        }
+                int finalYield = 0;
+                if (farmManager.harvestCrop(targetPosition, finalYield)) {
+                    Item* initItem = ItemManager::getInstance()->getItem("Onion");
+                    if (initItem) {
+                        BackpackManager::getInstance()->addItem(initItem, finalYield);
                     }
+                    return true;
                 }
             }
             return false;
@@ -802,22 +805,23 @@ void  MainMap::SetUseItemInMainMap() {
             auto AntiInsect = ItemManager::getInstance()->getItem("Anti\nInsect");
             if (place == 1 || place == 2) {
                 Vec2 targetPosition;
-                if (place == 1) { // 在左边农场
+                if (place == 1) {
                     targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
                 }
-                else if (place == 2) { // 在右边农场
+                else if (place == 2) {
                     targetPosition = cropsRight->getPosition() + Vec2(96, -96);
                 }
-                // 除虫
-                if (1) { // 判断是否虫害
-                    // 除虫逻辑
-                    return true;
+
+                for (auto crop : farmManager.getCrops()) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getPestDays() > 0) {
+                        farmManager.controlPest(targetPosition);
+                        AntiInsect->decreaseCount(1);
+                        return true;
+                    }
                 }
             }
             return false;
             };
-
-        // 设置回调函数
         ItemManager::getInstance()->getItem("Anti\nInsect")->setUseItemCallback(customUseItemLogic);
     }
     else {
@@ -839,7 +843,7 @@ void  MainMap::SetUseItemInMainMap() {
                 }
                 // 添加是否缺肥的判断
                 for (auto crop : farmManager.getCrops()) {
-                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getWaterDays() > 0) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getFertilizerDays() > 0) {
                         crop->fertilize();
                         Fertilizer->decreaseCount(1);
                         return true;
