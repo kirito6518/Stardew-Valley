@@ -16,12 +16,6 @@
     <ClCompile Include="..\Classes\SeasonManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BackpackLayer.cpp">
-      <Filter>myLayers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BackpackManager.cpp">
-      <Filter>myLayers</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp">
       <Filter>Item work</Filter>
     </ClCompile>
@@ -91,6 +85,12 @@
     <ClCompile Include="..\Classes\AnimalManager.cpp">
       <Filter>animal</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BackpackLayer.cpp">
+      <Filter>backpack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackpackManager.cpp">
+      <Filter>backpack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -107,12 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SeasonManager.h">
       <Filter>works</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BackpackLayer.h">
-      <Filter>myLayers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BackpackManager.h">
-      <Filter>myLayers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item.h">
       <Filter>Item work</Filter>
@@ -183,6 +177,12 @@
     <ClInclude Include="..\Classes\AnimalManager.h">
       <Filter>animal</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\BackpackLayer.h">
+      <Filter>backpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackpackManager.h">
+      <Filter>backpack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">
@@ -220,6 +220,9 @@
     </Filter>
     <Filter Include="works">
       <UniqueIdentifier>{653b5932-43f8-45cb-bee1-46f1f122f58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="backpack">
+      <UniqueIdentifier>{6369e493-0aa5-40eb-a4c3-769c7365ddff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

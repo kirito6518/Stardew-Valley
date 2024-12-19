@@ -494,13 +494,13 @@ void MainMap::getInitBackpack()
     initItem = ItemManager::getInstance()->getItem("Box");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
-    BackpackManager::getInstance()->addItem(initItem, 20);
-    initItem = ItemManager::getInstance()->getItem("Coin");
-    BackpackManager::getInstance()->addItem(initItem, 99);
-    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
-    BackpackManager::getInstance()->addItem(initItem, 20);
-    initItem = ItemManager::getInstance()->getItem("Fertilizer");
-    BackpackManager::getInstance()->addItem(initItem, 20);
+    BackpackManager::getInstance()->addItem(initItem, 1);
+    //initItem = ItemManager::getInstance()->getItem("Coin");
+    //BackpackManager::getInstance()->addItem(initItem, 99);
+    //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    //BackpackManager::getInstance()->addItem(initItem, 20);
+    //initItem = ItemManager::getInstance()->getItem("Fertilizer");
+    //BackpackManager::getInstance()->addItem(initItem, 20);
 
 }
 
@@ -827,7 +827,6 @@ void  MainMap::SetUseItemInMainMap() {
                 for (auto crop : farmManager.getCrops()) {
                     if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getPestDays() > 0) {
                         farmManager.controlPest(targetPosition);
-                        AntiInsect->decreaseCount(1);
                         return true;
                     }
                 }
