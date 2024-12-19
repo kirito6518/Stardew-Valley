@@ -29,7 +29,12 @@ public:
     //根据NPC名字更新其任务
     void renewTask(const std::string& npcName);
 
+    //获取MainMap实例
+    Scene* mainMap;
+
 private:
+
+
     static TaskManager* instance; ///< 单例实例
     TaskLayer* taskLayer; ///< 任务列表层对象
     Vector < NPCTask*> tasks; ///< 任务列表

@@ -2,6 +2,7 @@
 #include "TaskManager.h"
 #include "SimpleAudioEngine.h"
 #include "ShopItemManager.h"
+#include "MainMap.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -31,40 +32,64 @@ bool TaskLayer::init()
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // 初始化任务详情界面
-    taskDetailsUI = Sprite::create("ui/task_details_bg.png");
-    taskDetailsUI->setAnchorPoint(Vec2(0.5, 0.5));
-    taskDetailsUI->setPosition(visibleSize / 2);
-    taskDetailsUI->setVisible(false);
-    this->addChild(taskDetailsUI, 2);
+    // 初始化任务界面
+    taskUI = Sprite::create("ui/taskUI0.png");
+    taskUI->setAnchorPoint(Vec2(0, 0.5));
+    taskUI->setPosition(Vec2(visibleSize.width/2-100, visibleSize.height/2));
+    this->addChild(taskUI, 4);
 
-    // 初始化任务详情标签
-    taskDetailsLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
-    taskDetailsLabel->setAnchorPoint(Vec2(0, 1));
-    taskDetailsLabel->setVisible(false);
-    this->addChild(taskDetailsLabel, 3);
+    //获取任务界面信息
+    auto TaskUISize = taskUI->getContentSize();
+    auto TsakUIPos = taskUI->getPosition();
 
     // 创建关闭按钮
-   /* closeButton = MenuItemImage::create(
+    closeButton = MenuItemImage::create(
         "ui/close_normal.png",
         "ui/close_pressed.png",
-        CC_CALLBACK_1(TaskLayer::hideTaskDetails, this));*/
-
-    if (!closeButton)
-    {
-        return false;
-    }
-
+        CC_CALLBACK_1(TaskLayer::closeTaskUI, this));
     closeButton->setAnchorPoint(Vec2(1, 0));
-    closeButton->setPosition(Vec2(visibleSize.width / 2 + taskDetailsUI->getContentSize().width / 2, visibleSize.height / 2 + taskDetailsUI->getContentSize().height / 2));
+    closeButton->setPosition(Vec2(TsakUIPos.x+ TaskUISize.width, TsakUIPos.y+ TaskUISize.height/2));
     closeButton->setVisible(false);
-    this->addChild(closeButton);
+    this->addChild(closeButton,4);
 
     // 添加鼠标事件监听器
     setupMouseListener();
 
     return true;
 }
+
+
+//添加任务列表到layer中
+bool TaskLayer::addList(Sprite* taskList)
+{
+
+    //获取任务界面信息
+    auto TaskUISize = taskUI->getContentSize();
+    auto TsakUIPos = taskUI->getPosition();
+
+
+    //物品坐标相对于初始坐标的偏移量
+    int dx, dy;
+    taskList->setAnchorPoint(Vec2(1, 0));
+
+    taskList->setPosition(Vec2(TsakUIPos.x, TsakUIPos.y+ TaskUISize.height/2));
+    // 将物品图标添加到背包层
+    this->addChild(taskList, 4);
+    lists.pushBack(taskList);
+
+#if 0
+    // 为物品图标设置用户数据（即 Item 对象）
+    Item* item = static_cast<Item*>(taskList->getUserData());
+    if (item)
+    {
+        itemSprite->setUserData(item);
+    }
+
+    currentItems++;
+#endif
+    return true;
+}
+
 
 // 向任务列表中添加任务
 void TaskLayer::addTask(const std::string& npcName, const std::string& taskDescription)
@@ -78,28 +103,13 @@ void TaskLayer::removeTask(const std::string& npcName)
     //tasks.erase(npcName);
 }
 
-// 显示任务详情
-void TaskLayer::showTaskDetails(const std::string& npcName)
-{
-#if 0
-    auto taskDescription = TaskManager::getInstance();
-    if (!taskDescription.empty())
-    {
-        taskDetailsUI->setVisible(true);
-        taskDetailsLabel->setString(taskDescription);
-        taskDetailsLabel->setPosition(taskDetailsUI->getPosition() + Vec2(-taskDetailsUI->getContentSize().width / 2 + 20, taskDetailsUI->getContentSize().height / 2 - 20));
-        taskDetailsLabel->setVisible(true);
-        closeButton->setVisible(true);
-    }
-#endif
-}
 
-// 隐藏任务详情
-void TaskLayer::hideTaskDetails()
+void TaskLayer::closeTaskUI(Ref* sender)
 {
-    taskDetailsUI->setVisible(false);
-    taskDetailsLabel->setVisible(false);
-    closeButton->setVisible(false);
+    TaskManager::getInstance()->hideTaskList();
+
+    // 调用mainmap的恢复时间更新的函数
+    dynamic_cast<MainMap*>(TaskManager::getInstance()->mainMap)->hideBackpack(sender);
 }
 
 // 设置鼠标事件监听器
