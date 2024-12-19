@@ -11,7 +11,7 @@
 #include "FarmManager.h"
 #include "Cave.h"
 #include "FishingManager.h"
-
+#include "EventManager.h"
 
 USING_NS_CC;
 
@@ -79,8 +79,10 @@ public:
 
 
     SeasonManager seasonManager; // 声明 SeasonManager 实例
+    EventManager eventManager;
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
+    Label* eventLabel; // 声明 节日显示的 Label
     FishingManager* fishingManager; // 声明钓鱼管理器
     Scene* caveScene; // 洞穴场景
 

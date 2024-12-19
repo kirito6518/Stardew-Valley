@@ -380,13 +380,18 @@ bool MainMap::init()
 
         // 创建并添加季节显示的 Label
         seasonLabel = Label::createWithTTF("Spring", "fonts/Marker Felt.ttf", 35);
-        seasonLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+        seasonLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2 - 30, Director::getInstance()->getVisibleSize().height - 20));
         this->addChild(seasonLabel, 1);
 
         // 创建并添加天数显示的 Label
         dayLabel = Label::createWithTTF("Day 1", "fonts/Marker Felt.ttf", 35);
         dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0)); // 设置在seasonLabel右侧
         this->addChild(dayLabel, 1);
+
+        // 添加节日显示Label
+        eventLabel = Label::createWithTTF("- the Spring Festival -", "fonts/Marker Felt.ttf", 35);
+        eventLabel->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 60));
+        this->addChild(eventLabel, 1);
 
         // 设置定时器，每 3 秒调用一次 addDay 函数
         this->schedule(schedule_selector(MainMap::addDay), 3.0f);
@@ -654,17 +659,18 @@ void MainMap::updateCameraPosition(float dt) {
 
     toHollowWorldWord->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldWord->getContentSize().width / 2 - 20, toHollowWorldWord->getContentSize().height / 2 + 5));
 
-    seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
+    seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2 - 30 , Director::getInstance()->getVisibleSize().height - 20));
 
     dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
+
+    eventLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2,  Director::getInstance()->getVisibleSize().height - 60));
 
     // 牧场系统的按钮
     AnimalManager::getInstance()->ranchLayer->setPosition(targetCameraPosition + visibleSize / 2);
     AnimalManager::getInstance()->UpdateAnimals(dt);
 }
 
-void MainMap::addDay(float dt)
-{
+void MainMap::addDay(float dt) {
     // 增加一天
     seasonManager.updateSeason(1);
 
@@ -676,6 +682,27 @@ void MainMap::addDay(float dt)
     int day = seasonManager.getDaysInCurrentSeason() + 1; // 天数从1开始
     std::string dayText = "Day " + std::to_string(day);
     dayLabel->setString(dayText);
+
+    // 检查当前是否有节日
+    int currentSeasonValue = static_cast<int>(seasonManager.getCurrentSeason());
+    int daysInSeason = seasonManager.getDaysInCurrentSeason();
+    std::string currentEvent = EventManager().getCurrentEvent(currentSeasonValue, daysInSeason);
+
+    /*
+    if (!currentEvent.empty()) {
+        eventLabel->setString("Event: " + currentEvent);
+
+        // 触发节日事件
+        EventManager eventManager;
+        eventManager.onEventTrigger( 传入节日ID );
+    }
+    */
+    if (!currentEvent.empty()) {
+        eventLabel->setString(currentEvent);
+    }
+    else {
+        eventLabel->setString("");
+    }
 }
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
