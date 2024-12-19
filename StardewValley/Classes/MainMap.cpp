@@ -539,8 +539,6 @@ void MainMap::updatePlayerPosition(float delta)
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
 
-    AnimalManager::getInstance()->update(dt); // 更新动物时间
-
     // 进入洞穴时触发
     if (caveScene && place == 4) {
         player.playerSprite->setPosition(Vec2(640, -430 + 96 + 48));
@@ -647,9 +645,7 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 牧场系统的按钮
     AnimalManager::getInstance()->ranchLayer->setPosition(targetCameraPosition + visibleSize / 2);
-    AnimalManager::getInstance()->outButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(340, -4));
-    // CCLOG("outButton position: (%f,%f)", AnimalManager::getInstance()->outButton->getPosition().x, AnimalManager::getInstance()->outButton->getPosition().y);
-    // AnimalManager::getInstance()->ranchLayer->noButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(+240, -136));
+    AnimalManager::getInstance()->UpdateAnimals(dt);
 }
 
 void MainMap::addDay(float dt)
@@ -966,14 +962,14 @@ void MainMap::BackFromCave() {
 
 // 打开牧场
 void MainMap::OpenRanch() {
+    // 禁用 MainMap 场景的时间更新
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
     // 检查 chooseMineLayer 是否已经有父节点
     if (AnimalManager::getInstance()->ranchLayer->getParent() == nullptr) {
         AnimalManager::getInstance()->mainMap = this;
         this->addChild(AnimalManager::getInstance()->ranchLayer, 3);
     }
-    // 禁用 MainMap 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
 }
 
 // 隐藏牧场

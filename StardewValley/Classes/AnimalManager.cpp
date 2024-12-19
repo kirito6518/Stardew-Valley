@@ -5,6 +5,7 @@
 #include "ItemManager.h"
 #include "BackpackManager.h"
 #include "MainMap.h"
+#include <random>
 
 USING_NS_CC;
 
@@ -50,7 +51,7 @@ bool AnimalManager::init() {
     timeRecord = (unsigned int)time(nullptr);
     Time = 60; // 设置生长时间为 60 秒
 
-    ranchLayer = Sprite::create("ui/RanchLayer.png"); // 800*464
+    ranchLayer = Sprite::create("ui/RanchLayer.png"); // 800 * 464
     ranchLayer->setAnchorPoint(Vec2(0.5, 0.5));
     ranchLayer->setPosition(visibleSize / 2);
     ranchLayer->retain();
@@ -61,9 +62,7 @@ bool AnimalManager::init() {
         "ui/close_pressed.png",
         CC_CALLBACK_1(AnimalManager::HideRanch, this));
     //设置位置
-    const float x = visibleSize.width / 2;
-    const float y = visibleSize.height / 2;
-    outButton->setPosition(Vec2(x, y));
+    outButton->setPosition(visibleSize / 2);
 
     // 创建触摸监听器
     auto outButtonListener = EventListenerTouchOneByOne::create();
@@ -195,7 +194,7 @@ bool AnimalManager::AddAnimal(const std::string& name) {
             // 添加一个新的精灵
             Sprite* newSprite = Sprite::create();
             newSprite->setAnchorPoint(Vec2(0.5, 0.5));
-            newSprite->setPosition(Vec2(Director::getInstance()->getWinSize().width / 2, Director::getInstance()->getWinSize().height / 2)); // 设置位置为屏幕中心
+            newSprite->setPosition(GenerateRandomPosition()); // 设置随机位置
             mainMap->addChild(newSprite, 1); // 层数为 1
             animals[i]->sprites.push_back(newSprite);
             newSprite->runAction(RepeatForever::create(Animate::create(animals[i]->animations)));
@@ -231,7 +230,7 @@ bool AnimalManager::RemoveAnimal(const std::string& name) {
 }
 
 // 每帧更新，如果到指定时间，所有个体会成长一个阶段
-void AnimalManager::update(float dt) {
+void AnimalManager::UpdateAnimals(float dt) {
     // 获取当前时间
     unsigned int currentTime = (unsigned)(time(0));
 
@@ -247,7 +246,7 @@ void AnimalManager::update(float dt) {
                     OldDie(animal->name);
                 }
                 animal->numOfOld = 0;
-                CCLOG("OldDie!");
+                // CCLOG("OldDie!");
             }
             if (animal->numOfAdult > 0) { // 成年变老年
                 animal->numOfOld += animal->numOfAdult;
@@ -259,6 +258,8 @@ void AnimalManager::update(float dt) {
             }
         }
     }
+
+    outButton->setPosition(ranchLayer->getPosition() + Vec2(400, 10));
 }
 
 // 删除一个老年个体（老死）
@@ -284,4 +285,24 @@ void AnimalManager::OldDie(const std::string& name) {
 // 关闭牧场
 void AnimalManager::HideRanch(Ref* sender) {
     dynamic_cast<MainMap*>(mainMap)->HideRanch(sender);
+}
+
+// 生成一对随机浮点数 (x, y)，并返回 Vec2
+Vec2 AnimalManager::GenerateRandomPosition() {
+    // 创建一个随机数生成器
+    std::random_device rd;  // 用于获取随机种子
+    std::mt19937 gen(rd()); // 使用 Mersenne Twister 算法生成随机数
+
+    // 定义 x 的范围：-80 到 376
+    std::uniform_real_distribution<float> distX(-80.0f, 376.0f);
+
+    // 定义 y 的范围：468 到 1044
+    std::uniform_real_distribution<float> distY(468.0f, 1044.0f);
+
+    // 生成随机浮点数 x 和 y
+    float x = distX(gen);
+    float y = distY(gen);
+
+    // 返回生成的随机浮点数对，使用 Vec2
+    return Vec2(x, y);
 }
