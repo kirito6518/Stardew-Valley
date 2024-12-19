@@ -32,8 +32,11 @@ public:
     // 每帧更新，如果到指定时间，所有个体会成长一个阶段
     void update(float dt);
 
+    // 关闭牧场
+    void HideRanch(Ref* sender);
 
     Sprite* ranchLayer; // 牧场界面
+    MenuItemImage* outButton; // 退出按钮
     Animal* animals[4]; // 四种动物，0是猪，1是牛，2是羊，3是鸡
 
     unsigned int timeRecord; // 记录上次记录的时间，从而规划动物的长大

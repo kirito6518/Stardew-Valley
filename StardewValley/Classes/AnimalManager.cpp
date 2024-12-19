@@ -2,6 +2,9 @@
 #include <string>
 #include "cocos2d.h"
 #include <ctime>
+#include "ItemManager.h"
+#include "BackpackManager.h"
+#include "MainMap.h"
 
 USING_NS_CC;
 
@@ -42,8 +45,69 @@ bool AnimalManager::init() {
         return false;
     }
 
+    const auto visibleSize = Director::getInstance()->getVisibleSize();
+
     timeRecord = (unsigned int)time(nullptr);
-    Time = 10; // 设置生长时间为 60 秒
+    Time = 60; // 设置生长时间为 60 秒
+
+    ranchLayer = Sprite::create("ui/RanchLayer.png"); // 800*464
+    ranchLayer->setAnchorPoint(Vec2(0.5, 0.5));
+    ranchLayer->setPosition(visibleSize / 2);
+    ranchLayer->retain();
+
+    // 创建out按钮
+    outButton = MenuItemImage::create(
+        "ui/close_normal.png",
+        "ui/close_pressed.png",
+        CC_CALLBACK_1(AnimalManager::HideRanch, this));
+    //设置位置
+    const float x = visibleSize.width / 2;
+    const float y = visibleSize.height / 2;
+    outButton->setPosition(Vec2(x, y));
+
+    // 创建触摸监听器
+    auto outButtonListener = EventListenerTouchOneByOne::create();
+
+    // 触摸开始
+    outButtonListener->onTouchBegan = [this](Touch* touch, Event* event) {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());
+        Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+        Size s = target->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+
+        if (rect.containsPoint(locationInNode))
+        {
+            // 设置按钮为按下状态
+            outButton->setNormalImage(Sprite::create("ui/close_pressed.png"));
+            return true;
+        }
+        return false;
+        };
+
+    // 触摸结束
+    outButtonListener->onTouchEnded = [this](Touch* touch, Event* event) {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());
+        Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+        Size s = target->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+
+        if (rect.containsPoint(locationInNode))
+        {
+            // 设置按钮为正常状态
+            outButton->setNormalImage(Sprite::create("ui/close_normal.png"));
+            HideRanch(nullptr);
+        }
+        else
+        {
+            // 如果触摸结束时不在按钮上，恢复按钮状态
+            outButton->setNormalImage(Sprite::create("ui/close_normal.png"));
+        }
+        };
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(outButtonListener, outButton);
+
+    // 添加按钮到层
+    ranchLayer->addChild(outButton, 3);
 
     Sprite* sprite = Sprite::create(); // 创建一个空的精灵
 
@@ -148,6 +212,8 @@ bool AnimalManager::RemoveAnimal(const std::string& name) {
         if (animals[i]->name == name) {
             if (animals[i]->numOfAdult > 0) {
                 animals[i]->numOfAdult--; // 减少成年个体
+                Item* initItem = ItemManager::getInstance()->getItem(animals[i]->productType);
+                BackpackManager::getInstance()->addItem(initItem, 1);
                 // 删除一个精灵
                 if (!animals[i]->sprites.empty()) {
                     Sprite* spriteToRemove = animals[i]->sprites.back();
@@ -213,4 +279,9 @@ void AnimalManager::OldDie(const std::string& name) {
             }
         }
     }
+}
+
+// 关闭牧场
+void AnimalManager::HideRanch(Ref* sender) {
+    dynamic_cast<MainMap*>(mainMap)->HideRanch(sender);
 }
