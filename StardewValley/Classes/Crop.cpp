@@ -118,11 +118,11 @@ void Crop::update(float dt) {
     }
     else if (_pestDays > 9) {
         pestYield = pestYield - 1 ;
-        if (pestYield < 0) {
-            pestYield = 1;
-        }
+        
     }
-
+    if (pestYield < 0) {
+        pestYield = 1;
+    }
     _yield = pestYield;
 
     // ¸üÐÂ×´Ì¬±êÇ©

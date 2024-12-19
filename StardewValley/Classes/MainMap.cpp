@@ -495,12 +495,12 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
     BackpackManager::getInstance()->addItem(initItem, 20);
-    initItem = ItemManager::getInstance()->getItem("Coin");
-    BackpackManager::getInstance()->addItem(initItem, 99);
-    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
-    BackpackManager::getInstance()->addItem(initItem, 20);
-    initItem = ItemManager::getInstance()->getItem("Fertilizer");
-    BackpackManager::getInstance()->addItem(initItem, 20);
+    //initItem = ItemManager::getInstance()->getItem("Coin");
+    //BackpackManager::getInstance()->addItem(initItem, 99);
+    //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    //BackpackManager::getInstance()->addItem(initItem, 20);
+    //initItem = ItemManager::getInstance()->getItem("Fertilizer");
+    //BackpackManager::getInstance()->addItem(initItem, 20);
 
 }
 
