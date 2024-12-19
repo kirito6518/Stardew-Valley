@@ -412,11 +412,13 @@ bool MainMap::init()
 
         // 获取屏幕的中心位置
         const auto visibleSize = Director::getInstance()->getVisibleSize();
-        Vec2 screenCenter = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
+        Vec2 fish_pond = Vec2(visibleSize.width / 2 - 276, visibleSize.height / 2 - 288);
         Vec2 shop = Vec2(visibleSize.width + 96, visibleSize.height + 48);
+        Vec2 farmland = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
+        Vec2 pasture = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
 
         // 设置 NPC 的位置
-        NPCManager::getInstance()->_npcs[0]->setLocation(screenCenter);
+        NPCManager::getInstance()->_npcs[0]->setLocation(fish_pond);
         NPCManager::getInstance()->_npcs[1]->setLocation(shop);
 
         // 确保 NPC 的精灵锚点为 (0.5, 0.5)
