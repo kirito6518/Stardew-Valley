@@ -72,7 +72,6 @@ bool MainMap::init()
     // 加载动物管理器
     AnimalManager::getInstance();
     AnimalManager::getInstance()->mainMap = this;
-    AnimalManager::getInstance()->AddAnimal("Pig");
 
     // 加载使用逻辑
     SetUseItemInMainMap();
@@ -965,10 +964,10 @@ void MainMap::OpenRanch() {
     // 禁用 MainMap 场景的时间更新
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
-    // 检查 chooseMineLayer 是否已经有父节点
-    if (AnimalManager::getInstance()->ranchLayer->getParent() == nullptr) {
+    // 检查 AnimalManager 是否已经有父节点
+    if (AnimalManager::getInstance()->getParent() == nullptr) {
         AnimalManager::getInstance()->mainMap = this;
-        this->addChild(AnimalManager::getInstance()->ranchLayer, 3);
+        this->addChild(AnimalManager::getInstance(), 3);
     }
 }
 
@@ -977,8 +976,8 @@ void MainMap::HideRanch(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
-    // 移除 chooseMineLayer
-    if (AnimalManager::getInstance()->ranchLayer->getParent()) {
-        this->removeChild(AnimalManager::getInstance()->ranchLayer);
+    // 移除 AnimalManager
+    if (AnimalManager::getInstance()->getParent()) {
+        this->removeChild(AnimalManager::getInstance());
     }
 }

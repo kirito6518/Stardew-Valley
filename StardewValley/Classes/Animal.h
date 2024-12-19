@@ -12,7 +12,7 @@ class Animal : public Node {
 public:
 
     // 构造函数
-    Animal(const std::string& name, const std::string& productType, Sprite* sprite, int numOfChild, int numOfAdult, int numOfOld);
+    Animal(const std::string& name, const std::string& productType, int numOfChild, int numOfAdult, int numOfOld);
  
     std::string name; // 动物名称
     std::string productType; // 产品名称
