@@ -22,17 +22,17 @@ public:
     // 初始化 TaskLayer
     bool init();
 
+    //添加任务列表到layer中
+    bool addList(Sprite* taskList);
+
     // 向任务列表中添加任务
     void addTask(const std::string& npcName, const std::string& taskDescription);
 
     // 移除任务
     void removeTask(const std::string& npcName);
 
-    // 显示任务详情
-    void showTaskDetails(const std::string& npcName);
-
-    // 隐藏任务详情
-    void hideTaskDetails();
+    //关闭任务界面
+    void closeTaskUI(Ref* sender);
 
     // 获取所有任务的向量
     const Vector<NPCTask*>& getTasks() const { return tasks; }
@@ -42,15 +42,16 @@ public:
     void setupMouseListener();
 
 private:
-
-    Vector<NPCTask*> tasks;
-    cocos2d::Label* taskDetailsLabel; ///< 任务详情标签
-    cocos2d::Sprite* taskDetailsUI; ///< 任务详情界面
+    cocos2d::Vector<Sprite*> lists;//所有任务列表精灵
+    Vector <NPCTask*> tasks;//所有任务
+    cocos2d::Sprite* taskUI; ///< 任务界面
+    cocos2d::Sprite* taskList;//具体任务列表
     cocos2d::MenuItemImage* closeButton; ///< 关闭任务详情按钮
 
     cocos2d::Label* nowGoodwill;//当前好感度
     cocos2d::Label* rewardGoodwill;//奖励好感度
     cocos2d::Sprite* needItem;//需求物品
+    cocos2d::Label* needItemCount;//需求物品数量
 
 };
 
