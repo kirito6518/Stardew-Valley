@@ -46,7 +46,7 @@ bool Cave::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
     // 启用调试绘制
-    physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    // physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 加载地图
     caveSprite = Sprite::create("maps/Cave.png");// 1152 * 1248的
@@ -331,13 +331,13 @@ void Cave::OpenLayer() {
 
 //隐藏选项
 void Cave::HideLayer(Ref* sender){
+    // 重新启用 cave 场景的时间更新
+    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition), 0.2f);
+    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition), 0);
     // 移除 chooseMineLayer
     if (chooseMineLayer->getParent()) {
         this->removeChild(chooseMineLayer);
     }
-    // 重新启用 cave 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition), 0);
 }
 
 // 在屏幕下方显示可以带走的宝石
