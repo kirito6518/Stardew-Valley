@@ -165,11 +165,11 @@ bool ChooseMineLayer::init() {
 void ChooseMineLayer::ChangeMine(Ref* sender) {
     dynamic_cast<Cave*>(cave)->gem = chooseMine;
     this->removeFromParentAndCleanup(false); // 从父节点移除，但保留对象
-    dynamic_cast<Cave*>(cave)->HideLayer(sender); // 重新开始时间更新
+    dynamic_cast<Cave*>(cave)->HideLayer(sender); // 重新开始时间更新，并且退出Layer
 }
 
 // 不改变矿物
 void ChooseMineLayer::NoChangeMine(Ref* sender) {
     this->removeFromParentAndCleanup(false); // 从父节点移除，但保留对象
-    dynamic_cast<Cave*>(cave)->HideLayer(sender);
+    dynamic_cast<Cave*>(cave)->HideLayer(sender);// 重新开始时间更新，并且退出Layer
 }
