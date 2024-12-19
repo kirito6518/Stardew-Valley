@@ -13,7 +13,8 @@
 #include "ShopItemManager.h"
 #include "FarmManager.h"
 #include "Cave.h"
-#include "SimpleAudioEngine.h"
+#include "AnimalManager.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -68,9 +69,13 @@ bool MainMap::init()
     getInitShop();
     ShopManager::getInstance()->mainMap = this;
 
+    // 加载动物管理器
+    AnimalManager::getInstance();
+    AnimalManager::getInstance()->mainMap = this;
+    AnimalManager::getInstance()->AddAnimal("Pig");
+
     // 加载使用逻辑
     SetUseItemInMainMap();
-
 
     // 加载地图
     mapSprite = Sprite::create("maps/Farm_Combat.png");// 1920 * 1560的
@@ -528,10 +533,13 @@ void MainMap::updatePlayerPosition(float delta)
 {
     // 更新玩家的位置和动画
     player.update(delta);
+
 }
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
+
+    AnimalManager::getInstance()->update(dt); // 更新动物时间
 
     // 进入洞穴时触发
     if (caveScene && place == 4) {
@@ -636,6 +644,12 @@ void MainMap::updateCameraPosition(float dt) {
     seasonLabel->setPosition(targetCameraPosition + Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height - 20));
 
     dayLabel->setPosition(seasonLabel->getPosition() + Vec2(seasonLabel->getContentSize().width + 10, 0));
+
+    // 牧场系统的按钮
+    AnimalManager::getInstance()->ranchLayer->setPosition(targetCameraPosition + visibleSize / 2);
+    AnimalManager::getInstance()->outButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(340, -4));
+    // CCLOG("outButton position: (%f,%f)", AnimalManager::getInstance()->outButton->getPosition().x, AnimalManager::getInstance()->outButton->getPosition().y);
+    // AnimalManager::getInstance()->ranchLayer->noButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(+240, -136));
 }
 
 void MainMap::addDay(float dt)
@@ -907,7 +921,7 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         // CCLOG("Player collided with ranch!");
         // 执行牧场逻辑
         place = 5; // 设置位置为牧场
-
+        OpenRanch(); // 打开牧场
     }
     else if (nodeB->getName() == "shop" || nodeA->getName() == "shop") {
         // CCLOG("Player collided with shop!");
@@ -947,5 +961,28 @@ void MainMap::BackFromCave() {
     else if (gemBring == 5) {
         initItem = ItemManager::getInstance()->getItem("GemE");
         BackpackManager::getInstance()->addItem(initItem, 1);
+    }
+}
+
+// 打开牧场
+void MainMap::OpenRanch() {
+    // 检查 chooseMineLayer 是否已经有父节点
+    if (AnimalManager::getInstance()->ranchLayer->getParent() == nullptr) {
+        AnimalManager::getInstance()->mainMap = this;
+        this->addChild(AnimalManager::getInstance()->ranchLayer, 3);
+    }
+    // 禁用 MainMap 场景的时间更新
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+}
+
+// 隐藏牧场
+void MainMap::HideRanch(Ref* sender) {
+    // 重新启用 MainMap 场景的时间更新
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    // 移除 chooseMineLayer
+    if (AnimalManager::getInstance()->ranchLayer->getParent()) {
+        this->removeChild(AnimalManager::getInstance()->ranchLayer);
     }
 }

@@ -71,6 +71,13 @@ public:
     // 回到mainmap时触发
     void BackFromCave();
 
+    // 打开牧场
+    void OpenRanch();
+
+    // 隐藏牧场
+    void HideRanch(Ref* sender);
+
+
     SeasonManager seasonManager; // 声明 SeasonManager 实例
     Label* seasonLabel; // 声明 季节显示的 Label
     Label* dayLabel; // 声明 天数显示的 Label
