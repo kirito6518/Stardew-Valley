@@ -4,8 +4,8 @@
 #include "cocos2d.h"
 #include <string>
 #include <vector>
+#include "NPCRelationship.h"
 
-// NPC类继承自cocos2d::Sprite，表示一个NPC精灵
 class NPC : public cocos2d::Sprite {
 public:
     // 构造函数：初始化NPC的ID、名字和精灵图像
@@ -13,8 +13,8 @@ public:
     ~NPC(); // 析构函数
 
     // 设置和获取NPC的对话内容
-    void setDialogue(const std::string& dialogue);
-    std::string getDialogue() const;
+    void setDialogue(const std::vector<std::string>& dialogues);
+    std::string getRandomDialogue() const;
 
     // 设置和获取NPC与玩家的关系等级
     void setRelationship(int level);
@@ -39,8 +39,8 @@ public:
 private:
     int _id; // NPC的唯一ID
     std::string _name; // NPC的名字
-    std::string _dialogue; // NPC的对话内容
-    int _relationship; // 与玩家的关系等级（0:陌生人, 1:朋友, 2:浪漫）
+    std::vector<std::string> _dialogues; // NPC的对话内容
+    NPCRelationship _relationship; // 与玩家的关系等级
     std::vector<std::string> _tasks; // NPC发布的任务列表
     cocos2d::Vec2 _location; // NPC的位置
 };

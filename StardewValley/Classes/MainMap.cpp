@@ -424,6 +424,9 @@ bool MainMap::init()
         // 确保 NPC 的精灵锚点为 (0.5, 0.5)
         NPCManager::getInstance()->_npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
         NPCManager::getInstance()->_npcs[1]->setAnchorPoint(Vec2(0.5, 0.5));
+        //NPCManager::getInstance()->_npcs[2]->setAnchorPoint(Vec2(0.5, 0.5));
+        //NPCManager::getInstance()->_npcs[3]->setAnchorPoint(Vec2(0.5, 0.5));
+
 
         // 调试输出 NPC 的位置和精灵尺寸
         // CCLOG("NPC position: (%f, %f)", npcManager._npcs[0]->getLocation().x, npcManager._npcs[0]->getLocation().y);
@@ -432,6 +435,10 @@ bool MainMap::init()
         // 将 NPC 添加到场景中
         this->addChild(NPCManager::getInstance()->_npcs[0], 1);
         this->addChild(NPCManager::getInstance()->_npcs[1], 1);
+
+        //载入图片后即可添加后两个
+        //this->addChild(NPCManager::getInstance()->_npcs[2], 1);
+        //this->addChild(NPCManager::getInstance()->_npcs[3], 1);
     }
     
 

@@ -1,5 +1,6 @@
 #include "cocos2d.h"
 #include "NPC.h"
+#include <random>
 
 USING_NS_CC;
 
@@ -13,23 +14,27 @@ NPC::NPC(int id, const std::string& name, const std::string& spritePath)
 NPC::~NPC() {}
 
 // 设置NPC的对话内容
-void NPC::setDialogue(const std::string& dialogue) {
-    _dialogue = dialogue;
+void NPC::setDialogue(const std::vector<std::string>& dialogues) {
+    _dialogues = dialogues;
 }
 
-// 获取NPC的对话内容
-std::string NPC::getDialogue() const {
-    return _dialogue;
+// 获取NPC的随机对话内容
+std::string NPC::getRandomDialogue() const {
+    if (_dialogues.empty()) return "";
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, _dialogues.size() - 1);
+    return _dialogues[dis(gen)];
 }
 
 // 设置NPC与玩家的关系等级
 void NPC::setRelationship(int level) {
-    _relationship = level;
+    _relationship.increaseLevel(level);
 }
 
 // 获取NPC与玩家的关系等级
 int NPC::getRelationship() const {
-    return _relationship;
+    return _relationship.getLevel();
 }
 
 // 添加任务到NPC的任务列表
@@ -56,8 +61,8 @@ cocos2d::Vec2 NPC::getLocation() const {
 void NPC::interactWithPlayer() {
     if (_isDialogueVisible) return; // 如果对话框已经显示，直接返回
 
-    // 获取 NPC 的对话内容
-    std::string dialogue = getDialogue();
+    // 获取 NPC 的随机对话内容
+    std::string dialogue = getRandomDialogue();
 
     // 创建对话框 Label，使用 TTF 字体
     auto dialogueBox = Label::createWithTTF(dialogue, "fonts/Marker Felt.ttf", 24);

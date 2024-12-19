@@ -17,57 +17,57 @@ NPCManager* NPCManager::getInstance()
 //构造函数，在此处初始化所有NPC
 NPCManager::NPCManager()
 {
-    // 创建一个 NPC 对象
+    // 初始化 NPC 1 (Bob)
     NPC* npc1 = new NPC(1, "Bob", "npc_Fisher.png");
-    npc1->setDialogue("What kind of fish will I catch today?");
-    //npc1->setRelationship(0);
-    npc1->setLocation(cocos2d::Vec2(400, 200)); // 设置 NPC 的初始位置
-    _npcs.push_back(npc1); // 将 NPC 添加到 NPC 列表中
+    npc1->setDialogue({ "What kind of fish will I catch today?", "I love fishing!", "Do you like fish?" });
+    npc1->setLocation(cocos2d::Vec2(400, 200));
+    _npcs.push_back(npc1);
     auto npc1Body = PhysicsBody::createBox(npc1->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     npc1Body->setDynamic(false);
     npc1Body->setCollisionBitmask(0x01);
     npc1Body->setContactTestBitmask(0x01);
     npc1->setPhysicsBody(npc1Body);
     npc1->setName("npc1");
-    npcBodys.push_back(npc1Body); // 将 NPC物理体 添加到 NPC物理体 列表中
+    npcBodys.push_back(npc1Body);
 
+    // 初始化 NPC 2 (Alice)
     NPC* npc2 = new NPC(2, "Alice", "npc_Shopper.png");
-    npc2->setDialogue("Hello,Welcome to my shop!!!");
-    npc2->setLocation(cocos2d::Vec2(400, 400)); // 设置 NPC 的初始位置
-    _npcs.push_back(npc2); // 将 NPC 添加到 NPC 列表中
+    npc2->setDialogue({ "Hello, Welcome to my shop!", "Do you need anything?", "I have the best items in town!" });
+    npc2->setLocation(cocos2d::Vec2(400, 400));
+    _npcs.push_back(npc2);
     auto npc2Body = PhysicsBody::createBox(npc2->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     npc2Body->setDynamic(false);
     npc2Body->setCollisionBitmask(0x01);
     npc2Body->setContactTestBitmask(0x01);
     npc2->setPhysicsBody(npc2Body);
     npc2->setName("npc2");
-    npcBodys.push_back(npc2Body); // 将 NPC物理体 添加到 NPC物理体 列表中
+    npcBodys.push_back(npc2Body);
 
-    // 创建一个 NPC 对象
+    // 初始化 NPC 3 (John)
     NPC* npc3 = new NPC(3, "John", "npc_Farmer.png");
-    npc3->setDialogue("Remember to water and get rid of insects in time!!!");
-    npc3->setRelationship(0);
-    npc3->setLocation(cocos2d::Vec2(400, 300)); // 设置 NPC 的初始位置
-    _npcs.push_back(npc3); // 将 NPC 添加到 NPC 列表中
+    npc3->setDialogue({ "Remember to water and get rid of insects in time!", "I love farming!", "Do you like vegetables?" });
+    npc3->setLocation(cocos2d::Vec2(400, 300));
+    _npcs.push_back(npc3);
     auto npc3Body = PhysicsBody::createBox(npc3->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     npc3Body->setDynamic(false);
     npc3Body->setCollisionBitmask(0x01);
     npc3Body->setContactTestBitmask(0x01);
     npc3->setPhysicsBody(npc3Body);
     npc3->setName("npc3");
-    npcBodys.push_back(npc3Body); // 将 NPC物理体 添加到 NPC物理体 列表中
+    npcBodys.push_back(npc3Body);
 
+    // 初始化 NPC 4 (Mike)
     NPC* npc4 = new NPC(4, "Mike", "npc_Shepherd.png");
-    npc4->setDialogue("I have the fattest pigs.");
-    npc4->setLocation(cocos2d::Vec2(400, 400)); // 设置 NPC 的初始位置
-    _npcs.push_back(npc4); // 将 NPC 添加到 NPC 列表中
+    npc4->setDialogue({ "I have the fattest pigs.", "Do you like meat?", "I love my animals!" });
+    npc4->setLocation(cocos2d::Vec2(400, 400));
+    _npcs.push_back(npc4);
     auto npc4Body = PhysicsBody::createBox(npc4->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
     npc4Body->setDynamic(false);
     npc4Body->setCollisionBitmask(0x01);
     npc4Body->setContactTestBitmask(0x01);
     npc4->setPhysicsBody(npc4Body);
     npc4->setName("npc4");
-    npcBodys.push_back(npc4Body); // 将 NPC物理体 添加到 NPC物理体 列表中
+    npcBodys.push_back(npc4Body);
 }
 
 

@@ -6,18 +6,24 @@
 class NPCRelationship {
 public:
     // 构造函数：初始化关系等级
-    NPCRelationship(int level);
+    NPCRelationship(int level = 0);
     ~NPCRelationship(); // 析构函数
 
     // 增加关系等级
-    void increaseLevel();
+    void increaseLevel(int tasksCompleted);
     // 减少关系等级
     void decreaseLevel();
     // 获取当前关系等级
     int getLevel() const;
 
+    // 设置特殊任务完成状态
+    void setSpecialTaskCompleted(bool completed);
+    // 获取特殊任务完成状态
+    bool isSpecialTaskCompleted() const;
+
 private:
-    int _level; // 关系等级（0:陌生人, 1:朋友, 2:浪漫）
+    int _level; // 关系等级（0:陌生人, 1:朋友, 2:好友, 3:至交, 4:恋人）
+    bool _specialTaskCompleted; // 是否完成特殊任务
 };
 
 #endif // NPCRELATIONSHIP_H
