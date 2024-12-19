@@ -18,7 +18,7 @@ public:
     void update(float dt);
 
     // 种植作物
-    void plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, const Vec2& position);
+    void plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position);
 
     // 浇水
     void waterCrop(const Vec2& position);
@@ -26,8 +26,12 @@ public:
     // 施肥
     void fertilizeCrop(const Vec2& position);
 
+    void controlPest(const Vec2& position);
+
     // 收获作物
-    bool harvestCrop(const Vec2& position);
+    bool FarmManager::harvestCrop(const Vec2& position, int& yield);
+
+    void FarmManager::removeCrop(Crop* crop);
 
     bool isPositionOccupied(const Vec2& position);
 

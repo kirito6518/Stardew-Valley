@@ -72,7 +72,6 @@ bool MainMap::init()
     // 加载动物管理器
     AnimalManager::getInstance();
     AnimalManager::getInstance()->mainMap = this;
-    AnimalManager::getInstance()->AddAnimal("Pig");
 
     // 加载使用逻辑
     SetUseItemInMainMap();
@@ -495,7 +494,14 @@ void MainMap::getInitBackpack()
     initItem = ItemManager::getInstance()->getItem("Box");
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
-    BackpackManager::getInstance()->addItem(initItem, 1);
+    BackpackManager::getInstance()->addItem(initItem, 20);
+    initItem = ItemManager::getInstance()->getItem("Coin");
+    BackpackManager::getInstance()->addItem(initItem, 99);
+    initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
+    BackpackManager::getInstance()->addItem(initItem, 20);
+    initItem = ItemManager::getInstance()->getItem("Fertilizer");
+    BackpackManager::getInstance()->addItem(initItem, 20);
+
 }
 
 //显示商店
@@ -538,8 +544,6 @@ void MainMap::updatePlayerPosition(float delta)
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
 void MainMap::updateCameraPosition(float dt) {
-
-    AnimalManager::getInstance()->update(dt); // 更新动物时间
 
     // 进入洞穴时触发
     if (caveScene && place == 4) {
@@ -647,9 +651,7 @@ void MainMap::updateCameraPosition(float dt) {
 
     // 牧场系统的按钮
     AnimalManager::getInstance()->ranchLayer->setPosition(targetCameraPosition + visibleSize / 2);
-    AnimalManager::getInstance()->outButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(340, -4));
-    // CCLOG("outButton position: (%f,%f)", AnimalManager::getInstance()->outButton->getPosition().x, AnimalManager::getInstance()->outButton->getPosition().y);
-    // AnimalManager::getInstance()->ranchLayer->noButton->setPosition(targetCameraPosition + visibleSize / 2 + Vec2(+240, -136));
+    AnimalManager::getInstance()->UpdateAnimals(dt);
 }
 
 void MainMap::addDay(float dt)
@@ -681,7 +683,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
                         return true;
                     }
                 }
@@ -689,7 +691,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion2", "crops/Onion-1.png", 30, 7, 10, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
                         return true;
                     }
                 }
@@ -716,17 +718,13 @@ void  MainMap::SetUseItemInMainMap() {
                     targetPosition = cropsRight->getPosition() + Vec2(96, -96);
                 }
 
-                for (auto crop : farmManager.getCrops()) {
-                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() == 4) {
-                        if (farmManager.harvestCrop(targetPosition)) {
-                            Item* initItem;
-                            initItem = ItemManager::getInstance()->getItem("Onion");
-                            BackpackManager::getInstance()->addItem(initItem, 10);
-                            // 这里可以添加背包增加洋葱的逻辑，暂时保留注释
-                            // BackpackManager::addItem("Onion", crop->getYield());
-                            return true;
-                        }
+                int finalYield = 0;
+                if (farmManager.harvestCrop(targetPosition, finalYield)) {
+                    Item* initItem = ItemManager::getInstance()->getItem("Onion");
+                    if (initItem) {
+                        BackpackManager::getInstance()->addItem(initItem, finalYield);
                     }
+                    return true;
                 }
             }
             return false;
@@ -819,22 +817,23 @@ void  MainMap::SetUseItemInMainMap() {
             auto AntiInsect = ItemManager::getInstance()->getItem("Anti\nInsect");
             if (place == 1 || place == 2) {
                 Vec2 targetPosition;
-                if (place == 1) { // 在左边农场
+                if (place == 1) {
                     targetPosition = cropsLeft->getPosition() + Vec2(96, -96);
                 }
-                else if (place == 2) { // 在右边农场
+                else if (place == 2) {
                     targetPosition = cropsRight->getPosition() + Vec2(96, -96);
                 }
-                // 除虫
-                if (1) { // 判断是否虫害
-                    // 除虫逻辑
-                    return true;
+
+                for (auto crop : farmManager.getCrops()) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getPestDays() > 0) {
+                        farmManager.controlPest(targetPosition);
+                        AntiInsect->decreaseCount(1);
+                        return true;
+                    }
                 }
             }
             return false;
             };
-
-        // 设置回调函数
         ItemManager::getInstance()->getItem("Anti\nInsect")->setUseItemCallback(customUseItemLogic);
     }
     else {
@@ -856,7 +855,7 @@ void  MainMap::SetUseItemInMainMap() {
                 }
                 // 添加是否缺肥的判断
                 for (auto crop : farmManager.getCrops()) {
-                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getWaterDays() > 0) {
+                    if (crop->getPosition() == targetPosition && crop->getGrowthStage() < 4 && crop->getFertilizerDays() > 0) {
                         crop->fertilize();
                         Fertilizer->decreaseCount(1);
                         return true;
@@ -966,14 +965,14 @@ void MainMap::BackFromCave() {
 
 // 打开牧场
 void MainMap::OpenRanch() {
-    // 检查 chooseMineLayer 是否已经有父节点
-    if (AnimalManager::getInstance()->ranchLayer->getParent() == nullptr) {
-        AnimalManager::getInstance()->mainMap = this;
-        this->addChild(AnimalManager::getInstance()->ranchLayer, 3);
-    }
     // 禁用 MainMap 场景的时间更新
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+    // 检查 AnimalManager 是否已经有父节点
+    if (AnimalManager::getInstance()->getParent() == nullptr) {
+        AnimalManager::getInstance()->mainMap = this;
+        this->addChild(AnimalManager::getInstance(), 3);
+    }
 }
 
 // 隐藏牧场
@@ -981,8 +980,8 @@ void MainMap::HideRanch(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
-    // 移除 chooseMineLayer
-    if (AnimalManager::getInstance()->ranchLayer->getParent()) {
-        this->removeChild(AnimalManager::getInstance()->ranchLayer);
+    // 移除 AnimalManager
+    if (AnimalManager::getInstance()->getParent()) {
+        this->removeChild(AnimalManager::getInstance());
     }
 }
