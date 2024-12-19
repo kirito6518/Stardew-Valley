@@ -49,7 +49,7 @@ bool AnimalManager::init() {
     const auto visibleSize = Director::getInstance()->getVisibleSize();
 
     timeRecord = (unsigned int)time(nullptr);
-    Time = 30; // 设置生长时间为 60 秒
+    Time = 30; // 设置生长时间为 30 秒
 
     ranchLayer = Sprite::create("ui/RanchLayer.png"); // 800 * 464
     ranchLayer->setAnchorPoint(Vec2(0.5, 0.5));
@@ -294,7 +294,7 @@ bool AnimalManager::AddAnimal(const std::string& name) {
             Sprite* newSprite = Sprite::create();
             newSprite->setAnchorPoint(Vec2(0.5, 0.5));
             newSprite->setPosition(GenerateRandomPosition()); // 设置随机位置
-            mainMap->addChild(newSprite, 1); // 层数为 1
+            mainMap->addChild(newSprite, 2); // 层数为 2
             animals[i]->sprites.push_back(newSprite);
             newSprite->runAction(RepeatForever::create(Animate::create(animals[i]->animations)));
             CreateNumber(); // 更新
@@ -342,11 +342,8 @@ void AnimalManager::UpdateAnimals(float dt) {
         // 遍历所有动物
         for (int i = 0; i < 4; i++) {
             Animal* animal = animals[i];
-            if (animal->numOfOld > 0) { // 老年死去
-                for (int j = 0; j < animal->numOfOld; j++) {
-                    OldDie(animal->name);
-                }
-                animal->numOfOld = 0;
+            while (animal->numOfOld > 0) { // 老年死去
+                OldDie(animal->name);
                 // CCLOG("OldDie!");
             }
             if (animal->numOfAdult > 0) { // 成年变老年
@@ -378,6 +375,7 @@ void AnimalManager::OldDie(const std::string& name) {
                         mainMap->removeChild(spriteToRemove);
                     }
                     animals[i]->sprites.pop_back();
+                    CreateNumber(); // 更新
                 }
                 break;
             }
