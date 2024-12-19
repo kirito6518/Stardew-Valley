@@ -78,7 +78,7 @@ void Crop::update(float dt) {
 
     // 计算产量影响
     int waterYield = _yield;
-    if (_waterDays > 10 && _growthStage != 4) {
+    if (_waterDays > 30 && _growthStage != 4) {
 
         // 植物死亡
         if (_farmManager) {
@@ -88,21 +88,25 @@ void Crop::update(float dt) {
         return;
 
     }
-    else if (_waterDays > 7) {
+    else if (_waterDays > 21) {
         waterYield = waterYield - 7;
     }
-    else if (_waterDays > 5) {
+    else if (_waterDays > 15) {
         waterYield = waterYield - 3;
     }
 
     int fertilizerYield = waterYield;
-    if (_fertilizerDays > 5) {
-        int fertilizerImpact = std::min(_fertilizerDays - 5, 5) - 5;
+    if (_fertilizerDays > 15) {
+        int fertilizerImpact =  1;
         fertilizerYield = fertilizerYield - fertilizerImpact;
+    }
+    else if (_fertilizerDays > 10 && _fertilizerDays <= 15) {
+        int fertilizerImpact = 2;
+        fertilizerYield = fertilizerYield + fertilizerImpact;
     }
 
     int pestYield = fertilizerYield;
-    if (_pestDays > 10 && _growthStage != 4) {
+    if (_pestDays > 30 && _growthStage != 4) {
         // 植物死亡
 
         if (_farmManager) {
@@ -112,8 +116,8 @@ void Crop::update(float dt) {
         return;
 
     }
-    else if (_pestDays > 3) {
-        pestYield = pestYield - _pestDays ;
+    else if (_pestDays > 9) {
+        pestYield = pestYield - 1 ;
         if (pestYield < 0) {
             pestYield = 1;
         }
