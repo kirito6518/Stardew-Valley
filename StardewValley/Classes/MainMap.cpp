@@ -13,10 +13,11 @@
 #include "ShopItemManager.h"
 #include "FarmManager.h"
 #include "Cave.h"
-
-
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
+
 
 Scene* MainMap::createScene()
 {

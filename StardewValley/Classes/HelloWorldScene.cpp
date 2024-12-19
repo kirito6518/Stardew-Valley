@@ -4,8 +4,11 @@
 #include "AuthorListScene.h"
 #include "MainMap.h"
 #include "BackpackManager.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
+
 //创建场景
 Scene* HelloWorld::createScene()
 {
@@ -24,12 +27,16 @@ bool HelloWorld::init()
     // 关于addChild后面第二个参数的问题，这个参数是图层参数
     // 精灵，菜单，标签共用图层参数，图层越大显示越靠上
     // 同一图层，先运行的在上面
+
     if ( !Scene::init() )
     {
         return false;
     }
     // 获取游戏屏幕宽高
     const auto visibleSize = Director::getInstance()->getVisibleSize();
+
+    // 加载音效
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/start.mp3");
 
     {
         // 添加图片
@@ -182,6 +189,8 @@ void HelloWorld::toAuthorlist(Ref* ref)
 //前往主地图场景
 void HelloWorld::toMainMap(Ref* ref)
 {
+    // 播放音效
+    SimpleAudioEngine::getInstance()->playEffect("audio/start.mp3");
     mainMapScene = MainMap::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(1.0f, mainMapScene));
 }

@@ -4,9 +4,11 @@
 #include "AppDelegate.h"
 #include "MainMap.h"
 #include "ItemManager.h"
+#include "SimpleAudioEngine.h"
 
 
 USING_NS_CC;
+using namespace CocosDenshion;
 
 
 
@@ -31,6 +33,10 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         return false;
     }
 
+    // 加载音效
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
+
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -44,7 +50,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     backpackBgSprite->setAnchorPoint(Vec2(0.5, 0.5));
     backpackBgSprite->setPosition(visibleSize / 2);
-    this->addChild(backpackBgSprite, 2);
+    this->addChild(backpackBgSprite, 4);
 
     //获取背包背景图尺寸及坐标
     auto backpackSize = backpackBgSprite->getContentSize();
@@ -64,7 +70,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     hideButton->setAnchorPoint(Vec2(1, 0));
     hideButton->setPosition(Vec2(visibleSize.width / 2 + backpackSize.width / 2, visibleSize.height / 2 + backpackSize.height / 2));
-    this->addChild(hideButton);
+    this->addChild(hideButton,4);
 
     // 初始化背包属性
     this->maxItems = maxItems;
@@ -74,31 +80,31 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     itemNameLabel = Label::createWithTTF("", "fonts/Gen.ttf", 20);
     itemNameLabel->setAnchorPoint(Vec2(0.5, 1));
     itemNameLabel->setVisible(false);
-    this->addChild(itemNameLabel,3);
+    this->addChild(itemNameLabel,5);
 
     //初始化使用结果标签
     useResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
     useResultLabel->setAnchorPoint(Vec2(0.5, 0.5));
     useResultLabel->setVisible(false);
-    this->addChild(useResultLabel, 3);
+    this->addChild(useResultLabel, 5);
 
     //初始化销毁结果标签
     destroyResultLabel = Label::createWithTTF("", "fonts/Gen.ttf", 30);
     destroyResultLabel->setAnchorPoint(Vec2(0.5, 0.5));
     destroyResultLabel->setVisible(false);
-    this->addChild(destroyResultLabel, 3);
+    this->addChild(destroyResultLabel, 5);
 
     //初始化物品信息UI
     itemDetaUI = Sprite::create("ui/itemDetaUI.png");
     itemDetaUI->setAnchorPoint(Vec2(1, 1));
     itemDetaUI->setVisible(false);
-    this->addChild(itemDetaUI, 0);
+    this->addChild(itemDetaUI, 2);
 
     //初始化物品信息标签
     itemDataLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
     itemDataLabel->setAnchorPoint(Vec2(0, 1));
     itemDataLabel->setVisible(false);
-    this->addChild(itemDataLabel, 3);
+    this->addChild(itemDataLabel, 5);
 
 
     //加载物品使用按钮
@@ -109,7 +115,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
 
     useButton->setAnchorPoint(Vec2(1, 1));  
     useButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y + 20));
-    this->addChild(useButton,2);
+    this->addChild(useButton,4);
     useButton->setVisible(false);
     // 默认关闭 useButton 的鼠标事件监听
     useButton->setEnabled(false);
@@ -121,7 +127,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         CC_CALLBACK_1(BackpackLayer::onDestroyButtonClicked, this)); // 点击回调函数
     destroyButton->setAnchorPoint(Vec2(1, 1));
     destroyButton->setPosition(Vec2(backpackPos.x - backpackSize.width / 2 - 20, backpackPos.y - 40));
-    this->addChild(destroyButton,2);
+    this->addChild(destroyButton,4);
     destroyButton->setVisible(false);
     // 默认关闭 destroyButton 的鼠标事件监听
     destroyButton->setEnabled(false);
@@ -131,14 +137,14 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     determineUI->setAnchorPoint(Vec2(0.5, 0.5));
     determineUI->setPosition(backpackPos);
     determineUI->setVisible(false);
-    this->addChild(determineUI, 3);
+    this->addChild(determineUI, 5);
 
     //初始化售出可获得金币数
     getCoinCount = Label::createWithTTF("", "fonts/Gen.ttf", 20);
     getCoinCount->setAnchorPoint(Vec2(0, 0));
     getCoinCount->setPosition(backpackPos+Vec2(50,-50));
     getCoinCount->setVisible(false);
-    this->addChild(getCoinCount, 5);
+    this->addChild(getCoinCount, 7);
 
     //初始化yes按钮
     yesButton = MenuItemImage::create(
@@ -147,7 +153,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         CC_CALLBACK_1(BackpackLayer::onYesButtonClicked, this)); // 点击回调函数
     yesButton->setAnchorPoint(Vec2(0, 0));
     yesButton->setPosition(backpackPos+Vec2(-100,-60));
-    this->addChild(yesButton, 4);
+    this->addChild(yesButton, 6);
     yesButton->setVisible(false);
     // 默认关闭 destroyButton 的鼠标事件监听
     yesButton->setEnabled(false);
@@ -159,7 +165,7 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
         CC_CALLBACK_1(BackpackLayer::onNoButtonClicked, this)); // 点击回调函数
     noButton->setAnchorPoint(Vec2(0, 0));
     noButton->setPosition(backpackPos + Vec2(100, -60));
-    this->addChild(noButton, 4);
+    this->addChild(noButton, 6);
     noButton->setVisible(false);
     // 默认关闭 destroyButton 的鼠标事件监听
     noButton->setEnabled(false);
@@ -209,7 +215,7 @@ bool BackpackLayer::addItem(Sprite* itemSprite)
 
     itemSprite->setPosition(Vec2(gridStartX +dx, gridStartY -dy));
     // 将物品图标添加到背包层
-    this->addChild(itemSprite,2);
+    this->addChild(itemSprite,4);
     itemSprites.pushBack(itemSprite);
 
     // 为物品图标设置用户数据（即 Item 对象）
@@ -326,6 +332,8 @@ void BackpackLayer::onYesButtonClicked(Ref* sender)
             auto itemCoin = ItemManager::getInstance()->getItem("Coin");
             int money = (item->getsellingPrice()) * itemcount;
             itemCoin->increaseCount(money);
+            // 播放音效
+            SimpleAudioEngine::getInstance()->playEffect("audio/coins.mp3");
             if (itemCoin->getCount() > 0) {
                 BackpackManager::getInstance()->addItem(itemCoin, 0);
             }
@@ -337,6 +345,8 @@ void BackpackLayer::onYesButtonClicked(Ref* sender)
 
     }
     else {
+        // 播放音效
+        SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
         destroyResultLabel->setString("You Can't Sell This Item!");
     }
 
@@ -406,6 +416,10 @@ void BackpackLayer::setupCombinedMouseListener()
 {
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
+
+    // 加载音效
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
 
     //更新背包内物品位置
     this->renewPosition();
@@ -477,8 +491,10 @@ void BackpackLayer::setupCombinedMouseListener()
 
         if (hideButtonBoundingBox.containsPoint(mousePosition))
         {
+            
             // 如果点击了 hideButton，切换到按下状态的图片
             hideButton->setNormalImage(Sprite::create("ui/close_pressed.png"));
+
             return;
         }
 
@@ -493,8 +509,10 @@ void BackpackLayer::setupCombinedMouseListener()
 
             if (useButtonBoundingBox.containsPoint(mousePosition))
             {
+                
                 // 如果点击了 useButton，切换到按下状态的图片
                 useButton->setNormalImage(Sprite::create("ui/use_button_pressed.png"));
+            
                 return;
             }
         }
@@ -510,9 +528,13 @@ void BackpackLayer::setupCombinedMouseListener()
 
             if (destroyButtonBoundingBox.containsPoint(mousePosition))
             {
+                
+
                 // 如果点击了 destroyButton，切换到按下状态的图片
                 destroyButton->setNormalImage(Sprite::create("ui/sell_button_pressed.png"));
+
                 return;
+
             }
         }
 
@@ -524,8 +546,11 @@ void BackpackLayer::setupCombinedMouseListener()
 
             if (yesButtonBoundingBox.containsPoint(mousePosition))
             {
+                
+
                 // 如果点击了yesButton，切换到按下状态的图片
                 yesButton->setNormalImage(Sprite::create("ui/yes_pressed.png"));
+
                 return;
             }
         }
@@ -538,9 +563,12 @@ void BackpackLayer::setupCombinedMouseListener()
 
             if (noButtonBoundingBox.containsPoint(mousePosition))
             {
+                
                 // 如果点击了yesButton，切换到按下状态的图片
                 noButton->setNormalImage(Sprite::create("ui/no_pressed.png"));
+
                 return;
+
             }
         }
 
@@ -560,6 +588,8 @@ void BackpackLayer::setupCombinedMouseListener()
                 Item* item = static_cast<Item*>(itemSprite->getUserData());
                 if (item)
                 {
+                    // 播放音效
+                    SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
 
                     //显示物品UI
                     itemDetaUI->setVisible(true);
@@ -627,6 +657,11 @@ void BackpackLayer::setupCombinedMouseListener()
             hideButton->setNormalImage(Sprite::create("ui/close_normal.png"));
             hideBackpack(nullptr); // 隐藏背包层
 
+            // 播放音效
+            SimpleAudioEngine::getInstance()->setEffectsVolume(0.7f);
+            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+            SimpleAudioEngine::getInstance()->setEffectsVolume(1.0f);
+
             //隐藏物品UI
             itemDetaUI->setVisible(false);
             itemDataLabel->setVisible(false);
@@ -662,6 +697,9 @@ void BackpackLayer::setupCombinedMouseListener()
                 destroyButton->setNormalImage(Sprite::create("ui/sell_button_normal.png"));
                 destroyResultLabel->setPosition(backpackPos + Vec2(0, 40));
 
+                // 播放音效
+                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+
                 determineUI->setVisible(true);
                 yesButton->setVisible(true);
                 noButton->setVisible(true);
@@ -689,6 +727,8 @@ void BackpackLayer::setupCombinedMouseListener()
                 // 如果点击了 useButton，切换回正常状态的图片并执行使用逻辑
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
                 useResultLabel->setPosition(backpackPos + Vec2(0, 40));
+                // 播放音效
+                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
                 useButton->activate(); // 执行使用逻辑
             }
             else
@@ -707,8 +747,7 @@ void BackpackLayer::setupCombinedMouseListener()
             if (yesButtonBoundingBox.containsPoint(mousePosition))
             {
                 // 如果点击了 yesButton，切换回正常状态的图片并执行使用逻辑
-                yesButton->setNormalImage(Sprite::create("ui/yes_normal.png"));
-
+                yesButton->setNormalImage(Sprite::create("ui/yes_normal.png"));               
                 yesButton->activate(); // 执行使用逻辑
             }
             else
@@ -728,6 +767,8 @@ void BackpackLayer::setupCombinedMouseListener()
             {
                 // 如果点击了 noButton，切换回正常状态的图片并执行使用逻辑
                 noButton->setNormalImage(Sprite::create("ui/no_normal.png"));
+                // 播放音效
+                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
                 noButton->activate(); // 执行使用逻辑
             }
             else

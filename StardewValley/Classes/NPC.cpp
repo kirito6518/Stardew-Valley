@@ -67,7 +67,7 @@ void NPC::interactWithPlayer() {
     dialogueBox->setAnchorPoint(Vec2(0.5, 0.5));
 
     // 将对话框添加到场景中
-    this->getParent()->addChild(dialogueBox, 10); // 确保对话框显示在最上层
+    this->getParent()->addChild(dialogueBox, 3); // 确保对话框显示在最上层
 
     // 设置对话框的生命周期，例如 3 秒后移除
     this->scheduleOnce([this, dialogueBox](float dt) {

@@ -3,8 +3,10 @@
 #include "ShopItem.h"  
 #include "AppDelegate.h"
 #include "MainMap.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
 
 // 创建商店层
 ShopLayer* ShopLayer::create(const std::string& shopBgPath, int maxItems)
@@ -245,11 +247,15 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
                 leftCoinCount = coinYouHave->getCount();
             }
             std::string itemLeftLabel2Str = ":  " + std::to_string(leftCoinCount);
+            // 播放音效
+            SimpleAudioEngine::getInstance()->playEffect("audio/coins.mp3");
             itemLeftLabel2->setString(itemLeftLabel2Str);
             buyResultLabel->setString("Buy Success!");
         }
         else
         {
+            // 播放音效
+            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
             buyResultLabel->setString("You Don't Have enough Coins Left!");
         }
 
@@ -266,6 +272,10 @@ void ShopLayer::setupCombinedMouseListener()
 {
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
+
+    // 加载音效
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
+    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
 
     // 获取商店背景图尺寸及坐标
     auto shopSize = shopBgSprite->getContentSize();
@@ -389,6 +399,9 @@ void ShopLayer::setupCombinedMouseListener()
                 ShopItem* item = static_cast<ShopItem*>(itemSprite->getUserData());
                 if (item)
                 {
+                    // 播放音效
+                    SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+
                     // 显示物品UI
                     itemDetailUI->setVisible(true);
                     itemDetailUI->setPosition(Vec2(shopPos.x - shopSize.width / 2, shopPos.y + shopSize.height / 2)); // 在商店左侧显示
@@ -456,6 +469,9 @@ void ShopLayer::setupCombinedMouseListener()
             // 如果点击了 closeButton，切换回正常状态的图片并隐藏商店层
             closeButton->setNormalImage(Sprite::create("ui/close_normal.png"));
             hideShop(nullptr); // 隐藏商店层
+
+            // 播放音效
+            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
 
             // 隐藏物品UI
             itemDetailUI->setVisible(false);
