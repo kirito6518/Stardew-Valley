@@ -5,7 +5,7 @@
 USING_NS_CC;
 
 
-#define Seconds 0.025f // 动作每帧间隔多少秒
+#define Seconds 0.05f // 动作每帧间隔多少秒
 
 // 构造函数
 Player::Player() {
@@ -28,15 +28,17 @@ bool Player::init()
     isWPressed = isAPressed = isSPressed = isDPressed = false; // 初始化键盘状态
 
     // 初始化
-    lastDirectionIndex = 0;
+    lastWalkDirectionIndex = 6; // 初始未行走
+    lastIdleDirectionIndex = 0; // 初始向下待机
 
     // 初始化目标位置
     targetPosition = playerSprite->getPosition();
-    isMoving = false;
 
     // 创建动画
     createWalkAnimations();
     createIdleAnimations();
+
+    playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[0]))); // 播放待机动画
 
     return true;
 }
@@ -179,29 +181,49 @@ void Player::updatePlayerPosition(float dt)
     if (isSPressed) direction.y -= 1;
     if (isDPressed) direction.x += 1;
 
-    // 停下
-    playerSprite->stopAllActions();
-
-    if (direction != Vec2::ZERO)
+    if (direction != Vec2::ZERO) // 如果行走
     {
         // 移动方向
         Vec2 moveDistance = direction * 120 * dt;
+
         // 移动
         auto moveAction = MoveBy::create(dt, moveDistance);
+
         // 判断方向动画
         int directionIndex = getDirectionIndex(this->getPosition(), this->getPosition() + moveDistance);
-        // 创建行走的动作
-        auto animateAction = Animate::create(walkAnimations[directionIndex]);
-        // 播放行走动画
-        playerSprite->runAction(RepeatForever::create(animateAction));
+
         // 播放移动
         playerSprite->runAction(moveAction);
-        lastDirectionIndex = directionIndex;
+
+        if (lastWalkDirectionIndex == 6 || lastWalkDirectionIndex != directionIndex) { // 如果上一帧在待机或者行走方向改变
+
+            // 停下
+            playerSprite->stopAllActions();
+
+            // 创建行走的动作
+            auto animateAction = Animate::create(walkAnimations[directionIndex]);
+
+            // 播放行走动画
+            playerSprite->runAction(RepeatForever::create(animateAction));
+
+            // 更新方向
+            lastIdleDirectionIndex = 6; // 未待机
+            lastWalkDirectionIndex = directionIndex; // 记录行走方向
+
+        }
     }
-    else
+    else // 如果停止行走
     {
-        // 播放待机动画
-        playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastDirectionIndex])));
+        if (lastIdleDirectionIndex == 6) { // 如果上一帧不是在待机
+
+            // 停下
+            playerSprite->stopAllActions();
+
+            // 播放待机动画
+            playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastWalkDirectionIndex]))); // 播放行走方向的待机动画
+            lastIdleDirectionIndex = lastWalkDirectionIndex; // 记录待机方向
+            lastWalkDirectionIndex = 6; // 未在行走
+        }
     }
 }
 

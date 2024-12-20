@@ -51,10 +51,7 @@ public:
     CREATE_FUNC(MainMap);
 
     // 每帧更新
-    void updatePlayerPosition(float dt);
-
-    // 每帧更新
-    void updateCameraPosition(float dt);
+    void update(float dt);
 
     // 碰撞开始监听器
     bool onContactBegin(PhysicsContact& contact);

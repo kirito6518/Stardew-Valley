@@ -28,13 +28,13 @@ public:
     cocos2d::Animation* walkAnimations[6]; // 六个方向的行走动画
     cocos2d::Animation* idleAnimations[6]; // 六个方向的待机动画
     cocos2d::Vec2 targetPosition; // 目标位置
-    bool isMoving; // 是否正在移动
 
     // 键盘状态
     bool isWPressed, isAPressed, isSPressed, isDPressed;
 
-    // 最后一次行走的方向索引
-    int lastDirectionIndex;
+    int lastWalkDirectionIndex; // 上一帧行走的方向，如果上一帧未行走就是6
+    int lastIdleDirectionIndex; // 上一帧待机的方向，如果上一帧未待机就是6
+
 
     // 创建六个方向的行走动画
     void createWalkAnimations();

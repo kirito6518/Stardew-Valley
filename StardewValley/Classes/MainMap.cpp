@@ -406,10 +406,8 @@ bool MainMap::init()
     // 初始化位置
     place = 0;
 
-    // 每多少s更新主角位置
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
     
     {
         // 初始化 NPC
@@ -469,8 +467,7 @@ void MainMap::onBackpackButtonClicked(Ref* sender)
     BackpackManager::getInstance()->showBackpack(this);
 
     // 禁用 MainMap 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::update));
 
 }
 
@@ -478,8 +475,7 @@ void MainMap::onBackpackButtonClicked(Ref* sender)
 void MainMap::hideBackpack(Ref* sender)
 {
     // 重新启用 MainMap 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
 }
 
 //清空背包物品
@@ -525,15 +521,13 @@ void MainMap::toShop()
     ShopManager::getInstance()->showShop(this);
 
     // 禁用 MainMap 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::update));
 }
 
 //隐藏商店界面
 void MainMap::hideShop(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
 }
 
 //加载初始商店
@@ -559,16 +553,11 @@ void MainMap::getInitShop()
     ShopManager::getInstance()->addItem(initItem);
 }
 
-// 每0.2s更新玩家位置和动画
-void MainMap::updatePlayerPosition(float delta)
-{
-    // 更新玩家的位置和动画
-    player.update(delta);
-
-}
-
 // 每帧更新摄像头和按钮位置，更新碰撞体
-void MainMap::updateCameraPosition(float dt) {
+void MainMap::update(float dt) {
+
+    // 更新玩家的位置和动画
+    player.update(dt);
 
     // 进入洞穴时触发
     if (caveScene && place == 4) {
@@ -1099,8 +1088,7 @@ void MainMap::BackFromCave() {
 // 打开牧场
 void MainMap::OpenRanch() {
     // 禁用 MainMap 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::update));
     // 检查 AnimalManager 是否已经有父节点
     if (AnimalManager::getInstance()->getParent() == nullptr) {
         AnimalManager::getInstance()->mainMap = this;
@@ -1111,8 +1099,7 @@ void MainMap::OpenRanch() {
 // 隐藏牧场
 void MainMap::HideRanch(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
     // 移除 AnimalManager
     if (AnimalManager::getInstance()->getParent()) {
         this->removeChild(AnimalManager::getInstance());
