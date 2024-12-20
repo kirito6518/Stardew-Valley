@@ -379,7 +379,7 @@ bool MainMap::init()
     x = visibleSize.width - backpackButton->getContentSize().width / 2-80;
     y = visibleSize.height - backpackButton->getContentSize().height / 2 + 12;
     taskButton->setPosition(Vec2(x, y));
-    taskButton->setScale(0.8f);
+    taskButton->setScale(0.7f);
 
     // 添加点击事件监听器
     auto taskListener = EventListenerTouchOneByOne::create();
@@ -622,16 +622,16 @@ void MainMap::onTaskButtonClicked(Ref* sender)
 {
     // 调用单例管理类显示任务层
     TaskManager::getInstance()->showTaskList(this);
+
+    // 禁用 MainMap 场景的时间更新
+    this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::update));
 }
 
 //隐藏任务界面
 void MainMap::hideTask(Ref* sender) {
     // 重新启用 MainMap 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
 }
-
-
 
 
 // 每帧更新摄像头和按钮位置，更新碰撞体
@@ -744,7 +744,7 @@ void MainMap::update(float dt) {
     // 更新背包按钮、任务按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
 
-    taskButton->setPosition(targetCameraPosition+ Vec2(visibleSize.width - backpackButton->getContentSize().width / 2-80, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
+    taskButton->setPosition(targetCameraPosition+ Vec2(visibleSize.width - backpackButton->getContentSize().width / 2-70, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
 
     toHollowWorldButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldButton->getContentSize().width / 2, toHollowWorldButton->getContentSize().height / 2));
 
