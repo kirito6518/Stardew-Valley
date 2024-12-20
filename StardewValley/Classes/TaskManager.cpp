@@ -26,16 +26,50 @@ TaskManager::TaskManager()
     taskLayer->retain();
 
     //所有会出现在任务栏的物品都在此处加载，最好不要用名字带换行符的物品
-    //第一个数字作为其唯一标识符
-    TaskItem::create("crops/Onion.png", "Onion",1);
+    // 初始化任务物品
+    TaskItem::create("mineral/GemA.png", "GemA", 1);
+    TaskItem::create("mineral/GemB.png", "GemB", 2);
+    TaskItem::create("mineral/GemC.png", "GemC", 3);
+    TaskItem::create("mineral/GemD.png", "GemD", 4);
+    TaskItem::create("mineral/GemE.png", "GemE", 5);
+    TaskItem::create("fish/FishA.png", "FishA", 6);
+    TaskItem::create("fish/FishB.png", "FishB", 7);
+    TaskItem::create("fish/FishC.png", "FishC", 8);
+    TaskItem::create("fish/FishD.png", "FishD", 9);
+    TaskItem::create("fish/FishE.png", "FishE", 10);
+    TaskItem::create("crops/Onion.png", "Onion", 11);
+    TaskItem::create("crops/Potato.png", "Potato", 12);
+    TaskItem::create("crops/Carrot.png", "Carrot", 13);
+    TaskItem::create("crops/Turnip.png", "Turnip", 14);
+    TaskItem::create("crops/Potato.png", "Radish", 15);
+    TaskItem::create("crops/Spinach.png", "Spinach", 16);
+    TaskItem::create("animal/Pork.png", "Pork", 17);
+    TaskItem::create("animal/Beef.png", "Beef", 18);
+    TaskItem::create("animal/Mutton.png", "Muttun", 19);
+    TaskItem::create("animal/Chicken.png", "Chicken", 20);
 
+    // 初始化四个NPC的任务
+    // 店长
+    NPCTask* shopOwner = new NPCTask("Alice");
+    addTaskList(shopOwner);
+    tasks.pushBack(shopOwner);
 
-    //四个npc任务的初始化在此加载
-    NPCTask* Alice=new NPCTask("Alice");
-    addTaskList(Alice);
-    tasks.pushBack(Alice);
-    //继续增加....
+   /*
+    // 渔夫
+    NPCTask* fisher = new NPCTask("Bob");
+    addTaskList(fisher);
+    tasks.pushBack(fisher);
 
+    // 农民
+    NPCTask* farmer = new NPCTask("John");
+    addTaskList(farmer);
+    tasks.pushBack(farmer);
+
+    // 牧民
+    NPCTask* rancher = new NPCTask("Mike");
+    addTaskList(rancher);
+    tasks.pushBack(rancher);
+    */
 }
 
 // 析构函数
@@ -88,6 +122,7 @@ bool TaskManager::addTaskList(NPCTask* task)
 void TaskManager::renewTask()
 {
     for (auto task : tasks) {
+        task->renewTask();
         if (!task->getHaveTask()) {
             static_cast<TaskLayer*>(taskLayer)->removeItem(task->getIcon());
         }

@@ -6,20 +6,32 @@ NPCRelationship::NPCRelationship(int level) : _level(level), _specialTaskComplet
 NPCRelationship::~NPCRelationship() {}
 
 // 增加关系等级
-void NPCRelationship::increaseLevel(int tasksCompleted) {
-    if (_level < 4) {
-        if (tasksCompleted >= 6 && _level < 3) {
-            _level = 3; // 至交
-        }
-        else if (tasksCompleted >= 3 && _level < 2) {
-            _level = 2; // 好友
-        }
-        else if (tasksCompleted >= 1 && _level < 1) {
-            _level = 1; // 朋友
-        }
+void NPCRelationship::increaseLevel(int tasksCompleted)
+{
+    _level += tasksCompleted;
+    if (_level > 100)
+        _level = 100;
+
+    if (_level >= 100 && _specialTaskCompleted)
+    {
+        // 建立恋人关系
+        _level = 4;
     }
-    if (_level == 3 && _specialTaskCompleted) {
-        _level = 4; // 恋人
+    else if (_level >= 90)
+    {
+        _level = 3; // 至交
+    }
+    else if (_level >= 60)
+    {
+        _level = 2; // 好友
+    }
+    else if (_level >= 30)
+    {
+        _level = 1; // 朋友
+    }
+    else
+    {
+        _level = 0; // 陌生人
     }
 }
 
@@ -33,12 +45,12 @@ int NPCRelationship::getLevel() const {
     return _level;
 }
 
-// 设置特殊任务完成状态
-void NPCRelationship::setSpecialTaskCompleted(bool completed) {
+void NPCRelationship::setSpecialTaskCompleted(bool completed)
+{
     _specialTaskCompleted = completed;
 }
 
-// 获取特殊任务完成状态
-bool NPCRelationship::isSpecialTaskCompleted() const {
+bool NPCRelationship::isSpecialTaskCompleted() const
+{
     return _specialTaskCompleted;
 }

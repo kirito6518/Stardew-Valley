@@ -29,10 +29,13 @@ public:
     std::vector<NPC*> _npcs; // NPC列表
     std::vector<PhysicsBody*> npcBodys; // npc的物理体
     //std::vector<NPCTask*> _tasks; // 任务列表
+
+    NPC* getNPCByName(const std::string& name);
 private:
 
     //构造函数，初始化NPC
     NPCManager::NPCManager();
+    NPCManager::~NPCManager();
     static NPCManager* instance; // 单例实例
   
 };

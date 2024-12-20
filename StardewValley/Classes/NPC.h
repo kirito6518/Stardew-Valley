@@ -36,13 +36,18 @@ public:
 
     bool _isDialogueVisible = false; // 对话框是否可见
 
-private:
+    void setSpecialTaskCompleted(bool completed);
+    bool isSpecialTaskCompleted() const;
+
+
     int _id; // NPC的唯一ID
     std::string _name; // NPC的名字
     std::vector<std::string> _dialogues; // NPC的对话内容
     NPCRelationship _relationship; // 与玩家的关系等级
     std::vector<std::string> _tasks; // NPC发布的任务列表
     cocos2d::Vec2 _location; // NPC的位置
+private:
+    
 };
 
 #endif // NPC_H

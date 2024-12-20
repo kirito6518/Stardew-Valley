@@ -94,3 +94,13 @@ void NPC::removeDialogue() {
 
     _isDialogueVisible = false; // 重置标志位
 }
+
+void NPC::setSpecialTaskCompleted(bool completed)
+{
+    _relationship.setSpecialTaskCompleted(completed);
+}
+
+bool NPC::isSpecialTaskCompleted() const
+{
+    return _relationship.isSpecialTaskCompleted();
+}

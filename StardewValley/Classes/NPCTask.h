@@ -4,8 +4,15 @@
 #include "cocos2d.h"
 #include "TaskItemManager.h"
 #include "TaskItem.h"
+#include <chrono>
 
 USING_NS_CC;
+
+class Clock
+{
+public:
+    static float getElapsedTime();
+};
 
 class NPCTask : public Node {
 public:

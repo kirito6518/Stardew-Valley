@@ -44,7 +44,7 @@ NPCManager::NPCManager()
     npcBodys.push_back(npc2Body);
 
     // 初始化 NPC 3 (John)
-    NPC* npc3 = new NPC(3, "John", "npc_Shopper.png");
+    NPC* npc3 = new NPC(3, "John", "npc_Farmer.png");
     npc3->setDialogue({ "Remember to water and get rid of insects in time!", "You can't grow piglets in farmland!", "Gemstones do not grow in farmland." });
     npc3->setLocation(cocos2d::Vec2(400, 300));
     _npcs.push_back(npc3);
@@ -57,7 +57,7 @@ NPCManager::NPCManager()
     npcBodys.push_back(npc3Body);
 
     // 初始化 NPC 4 (Mike)
-    NPC* npc4 = new NPC(4, "Mike", "npc_Shopper.png");
+    NPC* npc4 = new NPC(4, "Mike", "npc_Rancher.png");
     npc4->setDialogue({ "I have the fattest pigs.", "Aha,you're like a cute little pig.", "I love my animals!" });
     npc4->setLocation(cocos2d::Vec2(400, 400));
     _npcs.push_back(npc4);
@@ -68,8 +68,14 @@ NPCManager::NPCManager()
     npc4->setPhysicsBody(npc4Body);
     npc4->setName("npc4");
     npcBodys.push_back(npc4Body);
+
 }
 
+NPCManager::~NPCManager() {
+    for (auto npc : _npcs) {
+        delete npc;
+    }
+}
 
 #if 0 //暂时注释掉任务部分
 // 初始化任务列表
@@ -101,4 +107,14 @@ void NPCManager::checkPlayerInteraction(const cocos2d::Vec2& playerPosition) {
             npc->removeDialogue(); // 玩家远离 NPC 时移除对话框
         }
     }
+}
+
+NPC* NPCManager::getNPCByName(const std::string& name)
+{
+    for (auto npc : _npcs)
+    {
+        if (npc->_name == name)
+            return npc;
+    }
+    return nullptr;
 }

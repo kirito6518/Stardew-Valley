@@ -569,6 +569,16 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Onion");
     BackpackManager::getInstance()->addItem(initItem, 10);
+    initItem = ItemManager::getInstance()->getItem("GemA");
+    BackpackManager::getInstance()->addItem(initItem, 10);
+    initItem = ItemManager::getInstance()->getItem("GemB");
+    BackpackManager::getInstance()->addItem(initItem, 10);
+    initItem = ItemManager::getInstance()->getItem("GemC");
+    BackpackManager::getInstance()->addItem(initItem, 10);
+    initItem = ItemManager::getInstance()->getItem("GemD");
+    BackpackManager::getInstance()->addItem(initItem, 10);
+    initItem = ItemManager::getInstance()->getItem("GemE");
+    BackpackManager::getInstance()->addItem(initItem, 10);
     //initItem = ItemManager::getInstance()->getItem("Coin");
     //BackpackManager::getInstance()->addItem(initItem, 99);
     //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");

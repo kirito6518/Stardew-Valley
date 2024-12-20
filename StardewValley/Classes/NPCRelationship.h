@@ -16,9 +16,7 @@ public:
     // 获取当前关系等级
     int getLevel() const;
 
-    // 设置特殊任务完成状态
     void setSpecialTaskCompleted(bool completed);
-    // 获取特殊任务完成状态
     bool isSpecialTaskCompleted() const;
 
 private:
