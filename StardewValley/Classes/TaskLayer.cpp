@@ -1,8 +1,10 @@
 #include "TaskLayer.h"
 #include "TaskManager.h"
 #include "SimpleAudioEngine.h"
-#include "ShopItemManager.h"
+#include "TaskItem.h"
+#include "TaskItemManager.h"
 #include "MainMap.h"
+#include "NPCtask.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -33,7 +35,7 @@ bool TaskLayer::init()
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // 初始化任务界面
-    taskUI = Sprite::create("ui/taskUI0.png");
+    taskUI = Sprite::create("ui/taskUI.png");
     taskUI->setAnchorPoint(Vec2(0, 0.5));
     taskUI->setPosition(Vec2(visibleSize.width/2-100, visibleSize.height/2));
     this->addChild(taskUI, 4);
@@ -52,6 +54,16 @@ bool TaskLayer::init()
     closeButton->setVisible(false);
     this->addChild(closeButton,4);
 
+    //创建任务详情UI
+    taskDetailsUi = Sprite::create("ui/task_detailsUI.png");
+    taskUI->setAnchorPoint(Vec2(0, 0.5));
+    taskUI->setPosition(TsakUIPos);
+    taskDetailsUi -> setVisible(false);
+    this->addChild(taskUI, 5);
+
+    //创建需求物品精灵
+
+
     // 添加鼠标事件监听器
     setupMouseListener();
 
@@ -68,41 +80,44 @@ bool TaskLayer::addList(Sprite* taskList)
     auto TsakUIPos = taskUI->getPosition();
 
 
-    //物品坐标相对于初始坐标的偏移量
-    int dx, dy;
-    taskList->setAnchorPoint(Vec2(1, 0));
-
+    taskList->setAnchorPoint(Vec2(1, 1));
     taskList->setPosition(Vec2(TsakUIPos.x, TsakUIPos.y+ TaskUISize.height/2));
-    // 将物品图标添加到背包层
+    // 将物品图标添加到任务层
     this->addChild(taskList, 4);
     lists.pushBack(taskList);
 
-#if 0
-    // 为物品图标设置用户数据（即 Item 对象）
-    Item* item = static_cast<Item*>(taskList->getUserData());
-    if (item)
-    {
-        itemSprite->setUserData(item);
-    }
 
-    currentItems++;
-#endif
     return true;
 }
 
-
-// 向任务列表中添加任务
-void TaskLayer::addTask(const std::string& npcName, const std::string& taskDescription)
+// 移除列表
+void TaskLayer::removeItem(Sprite* taskList)
 {
-    
+
+    lists.eraseObject(taskList);
+    taskList->removeFromParent();
 }
 
-// 移除任务
-void TaskLayer::removeTask(const std::string& npcName)
+//更新位置
+void TaskLayer::renewPosition()
 {
-    //tasks.erase(npcName);
-}
+    //获取任务界面信息
+    auto TaskUISize = taskUI->getContentSize();
+    auto TsakUIPos = taskUI->getPosition();
 
+    //更新list位置
+    int count = 0;
+    const int space = 132;
+    int startX = TsakUIPos.x;
+    int startY = TsakUIPos.y + TaskUISize.height / 2;
+    for (auto list : lists) {
+        int x = startX;
+        int y = startY + count * space;
+        list->setPosition(Vec2(x, y));
+        count++;
+    }
+
+}
 
 void TaskLayer::closeTaskUI(Ref* sender)
 {

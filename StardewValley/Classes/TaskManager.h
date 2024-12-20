@@ -26,6 +26,12 @@ public:
     //隐藏任务列表界面
     void hideTaskList();
 
+    //添加任务列表
+    bool addTaskLIst(NPCTask* task);
+
+    //移除任务列表
+    void TaskManager::removeList(NPCTask* task);
+
     //根据NPC名字更新其任务
     void renewTask(const std::string& npcName);
 

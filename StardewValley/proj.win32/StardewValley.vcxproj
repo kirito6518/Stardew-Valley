@@ -159,7 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\BringMine.cpp" />
     <ClCompile Include="..\Classes\Cave.cpp" />
     <ClCompile Include="..\Classes\Crop.cpp" />
-    <ClCompile Include="..\Classes\Event.cpp" />
+    <ClCompile Include="..\Classes\EventManager.cpp" />
     <ClCompile Include="..\Classes\FarmManager.cpp" />
     <ClCompile Include="..\Classes\FishingManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
@@ -177,6 +177,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ShopItemManager.cpp" />
     <ClCompile Include="..\Classes\ShopLayer.cpp" />
     <ClCompile Include="..\Classes\ShopManager.cpp" />
+    <ClCompile Include="..\Classes\TaskItem.cpp" />
+    <ClCompile Include="..\Classes\TaskItemManager.cpp" />
     <ClCompile Include="..\Classes\TaskLayer.cpp" />
     <ClCompile Include="..\Classes\TaskManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -191,7 +193,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\BringMine.h" />
     <ClInclude Include="..\Classes\Cave.h" />
     <ClInclude Include="..\Classes\Crop.h" />
-    <ClInclude Include="..\Classes\Event.h" />
+    <ClInclude Include="..\Classes\EventManager.h" />
     <ClInclude Include="..\Classes\FarmManager.h" />
     <ClInclude Include="..\Classes\FishingManager.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
@@ -209,6 +211,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ShopItemManager.h" />
     <ClInclude Include="..\Classes\ShopLayer.h" />
     <ClInclude Include="..\Classes\ShopManager.h" />
+    <ClInclude Include="..\Classes\TaskItem.h" />
+    <ClInclude Include="..\Classes\TaskItemManager.h" />
     <ClInclude Include="..\Classes\TaskLayer.h" />
     <ClInclude Include="..\Classes\TaskManager.h" />
     <ClInclude Include="main.h" />

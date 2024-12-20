@@ -7,9 +7,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ResourceManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
@@ -91,6 +88,15 @@
     <ClCompile Include="..\Classes\BackpackManager.cpp">
       <Filter>backpack</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EventManager.cpp">
+      <Filter>works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TaskItemManager.cpp">
+      <Filter>Item work</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TaskItem.cpp">
+      <Filter>Item work</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -98,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Event.h">
-      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManager.h">
       <Filter>works</Filter>
@@ -182,6 +185,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BackpackManager.h">
       <Filter>backpack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EventManager.h">
+      <Filter>works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TaskItemManager.h">
+      <Filter>Item work</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TaskItem.h">
+      <Filter>Item work</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

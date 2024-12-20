@@ -1,7 +1,7 @@
 #include "NPCTask.h"
 #include "BackpackManager.h" 
-#include "ShopItemManager.h"
-#include "ShopItem.h"
+#include "TaskItemManager.h"
+#include "TaskItem.h"
 
 
 // 注释掉 GameTimeManager 的引用
@@ -9,20 +9,33 @@
 #include "GameTimeManager.h" // 假设有一个管理游戏时间的类
 #endif
 
-NPCTask::NPCTask(const std::string& npcName, const std::string& description, const std::string& requiredItem, int requiredItemCount)
-    : npcName(npcName), needItemName(needItemName), requiredItemCount(requiredItemCount), cooldownTime(0.0f), cooldownEndTime(0.0f)
+NPCTask::NPCTask(std::string npcName)
+    : npcName(npcName), cooldownTime(0.0f), cooldownEndTime(0.0f)
 {
     haveTask = true;
-    auto item = ShopItemManager::getInstance()->getShopItem(needItemName);
+    needItem = nullptr;
+
+    int getOnlyNum = 1;//此处应通过随机获取物品唯一标识符，暂时先写死
+    auto item = TaskItemManager::getInstance()->getTaskItemById(getOnlyNum);
     if (item) {
         needItem = item;
     }
-    else {
-        needItem = nullptr;
-    }
     
-    //此处写一个随机函数，利用物品唯一标识符随机获得所需物品及所需个数
+    //此处写一个随机函数,随机获得所需物品个数,此处暂时先写死
+    needItemCount = 1;
 
+    //此处对应每个npc给他们对应的List精灵
+    if (npcName == "Alice") {
+        taskList = Sprite::create("ui/Alice_task.png");
+        taskList->retain();
+    }
+    else if (npcName == "Bob") {
+
+    }
+    else {//此处为健壮性加上
+        taskList = Sprite::create("ui/Alice_task.png");
+        taskList->retain();
+    }
 }
 
 //检测是否能够提交
@@ -36,7 +49,7 @@ bool NPCTask::canComplete()
         return false;
     }
 
-    if (item->getCount() < requiredItemCount) {
+    if (item->getCount() < needItemCount) {
         return false;
     }
 
@@ -55,7 +68,7 @@ void NPCTask::complete()
         // 获取背包中的任务物品
         auto item = BackpackManager::getInstance()->getItemByName(getItem);
         // 从背包中减少所需物品
-        item->decreaseCount(requiredItemCount);
+        item->decreaseCount(needItemCount);
 
         // 设置任务冷却时间
         setCooldown(60.0f); // 假设冷却时间为 60 秒
