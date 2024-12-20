@@ -57,6 +57,8 @@ BackpackManager::BackpackManager()
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
     Item::create("crops/Radish.png", "Radish", ItemCategory::Crops, 2, 1);//加载红萝卜果实
     Item::create("crops/RadishSeed.png", "Radish\nSeed", ItemCategory::Seed, 0, 1);// 加载红萝卜种子
+    Item::create("crops/Potato.png", "Potato", ItemCategory::Crops, 2, 1);//加载马铃薯果实
+    Item::create("crops/PotatoSeed.png", "Potato\nSeed", ItemCategory::Seed, 0, 1);// 加载马铃薯种子
 
 
     Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 3, 2);//加载猪肉
