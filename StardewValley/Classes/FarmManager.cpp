@@ -23,8 +23,8 @@ void FarmManager::setMainMap(MainMap* mainMap) {
     this->mainMap = mainMap;
 }
 
-void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position) {
-    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays, maxPestDays);
+void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType) {
+    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays, maxPestDays, cropType);
     crop->setFarmManager(this);
     crop->setPosition(position);
     _crops.push_back(crop);
@@ -79,6 +79,27 @@ bool FarmManager::harvestCrop(const Vec2& position, int& yield) {
         if ((*it)->getPosition() == position) {
             if ((*it)->harvest()) {
                 yield = (*it)->getYield();
+
+                // 根据作物类型决定背包中增加的物品
+                Crop::CropType cropType = (*it)->getCropType();
+                Item* item = nullptr;
+                switch (cropType) {
+                case Crop::ONION:
+                    item = ItemManager::getInstance()->getItem("Onion");
+                    break;
+                case Crop::POTATO:
+                    item = ItemManager::getInstance()->getItem("Potato");
+                    break;
+                case Crop::RADISH:
+                    item = ItemManager::getInstance()->getItem("Radish");
+                    break;
+                }
+
+                // 如果找到了对应的物品，增加到背包中
+                if (item) {
+                    BackpackManager::getInstance()->addItem(item, yield);
+                }
+
                 (*it)->removeFromParent();
                 delete* it;
                 it = _crops.erase(it);

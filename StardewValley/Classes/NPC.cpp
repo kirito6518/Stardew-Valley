@@ -78,7 +78,7 @@ void NPC::interactWithPlayer() {
     this->scheduleOnce([this, dialogueBox](float dt) {
         dialogueBox->removeFromParent();
         _isDialogueVisible = false; // 对话框被移除后，重置标志位
-        }, 1.0f, "remove_dialogue_box"); // 第三个参数是定时器的标签，可选
+        }, 2.0f, "remove_dialogue_box"); // 第三个参数是定时器的标签，可选
 
     _isDialogueVisible = true; // 标记对话框已显示
 }
