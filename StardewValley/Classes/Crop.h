@@ -19,7 +19,16 @@ public:
         SPINACH 
     };
 
-    Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType);
+    // 作物种植季节限制
+    enum SeasonRestriction {
+        SPRING_SUMMER_AUTUMN, // 春天、夏天、秋天
+        SPRING_AUTUMN,        // 春天、秋天
+        AUTUMN,               // 秋天
+        NO_RESTRICTION        // 无限制
+    };
+
+
+    Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType, SeasonRestriction seasonRestriction);
     ~Crop();
 
 
@@ -63,6 +72,11 @@ public:
         return _cropType;
     }
 
+    // 返回种植季节限制
+    SeasonRestriction getSeasonRestriction() const {
+        return _seasonRestriction;
+    }
+
     void setFarmManager(FarmManager* farmManager);
 
     std::string _cropName; // 作物名称
@@ -82,6 +96,7 @@ public:
     Label* _statusLabel; // 状态标签（显示缺水或缺肥）
     FarmManager* _farmManager;
     CropType _cropType; // 作物类型
+    SeasonRestriction _seasonRestriction; // 种植季节限制
 private:
     
 };

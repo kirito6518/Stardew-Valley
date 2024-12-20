@@ -18,7 +18,7 @@
 
 USING_NS_CC;
 using namespace CocosDenshion;
-
+SeasonManager::Season currentSeason = SeasonManager::Spring;
 
 Scene* MainMap::createScene()
 {
@@ -376,7 +376,7 @@ bool MainMap::init()
 
     {
         // 初始化 SeasonManager
-        seasonManager = SeasonManager();
+        SeasonManager::Season currentSeason1 = SeasonManager::getInstance()->getCurrentSeason();
 
         // 创建并添加季节显示的 Label
         seasonLabel = Label::createWithTTF("Spring", "fonts/Marker Felt.ttf", 35);
@@ -686,6 +686,7 @@ void MainMap::addDay(float dt) {
     seasonManager.updateSeason(1);
 
     // 获取当前季节名称并更新 Label
+    currentSeason = seasonManager.getCurrentSeason();
     std::string seasonName = seasonManager.getCurrentSeasonName();
     seasonLabel->setString(seasonName);
 
@@ -717,20 +718,27 @@ void MainMap::addDay(float dt) {
 }
 
 // 设置物品在MainMap的使用逻辑,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
-void  MainMap::SetUseItemInMainMap() {
-    
+void MainMap::SetUseItemInMainMap() {
+
     // 设置洋葱种子
     if (ItemManager::getInstance()->getItem("Onion\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
             auto OnionSeed = ItemManager::getInstance()->getItem("Onion\nSeed");
             Vec2 plantingPosition;
+
+            // 检查当前季节是否允许种植洋葱
+            if (currentSeason != SeasonManager::Autumn) {
+                CCLOG("Cannot plant Onion in the current season: %s", SeasonManager::getInstance()->getCurrentSeasonName().c_str());
+                return false;
+            }
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -738,7 +746,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -747,30 +755,34 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Onion\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
 
     // 设置土豆种子
     if (ItemManager::getInstance()->getItem("Potato\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
-            auto OnionSeed = ItemManager::getInstance()->getItem("Potato\nSeed");
+            auto PotatoSeed = ItemManager::getInstance()->getItem("Potato\nSeed");
             Vec2 plantingPosition;
+
+            // 检查当前季节是否允许种植土豆
+            if (currentSeason != SeasonManager::Autumn) {
+                CCLOG("Cannot plant Potato in the current season: %s", SeasonManager::getInstance()->getCurrentSeasonName().c_str());
+                return false;
+            }
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO);
+                        PotatoSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
                         return true;
                     }
                 }
                 else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO);
+                        PotatoSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -779,30 +791,30 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Potato\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
 
-    // 设置甜菜种子
+    // 设置萝卜种子
     if (ItemManager::getInstance()->getItem("Radish\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
-            auto OnionSeed = ItemManager::getInstance()->getItem("Radish\nSeed");
+            auto RadishSeed = ItemManager::getInstance()->getItem("Radish\nSeed");
             Vec2 plantingPosition;
+
+            // 萝卜没有季节限制
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Radish", "crops/Radish-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH);
+                        RadishSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Radish", "crops/Radish-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
                 else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Radish", "crops/Radish-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH);
+                        RadishSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Radish", "crops/Radish-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
@@ -811,30 +823,34 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Radish\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
 
-    // 设置红萝卜种子
+    // 设置胡萝卜种子
     if (ItemManager::getInstance()->getItem("Carrot\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
-            auto OnionSeed = ItemManager::getInstance()->getItem("Carrot\nSeed");
+            auto CarrotSeed = ItemManager::getInstance()->getItem("Carrot\nSeed");
             Vec2 plantingPosition;
+
+            // 检查当前季节是否允许种植胡萝卜
+            if (currentSeason != SeasonManager::Spring && currentSeason != SeasonManager::Autumn) {
+                CCLOG("Cannot plant Carrot in the current season: %s", SeasonManager::getInstance()->getCurrentSeasonName().c_str());
+                return false;
+            }
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT);
+                        CarrotSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
                         return true;
                     }
                 }
                 else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT);
+                        CarrotSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
                         return true;
                     }
                 }
@@ -843,30 +859,30 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Carrot\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
 
     // 设置白萝卜种子
     if (ItemManager::getInstance()->getItem("Turnip\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
-            auto OnionSeed = ItemManager::getInstance()->getItem("Turnip\nSeed");
+            auto TurnipSeed = ItemManager::getInstance()->getItem("Turnip\nSeed");
             Vec2 plantingPosition;
+
+            // 白萝卜没有季节限制
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP);
+                        TurnipSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
                 else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP);
+                        TurnipSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
@@ -875,30 +891,34 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Turnip\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
 
-    // 设置种子
+    // 设置菠菜种子
     if (ItemManager::getInstance()->getItem("Spinach\nSeed")) {
         auto customUseItemLogic = [this]() -> bool {
-            auto OnionSeed = ItemManager::getInstance()->getItem("Spinach\nSeed");
+            auto SpinachSeed = ItemManager::getInstance()->getItem("Spinach\nSeed");
             Vec2 plantingPosition;
+
+            // 检查当前季节是否允许种植菠菜
+            if (currentSeason == SeasonManager::Winter) {
+                CCLOG("Cannot plant Spinach in the current season: %s", SeasonManager::getInstance()->getCurrentSeasonName().c_str());
+                return false;
+            }
+
             if (place == 1 || place == 2) {
                 int countUsed = 1;
                 if (place == 1) {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH);
+                        SpinachSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
                         return true;
                     }
                 }
                 else if (place == 2) {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
-                        OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH);
+                        SpinachSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
                         return true;
                     }
                 }
@@ -907,9 +927,7 @@ void  MainMap::SetUseItemInMainMap() {
             };
         ItemManager::getInstance()->getItem("Spinach\nSeed")->setUseItemCallback(customUseItemLogic);
     }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
-    }
+
 
     // 设置叉子
     if (ItemManager::getInstance()->getItem("Fork")) {

@@ -1,11 +1,11 @@
 #include "Crop.h"
 #include "FarmManager.h"
 
-Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType)
+Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType, SeasonRestriction seasonRestriction)
     : _cropName(cropName), _growthStage(0), _growthTime(0), _maxGrowthTime(maxGrowthTime),
     _waterDays(0), _maxWaterDays(maxWaterDays), _fertilizerDays(0), _maxFertilizerDays(maxFertilizerDays),
     _lastWaterTime(0.0f), _lastFertilizerTime(0.0f), _lastPestControlTime(0.0f), _maxPestDays(maxPestDays), _yield(10),
-    _cropType(cropType) {
+    _cropType(cropType), _seasonRestriction(seasonRestriction) {
     // 初始化作物精灵
     this->initWithFile(imagePath);
 

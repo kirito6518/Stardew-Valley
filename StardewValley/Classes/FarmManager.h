@@ -18,7 +18,7 @@ public:
     void update(float dt);
 
     // 种植作物
-    void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType);
+    void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType, Crop::SeasonRestriction seasonRestriction);
 
     // 浇水
     void waterCrop(const Vec2& position);
@@ -37,6 +37,7 @@ public:
 
     // 其他函数声明
     void setMainMap(MainMap* mainMap);
+
 
     // 获取作物列表
     const std::vector<Crop*>& getCrops() const;
