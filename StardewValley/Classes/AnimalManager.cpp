@@ -109,6 +109,7 @@ bool AnimalManager::init() {
         // 添加按钮到层
         this->addChild(outButton, 3);
     }
+
     {
         // 创建猪的买入按钮
         BuyButtonPig = MenuItemImage::create(
@@ -219,6 +220,340 @@ bool AnimalManager::init() {
         // 添加按钮到层
         this->addChild(KillButtonPig, 3);
     }
+
+    {
+        // 创建牛的买入按钮
+        BuyButtonCow = MenuItemImage::create(
+            "ui/BuyChildNormal.png",
+            "ui/BuyChildSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        BuyButtonCow->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto BuyButtonCowListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        BuyButtonCowListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                BuyButtonCow->setNormalImage(Sprite::create("ui/BuyChildSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        BuyButtonCowListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                BuyButtonCow->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                Item* initItem = ItemManager::getInstance()->getItem("Coin");
+                if (initItem->getCount() >= 2) {
+                    initItem->decreaseCount(2);
+                    AddAnimal("Cow");
+                }
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                BuyButtonCow->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(BuyButtonCowListener, BuyButtonCow);
+
+        // 添加按钮到层
+        this->addChild(BuyButtonCow, 3);
+    }
+    {
+        // 创建牛的屠宰按钮
+        KillButtonCow = MenuItemImage::create(
+            "ui/KillAdultNormal.png",
+            "ui/KillAdultSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        KillButtonCow->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto KillButtonCowListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        KillButtonCowListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                KillButtonCow->setNormalImage(Sprite::create("ui/KillAdultSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        KillButtonCowListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                KillButtonCow->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                RemoveAnimal("Cow");
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                KillButtonCow->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(KillButtonCowListener, KillButtonCow);
+
+        // 添加按钮到层
+        this->addChild(KillButtonCow, 3);
+    }
+
+    {
+        // 创建羊的买入按钮
+        BuyButtonSheep = MenuItemImage::create(
+            "ui/BuyChildNormal.png",
+            "ui/BuyChildSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        BuyButtonSheep->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto BuyButtonSheepListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        BuyButtonSheepListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                BuyButtonSheep->setNormalImage(Sprite::create("ui/BuyChildSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        BuyButtonSheepListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                BuyButtonSheep->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                Item* initItem = ItemManager::getInstance()->getItem("Coin");
+                if (initItem->getCount() >= 2) {
+                    initItem->decreaseCount(2);
+                    AddAnimal("Sheep");
+                }
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                BuyButtonSheep->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(BuyButtonSheepListener, BuyButtonSheep);
+
+        // 添加按钮到层
+        this->addChild(BuyButtonSheep, 3);
+    }
+    {
+        // 创建羊的屠宰按钮
+        KillButtonSheep = MenuItemImage::create(
+            "ui/KillAdultNormal.png",
+            "ui/KillAdultSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        KillButtonSheep->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto KillButtonSheepListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        KillButtonSheepListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                KillButtonSheep->setNormalImage(Sprite::create("ui/KillAdultSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        KillButtonSheepListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                KillButtonSheep->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                RemoveAnimal("Sheep");
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                KillButtonSheep->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(KillButtonSheepListener, KillButtonSheep);
+
+        // 添加按钮到层
+        this->addChild(KillButtonSheep, 3);
+    }
+
+    {
+        // 创建鸡的买入按钮
+        BuyButtonChook = MenuItemImage::create(
+            "ui/BuyChildNormal.png",
+            "ui/BuyChildSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        BuyButtonChook->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto BuyButtonChookListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        BuyButtonChookListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                BuyButtonChook->setNormalImage(Sprite::create("ui/BuyChildSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        BuyButtonChookListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                BuyButtonChook->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                Item* initItem = ItemManager::getInstance()->getItem("Coin");
+                if (initItem->getCount() >= 2) {
+                    initItem->decreaseCount(2);
+                    AddAnimal("Chook");
+                }
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                BuyButtonChook->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(BuyButtonChookListener, BuyButtonChook);
+
+        // 添加按钮到层
+        this->addChild(BuyButtonChook, 3);
+    }
+    {
+        // 创建鸡的屠宰按钮
+        KillButtonChook = MenuItemImage::create(
+            "ui/KillAdultNormal.png",
+            "ui/KillAdultSelected.png",
+            CC_CALLBACK_1(AnimalManager::HideRanch, this));
+        //设置位置
+        KillButtonChook->setPosition(visibleSize / 2);
+
+        // 创建触摸监听器
+        auto KillButtonChookListener = EventListenerTouchOneByOne::create();
+
+        // 触摸开始
+        KillButtonChookListener->onTouchBegan = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为按下状态
+                KillButtonChook->setNormalImage(Sprite::create("ui/KillAdultSelected.png"));
+                return true;
+            }
+            return false;
+            };
+
+        // 触摸结束
+        KillButtonChookListener->onTouchEnded = [this](Touch* touch, Event* event) {
+            auto target = static_cast<Sprite*>(event->getCurrentTarget());
+            Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+            Size s = target->getContentSize();
+            Rect rect = Rect(0, 0, s.width, s.height);
+
+            if (rect.containsPoint(locationInNode))
+            {
+                // 设置按钮为正常状态
+                KillButtonChook->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                RemoveAnimal("Chook");
+            }
+            else
+            {
+                // 如果触摸结束时不在按钮上，恢复按钮状态
+                KillButtonChook->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+            }
+            };
+
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(KillButtonChookListener, KillButtonChook);
+
+        // 添加按钮到层
+        this->addChild(KillButtonChook, 3);
+    }
+
     // 初始化猪
     animals[0] = new Animal("Pig", "Pork", 0, 0, 0);
 
@@ -229,7 +564,7 @@ bool AnimalManager::init() {
     animals[2] = new Animal("Sheep", "Mutton", 0, 0, 0);
 
     // 初始化鸡
-    animals[3] = new Animal("Chicken", "Chicken", 0, 0, 0);
+    animals[3] = new Animal("Chook", "Chicken", 0, 0, 0);
 
     // 加载动画
     for (int i = 0; i < 4; i++) {
@@ -266,8 +601,8 @@ void AnimalManager::CreateAnimations(std::string& name) {
         texture = Director::getInstance()->getTextureCache()->addImage("animal/Sheep.png");
         num = 2; // 获得动物编号
     }
-    else if (name == "Chicken") {
-        texture = Director::getInstance()->getTextureCache()->addImage("animal/Chicken.png");
+    else if (name == "Chook") {
+        texture = Director::getInstance()->getTextureCache()->addImage("animal/Chook.png");
         num = 3; // 获得动物编号
     }
 
@@ -356,10 +691,17 @@ void AnimalManager::UpdateAnimals(float dt) {
             }
         }
     }
+    // 更新ui
     CreateNumber();
     AnimalManager::getInstance()->outButton->setPosition(ranchLayer->getPosition() + Vec2(348, 205));
     AnimalManager::getInstance()->BuyButtonPig->setPosition(ranchLayer->getPosition() + Vec2(140,140));
     AnimalManager::getInstance()->KillButtonPig->setPosition(ranchLayer->getPosition() + Vec2(280, 140));
+    AnimalManager::getInstance()->BuyButtonCow->setPosition(ranchLayer->getPosition() + Vec2(140, 60));
+    AnimalManager::getInstance()->KillButtonCow->setPosition(ranchLayer->getPosition() + Vec2(280, 60));
+    AnimalManager::getInstance()->BuyButtonSheep->setPosition(ranchLayer->getPosition() + Vec2(140, -20));
+    AnimalManager::getInstance()->KillButtonSheep->setPosition(ranchLayer->getPosition() + Vec2(280, -20));
+    AnimalManager::getInstance()->BuyButtonChook->setPosition(ranchLayer->getPosition() + Vec2(140, -100));
+    AnimalManager::getInstance()->KillButtonChook->setPosition(ranchLayer->getPosition() + Vec2(280, -100));
 }
 
 // 删除一个老年个体（老死）

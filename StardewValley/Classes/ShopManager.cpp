@@ -32,8 +32,9 @@ ShopManager::ShopManager()
     //此处加载所有商店中会出现的物品
     // 第一个数字为卖出价格，第二个数字为买入价格
     ShopItem::create("crops/OnionSeed.png", "Onion\nSeed", 0, 1); // 洋葱种子
+    ShopItem::create("crops/RadishSeed.png", "Radish\nSeed", 0, 1); // 红萝卜种子
     ShopItem::create("fish/Bait.png", "Bait", 0, 1); // 饵料
-    ShopItem::create("tool/Fertilizer.png", "Fertilizer", 0, 3); // 肥料
+    ShopItem::create("tool/Fertilizer.png", "Fertilizer", 0, 2); // 肥料
 }
 
 // 析构函数

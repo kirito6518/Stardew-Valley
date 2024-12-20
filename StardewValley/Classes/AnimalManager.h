@@ -50,8 +50,8 @@ public:
     MenuItemImage* KillButtonCow; // 屠宰
     MenuItemImage* BuyButtonSheep; // 买入
     MenuItemImage* KillButtonSheep; // 屠宰
-    MenuItemImage* BuyButtonChicken; // 买入
-    MenuItemImage* KillButtonChicken; // 屠宰
+    MenuItemImage* BuyButtonChook; // 买入
+    MenuItemImage* KillButtonChook; // 屠宰
 
     Animal* animals[4]; // 四种动物，0是猪，1是牛，2是羊，3是鸡
     Label* animalNum[4]; // 四种动物的数量显示
