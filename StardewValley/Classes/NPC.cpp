@@ -68,7 +68,7 @@ void NPC::interactWithPlayer() {
     auto dialogueBox = Label::createWithTTF(dialogue, "fonts/Marker Felt.ttf", 24);
 
     // 设置对话框的位置
-    dialogueBox->setPosition(Vec2(getPosition().x, getPosition().y + getContentSize().height / 2 + 50));
+    dialogueBox->setPosition(Vec2(getPosition().x, getPosition().y + getContentSize().height / 2 + 20));
     dialogueBox->setAnchorPoint(Vec2(0.5, 0.5));
 
     // 将对话框添加到场景中
@@ -78,7 +78,7 @@ void NPC::interactWithPlayer() {
     this->scheduleOnce([this, dialogueBox](float dt) {
         dialogueBox->removeFromParent();
         _isDialogueVisible = false; // 对话框被移除后，重置标志位
-        }, 3.0f, "remove_dialogue_box"); // 第三个参数是定时器的标签，可选
+        }, 1.0f, "remove_dialogue_box"); // 第三个参数是定时器的标签，可选
 
     _isDialogueVisible = true; // 标记对话框已显示
 }

@@ -19,7 +19,7 @@ NPCManager::NPCManager()
 {
     // 初始化 NPC 1 (Bob)
     NPC* npc1 = new NPC(1, "Bob", "npc_Fisher.png");
-    npc1->setDialogue({ "What kind of fish will I catch today?", "I love fishing!", "Do you like fish?" });
+    npc1->setDialogue({ "What kind of fish will I catch today?", "I caught a big treasure chest yesterday!", "I want to change to a gold fishing rod." });
     npc1->setLocation(cocos2d::Vec2(400, 200));
     _npcs.push_back(npc1);
     auto npc1Body = PhysicsBody::createBox(npc1->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
@@ -32,7 +32,7 @@ NPCManager::NPCManager()
 
     // 初始化 NPC 2 (Alice)
     NPC* npc2 = new NPC(2, "Alice", "npc_Shopper.png");
-    npc2->setDialogue({ "Hello, Welcome to my shop!", "Do you need anything?", "I have the best items in town!" });
+    npc2->setDialogue({ "Hello, Welcome to my shop!", "bro, I will never deceive you.", "I like gems, can you give them to me?" });
     npc2->setLocation(cocos2d::Vec2(400, 400));
     _npcs.push_back(npc2);
     auto npc2Body = PhysicsBody::createBox(npc2->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
@@ -44,8 +44,8 @@ NPCManager::NPCManager()
     npcBodys.push_back(npc2Body);
 
     // 初始化 NPC 3 (John)
-    NPC* npc3 = new NPC(3, "John", "npc_Farmer.png");
-    npc3->setDialogue({ "Remember to water and get rid of insects in time!", "I love farming!", "Do you like vegetables?" });
+    NPC* npc3 = new NPC(3, "John", "npc_Shopper.png");
+    npc3->setDialogue({ "Remember to water and get rid of insects in time!", "You can't grow piglets in farmland!", "Gemstones do not grow in farmland." });
     npc3->setLocation(cocos2d::Vec2(400, 300));
     _npcs.push_back(npc3);
     auto npc3Body = PhysicsBody::createBox(npc3->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));
@@ -57,8 +57,8 @@ NPCManager::NPCManager()
     npcBodys.push_back(npc3Body);
 
     // 初始化 NPC 4 (Mike)
-    NPC* npc4 = new NPC(4, "Mike", "npc_Shepherd.png");
-    npc4->setDialogue({ "I have the fattest pigs.", "Do you like meat?", "I love my animals!" });
+    NPC* npc4 = new NPC(4, "Mike", "npc_Shopper.png");
+    npc4->setDialogue({ "I have the fattest pigs.", "Aha,you're like a cute little pig.", "I love my animals!" });
     npc4->setLocation(cocos2d::Vec2(400, 400));
     _npcs.push_back(npc4);
     auto npc4Body = PhysicsBody::createBox(npc4->getContentSize(), PhysicsMaterial(1.0f, 1.0f, 0.0f));

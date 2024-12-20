@@ -96,12 +96,12 @@ void Crop::update(float dt) {
     }
 
     int fertilizerYield = waterYield;
-    if (_fertilizerDays > 15) {
+    if (_fertilizerDays > 15 && _fertilizerDays <= 20) {
         int fertilizerImpact =  1;
         fertilizerYield = fertilizerYield - fertilizerImpact;
     }
-    else if (_fertilizerDays > 0 && _fertilizerDays <= 5) {
-        int fertilizerImpact = 2;
+    else if (_fertilizerDays > 0 && _fertilizerDays <= 1) {
+        int fertilizerImpact = 5;
         fertilizerYield = fertilizerYield + fertilizerImpact;
     }
 
@@ -119,7 +119,7 @@ void Crop::update(float dt) {
     else if (_pestDays > 9) {
         pestYield = pestYield - 1 ;
     }
-    if (pestYield < 0) {
+    if (pestYield <= 0) {
         pestYield = 1;
     }
 
