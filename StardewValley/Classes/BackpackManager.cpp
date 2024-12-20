@@ -53,7 +53,7 @@ BackpackManager::BackpackManager()
     Item::create("fish/Bait.png", "Bait", ItemCategory::Tool, 0, 1);// 加载饵料（不可以卖）
     Item::create("fish/Box.png", "Box", ItemCategory::Tool, 0, 0);// 加载箱子（不可以卖）
 
-    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 1, 2);//加载洋葱果实
+    Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 2, 1);//加载洋葱果实
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
 
     Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 4, 2);//加载猪肉

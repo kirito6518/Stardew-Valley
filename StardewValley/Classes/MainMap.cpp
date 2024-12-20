@@ -419,18 +419,20 @@ bool MainMap::init()
         const auto visibleSize = Director::getInstance()->getVisibleSize();
         Vec2 fish_pond = Vec2(visibleSize.width / 2 - 276, visibleSize.height / 2 - 288);
         Vec2 shop = Vec2(visibleSize.width + 96, visibleSize.height + 48);
-        Vec2 farmland = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
-        Vec2 pasture = Vec2(visibleSize.width / 2 + 96, visibleSize.height / 2);
+        Vec2 farmland = Vec2(visibleSize.width / 2 + 300, visibleSize.height / 2 - 400);
+        Vec2 pasture = Vec2(visibleSize.width / 2 - 200, visibleSize.height / 2 + 168);
 
         // 设置 NPC 的位置
         NPCManager::getInstance()->_npcs[0]->setLocation(fish_pond);
         NPCManager::getInstance()->_npcs[1]->setLocation(shop);
+        NPCManager::getInstance()->_npcs[2]->setLocation(farmland);
+        NPCManager::getInstance()->_npcs[3]->setLocation(pasture);
 
         // 确保 NPC 的精灵锚点为 (0.5, 0.5)
         NPCManager::getInstance()->_npcs[0]->setAnchorPoint(Vec2(0.5, 0.5));
         NPCManager::getInstance()->_npcs[1]->setAnchorPoint(Vec2(0.5, 0.5));
-        //NPCManager::getInstance()->_npcs[2]->setAnchorPoint(Vec2(0.5, 0.5));
-        //NPCManager::getInstance()->_npcs[3]->setAnchorPoint(Vec2(0.5, 0.5));
+        NPCManager::getInstance()->_npcs[2]->setAnchorPoint(Vec2(0.5, 0.5));
+        NPCManager::getInstance()->_npcs[3]->setAnchorPoint(Vec2(0.5, 0.5));
 
 
         // 调试输出 NPC 的位置和精灵尺寸
@@ -440,10 +442,8 @@ bool MainMap::init()
         // 将 NPC 添加到场景中
         this->addChild(NPCManager::getInstance()->_npcs[0], 1);
         this->addChild(NPCManager::getInstance()->_npcs[1], 1);
-
-        //载入图片后即可添加后两个
-        //this->addChild(NPCManager::getInstance()->_npcs[2], 1);
-        //this->addChild(NPCManager::getInstance()->_npcs[3], 1);
+        this->addChild(NPCManager::getInstance()->_npcs[2], 1);
+        this->addChild(NPCManager::getInstance()->_npcs[3], 1);
     }
     
 
