@@ -546,6 +546,13 @@ void MainMap::getInitShop()
     ShopManager::getInstance()->addItem(initItem);
     initItem = ShopItemManager::getInstance()->getShopItem("Potato\nSeed");
     ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("Carrot\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("Turnip\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("Spinach\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+
     initItem = ShopItemManager::getInstance()->getShopItem("Bait");
     ShopManager::getInstance()->addItem(initItem);
     initItem = ShopItemManager::getInstance()->getShopItem("Fertilizer");
