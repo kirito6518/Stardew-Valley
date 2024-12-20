@@ -79,8 +79,8 @@ bool TaskLayer::init()
 
     //创建提交按钮
     submitButton = MenuItemImage::create(
-        "ui/CloseNormal.png",
-        "ui/CloseSelected.png",
+        "ui/submit_normal.png",
+        "ui/submit_pressed.png",
         CC_CALLBACK_1(TaskLayer::onSubmitButton, this));
     submitButton->setAnchorPoint(Vec2(0.5, 1));
     submitButton->setVisible(false);
@@ -306,7 +306,7 @@ void TaskLayer::setupMouseListener()
         if (submitButtonBoundingBox.containsPoint(mousePosition))
         {
             // 如果点击了 submitButton，切换到按下状态的图片
-            submitButton->setNormalImage(Sprite::create("ui/CloseSelected.png"));
+            submitButton->setNormalImage(Sprite::create("ui/submit_pressed.png"));
             return;
         }
     };
@@ -344,6 +344,12 @@ void TaskLayer::setupMouseListener()
             needItemDeta->setVisible(false);
             resultLabel->setVisible(false);
 
+            //隐藏好感度ui
+             //显示好感ui
+            rewardGoodwill->setVisible(false);
+            nowGoodwill->setVisible(false);
+
+
             // 解除提交按钮的绑定及可见
             submitButton->setUserData(nullptr);
             submitButton->setVisible(false);
@@ -365,13 +371,13 @@ void TaskLayer::setupMouseListener()
             if (submitButtonBoundingBox.containsPoint(mousePosition))
             {
                 // 如果点击了 submitButton，切换回正常状态的图片并执行逻辑
-                submitButton->setNormalImage(Sprite::create("ui/CloseNormal.png"));
+                submitButton->setNormalImage(Sprite::create("ui/submit_normal.png"));
                 submitButton->activate(); // 执行逻辑
             }
             else
             {
                 // 如果触摸结束时不在按钮区域内，也切换回正常状态
-                submitButton->setNormalImage(Sprite::create("ui/CloseNormal.png"));
+                submitButton->setNormalImage(Sprite::create("ui/submit_normal.png"));
             }
         }
         };
