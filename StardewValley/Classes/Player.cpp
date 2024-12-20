@@ -1,18 +1,18 @@
-#include "Player.h"
+ï»¿#include "Player.h"
 #include "cocos2d.h"
 #include "chipmunk.h"
 
 USING_NS_CC;
 
 
-#define Seconds 0.05f // ¶¯×÷Ã¿Ö¡¼ä¸ô¶àÉÙÃë
+#define Seconds 0.05f // åŠ¨ä½œæ¯å¸§é—´éš”å¤šå°‘ç§’
 
-// ¹¹Ôìº¯Êı
+// æ„é€ å‡½æ•°
 Player::Player() {
     init();
 }
 
-// ³õÊ¼»¯º¯Êı
+// åˆå§‹åŒ–å‡½æ•°
 bool Player::init()
 {
     if (!Sprite::init())
@@ -20,114 +20,114 @@ bool Player::init()
         return false;
     }
 
-    //Ìí¼ÓÖ÷½ÇĞÅÏ¢
+    //æ·»åŠ ä¸»è§’ä¿¡æ¯
     auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
-    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 72, 96)); // ´ı»úÊÇÏòÏÂ´ı»úµÄµÚÒ»Ö¡
+    playerSprite = Sprite::createWithTexture(texture, Rect(0, 0, 72, 96)); // å¾…æœºæ˜¯å‘ä¸‹å¾…æœºçš„ç¬¬ä¸€å¸§
 
-    // ³õÊ¼»¯ÊôĞÔ
-    isWPressed = isAPressed = isSPressed = isDPressed = false; // ³õÊ¼»¯¼üÅÌ×´Ì¬
+    // åˆå§‹åŒ–å±æ€§
+    isWPressed = isAPressed = isSPressed = isDPressed = false; // åˆå§‹åŒ–é”®ç›˜çŠ¶æ€
 
-    // ³õÊ¼»¯
-    lastWalkDirectionIndex = 6; // ³õÊ¼Î´ĞĞ×ß
-    lastIdleDirectionIndex = 0; // ³õÊ¼ÏòÏÂ´ı»ú
+    // åˆå§‹åŒ–
+    lastWalkDirectionIndex = 6; // åˆå§‹æœªè¡Œèµ°
+    lastIdleDirectionIndex = 0; // åˆå§‹å‘ä¸‹å¾…æœº
 
-    // ³õÊ¼»¯Ä¿±êÎ»ÖÃ
+    // åˆå§‹åŒ–ç›®æ ‡ä½ç½®
     targetPosition = playerSprite->getPosition();
 
-    // ´´½¨¶¯»­
+    // åˆ›å»ºåŠ¨ç”»
     createWalkAnimations();
     createIdleAnimations();
 
-    playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[0]))); // ²¥·Å´ı»ú¶¯»­
+    playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[0]))); // æ’­æ”¾å¾…æœºåŠ¨ç”»
 
     return true;
 }
 
-// ´´½¨Áù¸ö·½ÏòµÄĞĞ×ß¶¯»­
+// åˆ›å»ºå…­ä¸ªæ–¹å‘çš„è¡Œèµ°åŠ¨ç”»
 void Player::createWalkAnimations()
 {
-    // ¼ÓÔØ walk.png Í¼Æ¬
+    // åŠ è½½ walk.png å›¾ç‰‡
     auto texture = Director::getInstance()->getTextureCache()->addImage("walk.png");
 
-    // walk.png ÊÇÒ»¸ö 6 ·½ÏòµÄÍ¼Æ¬£¬Ã¿Ö¡µÄ¿í¶ÈÎª 72 ÏñËØ£¬¸ß¶ÈÎª 96 ÏñËØ
+    // walk.png æ˜¯ä¸€ä¸ª 6 æ–¹å‘çš„å›¾ç‰‡ï¼Œæ¯å¸§çš„å®½åº¦ä¸º 72 åƒç´ ï¼Œé«˜åº¦ä¸º 96 åƒç´ 
     const int frameWidth = 72;
     const int frameHeight = 96;
-    const int framesPerDirection = 8; // Ã¿¸ö·½ÏòÓĞ 8 Ö¡
+    const int framesPerDirection = 8; // æ¯ä¸ªæ–¹å‘æœ‰ 8 å¸§
 
-    // ¶¨ÒåÃ¿¸ö·½ÏòµÄÖ¡·¶Î§
-    // ·½ÏòË³Ğò£ºÏÂ¡¢×ó¡¢×óÉÏ¡¢ÉÏ¡¢ÓÒÉÏ¡¢ÓÒ
-    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ¸ö·½ÏòµÄÆ«ÒÆÁ¿
+    // å®šä¹‰æ¯ä¸ªæ–¹å‘çš„å¸§èŒƒå›´
+    // æ–¹å‘é¡ºåºï¼šä¸‹ã€å·¦ã€å·¦ä¸Šã€ä¸Šã€å³ä¸Šã€å³
+    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ä¸ªæ–¹å‘çš„åç§»é‡
 
     for (int i = 0; i < 6; ++i)
     {
         Vector<SpriteFrame*> frames;
         for (int j = 0; j < framesPerDirection; ++j)
         {
-            // ¸ù¾İ·½ÏòÆ«ÒÆÁ¿¼ÆËãÖ¡µÄ×ø±ê
+            // æ ¹æ®æ–¹å‘åç§»é‡è®¡ç®—å¸§çš„åæ ‡
             auto frame = SpriteFrame::createWithTexture(texture, Rect(j * frameWidth, directionOffsets[i] * frameHeight, frameWidth, frameHeight));
             frames.pushBack(frame);
         }
 
-        // ´´½¨¶¯»­
-        walkAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // Ã¿Ö¡¼ä¸ô¶àÉÙÃë
-        walkAnimations[i]->retain(); // ±£Áô¶¯»­£¬·ÀÖ¹±»ÊÍ·Å
+        // åˆ›å»ºåŠ¨ç”»
+        walkAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // æ¯å¸§é—´éš”å¤šå°‘ç§’
+        walkAnimations[i]->retain(); // ä¿ç•™åŠ¨ç”»ï¼Œé˜²æ­¢è¢«é‡Šæ”¾
     }
 }
 
-// ´´½¨Áù¸ö·½ÏòµÄ´ı»ú¶¯»­
+// åˆ›å»ºå…­ä¸ªæ–¹å‘çš„å¾…æœºåŠ¨ç”»
 void Player::createIdleAnimations()
 {
-    // ¼ÓÔØ idle.png Í¼Æ¬
+    // åŠ è½½ idle.png å›¾ç‰‡
     auto texture = Director::getInstance()->getTextureCache()->addImage("idle.png");
 
-    // idle.png ÊÇÒ»¸ö 6 ·½ÏòµÄÍ¼Æ¬£¬Ã¿Ö¡µÄ¿í¶ÈÎª 72 ÏñËØ£¬¸ß¶ÈÎª 96 ÏñËØ
+    // idle.png æ˜¯ä¸€ä¸ª 6 æ–¹å‘çš„å›¾ç‰‡ï¼Œæ¯å¸§çš„å®½åº¦ä¸º 72 åƒç´ ï¼Œé«˜åº¦ä¸º 96 åƒç´ 
     const int frameWidth = 72;
     const int frameHeight = 96;
-    const int framesPerDirection = 8; // Ã¿¸ö·½ÏòÓĞ 8 Ö¡
+    const int framesPerDirection = 8; // æ¯ä¸ªæ–¹å‘æœ‰ 8 å¸§
 
-    // ¶¨ÒåÃ¿¸ö·½ÏòµÄÖ¡·¶Î§
-    // ·½ÏòË³Ğò£ºÏÂ¡¢×ó¡¢×óÉÏ¡¢ÉÏ¡¢ÓÒÉÏ¡¢ÓÒ
-    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ¸ö·½ÏòµÄÆ«ÒÆÁ¿
+    // å®šä¹‰æ¯ä¸ªæ–¹å‘çš„å¸§èŒƒå›´
+    // æ–¹å‘é¡ºåºï¼šä¸‹ã€å·¦ã€å·¦ä¸Šã€ä¸Šã€å³ä¸Šã€å³
+    const int directionOffsets[6] = { 0, 1, 2, 3, 4, 5 }; // 6 ä¸ªæ–¹å‘çš„åç§»é‡
 
     for (int i = 0; i < 6; ++i)
     {
         Vector<SpriteFrame*> frames;
         for (int j = 0; j < framesPerDirection; ++j)
         {
-            // ¸ù¾İ·½ÏòÆ«ÒÆÁ¿¼ÆËãÖ¡µÄ×ø±ê
+            // æ ¹æ®æ–¹å‘åç§»é‡è®¡ç®—å¸§çš„åæ ‡
             auto frame = SpriteFrame::createWithTexture(texture, Rect(j * frameWidth, directionOffsets[i] * frameHeight, frameWidth, frameHeight));
             frames.pushBack(frame);
         }
 
-        // ´´½¨¶¯»­
-        idleAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // Ã¿Ö¡¼ä¸ô¶àÉÙÃë
-        idleAnimations[i]->retain(); // ±£Áô¶¯»­£¬·ÀÖ¹±»ÊÍ·Å
+        // åˆ›å»ºåŠ¨ç”»
+        idleAnimations[i] = Animation::createWithSpriteFrames(frames, Seconds); // æ¯å¸§é—´éš”å¤šå°‘ç§’
+        idleAnimations[i]->retain(); // ä¿ç•™åŠ¨ç”»ï¼Œé˜²æ­¢è¢«é‡Šæ”¾
     }
 }
 
-// ¸ù¾İ·½ÏòÑ¡Ôñ¶¯»­
+// æ ¹æ®æ–¹å‘é€‰æ‹©åŠ¨ç”»
 int Player::getDirectionIndex(const cocos2d::Vec2& from, const cocos2d::Vec2& to)
 {
     Vec2 direction = to - from;
     float angle = CC_RADIANS_TO_DEGREES(atan2(direction.y, direction.x));
 
-    // ¸ù¾İ½Ç¶ÈÈ·¶¨·½Ïò
-    if (angle >= -22.5f && angle < 22.5f) return 5; // ÓÒ
-    if (angle >= 22.5f && angle < 67.5f) return 4;  // ÓÒÉÏ
-    if (angle >= 67.5f && angle < 112.5f) return 3; // ÉÏ
-    if (angle >= 112.5f && angle < 157.5f) return 2; // ×óÉÏ
-    if (angle >= 157.5f || angle < -157.5f) return 1; // ×ó
-    if (angle >= -157.5f && angle < -112.5f) return 1; // ×óÏÂ
-    if (angle >= -112.5f && angle < -67.5f) return 0; // ÏÂ
-    if (angle >= -67.5f && angle < -22.5f) return 5; // ÓÒÏÂ
+    // æ ¹æ®è§’åº¦ç¡®å®šæ–¹å‘
+    if (angle >= -22.5f && angle < 22.5f) return 5; // å³
+    if (angle >= 22.5f && angle < 67.5f) return 4;  // å³ä¸Š
+    if (angle >= 67.5f && angle < 112.5f) return 3; // ä¸Š
+    if (angle >= 112.5f && angle < 157.5f) return 2; // å·¦ä¸Š
+    if (angle >= 157.5f || angle < -157.5f) return 1; // å·¦
+    if (angle >= -157.5f && angle < -112.5f) return 1; // å·¦ä¸‹
+    if (angle >= -112.5f && angle < -67.5f) return 0; // ä¸‹
+    if (angle >= -67.5f && angle < -22.5f) return 5; // å³ä¸‹
 
-    return 5; // Ä¬ÈÏÓÒ
+    return 5; // é»˜è®¤å³
 }
 
-// ¼üÅÌ°´ÏÂÊÂ¼ş´¦Àí
+// é”®ç›˜æŒ‰ä¸‹äº‹ä»¶å¤„ç†
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    // CCLOG("Key pressed: %d", keyCode); // Êä³ö°´¼ü´úÂë
+    // CCLOG("Key pressed: %d", keyCode); // è¾“å‡ºæŒ‰é”®ä»£ç 
     switch (keyCode)
     {
         case EventKeyboard::KeyCode::KEY_W:
@@ -147,10 +147,10 @@ void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
     }
 }
 
-// ¼üÅÌÊÍ·ÅÊÂ¼ş´¦Àí
+// é”®ç›˜é‡Šæ”¾äº‹ä»¶å¤„ç†
 void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    // CCLOG("Key released: %d", keyCode); // Êä³ö°´¼ü´úÂë
+    // CCLOG("Key released: %d", keyCode); // è¾“å‡ºæŒ‰é”®ä»£ç 
     switch (keyCode)
     {
         case EventKeyboard::KeyCode::KEY_W:
@@ -170,7 +170,7 @@ void Player::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Eve
     }
 }
 
-// ¸üĞÂÖ÷½ÇÎ»ÖÃ
+// æ›´æ–°ä¸»è§’ä½ç½®
 void Player::updatePlayerPosition(float dt)
 {
 
@@ -181,53 +181,53 @@ void Player::updatePlayerPosition(float dt)
     if (isSPressed) direction.y -= 1;
     if (isDPressed) direction.x += 1;
 
-    if (direction != Vec2::ZERO) // Èç¹ûĞĞ×ß
+    if (direction != Vec2::ZERO) // å¦‚æœè¡Œèµ°
     {
-        // ÒÆ¶¯·½Ïò
+        // ç§»åŠ¨æ–¹å‘
         Vec2 moveDistance = direction * 120 * dt;
 
-        // ÒÆ¶¯
+        // ç§»åŠ¨
         auto moveAction = MoveBy::create(dt, moveDistance);
 
-        // ÅĞ¶Ï·½Ïò¶¯»­
+        // åˆ¤æ–­æ–¹å‘åŠ¨ç”»
         int directionIndex = getDirectionIndex(this->getPosition(), this->getPosition() + moveDistance);
 
-        // ²¥·ÅÒÆ¶¯
+        // æ’­æ”¾ç§»åŠ¨
         playerSprite->runAction(moveAction);
 
-        if (lastWalkDirectionIndex == 6 || lastWalkDirectionIndex != directionIndex) { // Èç¹ûÉÏÒ»Ö¡ÔÚ´ı»ú»òÕßĞĞ×ß·½Ïò¸Ä±ä
+        if (lastWalkDirectionIndex == 6 || lastWalkDirectionIndex != directionIndex) { // å¦‚æœä¸Šä¸€å¸§åœ¨å¾…æœºæˆ–è€…è¡Œèµ°æ–¹å‘æ”¹å˜
 
-            // Í£ÏÂ
+            // åœä¸‹
             playerSprite->stopAllActions();
 
-            // ´´½¨ĞĞ×ßµÄ¶¯×÷
+            // åˆ›å»ºè¡Œèµ°çš„åŠ¨ä½œ
             auto animateAction = Animate::create(walkAnimations[directionIndex]);
 
-            // ²¥·ÅĞĞ×ß¶¯»­
+            // æ’­æ”¾è¡Œèµ°åŠ¨ç”»
             playerSprite->runAction(RepeatForever::create(animateAction));
 
-            // ¸üĞÂ·½Ïò
-            lastIdleDirectionIndex = 6; // Î´´ı»ú
-            lastWalkDirectionIndex = directionIndex; // ¼ÇÂ¼ĞĞ×ß·½Ïò
+            // æ›´æ–°æ–¹å‘
+            lastIdleDirectionIndex = 6; // æœªå¾…æœº
+            lastWalkDirectionIndex = directionIndex; // è®°å½•è¡Œèµ°æ–¹å‘
 
         }
     }
-    else // Èç¹ûÍ£Ö¹ĞĞ×ß
+    else // å¦‚æœåœæ­¢è¡Œèµ°
     {
-        if (lastIdleDirectionIndex == 6) { // Èç¹ûÉÏÒ»Ö¡²»ÊÇÔÚ´ı»ú
+        if (lastIdleDirectionIndex == 6) { // å¦‚æœä¸Šä¸€å¸§ä¸æ˜¯åœ¨å¾…æœº
 
-            // Í£ÏÂ
+            // åœä¸‹
             playerSprite->stopAllActions();
 
-            // ²¥·Å´ı»ú¶¯»­
-            playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastWalkDirectionIndex]))); // ²¥·ÅĞĞ×ß·½ÏòµÄ´ı»ú¶¯»­
-            lastIdleDirectionIndex = lastWalkDirectionIndex; // ¼ÇÂ¼´ı»ú·½Ïò
-            lastWalkDirectionIndex = 6; // Î´ÔÚĞĞ×ß
+            // æ’­æ”¾å¾…æœºåŠ¨ç”»
+            playerSprite->runAction(RepeatForever::create(Animate::create(idleAnimations[lastWalkDirectionIndex]))); // æ’­æ”¾è¡Œèµ°æ–¹å‘çš„å¾…æœºåŠ¨ç”»
+            lastIdleDirectionIndex = lastWalkDirectionIndex; // è®°å½•å¾…æœºæ–¹å‘
+            lastWalkDirectionIndex = 6; // æœªåœ¨è¡Œèµ°
         }
     }
 }
 
-// Ã¿Ö¡¸üĞÂ
+// æ¯å¸§æ›´æ–°
 void Player::update(float dt)
 {
     updatePlayerPosition(dt);

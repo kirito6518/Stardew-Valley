@@ -805,7 +805,6 @@ void  MainMap::SetUseItemInMainMap() {
     }
 
     // 设置叉子
-    // 设置叉子
     if (ItemManager::getInstance()->getItem("Fork")) {
         // 定义一个自定义的 useItem 逻辑
         auto customUseItemLogic = [this]() -> bool {
