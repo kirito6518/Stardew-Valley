@@ -7,9 +7,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>app</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>works</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ResourceManager.cpp">
       <Filter>works</Filter>
     </ClCompile>
@@ -31,18 +28,6 @@
     <ClCompile Include="..\Classes\AuthorListScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ShopLayer.cpp">
-      <Filter>myLayers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ShopManager.cpp">
-      <Filter>myLayers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ShopItem.cpp">
-      <Filter>Item work</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ShopItemManager.cpp">
-      <Filter>Item work</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\NPC.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
@@ -62,10 +47,10 @@
       <Filter>NPC</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TaskLayer.cpp">
-      <Filter>myLayers</Filter>
+      <Filter>task</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TaskManager.cpp">
-      <Filter>myLayers</Filter>
+      <Filter>task</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BringMine.cpp">
       <Filter>Cave</Filter>
@@ -91,6 +76,21 @@
     <ClCompile Include="..\Classes\BackpackManager.cpp">
       <Filter>backpack</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EventManager.cpp">
+      <Filter>works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopLayer.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopManager.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItem.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItemManager.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -98,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>app</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Event.h">
-      <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResourceManager.h">
       <Filter>works</Filter>
@@ -123,18 +120,6 @@
     <ClInclude Include="..\Classes\AuthorListScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ShopLayer.h">
-      <Filter>myLayers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ShopManager.h">
-      <Filter>myLayers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ShopItem.h">
-      <Filter>Item work</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ShopItemManager.h">
-      <Filter>Item work</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NPC.h">
       <Filter>NPC</Filter>
     </ClInclude>
@@ -154,10 +139,10 @@
       <Filter>NPC</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TaskLayer.h">
-      <Filter>myLayers</Filter>
+      <Filter>task</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TaskManager.h">
-      <Filter>myLayers</Filter>
+      <Filter>task</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BringMine.h">
       <Filter>Cave</Filter>
@@ -183,6 +168,21 @@
     <ClInclude Include="..\Classes\BackpackManager.h">
       <Filter>backpack</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\EventManager.h">
+      <Filter>works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopLayer.h">
+      <Filter>shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopManager.h">
+      <Filter>shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItem.h">
+      <Filter>shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItemManager.h">
+      <Filter>shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="main">
@@ -190,9 +190,6 @@
     </Filter>
     <Filter Include="app">
       <UniqueIdentifier>{e15123cf-3b3e-45f8-8abc-1aa0aef345ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="myLayers">
-      <UniqueIdentifier>{aabc4a83-cc94-4d40-aa86-97e63666682e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Item work">
       <UniqueIdentifier>{6194fa75-bdeb-4f30-8d61-3516b8b99290}</UniqueIdentifier>
@@ -223,6 +220,12 @@
     </Filter>
     <Filter Include="backpack">
       <UniqueIdentifier>{6369e493-0aa5-40eb-a4c3-769c7365ddff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shop">
+      <UniqueIdentifier>{68ee9ea1-2a85-4c1b-ba33-646ed2bc762d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="task">
+      <UniqueIdentifier>{aabc4a83-cc94-4d40-aa86-97e63666682e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

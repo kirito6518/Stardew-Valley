@@ -55,8 +55,14 @@ BackpackManager::BackpackManager()
 
     Item::create("crops/Onion.png", "Onion", ItemCategory::Crops, 2, 1);//加载洋葱果实
     Item::create("crops/OnionSeed.png", "Onion\nSeed", ItemCategory::Seed, 0, 1);// 加载洋葱种子
+    Item::create("crops/Radish.png", "Radish", ItemCategory::Crops, 2, 1);//加载红萝卜果实
+    Item::create("crops/RadishSeed.png", "Radish\nSeed", ItemCategory::Seed, 0, 1);// 加载红萝卜种子
 
-    Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 4, 2);//加载猪肉
+
+    Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 3, 2);//加载猪肉
+    Item::create("animal/Beef.png", "Beef", ItemCategory::AnimalProduct, 3, 2);//加载牛肉
+    Item::create("animal/Mutton.png", "Mutton", ItemCategory::AnimalProduct, 3, 2);//加载羊肉
+    Item::create("animal/Chicken.png", "Chicken", ItemCategory::AnimalProduct, 3, 2);//加载鸡肉
 }
 
 // 析构函数
