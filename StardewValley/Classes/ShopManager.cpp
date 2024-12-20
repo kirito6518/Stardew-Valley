@@ -34,6 +34,10 @@ ShopManager::ShopManager()
     ShopItem::create("crops/OnionSeed.png", "Onion\nSeed", 0, 1); // 洋葱种子
     ShopItem::create("crops/RadishSeed.png", "Radish\nSeed", 0, 1); // 红萝卜种子
     ShopItem::create("crops/PotatoSeed.png", "Potato\nSeed", 0, 1); // 马铃薯种子
+    ShopItem::create("crops/CarrotSeed.png", "Carrot\nSeed", 0, 1); // 胡萝卜种子
+    ShopItem::create("crops/TurnipSeed.png", "Turnip\nSeed", 0, 1); // 白萝卜种子
+    ShopItem::create("crops/SpinachSeed.png", "Spinach\nSeed", 0, 1); // 白菜种子
+
     ShopItem::create("fish/Bait.png", "Bait", 0, 1); // 饵料
     ShopItem::create("tool/Fertilizer.png", "Fertilizer", 0, 2); // 肥料
 }

@@ -59,6 +59,12 @@ BackpackManager::BackpackManager()
     Item::create("crops/RadishSeed.png", "Radish\nSeed", ItemCategory::Seed, 0, 1);// 加载红萝卜种子
     Item::create("crops/Potato.png", "Potato", ItemCategory::Crops, 2, 1);//加载马铃薯果实
     Item::create("crops/PotatoSeed.png", "Potato\nSeed", ItemCategory::Seed, 0, 1);// 加载马铃薯种子
+    Item::create("crops/Carrot.png", "Carrot", ItemCategory::Crops, 2, 1);//加载胡萝卜果实
+    Item::create("crops/CarrotSeed.png", "Carrot\nSeed", ItemCategory::Seed, 0, 1);// 加载胡萝卜种子
+    Item::create("crops/Turnip.png", "Turnip", ItemCategory::Crops, 2, 1);//加载白萝卜果实
+    Item::create("crops/TurnipSeed.png", "Turnip\nSeed", ItemCategory::Seed, 0, 1);// 加载白萝卜种子
+    Item::create("crops/Spinach.png", "Spinach", ItemCategory::Crops, 2, 1);//加载白菜果实
+    Item::create("crops/SpinachSeed.png", "Spinach\nSeed", ItemCategory::Seed, 0, 1);// 加载白菜种子
 
 
     Item::create("animal/Pork.png", "Pork", ItemCategory::AnimalProduct, 3, 2);//加载猪肉
