@@ -1,4 +1,4 @@
-#ifndef __BRING_MINE_H__
+ï»¿#ifndef __BRING_MINE_H__
 #define __BRING_MINE_H__
 
 #include "cocos2d.h"
@@ -8,31 +8,31 @@ USING_NS_CC;
 class ChooseMineLayer : public Layer
 {
 public:
-    // »ñÈ¡µ¥ÀıÊµÀı
+    // è·å–å•ä¾‹å®ä¾‹
     static ChooseMineLayer* getInstance();
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     virtual bool init();
 
-    // ¸Ä±ä¿óÎï
+    // æ”¹å˜çŸ¿ç‰©
     void ChangeMine(Ref* sender);
 
-    // ²»¸Ä±ä¿óÎï
+    // ä¸æ”¹å˜çŸ¿ç‰©
     void NoChangeMine(Ref* sender);
 
-    Scene* cave; // ³¡¾°
+    Scene* cave; // åœºæ™¯
 
     Sprite* chooseLayer;
-    MenuItemImage* yesButton;//yes°´Å¥
-    MenuItemImage* noButton;//no°´Å¥
+    MenuItemImage* yesButton;//yesæŒ‰é’®
+    MenuItemImage* noButton;//noæŒ‰é’®
 
-    int chooseMine; // Ñ¡ÔñµÄ¿óÎï£¬·¶Î§1-5£¬0±íÊ¾Î´Ñ¡Ôñ
+    int chooseMine; // é€‰æ‹©çš„çŸ¿ç‰©ï¼ŒèŒƒå›´1-5ï¼Œ0è¡¨ç¤ºæœªé€‰æ‹©
 
 private:
-    // Ë½ÓĞ¹¹Ôìº¯Êı£¬·ÀÖ¹Íâ²¿Ö±½ÓÊµÀı»¯
+    // ç§æœ‰æ„é€ å‡½æ•°ï¼Œé˜²æ­¢å¤–éƒ¨ç›´æ¥å®ä¾‹åŒ–
     ChooseMineLayer();
 
-    // µ¥ÀıÊµÀı
+    // å•ä¾‹å®ä¾‹
     static ChooseMineLayer* _instance;
 };
 

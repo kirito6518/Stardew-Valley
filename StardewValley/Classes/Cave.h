@@ -1,4 +1,4 @@
-#ifndef CAVE_H
+ï»¿#ifndef CAVE_H
 #define CAVE_H
 
 #include "cocos2d.h"
@@ -13,75 +13,72 @@
 
 USING_NS_CC;
 
-//¶´Ñ¨³¡¾°
+//æ´ç©´åœºæ™¯
 class Cave : public Scene {
 public:
 
 	static Scene* createScene();
 
-	// ³õÊ¼»¯
+	// åˆå§‹åŒ–
 	virtual bool init();
 
-	// ÊµÏÖcreateº¯Êı
+	// å®ç°createå‡½æ•°
 	CREATE_FUNC(Cave);
 
-	// Ã¿Ö¡¸üĞÂ
-	void updatePlayerPosition(float dt);
+	// æ¯å¸§æ›´æ–°
+	void update(float dt);
 
-	// Ã¿Ö¡¸üĞÂ
-	void updateCameraPosition(float dt);
-
-	// Åö×²¿ªÊ¼¼àÌıÆ÷
+	// ç¢°æ’å¼€å§‹ç›‘å¬å™¨
 	bool onContactBegin(PhysicsContact& contact);
 
-	// Ìí¼ÓÒ»¸ö¿óÎï
+	// æ·»åŠ ä¸€ä¸ªçŸ¿ç‰©
 	void AddMine(Sprite* mine, PhysicsBody* minesBox, Vec2 position);
 
-	// Ëæ»úÉú³É¿óÎï
+	// éšæœºç”ŸæˆçŸ¿ç‰©
 	void CreateMine();
 
-	// ´ò¿ªÑ¡Ïî
+	// æ‰“å¼€é€‰é¡¹
 	void OpenLayer();
 
-	// Òş²ØÑ¡Ïî
+	// éšè—é€‰é¡¹
 	void HideLayer(Ref* sender);
 
-	// ÔÚÆÁÄ»ÏÂ·½ÏÔÊ¾¿ÉÒÔ´ø×ßµÄ±¦Ê¯
+	// åœ¨å±å¹•ä¸‹æ–¹æ˜¾ç¤ºå¯ä»¥å¸¦èµ°çš„å®çŸ³
 	void Gem(Vec2 targetCameraPosition);
 	
 	Scene* mainMap;
 
-	Sprite* caveSprite; // µØÍ¼
-	Sprite* gemSprite1; // ¿ÉÒÔ±»´ø×ßµÄ±¦Ê¯
-	Sprite* gemSprite2; // ¿ÉÒÔ±»´ø×ßµÄ±¦Ê¯
-	Sprite* gemSprite3; // ¿ÉÒÔ±»´ø×ßµÄ±¦Ê¯
-	Sprite* gemSprite4; // ¿ÉÒÔ±»´ø×ßµÄ±¦Ê¯
-	Sprite* gemSprite5; // ¿ÉÒÔ±»´ø×ßµÄ±¦Ê¯
+	Sprite* caveSprite; // åœ°å›¾
+	Sprite* gemSprite1; // å¯ä»¥è¢«å¸¦èµ°çš„å®çŸ³
+	Sprite* gemSprite2; // å¯ä»¥è¢«å¸¦èµ°çš„å®çŸ³
+	Sprite* gemSprite3; // å¯ä»¥è¢«å¸¦èµ°çš„å®çŸ³
+	Sprite* gemSprite4; // å¯ä»¥è¢«å¸¦èµ°çš„å®çŸ³
+	Sprite* gemSprite5; // å¯ä»¥è¢«å¸¦èµ°çš„å®çŸ³
 
-	Sprite* caveUpBoundary; // µØÍ¼ÉÏ±ß½ç
+	Sprite* caveUpBoundary; // åœ°å›¾ä¸Šè¾¹ç•Œ
 	PhysicsBody* caveUpBoundaryBox;
-	Sprite* caveRightBoundary; // µØÍ¼ÓÒ±ß½ç
+	Sprite* caveRightBoundary; // åœ°å›¾å³è¾¹ç•Œ
 	PhysicsBody* caveRightBoundaryBox;
-	Sprite* caveLeftBoundary; // µØÍ¼×ó±ß½ç
+	Sprite* caveLeftBoundary; // åœ°å›¾å·¦è¾¹ç•Œ
 	PhysicsBody* caveLeftBoundaryBox;
-	Sprite* caveDownBoundary; // µØÍ¼ÏÂ±ß½ç
+	Sprite* caveDownBoundary; // åœ°å›¾ä¸‹è¾¹ç•Œ
 	PhysicsBody* caveDownBoundaryBox;
 
-	Player player; // Íæ¼Ò
+	Player player; // ç©å®¶
 	PhysicsBody* playerBox;
-	Sprite* black; // ºÚ°µ¿ó¶´ 
+	Sprite* black; // é»‘æš—çŸ¿æ´ 
 
-	Sprite* ladder; //»ØÈ¥µÄÌİ×Ó
+	Sprite* ladder; //å›å»çš„æ¢¯å­
 	PhysicsBody* ladderBox;
 
-	std::vector<Sprite*> mines; // ¿óÎï£¬×î¶àÊ®Öê
+	std::vector<Sprite*> mines; // çŸ¿ç‰©ï¼Œæœ€å¤šåæ ª
 	std::vector<PhysicsBody*> minesBox;
 
-	ChooseMineLayer* chooseMineLayer; // Ñ¡ÔñÊÇ·ñ´ø³öµÄLayer
+	ChooseMineLayer* chooseMineLayer; // é€‰æ‹©æ˜¯å¦å¸¦å‡ºçš„Layer
 
-	int gem; // ¿ÉÒÔ´ø³öµÄ¿óÎï£¬·Ö±ğÊÇ1-5£¬0¾ÍÊÇÎ´Ñ¡³öÀ´
+	int gem; // å¯ä»¥å¸¦å‡ºçš„çŸ¿ç‰©ï¼Œåˆ†åˆ«æ˜¯1-5ï¼Œ0å°±æ˜¯æœªé€‰å‡ºæ¥
 
-	int place; // Î»ÖÃ£¬0¿ÕµØ£¬7¿óÎï
+	int place; // ä½ç½®ï¼Œ0ç©ºåœ°ï¼Œ7çŸ¿ç‰©
 };
 
 #endif // CAVE_H
