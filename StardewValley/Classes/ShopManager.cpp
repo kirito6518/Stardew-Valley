@@ -97,7 +97,7 @@ bool ShopManager::addItem(ShopItem* newitem)
 }
 
 // ÒÆ³ýÎïÆ·
-void ShopManager::removeItem(ShopItem* item)  // Ìæ»» Item*
+void ShopManager::removeItem(ShopItem* item) 
 {
     items.eraseObject(item);
     static_cast<ShopLayer*>(shopLayer)->removeItem(item->getIcon());

@@ -25,11 +25,11 @@ public:
     //添加任务列表到layer中
     bool addList(Sprite* taskList);
 
-    // 向任务列表中添加任务
-    void addTask(const std::string& npcName, const std::string& taskDescription);
+    // 移除列表
+    void removeItem(Sprite* taskList);
 
-    // 移除任务
-    void removeTask(const std::string& npcName);
+    //更新物品位置
+    void renewPosition();
 
     //关闭任务界面
     void closeTaskUI(Ref* sender);
@@ -42,15 +42,18 @@ public:
     void setupMouseListener();
 
 private:
+
     cocos2d::Vector<Sprite*> lists;//所有任务列表精灵
     Vector <NPCTask*> tasks;//所有任务
+
     cocos2d::Sprite* taskUI; ///< 任务界面
-    cocos2d::Sprite* taskList;//具体任务列表
+    cocos2d::Sprite* taskDetailsUi;//任务详情UI
     cocos2d::MenuItemImage* closeButton; ///< 关闭任务详情按钮
 
     cocos2d::Label* nowGoodwill;//当前好感度
     cocos2d::Label* rewardGoodwill;//奖励好感度
-    cocos2d::Sprite* needItem;//需求物品
+
+    cocos2d::Sprite* needItem;//需求物品图标精灵
     cocos2d::Label* needItemCount;//需求物品数量
 
 };

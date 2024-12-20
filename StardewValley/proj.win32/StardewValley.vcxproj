@@ -177,6 +177,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\ShopItemManager.cpp" />
     <ClCompile Include="..\Classes\ShopLayer.cpp" />
     <ClCompile Include="..\Classes\ShopManager.cpp" />
+    <ClCompile Include="..\Classes\TaskItem.cpp" />
+    <ClCompile Include="..\Classes\TaskItemManager.cpp" />
     <ClCompile Include="..\Classes\TaskLayer.cpp" />
     <ClCompile Include="..\Classes\TaskManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -209,6 +211,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ShopItemManager.h" />
     <ClInclude Include="..\Classes\ShopLayer.h" />
     <ClInclude Include="..\Classes\ShopManager.h" />
+    <ClInclude Include="..\Classes\TaskItem.h" />
+    <ClInclude Include="..\Classes\TaskItemManager.h" />
     <ClInclude Include="..\Classes\TaskLayer.h" />
     <ClInclude Include="..\Classes\TaskManager.h" />
     <ClInclude Include="main.h" />
