@@ -34,6 +34,9 @@ public:
     //关闭任务界面
     void closeTaskUI(Ref* sender);
 
+    //提交按钮的回调函数
+    void onSubmitButton(Ref* sender);
+
     // 获取所有任务的向量
     const Vector<NPCTask*>& getTasks() const { return tasks; }
 
@@ -41,24 +44,22 @@ public:
     // 设置鼠标事件监听器
     void setupMouseListener();
 
+    cocos2d::Sprite* taskUI; ///< 任务界面
+
 private:
 
     cocos2d::Vector<Sprite*> lists;//所有任务列表精灵
     Vector <NPCTask*> tasks;//所有任务
 
-    cocos2d::Sprite* taskUI; ///< 任务界面
     cocos2d::Sprite* taskDetailsUi;//任务详情UI
     cocos2d::MenuItemImage* closeButton; ///< 关闭任务详情按钮
     cocos2d::MenuItemImage* submitButton;//提交按钮
-    cocos2d::Label* submitSuccess;//使用成功提示
-    cocos2d::Label* submitFailed;//提交失败提示
+    cocos2d::Label* resultLabel;//提交提示
 
     cocos2d::Label* nowGoodwill;//当前好感度
     cocos2d::Label* rewardGoodwill;//奖励好感度
 
-
-    cocos2d::Sprite* needItem;//需求物品图标精灵
-    cocos2d::Label* needItemCount;//需求物品数量
+    cocos2d::Label* needItemDeta;//需求物品信息标签
 
 };
 

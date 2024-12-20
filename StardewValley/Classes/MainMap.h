@@ -47,6 +47,12 @@ public:
     //加载初始商店
     void getInitShop();
 
+    //点击任务按钮的回调函数
+    void onTaskButtonClicked(Ref* sender);
+
+    //隐藏任务界面
+    void hideTask(Ref* sender);
+
     // 实现create函数
     CREATE_FUNC(MainMap);
 
@@ -125,7 +131,8 @@ private:
 
     MenuItemImage* toHollowWorldButton; // 返回菜单的按钮
     Label* toHollowWorldWord; // 返回菜单按钮的文字
-    MenuItemImage* backpackButton; // 开启背包的文字
+    MenuItemImage* backpackButton; // 开启背包的按钮
+    MenuItemImage* taskButton;//开启任务界面的按钮
     FarmManager farmManager; // 声明 FarmManager 实例
 
     int place; // 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店

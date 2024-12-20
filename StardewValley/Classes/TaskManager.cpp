@@ -14,7 +14,7 @@ TaskManager* TaskManager::getInstance()
 {
     if (!instance)
     {
-        instance = new TaskManager();
+        instance = new(std::nothrow) TaskManager();
     }
     return instance;
 }
@@ -23,16 +23,16 @@ TaskManager* TaskManager::getInstance()
 TaskManager::TaskManager()
 {
     taskLayer = TaskLayer::create();
-    taskLayer->retain(); // 保留任务列表层，防止被释放
+    taskLayer->retain();
 
-
-    //所有会出现在任务栏的物品都在此处加载
+    //所有会出现在任务栏的物品都在此处加载，最好不要用名字带换行符的物品
     //第一个数字作为其唯一标识符
     TaskItem::create("crops/Onion.png", "Onion",1);
 
 
     //四个npc任务的初始化在此加载
     NPCTask* Alice=new NPCTask("Alice");
+    addTaskList(Alice);
     tasks.pushBack(Alice);
     //继续增加....
 
@@ -60,7 +60,7 @@ void TaskManager::hideTaskList()
 }
 
 //添加任务列表
-bool TaskManager::addTaskLIst(NPCTask* task)
+bool TaskManager::addTaskList(NPCTask* task)
 {
     if (!task) {
         return false;
@@ -83,17 +83,23 @@ bool TaskManager::addTaskLIst(NPCTask* task)
     return true;
 }
 
-// 移除任务列表
-void TaskManager::removeList(NPCTask* task)
+
+// 更新任务状态
+void TaskManager::renewTask()
 {
-    if (!task->getHaveTask()) {
-        static_cast<TaskLayer*>(taskLayer)->removeItem(task->getIcon());
+    for (auto task : tasks) {
+        if (!task->getHaveTask()) {
+            static_cast<TaskLayer*>(taskLayer)->removeItem(task->getIcon());
+        }
+        else {
+            // 获取列表实例并设置用户数据
+            auto listSprite = task->getIcon();
+            if (!listSprite->getParent()) {//确保listSprite没有父节点
+                listSprite->setUserData(task);// 将 task 对象与列表图标关联
+                // 将列表图标添加到任务层
+                static_cast<TaskLayer*>(taskLayer)->addList(listSprite);
+            }         
+        }
+
     }
-}
-
-
-// 根据NPC名字更新其任务
-void TaskManager::renewTask(const std::string& npcName)
-{
-   
 }

@@ -26,7 +26,7 @@ bool TaskItem::init(const std::string& itemImagePath, const std::string& itemNam
     this->itemName = itemName; // 设置物品名称
 
     //设置物品标识符
-    ItemId = ItemId;
+    this->taskId = ItemId;
 
     // 创建物品图标
     itemIcon = cocos2d::Sprite::create(itemImagePath);

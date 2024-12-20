@@ -15,10 +15,10 @@ public:
     std::string getNPCName() const { return npcName; }
 
     // 获取所需物品名称
-    std::string getRequiredItem() const { return needItemName; }
+    std::string getNeedItemName() const { return needItemName; }
 
     // 获取所需物品数量
-    int getRequiredItemCount() const { return needItemCount; }
+    int getNeedItemCount() const { return needItemCount; }
 
     // 检查任务是否可以完成
     bool canComplete();

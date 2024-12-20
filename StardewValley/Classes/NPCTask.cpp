@@ -60,16 +60,9 @@ bool NPCTask::canComplete()
 void NPCTask::complete()
 {
 
-
     if (canComplete())
     {
-        std::string getItem = needItemName;
-        getItem.pop_back();
-        // 获取背包中的任务物品
-        auto item = BackpackManager::getInstance()->getItemByName(getItem);
-        // 从背包中减少所需物品
-        item->decreaseCount(needItemCount);
-
+        haveTask = false;
         // 设置任务冷却时间
         setCooldown(60.0f); // 假设冷却时间为 60 秒
     }

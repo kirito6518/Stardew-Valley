@@ -14,6 +14,8 @@
 #include "FarmManager.h"
 #include "Cave.h"
 #include "AnimalManager.h"
+#include "TaskLayer.h"
+#include "TaskManager.h"
 
 
 USING_NS_CC;
@@ -62,6 +64,10 @@ bool MainMap::init()
     ShopManager::getInstance();
     getInitShop();
     ShopManager::getInstance()->mainMap = this;
+
+    //加载任务界面
+    TaskManager::getInstance();
+    TaskManager::getInstance()->mainMap = this;
 
     // 加载动物管理器
     AnimalManager::getInstance();
@@ -360,8 +366,64 @@ bool MainMap::init()
 
     _eventDispatcher->addEventListenerWithSceneGraphPriority(backpackListener, backpackButton);
 
+    this->addChild(backpackButton, 4);
+
+
+    // 添加一个按钮，左键点击后打开任务栏
+    // 创建任务按钮
+    taskButton = MenuItemImage::create(
+        "ui/task_normal.png",  // 按钮正常状态的图片
+        "ui/task_pressed.png", // 按钮按下状态的图片
+        CC_CALLBACK_1(MainMap::onTaskButtonClicked, this));
+    //设置坐标
+    x = visibleSize.width - backpackButton->getContentSize().width / 2-80;
+    y = visibleSize.height - backpackButton->getContentSize().height / 2 + 12;
+    taskButton->setPosition(Vec2(x, y));
+    taskButton->setScale(0.8f);
+
+    // 添加点击事件监听器
+    auto taskListener = EventListenerTouchOneByOne::create();
+
+    // 点击开始
+    taskListener->onTouchBegan = [this](Touch* touch, Event* event) {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());
+        Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+        Size s = target->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+
+        if (rect.containsPoint(locationInNode))
+        {
+            // 切换到按下状态的图片
+            taskButton->setNormalImage(Sprite::create("ui/task_pressed.png"));
+            return true;
+        }
+        return false;
+        };
+
+    // 点击结束
+    taskListener->onTouchEnded = [this](Touch* touch, Event* event) {
+        auto target = static_cast<Sprite*>(event->getCurrentTarget());
+        Vec2 locationInNode = target->convertToNodeSpace(touch->getLocation());
+        Size s = target->getContentSize();
+        Rect rect = Rect(0, 0, s.width, s.height);
+
+        if (rect.containsPoint(locationInNode))
+        {
+            // 切换回正常状态的图片
+            taskButton->setNormalImage(Sprite::create("ui/task_normal.png"));
+            onTaskButtonClicked(nullptr);
+        }
+        else
+        {
+            // 如果触摸结束时不在按钮区域内，也切换回正常状态
+            taskButton->setNormalImage(Sprite::create("ui/task_normal.png"));
+        }
+        };
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(taskListener, taskButton);
+
     // 添加到图层
-    this->addChild(backpackButton, 2);
+    this->addChild(taskButton, 2);
 
     // 创建主角精灵
     player.playerSprite->setPosition(visibleSize / 2); // 初始位置在屏幕中央
@@ -509,6 +571,8 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
     BackpackManager::getInstance()->addItem(initItem, 1);
+    initItem = ItemManager::getInstance()->getItem("Onion");
+    BackpackManager::getInstance()->addItem(initItem, 10);
     //initItem = ItemManager::getInstance()->getItem("Coin");
     //BackpackManager::getInstance()->addItem(initItem, 99);
     //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
@@ -521,7 +585,7 @@ void MainMap::getInitBackpack()
 //显示商店
 void MainMap::toShop()
 {
-    // 调用单例管理类显示背包层
+    // 调用单例管理类显示商店层
     ShopManager::getInstance()->showShop(this);
 
     // 禁用 MainMap 场景的时间更新
@@ -558,6 +622,21 @@ void MainMap::getInitShop()
     initItem = ShopItemManager::getInstance()->getShopItem("Fertilizer");
     ShopManager::getInstance()->addItem(initItem);
 }
+
+//点击任务按钮的回调函数
+void MainMap::onTaskButtonClicked(Ref* sender)
+{
+    // 调用单例管理类显示任务层
+    TaskManager::getInstance()->showTaskList(this);
+}
+
+//隐藏任务界面
+void MainMap::hideTask(Ref* sender) {
+    // 重新启用 MainMap 场景的时间更新
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updatePlayerPosition), 0.2f);
+    this->schedule(CC_SCHEDULE_SELECTOR(MainMap::updateCameraPosition), 0);
+}
+
 
 // 每0.2s更新玩家位置和动画
 void MainMap::updatePlayerPosition(float delta)
@@ -640,6 +719,13 @@ void MainMap::updateCameraPosition(float dt) {
     shoplayer->shopSprite->setPosition(Vec2(shopBgPos.x, shopBgPos.y + shopBgSize.height / 2));
     shoplayer->closeButton->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 + shopBgSize.width / 2, visibleSize.height / 2 + shopBgSize.height / 2));
 
+    //获取tasklayer实例
+    auto tasklayer = TaskManager::getInstance()->taskLayer;
+
+    //更新任务位置
+    tasklayer->taskUI->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 - 100, visibleSize.height / 2));
+
+
     //更新商店物品图标坐标值
     {
         int dx, dy;   //物品坐标相对于背包初始坐标的偏移量
@@ -662,9 +748,12 @@ void MainMap::updateCameraPosition(float dt) {
     // 重新绑定鼠标事件监听器
     BackpackLayer->setupCombinedMouseListener();
     ShopManager::getInstance()->shopLayer->setupCombinedMouseListener();
+    tasklayer->setupMouseListener();
 
-    // 更新背包按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
+    // 更新背包按钮、任务按钮、Menu按钮和文字的位置，使它们始终保持在屏幕的固定位置
     backpackButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - backpackButton->getContentSize().width / 2, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
+
+    taskButton->setPosition(targetCameraPosition+ Vec2(visibleSize.width - backpackButton->getContentSize().width / 2-80, visibleSize.height - backpackButton->getContentSize().height / 2 + 12));
 
     toHollowWorldButton->setPosition(targetCameraPosition + Vec2(visibleSize.width - toHollowWorldButton->getContentSize().width / 2, toHollowWorldButton->getContentSize().height / 2));
 

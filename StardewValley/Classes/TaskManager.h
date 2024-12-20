@@ -27,22 +27,20 @@ public:
     void hideTaskList();
 
     //添加任务列表
-    bool addTaskLIst(NPCTask* task);
+    bool addTaskList(NPCTask* task);
 
-    //移除任务列表
-    void TaskManager::removeList(NPCTask* task);
-
-    //根据NPC名字更新其任务
-    void renewTask(const std::string& npcName);
+    //更新所有任务状态
+    void renewTask();
 
     //获取MainMap实例
     Scene* mainMap;
+
+    TaskLayer* taskLayer; ///< 任务列表层对象
 
 private:
 
 
     static TaskManager* instance; ///< 单例实例
-    TaskLayer* taskLayer; ///< 任务列表层对象
     Vector < NPCTask*> tasks; ///< 任务列表
 
     /**
