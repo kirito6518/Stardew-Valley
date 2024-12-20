@@ -89,6 +89,54 @@ void Crop::update(float dt) {
             break;
         }
         break;
+    case CARROT: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Carrot-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Carrot-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Carrot-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Carrot-harvest.png");
+            break;
+        }
+        break;
+    case TURNIP: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Turnip-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Turnip-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Turnip-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Turnip-harvest.png");
+            break;
+        }
+        break;
+    case SPINACH: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Spinach-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Spinach-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Spinach-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Spinach-harvest.png");
+            break;
+        }
+        break;
     }
 
     // 更新缺水天数

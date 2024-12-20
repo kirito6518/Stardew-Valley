@@ -93,6 +93,15 @@ bool FarmManager::harvestCrop(const Vec2& position, int& yield) {
                 case Crop::RADISH:
                     item = ItemManager::getInstance()->getItem("Radish");
                     break;
+                case Crop::CARROT: // 新增
+                    item = ItemManager::getInstance()->getItem("Carrot");
+                    break;
+                case Crop::TURNIP: // 新增
+                    item = ItemManager::getInstance()->getItem("Turnip");
+                    break;
+                case Crop::SPINACH: // 新增
+                    item = ItemManager::getInstance()->getItem("Spinach");
+                    break;
                 }
 
                 // 如果找到了对应的物品，增加到背包中

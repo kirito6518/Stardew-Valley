@@ -13,7 +13,10 @@ public:
     enum CropType {
         ONION,
         POTATO,
-        RADISH
+        RADISH,
+        CARROT, 
+        TURNIP, 
+        SPINACH 
     };
 
     Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType);
