@@ -45,12 +45,6 @@ bool MainMap::init()
     auto physicsWorld = this->getPhysicsWorld();
     physicsWorld->setGravity(Vec2(0, 0));// 设置重力，无
 
-    // 在 MainMap 的构造函数或初始化函数中
-    farmManager = FarmManager();
-    farmManager.setMainMap(this);
-    farmManager.initFarm();
-    this->schedule(schedule_selector(MainMap::updateFarm), 1.0f); // 每秒更新一次
-
     // 设置碰撞监听器
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(MainMap::onContactBegin, this);
@@ -72,6 +66,12 @@ bool MainMap::init()
     // 加载动物管理器
     AnimalManager::getInstance();
     AnimalManager::getInstance()->mainMap = this;
+
+    // 加载农场
+    farmManager = FarmManager();
+    farmManager.setMainMap(this);
+    farmManager.initFarm();
+    this->schedule(schedule_selector(MainMap::updateFarm), 1.0f); // 每秒更新一次
 
     // 加载使用逻辑
     SetUseItemInMainMap();
@@ -723,7 +723,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION);
                         return true;
                     }
                 }
@@ -731,7 +731,7 @@ void  MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION);
                         return true;
                     }
                 }
@@ -744,6 +744,71 @@ void  MainMap::SetUseItemInMainMap() {
         // CCLOG("Item 'test' not found in backpack.");
     }
 
+    // 设置土豆种子
+    if (ItemManager::getInstance()->getItem("Potato\nSeed")) {
+        auto customUseItemLogic = [this]() -> bool {
+            auto OnionSeed = ItemManager::getInstance()->getItem("Potato\nSeed");
+            Vec2 plantingPosition;
+            if (place == 1 || place == 2) {
+                int countUsed = 1;
+                if (place == 1) {
+                    plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
+                        OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO);
+                        return true;
+                    }
+                }
+                else if (place == 2) {
+                    plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
+                        OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO);
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+        ItemManager::getInstance()->getItem("Potato\nSeed")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    // 设置红萝卜种子
+    if (ItemManager::getInstance()->getItem("Radish\nSeed")) {
+        auto customUseItemLogic = [this]() -> bool {
+            auto OnionSeed = ItemManager::getInstance()->getItem("Radish\nSeed");
+            Vec2 plantingPosition;
+            if (place == 1 || place == 2) {
+                int countUsed = 1;
+                if (place == 1) {
+                    plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
+                        OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH);
+                        return true;
+                    }
+                }
+                else if (place == 2) {
+                    plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
+                    if (!farmManager.isPositionOccupied(plantingPosition)) {
+                        OnionSeed->decreaseCount(countUsed);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::RADISH);
+                        return true;
+                    }
+                }
+            }
+            return false;
+            };
+        ItemManager::getInstance()->getItem("Radish\nSeed")->setUseItemCallback(customUseItemLogic);
+    }
+    else {
+        // CCLOG("Item 'test' not found in backpack.");
+    }
+
+    // 设置叉子
     // 设置叉子
     if (ItemManager::getInstance()->getItem("Fork")) {
         // 定义一个自定义的 useItem 逻辑
@@ -760,9 +825,34 @@ void  MainMap::SetUseItemInMainMap() {
 
                 int finalYield = 0;
                 if (farmManager.harvestCrop(targetPosition, finalYield)) {
-                    Item* initItem = ItemManager::getInstance()->getItem("Onion");
-                    if (initItem) {
-                        BackpackManager::getInstance()->addItem(initItem, finalYield);
+                    // 根据作物类型决定背包中增加的物品
+                    Crop* crop = nullptr;
+                    for (auto c : farmManager.getCrops()) {
+                        if (c->getPosition() == targetPosition) {
+                            crop = c;
+                            break;
+                        }
+                    }
+
+                    if (crop) {
+                        Crop::CropType cropType = crop->getCropType();
+                        Item* item = nullptr;
+                        switch (cropType) {
+                        case Crop::ONION:
+                            item = ItemManager::getInstance()->getItem("Onion");
+                            break;
+                        case Crop::POTATO:
+                            item = ItemManager::getInstance()->getItem("Potato");
+                            break;
+                        case Crop::RADISH:
+                            item = ItemManager::getInstance()->getItem("Radish");
+                            break;
+                        }
+
+                        // 如果找到了对应的物品，增加到背包中
+                        if (item) {
+                            BackpackManager::getInstance()->addItem(item, finalYield);
+                        }
                     }
                     return true;
                 }
@@ -772,9 +862,6 @@ void  MainMap::SetUseItemInMainMap() {
 
         // 设置回调函数
         ItemManager::getInstance()->getItem("Fork")->setUseItemCallback(customUseItemLogic);
-    }
-    else {
-        // CCLOG("Item 'test' not found in backpack.");
     }
 
     // 设置水瓶

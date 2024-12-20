@@ -9,8 +9,16 @@ class FarmManager;
 
 class Crop : public Sprite {
 public:
-    Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays);
+    // 作物类型枚举
+    enum CropType {
+        ONION,
+        POTATO,
+        RADISH
+    };
+
+    Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType);
     ~Crop();
+
 
     // 更新作物状态
     void update(float dt);
@@ -47,6 +55,11 @@ public:
     // 获取作物位置
     Vec2 get_Position() const;
 
+    // 返回作物类型
+    CropType getCropType() const {
+        return _cropType;
+    }
+
     void setFarmManager(FarmManager* farmManager);
 
     std::string _cropName; // 作物名称
@@ -65,6 +78,7 @@ public:
     int _yield; // 当前产量
     Label* _statusLabel; // 状态标签（显示缺水或缺肥）
     FarmManager* _farmManager;
+    CropType _cropType; // 作物类型
 private:
     
 };

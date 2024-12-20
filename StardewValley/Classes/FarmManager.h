@@ -18,7 +18,7 @@ public:
     void update(float dt);
 
     // 种植作物
-    void plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position);
+    void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType);
 
     // 浇水
     void waterCrop(const Vec2& position);

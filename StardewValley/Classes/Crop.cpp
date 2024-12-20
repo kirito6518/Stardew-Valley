@@ -1,10 +1,11 @@
 #include "Crop.h"
 #include "FarmManager.h"
 
-Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays)
+Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType)
     : _cropName(cropName), _growthStage(0), _growthTime(0), _maxGrowthTime(maxGrowthTime),
     _waterDays(0), _maxWaterDays(maxWaterDays), _fertilizerDays(0), _maxFertilizerDays(maxFertilizerDays),
-    _lastWaterTime(0.0f), _lastFertilizerTime(0.0f), _lastPestControlTime(0.0f), _maxPestDays(maxPestDays), _yield(10) {
+    _lastWaterTime(0.0f), _lastFertilizerTime(0.0f), _lastPestControlTime(0.0f), _maxPestDays(maxPestDays), _yield(10),
+    _cropType(cropType) {
     // 初始化作物精灵
     this->initWithFile(imagePath);
 
@@ -38,23 +39,59 @@ void Crop::update(float dt) {
         _growthStage = 4;
     }
 
-    switch (_growthStage) {
-    case 1:
-        this->setTexture("crops/Onion-1.png");
+    // 根据作物类型更新图像
+    switch (_cropType) {
+    case ONION:
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Onion-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Onion-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Onion-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Onion-harvest.png");
+            break;
+        }
         break;
-    case 2:
-        this->setTexture("crops/Onion-2.png");
+    case POTATO:
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Potato-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Potato-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Potato-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Potato-harvest.png");
+            break;
+        }
         break;
-    case 3:
-        this->setTexture("crops/Onion-3.png");
-        break;
-    case 4:
-        this->setTexture("crops/Onion-harvest.png");
+    case RADISH:
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Radish-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Radish-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Radish-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Radish-harvest.png");
+            break;
+        }
         break;
     }
 
-
-    //更新缺水天数
+    // 更新缺水天数
     if (_lastWaterTime + _maxWaterDays < _growthTime) {
         _waterDays = static_cast<int>(_growthTime - (_lastWaterTime + _maxWaterDays));
     }
@@ -79,14 +116,12 @@ void Crop::update(float dt) {
     // 计算产量影响
     int waterYield = _yield;
     if (_waterDays > 30 && _growthStage != 4) {
-
         // 植物死亡
         if (_farmManager) {
             _farmManager->removeCrop(this);
         }
         this->removeFromParent();
         return;
-
     }
     else if (_waterDays > 21) {
         waterYield = waterYield - 7;
@@ -97,7 +132,7 @@ void Crop::update(float dt) {
 
     int fertilizerYield = waterYield;
     if (_fertilizerDays > 15 && _fertilizerDays <= 20) {
-        int fertilizerImpact =  1;
+        int fertilizerImpact = 1;
         fertilizerYield = fertilizerYield - fertilizerImpact;
     }
     else if (_fertilizerDays > 0 && _fertilizerDays <= 1) {
@@ -108,16 +143,14 @@ void Crop::update(float dt) {
     int pestYield = fertilizerYield;
     if (_pestDays > 30 && _growthStage != 4) {
         // 植物死亡
-
         if (_farmManager) {
             _farmManager->removeCrop(this);
         }
         this->removeFromParent();
         return;
-
     }
     else if (_pestDays > 9) {
-        pestYield = pestYield - 1 ;
+        pestYield = pestYield - 1;
     }
     if (pestYield <= 0) {
         pestYield = 1;
