@@ -91,6 +91,12 @@
     <ClCompile Include="..\Classes\ShopItemManager.cpp">
       <Filter>shop</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TaskItem.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TaskItemManager.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -182,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ShopItemManager.h">
       <Filter>shop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TaskItem.h">
+      <Filter>task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TaskItemManager.h">
+      <Filter>task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
