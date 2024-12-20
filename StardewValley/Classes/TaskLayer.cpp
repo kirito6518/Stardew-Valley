@@ -161,8 +161,8 @@ void TaskLayer::renewPosition()
     submitSuccess->setPosition(TsakUIPos);
     submitFailed->setPosition(TsakUIPos);
 
-
-
+    //
+    this->setupMouseListener();
 }
 
 void TaskLayer::closeTaskUI(Ref* sender)

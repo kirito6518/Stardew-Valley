@@ -12,13 +12,14 @@
 NPCTask::NPCTask(std::string npcName)
     : npcName(npcName), cooldownTime(0.0f), cooldownEndTime(0.0f)
 {
-    haveTask = true;
+    haveTask = true;//初始为有任务
     needItem = nullptr;
 
     int getOnlyNum = 1;//此处应通过随机获取物品唯一标识符，暂时先写死
     auto item = TaskItemManager::getInstance()->getTaskItemById(getOnlyNum);
     if (item) {
         needItem = item;
+        needItemName = item->getName();
     }
     
     //此处写一个随机函数,随机获得所需物品个数,此处暂时先写死
@@ -41,10 +42,9 @@ NPCTask::NPCTask(std::string npcName)
 //检测是否能够提交
 bool NPCTask::canComplete()
 {
-    std::string getItem= needItemName;
-    getItem.pop_back();
+
     // 检查背包中是否有足够的所需物品
-    auto item = BackpackManager::getInstance()->getItemByName(getItem);
+    auto item = BackpackManager::getInstance()->getItemByName(needItemName);
     if (item == nullptr) {
         return false;
     }
@@ -110,4 +110,17 @@ void NPCTask::renewTask()
     //先判断是否处于任务冷却中
     //若是，设置haveItem为 false
     //若否，设置haveItem为ture ,并利用物品唯一标识符随机生成所需物品和数量
+    //例如
+    haveTask = true;//根据是否冷却判断此处是否需要更改
+    needItem = nullptr;
+
+    int getOnlyNum = 1;//此处应通过随机获取物品唯一标识符，暂时先写死
+    auto item = TaskItemManager::getInstance()->getTaskItemById(getOnlyNum);
+    if (item) {
+        needItem = item;
+        needItemName = item->getName();
+    }
+
+    //此处写一个随机函数,随机获得所需物品个数,此处暂时先写死
+    needItemCount = 1;
 }

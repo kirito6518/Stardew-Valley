@@ -14,10 +14,10 @@
       <Filter>works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp">
-      <Filter>Item work</Filter>
+      <Filter>Item works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ItemManager.cpp">
-      <Filter>Item work</Filter>
+      <Filter>Item works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>Scenes</Filter>
@@ -85,17 +85,17 @@
     <ClCompile Include="..\Classes\ShopManager.cpp">
       <Filter>shop</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ShopItem.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ShopItemManager.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TaskItem.cpp">
-      <Filter>task</Filter>
+      <Filter>Item works</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TaskItemManager.cpp">
-      <Filter>task</Filter>
+      <Filter>Item works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItem.cpp">
+      <Filter>Item works</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItemManager.cpp">
+      <Filter>Item works</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,10 +112,10 @@
       <Filter>works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item.h">
-      <Filter>Item work</Filter>
+      <Filter>Item works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ItemManager.h">
-      <Filter>Item work</Filter>
+      <Filter>Item works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Scenes</Filter>
@@ -183,17 +183,17 @@
     <ClInclude Include="..\Classes\ShopManager.h">
       <Filter>shop</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ShopItem.h">
-      <Filter>shop</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ShopItemManager.h">
-      <Filter>shop</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TaskItem.h">
-      <Filter>task</Filter>
+      <Filter>Item works</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TaskItemManager.h">
-      <Filter>task</Filter>
+      <Filter>Item works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItem.h">
+      <Filter>Item works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItemManager.h">
+      <Filter>Item works</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -202,9 +202,6 @@
     </Filter>
     <Filter Include="app">
       <UniqueIdentifier>{e15123cf-3b3e-45f8-8abc-1aa0aef345ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Item work">
-      <UniqueIdentifier>{6194fa75-bdeb-4f30-8d61-3516b8b99290}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{036efc9e-a3d6-4559-8796-c55d73b349d9}</UniqueIdentifier>
@@ -238,6 +235,9 @@
     </Filter>
     <Filter Include="task">
       <UniqueIdentifier>{aabc4a83-cc94-4d40-aa86-97e63666682e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item works">
+      <UniqueIdentifier>{6194fa75-bdeb-4f30-8d61-3516b8b99290}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
