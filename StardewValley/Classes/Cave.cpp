@@ -143,24 +143,17 @@ bool Cave::init()
     keyboardListener->onKeyReleased = CC_CALLBACK_2(Player::onKeyReleased, &player);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
-    // 每多少s更新主角位置
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition), 0.2f);
     // 每多少s更新摄像头和按钮位置
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(Cave::update), 0);
 
     return true;
 }
 
-// 每0.2s更新玩家位置和动画
-void Cave::updatePlayerPosition(float delta)
-{
-    // 更新玩家的位置和动画
-    player.update(delta);
-
-}
-
 // 每帧更新摄像头和按钮位置，更新碰撞体
-void Cave::updateCameraPosition(float dt) {
+void Cave::update(float dt) {
+
+    // 更新玩家的位置和动画
+    player.update(dt);
 
     // 获取玩家的位置
     const Vec2 playerPosition = player.playerSprite->getPosition();// 锚点是左下角的一个位置
@@ -325,15 +318,14 @@ void Cave::OpenLayer() {
         this->addChild(chooseMineLayer, 3);
     }
     // 禁用 Cave 场景的时间更新
-    this->unschedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition));
-    this->unschedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition));
+    this->unschedule(CC_SCHEDULE_SELECTOR(Cave::update));
 }
 
 //隐藏选项
 void Cave::HideLayer(Ref* sender){
+
     // 重新启用 cave 场景的时间更新
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updatePlayerPosition), 0.2f);
-    this->schedule(CC_SCHEDULE_SELECTOR(Cave::updateCameraPosition), 0);
+    this->schedule(CC_SCHEDULE_SELECTOR(Cave::update), 0);
     // 移除 chooseMineLayer
     if (chooseMineLayer->getParent()) {
         this->removeChild(chooseMineLayer);

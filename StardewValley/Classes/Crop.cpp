@@ -1,11 +1,11 @@
 #include "Crop.h"
 #include "FarmManager.h"
 
-Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType)
+Crop::Crop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, CropType cropType, SeasonRestriction seasonRestriction)
     : _cropName(cropName), _growthStage(0), _growthTime(0), _maxGrowthTime(maxGrowthTime),
     _waterDays(0), _maxWaterDays(maxWaterDays), _fertilizerDays(0), _maxFertilizerDays(maxFertilizerDays),
     _lastWaterTime(0.0f), _lastFertilizerTime(0.0f), _lastPestControlTime(0.0f), _maxPestDays(maxPestDays), _yield(10),
-    _cropType(cropType) {
+    _cropType(cropType), _seasonRestriction(seasonRestriction) {
     // 初始化作物精灵
     this->initWithFile(imagePath);
 
@@ -86,6 +86,54 @@ void Crop::update(float dt) {
             break;
         case 4:
             this->setTexture("crops/Radish-harvest.png");
+            break;
+        }
+        break;
+    case CARROT: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Carrot-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Carrot-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Carrot-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Carrot-harvest.png");
+            break;
+        }
+        break;
+    case TURNIP: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Turnip-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Turnip-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Turnip-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Turnip-harvest.png");
+            break;
+        }
+        break;
+    case SPINACH: 
+        switch (_growthStage) {
+        case 1:
+            this->setTexture("crops/Spinach-1.png");
+            break;
+        case 2:
+            this->setTexture("crops/Spinach-2.png");
+            break;
+        case 3:
+            this->setTexture("crops/Spinach-3.png");
+            break;
+        case 4:
+            this->setTexture("crops/Spinach-harvest.png");
             break;
         }
         break;

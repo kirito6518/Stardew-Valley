@@ -23,8 +23,29 @@ void FarmManager::setMainMap(MainMap* mainMap) {
     this->mainMap = mainMap;
 }
 
-void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType) {
-    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays, maxPestDays, cropType);
+void FarmManager::plantCrop(const std::string& cropName, const std::string& imagePath, int maxGrowthTime, int maxWaterDays, int maxFertilizerDays, int maxPestDays, const Vec2& position, Crop::CropType cropType, Crop::SeasonRestriction seasonRestriction) {
+    // 获取当前季节
+    SeasonManager::Season currentSeason = SeasonManager::getInstance()->getCurrentSeason();
+
+    // 检查当前季节是否符合种植条件
+    bool canPlant = false;
+    switch (seasonRestriction) {
+    case Crop::SPRING_SUMMER_AUTUMN:
+        canPlant = (currentSeason == SeasonManager::Spring || currentSeason == SeasonManager::Summer || currentSeason == SeasonManager::Autumn);
+        break;
+    case Crop::SPRING_AUTUMN:
+        canPlant = (currentSeason == SeasonManager::Spring || currentSeason == SeasonManager::Autumn);
+        break;
+    case Crop::AUTUMN:
+        canPlant = (currentSeason == SeasonManager::Autumn);
+        break;
+    case Crop::NO_RESTRICTION:
+        canPlant = true;
+        break;
+    }
+
+    // 如果符合种植条件，继续种植
+    Crop* crop = new Crop(cropName, imagePath, maxGrowthTime, maxWaterDays, maxFertilizerDays, maxPestDays, cropType, seasonRestriction);
     crop->setFarmManager(this);
     crop->setPosition(position);
     _crops.push_back(crop);
@@ -92,6 +113,15 @@ bool FarmManager::harvestCrop(const Vec2& position, int& yield) {
                     break;
                 case Crop::RADISH:
                     item = ItemManager::getInstance()->getItem("Radish");
+                    break;
+                case Crop::CARROT: // 新增
+                    item = ItemManager::getInstance()->getItem("Carrot");
+                    break;
+                case Crop::TURNIP: // 新增
+                    item = ItemManager::getInstance()->getItem("Turnip");
+                    break;
+                case Crop::SPINACH: // 新增
+                    item = ItemManager::getInstance()->getItem("Spinach");
                     break;
                 }
 

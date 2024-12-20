@@ -1,10 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 
-// ¼¾½Ú¹ÜÀíÆ÷Àà
 class SeasonManager {
 public:
-    // ¼¾½ÚÃ¶¾Ù
+    // å­£èŠ‚æšä¸¾
     enum Season {
         Spring,
         Summer,
@@ -12,24 +11,33 @@ public:
         Winter
     };
 
-    // ¹¹Ôìº¯Êı
-    SeasonManager();
+    // è·å–å•ä¾‹å®ä¾‹
+    static SeasonManager* getInstance();
 
-    // ¸üĞÂ¼¾½Ú
+    // æ›´æ–°å­£èŠ‚
     void updateSeason(int days);
 
-    // »ñÈ¡µ±Ç°¼¾½Ú
+    // è·å–å½“å‰å­£èŠ‚
     Season getCurrentSeason() const;
 
-    // »ñÈ¡µ±Ç°¼¾½ÚµÄÃû³Æ
+    // è·å–å½“å‰å­£èŠ‚åç§°
     std::string getCurrentSeasonName() const;
 
-    // »ñÈ¡µ±Ç°¼¾½ÚÒÑ¹ıÈ¥µÄÌìÊı
+    // è·å–å½“å‰å­£èŠ‚çš„å¤©æ•°
     int getDaysInCurrentSeason() const { return daysInCurrentSeason; }
 
-    Season currentSeason; // µ±Ç°¼¾½Ú
-    int daysInCurrentSeason; // µ±Ç°¼¾½ÚµÄÌìÊı
-    static const int DAYS_PER_SEASON = 15; // Ã¿¸ö¼¾½Ú³ÖĞø10Ìì
+    // æ„é€ å‡½æ•°ç§æœ‰åŒ–
+    SeasonManager();
+
+    // ç¦æ­¢æ‹·è´æ„é€ å’Œèµ‹å€¼æ“ä½œ
+    SeasonManager(const SeasonManager&) = delete;
+    SeasonManager& operator=(const SeasonManager&) = delete;
+
+    Season currentSeason; // å½“å‰å­£èŠ‚
+    int daysInCurrentSeason; // å½“å‰å­£èŠ‚çš„å¤©æ•°
+    static const int DAYS_PER_SEASON = 15; // æ¯ä¸ªå­£èŠ‚çš„å¤©æ•°
+
+    static SeasonManager* instance; // å•ä¾‹å®ä¾‹
 private:
     
 };
