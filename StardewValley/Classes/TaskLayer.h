@@ -49,9 +49,13 @@ private:
     cocos2d::Sprite* taskUI; ///< 任务界面
     cocos2d::Sprite* taskDetailsUi;//任务详情UI
     cocos2d::MenuItemImage* closeButton; ///< 关闭任务详情按钮
+    cocos2d::MenuItemImage* submitButton;//提交按钮
+    cocos2d::Label* submitSuccess;//使用成功提示
+    cocos2d::Label* submitFailed;//提交失败提示
 
     cocos2d::Label* nowGoodwill;//当前好感度
     cocos2d::Label* rewardGoodwill;//奖励好感度
+
 
     cocos2d::Sprite* needItem;//需求物品图标精灵
     cocos2d::Label* needItemCount;//需求物品数量

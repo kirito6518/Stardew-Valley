@@ -56,13 +56,48 @@ bool TaskLayer::init()
 
     //创建任务详情UI
     taskDetailsUi = Sprite::create("ui/task_detailsUI.png");
-    taskUI->setAnchorPoint(Vec2(0, 0.5));
-    taskUI->setPosition(TsakUIPos);
+    taskDetailsUi->setAnchorPoint(Vec2(0, 0.5));
+    taskDetailsUi->setPosition(TsakUIPos);
     taskDetailsUi -> setVisible(false);
     this->addChild(taskUI, 5);
 
     //创建需求物品精灵
+    needItem = Sprite::create();
+    needItem->setAnchorPoint(Vec2(0, 0.5));
+    needItem->setPosition(TsakUIPos+Vec2(300,-400));
+    needItem->setVisible(false);
+    this->addChild(taskUI, 6);
 
+    //创建需求物品数量标签
+    needItemCount =Label::createWithTTF("", "fonts/Gen.ttf", 30);
+    needItemCount->setAnchorPoint(Vec2(0, 0.5));
+    needItemCount->setPosition(TsakUIPos + Vec2(350, -400));
+    needItemCount->setVisible(false);
+    this->addChild(needItemCount, 6);
+
+    //创建提交按钮
+    submitButton = MenuItemImage::create(
+        "ui/CloseNormal.png",
+        "ui/CloseSelected.png",
+        CC_CALLBACK_1(TaskLayer::closeTaskUI, this));
+    submitButton->setAnchorPoint(Vec2(1, 0));
+    submitButton->setPosition(TsakUIPos+Vec2(400, -500));
+    submitButton->setVisible(false);
+    this->addChild(submitButton, 6);
+
+    //创建提交成功标签
+    submitSuccess = Label::createWithTTF("Submit Success!", "fonts/Gen.ttf", 30);
+    submitSuccess->setAnchorPoint(Vec2(0.5, 0.5));
+    submitSuccess->setPosition(TsakUIPos);
+    submitSuccess->setVisible(false);
+    this->addChild(submitSuccess, 7);
+
+    //创建提交失败标签
+    submitFailed = Label::createWithTTF("You Don't Have Enough Item!", "fonts/Gen.ttf", 30);
+    submitFailed->setAnchorPoint(Vec2(0.5, 0.5));
+    submitFailed->setPosition(TsakUIPos);
+    submitFailed->setVisible(false);
+    this->addChild(submitFailed, 7);
 
     // 添加鼠标事件监听器
     setupMouseListener();
@@ -82,7 +117,7 @@ bool TaskLayer::addList(Sprite* taskList)
 
     taskList->setAnchorPoint(Vec2(1, 1));
     taskList->setPosition(Vec2(TsakUIPos.x, TsakUIPos.y+ TaskUISize.height/2));
-    // 将物品图标添加到任务层
+    // 将List添加到任务层
     this->addChild(taskList, 4);
     lists.pushBack(taskList);
 
@@ -116,6 +151,17 @@ void TaskLayer::renewPosition()
         list->setPosition(Vec2(x, y));
         count++;
     }
+
+    //更新其他ui位置
+    closeButton->setPosition(Vec2(TsakUIPos.x + TaskUISize.width, TsakUIPos.y + TaskUISize.height / 2));
+    taskDetailsUi->setPosition(TsakUIPos);
+    needItem->setPosition(TsakUIPos + Vec2(300, -400));
+    needItemCount->setPosition(TsakUIPos + Vec2(350, -400));
+    submitButton->setPosition(TsakUIPos + Vec2(400, -500));
+    submitSuccess->setPosition(TsakUIPos);
+    submitFailed->setPosition(TsakUIPos);
+
+
 
 }
 
