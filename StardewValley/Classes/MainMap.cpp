@@ -726,6 +726,8 @@ void MainMap::update(float dt) {
     //更新任务位置
     tasklayer->taskUI->setPosition(targetCameraPosition + Vec2(visibleSize.width / 2 - 100, visibleSize.height / 2));
 
+    // 刷新任务列表
+    TaskManager::getInstance()->renewTask();
 
     //更新商店物品图标坐标值
     {

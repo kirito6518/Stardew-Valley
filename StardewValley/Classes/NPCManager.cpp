@@ -43,8 +43,8 @@ NPCManager::NPCManager()
     npc2->setName("npc2");
     npcBodys.push_back(npc2Body);
 
-    // 初始化 NPC 3 (John)
-    NPC* npc3 = new NPC(3, "John", "npc_Farmer.png");
+    // 初始化 NPC 3 (Mary)
+    NPC* npc3 = new NPC(3, "Mary", "npc_Farmer.png");
     npc3->setDialogue({ "Remember to water and get rid of insects in time!", "You can't grow piglets in farmland!", "Gemstones do not grow in farmland." });
     npc3->setLocation(cocos2d::Vec2(400, 300));
     _npcs.push_back(npc3);
@@ -56,8 +56,8 @@ NPCManager::NPCManager()
     npc3->setName("npc3");
     npcBodys.push_back(npc3Body);
 
-    // 初始化 NPC 4 (Mike)
-    NPC* npc4 = new NPC(4, "Mike", "npc_Rancher.png");
+    // 初始化 NPC 4 (Annie)
+    NPC* npc4 = new NPC(4, "Annie", "npc_Rancher.png");
     npc4->setDialogue({ "I have the fattest pigs.", "Aha,you're like a cute little pig.", "I love my animals!" });
     npc4->setLocation(cocos2d::Vec2(400, 400));
     _npcs.push_back(npc4);
