@@ -15,12 +15,15 @@ public:
     void decreaseLevel();
     // 获取当前关系等级
     int getLevel() const;
+    int getFavorability() const;
+
 
     void setSpecialTaskCompleted(bool completed);
     bool isSpecialTaskCompleted() const;
 
 private:
     int _level; // 关系等级（0:陌生人, 1:朋友, 2:好友, 3:至交, 4:恋人）
+    int _Favorability; //好感度
     bool _specialTaskCompleted; // 是否完成特殊任务
 };
 
