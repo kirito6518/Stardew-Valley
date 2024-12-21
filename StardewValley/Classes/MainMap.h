@@ -134,6 +134,9 @@ private:
 
     int place; // 设置位置,0是在空地，1是在左农场，2是在右农场，3钓鱼，4路，5牧场，6商店
 
+    int audioId0;//0号背景音乐
+    int audioId1;//1号背景音乐
+    int audioId2;//2号背景音乐
 };
 
 #endif // __MainMap_H__

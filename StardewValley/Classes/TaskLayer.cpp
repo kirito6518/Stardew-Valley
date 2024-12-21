@@ -6,7 +6,11 @@
 #include "NPCtask.h"
 #include "NPCManager.h"
 #include "NPC.h"
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
+
 USING_NS_CC;
+
 
 
 // 创建任务列表层
@@ -260,6 +264,10 @@ void TaskLayer::setupMouseListener()
 
             if (listBoundingBox.containsPoint(mousePosition))
             {
+
+                // 播放音效
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
+
                 if (task->getNPCName() == "Alice") {
                     list->setTexture("ui/Alice_selected.png");
                     for (auto list : lists) {
@@ -400,6 +408,9 @@ void TaskLayer::setupMouseListener()
 
         if (closeButtonBoundingBox.containsPoint(mousePosition))
         {
+            // 播放音效
+            int audioId2 = AudioEngine::play2d("audio/click.mp3");
+
             // 如果点击了 closeButton，切换回正常状态的图片并隐藏任务层
             closeButton->setNormalImage(Sprite::create("ui/close_normal.png"));
             closeTaskUI(nullptr); // 隐藏任务层
@@ -443,6 +454,7 @@ void TaskLayer::setupMouseListener()
 
         // 检查是否点击了 submitButton
         if (submitButton) {
+        
             Vec2 submitButtonPosition = submitButton->getPosition();
             Size submitButtonSize = submitButton->getContentSize();
             Rect submitButtonBoundingBox = Rect(submitButtonPosition.x - submitButtonSize.width/2,
@@ -451,6 +463,9 @@ void TaskLayer::setupMouseListener()
 
             if (submitButtonBoundingBox.containsPoint(mousePosition))
             {
+                // 播放音效
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
+
                 // 如果点击了 submitButton，切换回正常状态的图片并执行逻辑
                 submitButton->setNormalImage(Sprite::create("ui/submit_normal.png"));
                 submitButton->activate(); // 执行逻辑

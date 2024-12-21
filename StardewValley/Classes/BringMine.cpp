@@ -1,6 +1,8 @@
 ﻿#include "BringMine.h"
 #include "cocos2d.h"
 #include "Cave.h"
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
 
 USING_NS_CC;
 
@@ -90,6 +92,7 @@ bool ChooseMineLayer::init() {
         {
             // 设置按钮为正常状态
             yesButton->setNormalImage(Sprite::create("ui/yes_normal.png"));
+            int audioId2 = AudioEngine::play2d("audio/click.mp3");
             ChangeMine(nullptr);
         }
         else
@@ -144,6 +147,7 @@ bool ChooseMineLayer::init() {
         {
             // 设置按钮为正常状态
             noButton->setNormalImage(Sprite::create("ui/no_normal.png"));
+            int audioId2 = AudioEngine::play2d("audio/click.mp3");
             NoChangeMine(nullptr);
         }
         else

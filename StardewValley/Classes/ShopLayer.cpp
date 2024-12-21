@@ -3,10 +3,11 @@
 #include "ShopItem.h"  
 #include "AppDelegate.h"
 #include "MainMap.h"
-#include "SimpleAudioEngine.h"
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
 
 USING_NS_CC;
-using namespace CocosDenshion;
+
 
 // 创建商店层
 ShopLayer* ShopLayer::create(const std::string& shopBgPath, int maxItems)
@@ -114,7 +115,7 @@ bool ShopLayer::init(const std::string& shopBgPath, int maxItems)
 
     // 初始化物品价格标签
     itemPriceLabel = Label::createWithTTF("", "fonts/Gen.ttf", 25);
-    itemPriceLabel->setAnchorPoint(Vec2(1, 1));
+    itemPriceLabel->setAnchorPoint(Vec2(0, 1));
     itemPriceLabel->setVisible(false);
     this->addChild(itemPriceLabel, 3);
 
@@ -248,14 +249,14 @@ void ShopLayer::onBuyButtonClicked(Ref* sender)
             }
             std::string itemLeftLabel2Str = ":  " + std::to_string(leftCoinCount);
             // 播放音效
-            SimpleAudioEngine::getInstance()->playEffect("audio/coins.mp3");
+            int audioId2 = AudioEngine::play2d("audio/coins.mp3");
             itemLeftLabel2->setString(itemLeftLabel2Str);
             buyResultLabel->setString("Buy Success!");
         }
         else
         {
             // 播放音效
-            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+            int audioId2 = AudioEngine::play2d("audio/click.mp3");
             buyResultLabel->setString("You Don't Have enough Coins Left!");
         }
 
@@ -272,10 +273,6 @@ void ShopLayer::setupCombinedMouseListener()
 {
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
-
-    // 加载音效
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
 
     // 获取商店背景图尺寸及坐标
     auto shopSize = shopBgSprite->getContentSize();
@@ -400,7 +397,7 @@ void ShopLayer::setupCombinedMouseListener()
                 if (item)
                 {
                     // 播放音效
-                    SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+                    int audioId2 = AudioEngine::play2d("audio/click.mp3");
 
                     // 显示物品UI
                     itemDetailUI->setVisible(true);
@@ -415,7 +412,7 @@ void ShopLayer::setupCombinedMouseListener()
                     // 显示物品价格
                     std::string label = " :  "+ std::to_string(item->getBuyingPrice());
                     itemPriceLabel->setString(label);
-                    itemPriceLabel->setPosition(Vec2(shopPos.x - shopSize.width /2 -55, shopPos.y +3)); // 在商店左侧显示
+                    itemPriceLabel->setPosition(Vec2(shopPos.x - shopSize.width /2 -90, shopPos.y +3)); // 在商店左侧显示
                     itemPriceLabel->setVisible(true);
 
                     //显示所需金币图标
@@ -471,7 +468,7 @@ void ShopLayer::setupCombinedMouseListener()
             hideShop(nullptr); // 隐藏商店层
 
             // 播放音效
-            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+            int audioId2 = AudioEngine::play2d("audio/click.mp3");
 
             // 隐藏物品UI
             itemDetailUI->setVisible(false);
