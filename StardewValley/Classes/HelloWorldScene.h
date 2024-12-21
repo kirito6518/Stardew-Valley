@@ -1,4 +1,4 @@
-
+ï»¿
 #ifndef __HELLOWORLD_SCENE_H__
 #define __HELLOWORLD_SCENE_H__
 
@@ -15,16 +15,19 @@ public:
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
 
-    //Ç°Íù×÷ÕßÃûµ¥³¡¾°
+    // å‰å¾€ä½œè€…åå•åœºæ™¯
     void toAuthorlist(Ref*);
 
-    //Ç°ÍùÖ÷µØÍ¼³¡¾°
+    // å‰å¾€ä¸»åœ°å›¾åœºæ™¯
     void toMainMap(Ref*);
+
+    // å‰å¾€å¸®åŠ©åœºæ™¯
+    void toHelp(Ref*);
 
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
 
-    Scene* mainMapScene; // Ö÷µØÍ¼³¡¾°
+    Scene* mainMapScene; // ä¸»åœ°å›¾åœºæ™¯
 };
 
 #endif // __HELLOWORLD_SCENE_H__

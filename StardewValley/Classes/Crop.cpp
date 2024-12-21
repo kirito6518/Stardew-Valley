@@ -171,25 +171,25 @@ void Crop::update(float dt) {
         this->removeFromParent();
         return;
     }
-    else if (_waterDays > 21) {
-        waterYield = waterYield - 7;
+    else if (_waterDays == 21) {
+        waterYield = waterYield - 4;
     }
-    else if (_waterDays > 15) {
+    else if (_waterDays == 15) {
         waterYield = waterYield - 3;
     }
 
     int fertilizerYield = waterYield;
-    if (_fertilizerDays > 15 && _fertilizerDays <= 20) {
+    if (_fertilizerDays >= 21 && _fertilizerDays <= 25) {
         int fertilizerImpact = 1;
         fertilizerYield = fertilizerYield - fertilizerImpact;
     }
-    else if (_fertilizerDays > 0 && _fertilizerDays <= 1) {
+    else if (_fertilizerDays == 1) {
         int fertilizerImpact = 5;
         fertilizerYield = fertilizerYield + fertilizerImpact;
     }
 
     int pestYield = fertilizerYield;
-    if (_pestDays > 30 && _growthStage != 4) {
+    if (_pestDays > 27 && _growthStage != 4) {
         // Ö²ÎïËÀÍö
         if (_farmManager) {
             _farmManager->removeCrop(this);
@@ -197,8 +197,14 @@ void Crop::update(float dt) {
         this->removeFromParent();
         return;
     }
-    else if (_pestDays > 9) {
-        pestYield = pestYield - 1;
+    else if (_pestDays == 9) {
+        pestYield = pestYield - 2;
+    }
+    else if (_pestDays == 15) {
+        pestYield = pestYield - 2;
+    }
+    else if (_pestDays == 21) {
+        pestYield = pestYield - 2;
     }
     if (pestYield <= 0) {
         pestYield = 1;

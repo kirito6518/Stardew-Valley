@@ -29,11 +29,16 @@ public:
     // 获取物品的唯一标识符
     int getTaskId() const { return taskId; }
 
+    int getRarity() const { return rarity; }
+
+    void setRarity(int r) { rarity = r; }
+
 private:
 
     int taskId; ///< 物品的唯一标识符
     std::string itemName; ///< 物品的名称
     cocos2d::Sprite* itemIcon; ///< 物品的图标精灵
+    int rarity; // 物品的稀有度
 };
 
 #endif // __TASK_ITEM_H__

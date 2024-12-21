@@ -56,7 +56,7 @@ bool MainMap::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
     // 启用调试绘制
-    physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    // physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 加载背包
     BackpackManager::getInstance();
@@ -570,25 +570,24 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
     BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Onion");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemA");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemB");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemC");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemD");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemE");
-    BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("Onion");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemA");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemB");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemC");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemD");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemE");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
     //initItem = ItemManager::getInstance()->getItem("Coin");
     //BackpackManager::getInstance()->addItem(initItem, 99);
     //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     //BackpackManager::getInstance()->addItem(initItem, 20);
     //initItem = ItemManager::getInstance()->getItem("Fertilizer");
     //BackpackManager::getInstance()->addItem(initItem, 20);
-
 }
 
 //显示商店
@@ -622,6 +621,17 @@ void MainMap::getInitShop()
     initItem = ShopItemManager::getInstance()->getShopItem("Turnip\nSeed");
     ShopManager::getInstance()->addItem(initItem);
     initItem = ShopItemManager::getInstance()->getShopItem("Spinach\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+
+    initItem = ShopItemManager::getInstance()->getShopItem("GemA");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemB");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemC");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemD");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemE");
     ShopManager::getInstance()->addItem(initItem);
 
     initItem = ShopItemManager::getInstance()->getShopItem("Bait");
@@ -833,7 +843,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION, Crop::AUTUMN);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 15, 21, 27, plantingPosition, Crop::ONION, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -841,7 +851,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         OnionSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 21, 30, 45, plantingPosition, Crop::ONION, Crop::AUTUMN);
+                        farmManager.plantCrop("Onion1", "crops/Onion-1.png", 90, 15, 21, 27, plantingPosition, Crop::ONION, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -869,7 +879,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         PotatoSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 75, 27, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -877,7 +887,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         PotatoSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 90, 21, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
+                        farmManager.plantCrop("Potato", "crops/Potato-1.png", 75, 27, 30, 45, plantingPosition, Crop::POTATO, Crop::AUTUMN);
                         return true;
                     }
                 }
@@ -937,7 +947,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         CarrotSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
+                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 60, 30, 30, 60, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
                         return true;
                     }
                 }
@@ -945,7 +955,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         CarrotSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 90, 21, 30, 45, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
+                        farmManager.plantCrop("Carrot", "crops/Carrot-1.png", 60, 30, 30, 60, plantingPosition, Crop::CARROT, Crop::SPRING_AUTUMN);
                         return true;
                     }
                 }
@@ -969,7 +979,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         TurnipSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
+                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 60, 30, 30, 60, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
@@ -977,7 +987,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         TurnipSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 90, 21, 30, 45, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
+                        farmManager.plantCrop("Turnip", "crops/Turnip-1.png", 60, 30, 30, 60, plantingPosition, Crop::TURNIP, Crop::NO_RESTRICTION);
                         return true;
                     }
                 }
@@ -1005,7 +1015,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsLeft->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         SpinachSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
+                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 75, 27, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
                         return true;
                     }
                 }
@@ -1013,7 +1023,7 @@ void MainMap::SetUseItemInMainMap() {
                     plantingPosition = cropsRight->getPosition() + Vec2(96, -96);
                     if (!farmManager.isPositionOccupied(plantingPosition)) {
                         SpinachSeed->decreaseCount(countUsed);
-                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 90, 21, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
+                        farmManager.plantCrop("Spinach", "crops/Spinach-1.png", 75, 27, 30, 45, plantingPosition, Crop::SPINACH, Crop::SPRING_SUMMER_AUTUMN);
                         return true;
                     }
                 }

@@ -4,7 +4,8 @@
 #include "AuthorListScene.h"
 #include "MainMap.h"
 #include "BackpackManager.h"
-#include "SimpleAudioEngine.h"
+#include "HelpScene.h"
+
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -15,12 +16,14 @@ Scene* HelloWorld::createScene()
     //创建场景
     return HelloWorld::create();
 }
+
 // 当文件不存在时，打印有用的错误消息，而不是分段错误。
 static void problemLoading(const char* filename)
 {
     printf("Error while loading: %s\n", filename);
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
+
 // 在“init”上，您需要初始化您的实例
 bool HelloWorld::init()
 {
@@ -108,11 +111,11 @@ bool HelloWorld::init()
 
     {
         //添加一个按钮，左键点击后加载存档
-        //执行加载存档的函数（未实现）
+        //执行帮助
         auto closeItem = MenuItemImage::create(
             "ui/CloseNormal.png",
             "ui/CloseSelected.png",
-            CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+            CC_CALLBACK_1(HelloWorld::toHelp, this));
         //设置坐标
         const float x = visibleSize.width / 4 + closeItem->getContentSize().width / 2;
         const float y = closeItem->getContentSize().height / 2;
@@ -182,7 +185,7 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 void HelloWorld::toAuthorlist(Ref* ref)
 {
     auto authorListScene = AuthorListScene::createScene();
-    Director::getInstance()->replaceScene(authorListScene);
+    Director::getInstance()->replaceScene(TransitionFade::create(1.0f, authorListScene));
 }
 
 
@@ -193,6 +196,12 @@ void HelloWorld::toMainMap(Ref* ref)
     SimpleAudioEngine::getInstance()->playEffect("audio/start.mp3");
     mainMapScene = MainMap::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(1.0f, mainMapScene));
+}
+
+// 前往帮助场景
+void HelloWorld::toHelp(Ref* ref) {
+    auto HelpScene = Help::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(1.0f, HelpScene));
 }
 
 

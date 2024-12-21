@@ -55,8 +55,29 @@ NPCTask::NPCTask(std::string npcName)
         needItemName = item->getName();
     }
 
-    // 随机获取需要物品数量（1-10）
-    std::uniform_int_distribution<> dis(1, 10);
+    // 根据稀有度设置needItemCount
+    int rarity = needItem->getRarity();
+    std::uniform_int_distribution<> dis;
+    switch (rarity) {
+    case 1:
+        dis = std::uniform_int_distribution<>(6, 10);
+        break;
+    case 2:
+        dis = std::uniform_int_distribution<>(4, 6);
+        break;
+    case 3:
+        dis = std::uniform_int_distribution<>(2, 4);
+        break;
+    case 4:
+        dis = std::uniform_int_distribution<>(1, 3);
+        break;
+    case 5:
+        dis = std::uniform_int_distribution<>(1, 2);
+        break;
+    default:
+        dis = std::uniform_int_distribution<>(1, 10);
+        break;
+    }
     needItemCount = dis(gen);
 
 
@@ -103,8 +124,9 @@ void NPCTask::complete()
     {
         haveTask = false;
         // 完成任务，增加好感度
-        int difficulty = needItemCount;
-        int goodwillIncrease = difficulty * 2;
+        int rarity = needItem->getRarity();
+        int difficulty = rarity * needItemCount; 
+        int goodwillIncrease = difficulty; // 好感度增加量与难度相关
         NPC* npc = NPCManager::getInstance()->getNPCByName(npcName);
         if (npc)
         {
@@ -121,7 +143,7 @@ void NPCTask::complete()
         }
 
         // 设置任务冷却时间
-        setCooldown(3.0f);
+        setCooldown(21.0f);
     }
 }
 
@@ -189,8 +211,28 @@ void NPCTask::renewTask()
             needItemName = item->getName();
         }
 
-        // 随机获取需要物品数量（1-10）
-        std::uniform_int_distribution<> dis(1, 10);
+        int rarity = needItem->getRarity();
+        std::uniform_int_distribution<> dis;
+        switch (rarity) {
+        case 1:
+            dis = std::uniform_int_distribution<>(6, 10);
+            break;
+        case 2:
+            dis = std::uniform_int_distribution<>(4, 6);
+            break;
+        case 3:
+            dis = std::uniform_int_distribution<>(2, 4);
+            break;
+        case 4:
+            dis = std::uniform_int_distribution<>(1, 3);
+            break;
+        case 5:
+            dis = std::uniform_int_distribution<>(1, 2);
+            break;
+        default:
+            dis = std::uniform_int_distribution<>(1, 10);
+            break;
+        }
         needItemCount = dis(gen);
     }
 }
