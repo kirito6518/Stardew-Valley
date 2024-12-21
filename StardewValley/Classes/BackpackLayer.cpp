@@ -4,11 +4,12 @@
 #include "AppDelegate.h"
 #include "MainMap.h"
 #include "ItemManager.h"
-#include "SimpleAudioEngine.h"
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
 
 
 USING_NS_CC;
-using namespace CocosDenshion;
+
 
 
 
@@ -32,10 +33,6 @@ bool BackpackLayer::init(const std::string& backpackBgPath, int maxItems)
     {
         return false;
     }
-
-    // 加载音效
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
 
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -333,7 +330,7 @@ void BackpackLayer::onYesButtonClicked(Ref* sender)
             int money = (item->getsellingPrice()) * itemcount;
             itemCoin->increaseCount(money);
             // 播放音效
-            SimpleAudioEngine::getInstance()->playEffect("audio/coins.mp3");
+            int audioId = AudioEngine::play2d("audio/coins.mp3",false);
             if (itemCoin->getCount() > 0) {
                 BackpackManager::getInstance()->addItem(itemCoin, 0);
             }
@@ -346,7 +343,7 @@ void BackpackLayer::onYesButtonClicked(Ref* sender)
     }
     else {
         // 播放音效
-        SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+        int audioId = AudioEngine::play2d("audio/click.mp3",false);
         destroyResultLabel->setString("You Can't Sell This Item!");
     }
 
@@ -416,10 +413,6 @@ void BackpackLayer::setupCombinedMouseListener()
 {
     // 移除之前绑定的事件监听器
     _eventDispatcher->removeEventListenersForTarget(this);
-
-    // 加载音效
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/click.mp3");
-    SimpleAudioEngine::getInstance()->preloadEffect("audio/coins.mp3");
 
     //更新背包内物品位置
     this->renewPosition();
@@ -589,7 +582,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 if (item)
                 {
                     // 播放音效
-                    SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+                    int audioId = AudioEngine::play2d("audio/click.mp3");
 
                     //显示物品UI
                     itemDetaUI->setVisible(true);
@@ -658,9 +651,7 @@ void BackpackLayer::setupCombinedMouseListener()
             hideBackpack(nullptr); // 隐藏背包层
 
             // 播放音效
-            SimpleAudioEngine::getInstance()->setEffectsVolume(0.7f);
-            SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
-            SimpleAudioEngine::getInstance()->setEffectsVolume(1.0f);
+            int audioId = AudioEngine::play2d("audio/click.mp3");
 
             //隐藏物品UI
             itemDetaUI->setVisible(false);
@@ -698,7 +689,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 destroyResultLabel->setPosition(backpackPos + Vec2(0, 40));
 
                 // 播放音效
-                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+                int audioId = AudioEngine::play2d("audio/click.mp3");
 
                 determineUI->setVisible(true);
                 yesButton->setVisible(true);
@@ -728,7 +719,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 useButton->setNormalImage(Sprite::create("ui/use_button_normal.png"));
                 useResultLabel->setPosition(backpackPos + Vec2(0, 40));
                 // 播放音效
-                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+                int audioId = AudioEngine::play2d("audio/click.mp3");
                 useButton->activate(); // 执行使用逻辑
             }
             else
@@ -768,7 +759,7 @@ void BackpackLayer::setupCombinedMouseListener()
                 // 如果点击了 noButton，切换回正常状态的图片并执行使用逻辑
                 noButton->setNormalImage(Sprite::create("ui/no_normal.png"));
                 // 播放音效
-                SimpleAudioEngine::getInstance()->playEffect("audio/click.mp3");
+                int audioId = AudioEngine::play2d("audio/click.mp3");
                 noButton->activate(); // 执行使用逻辑
             }
             else

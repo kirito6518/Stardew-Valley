@@ -6,6 +6,8 @@
 #include "BackpackManager.h"
 #include "MainMap.h"
 #include <random>
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
 
 USING_NS_CC;
 
@@ -94,7 +96,8 @@ bool AnimalManager::init() {
             if (rect.containsPoint(locationInNode))
             {
                 // 设置按钮为正常状态
-                outButton->setNormalImage(Sprite::create("ui/close_normal.png"));
+                outButton->setNormalImage(Sprite::create("ui/close_normal.png")); 
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
                 HideRanch(nullptr);
             }
             else
@@ -149,6 +152,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 BuyButtonPig->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/coins.mp3");
                 Item* initItem = ItemManager::getInstance()->getItem("Coin");
                 if (initItem->getCount() >= 2) {
                     initItem->decreaseCount(2);
@@ -206,6 +210,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 KillButtonPig->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
                 RemoveAnimal("Pig");
             }
             else
@@ -260,6 +265,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 BuyButtonCow->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/coins.mp3");
                 Item* initItem = ItemManager::getInstance()->getItem("Coin");
                 if (initItem->getCount() >= 2) {
                     initItem->decreaseCount(2);
@@ -317,6 +323,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 KillButtonCow->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
                 RemoveAnimal("Cow");
             }
             else
@@ -371,6 +378,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 BuyButtonSheep->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/coins.mp3");
                 Item* initItem = ItemManager::getInstance()->getItem("Coin");
                 if (initItem->getCount() >= 2) {
                     initItem->decreaseCount(2);
@@ -428,6 +436,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 KillButtonSheep->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
                 RemoveAnimal("Sheep");
             }
             else
@@ -482,6 +491,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 BuyButtonChook->setNormalImage(Sprite::create("ui/BuyChildNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/coins.mp3");
                 Item* initItem = ItemManager::getInstance()->getItem("Coin");
                 if (initItem->getCount() >= 2) {
                     initItem->decreaseCount(2);
@@ -539,6 +549,7 @@ bool AnimalManager::init() {
             {
                 // 设置按钮为正常状态
                 KillButtonChook->setNormalImage(Sprite::create("ui/KillAdultNormal.png"));
+                int audioId2 = AudioEngine::play2d("audio/click.mp3");
                 RemoveAnimal("Chook");
             }
             else

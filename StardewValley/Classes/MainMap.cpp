@@ -1,5 +1,4 @@
 ﻿#include "HelloWorldScene.h"
-#include "SimpleAudioEngine.h"
 #include "MainMap.h"
 #include "cocos2d.h"
 #include "Player.h"
@@ -16,10 +15,13 @@
 #include "AnimalManager.h"
 #include "TaskLayer.h"
 #include "TaskManager.h"
+#include "audio/include/AudioEngine.h"
+using namespace cocos2d::experimental;
 
 
 USING_NS_CC;
-using namespace CocosDenshion;
+
+
 SeasonManager::Season currentSeason = SeasonManager::Spring;
 
 Scene* MainMap::createScene()
@@ -40,8 +42,9 @@ bool MainMap::init()
     // 原点是窗口左下角
     const auto visibleSize = Director::getInstance()->getVisibleSize();
 
-    //加载音效
-    SimpleAudioEngine::getInstance()->setEffectsVolume(0.8f);
+    // 播放背景音乐并设置循环
+    audioId0 = AudioEngine::play2d("audio/back.mp3", true); // 第二个参数为 true，表示循环播放,
+    AudioEngine::setVolume(audioId0, 0.5f); // 设置音量为 50%
 
     // 获取物理世界
     auto physicsWorld = this->getPhysicsWorld();
@@ -1262,6 +1265,10 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
         dynamic_cast<Cave*>(caveScene)->mainMap = this;
         // 将新场景推入场景栈
         Director::getInstance()->pushScene(caveScene);
+        // 暂停音效
+        AudioEngine::pause(audioId0);
+        audioId1 = AudioEngine::play2d("audio/cave.mp3", true); // 第二个参数为 true，表示循环播放,
+        AudioEngine::setVolume(audioId1, 0.8f); // 设置音量为 50%
     }
     else if (nodeB->getName() == "ranch" || nodeA->getName() == "ranch") {
         // CCLOG("Player collided with ranch!");
@@ -1282,6 +1289,10 @@ bool MainMap::onContactBegin(PhysicsContact& contact) {
 
 // 回到mainmap时触发
 void MainMap::BackFromCave() {
+
+    // 暂停音效
+    AudioEngine::pause(audioId1);
+    audioId0 = AudioEngine::play2d("audio/back.mp3", true); 
 
     auto gemBring = dynamic_cast<Cave*>(caveScene)->gem;
     Item* initItem;
