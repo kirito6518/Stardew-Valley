@@ -54,22 +54,21 @@ TaskManager::TaskManager()
     addTaskList(shopOwner);
     tasks.pushBack(shopOwner);
 
-   /*
     // 渔夫
     NPCTask* fisher = new NPCTask("Bob");
     addTaskList(fisher);
     tasks.pushBack(fisher);
 
     // 农民
-    NPCTask* farmer = new NPCTask("John");
+    NPCTask* farmer = new NPCTask("Mary");
     addTaskList(farmer);
     tasks.pushBack(farmer);
 
     // 牧民
-    NPCTask* rancher = new NPCTask("Mike");
+    NPCTask* rancher = new NPCTask("Annie");
     addTaskList(rancher);
     tasks.pushBack(rancher);
-    */
+    
 }
 
 // 析构函数

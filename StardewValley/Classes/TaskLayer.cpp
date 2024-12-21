@@ -4,7 +4,8 @@
 #include "TaskItemManager.h"
 #include "MainMap.h"
 #include "NPCtask.h"
-
+#include "NPCManager.h"
+#include "NPC.h"
 USING_NS_CC;
 
 
@@ -143,7 +144,7 @@ void TaskLayer::renewPosition()
     int startY = TsakUIPos.y + TaskUISize.height / 2;
     for (auto list : lists) {
         int x = startX;
-        int y = startY + count * space;
+        int y = startY - count * space;
         list->setPosition(Vec2(x, y));
         count++;
     }
@@ -152,10 +153,10 @@ void TaskLayer::renewPosition()
     closeButton->setPosition(Vec2(TsakUIPos.x + TaskUISize.width, TsakUIPos.y + TaskUISize.height / 2));
     taskDetailsUi->setPosition(TsakUIPos);
     needItemDeta->setPosition(TsakUIPos + Vec2(150,-98));
-    submitButton->setPosition(TsakUIPos + Vec2(TaskUISize.width/2, -TaskUISize.height / 2+40));
+    submitButton->setPosition(TsakUIPos + Vec2(TaskUISize.width/2+155, -TaskUISize.height / 2+100));
     resultLabel->setPosition(TsakUIPos+Vec2(100,0));
     rewardGoodwill->setPosition(TsakUIPos + Vec2(262, -192));
-    nowGoodwill->setPosition(TsakUIPos + Vec2(150, -138));
+    nowGoodwill->setPosition(TsakUIPos + Vec2(262, -148));
 
 }
 
@@ -259,6 +260,62 @@ void TaskLayer::setupMouseListener()
 
             if (listBoundingBox.containsPoint(mousePosition))
             {
+                if (task->getNPCName() == "Alice") {
+                    list->setTexture("ui/Alice_selected.png");
+                    for (auto list : lists) {
+                        if (static_cast<NPCTask*>(list->getUserData())->getNPCName()=="Bob") {
+                            list->setTexture("ui/Bob_task.png");
+                        }
+                        else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Mary") {
+                            list->setTexture("ui/Mary_task.png");
+                        }
+                        else if(static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Annie"){
+                            list->setTexture("ui/Annie_task.png");
+                        }
+                    }
+                }
+                else if (task->getNPCName() == "Bob") {
+                    list->setTexture("ui/Bob_selected.png");
+                    for (auto list : lists) {
+                        if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Alice") {
+                            list->setTexture("ui/Alice_task.png");
+                        }
+                        else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Mary") {
+                            list->setTexture("ui/Mary_task.png");
+                        }
+                        else if(static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Annie"){
+                            list->setTexture("ui/Annie_task.png");
+                        }
+                    }
+                }
+                else if (task->getNPCName() == "Mary") {
+                    list->setTexture("ui/Mary_selected.png");
+                    for (auto list : lists) {
+                        if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Alice") {
+                            list->setTexture("ui/Alice_task.png");
+                        }
+                        else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Bob") {
+                            list->setTexture("ui/Bob_task.png");
+                        }
+                        else if(static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Annie") {
+                            list->setTexture("ui/Annie_task.png");
+                        }
+                    }
+                }
+                else {
+                    list->setTexture("ui/Annie_selected.png");
+                    for (auto list : lists) {
+                        if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Alice") {
+                            list->setTexture("ui/Alice_task.png");
+                        }
+                        else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Bob") {
+                            list->setTexture("ui/Bob_task.png");
+                        }
+                        else if(static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Mary"){
+                            list->setTexture("ui/Mary_task.png");
+                        }
+                    }
+                }
                 //显示详细信息ui
                 taskDetailsUi->setPosition(TsakUIPos);
                 taskDetailsUi->setVisible(true);
@@ -274,6 +331,14 @@ void TaskLayer::setupMouseListener()
                 submitButton->setVisible(true);
                 submitButton->setEnabled(true);
 
+                //获取当前好感
+                std::string name=task->getNPCName();
+                int goodwill = NPCManager::getInstance()->getNPCByName(name)->getFavorability();
+                nowGoodwill->setString(std::to_string(goodwill));
+
+                //获取奖励好感
+                int reward = task->getNeedItemCount() * 2;
+                rewardGoodwill->setString(std::to_string(reward));
                 //显示好感ui
                 rewardGoodwill->setVisible(true);
                 nowGoodwill->setVisible(true);
@@ -338,6 +403,22 @@ void TaskLayer::setupMouseListener()
             // 如果点击了 closeButton，切换回正常状态的图片并隐藏任务层
             closeButton->setNormalImage(Sprite::create("ui/close_normal.png"));
             closeTaskUI(nullptr); // 隐藏任务层
+
+            //更换图片
+            for (auto list : lists) {
+                if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Alice") {
+                    list->setTexture("ui/Alice_task.png");
+                }
+                else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Bob") {
+                    list->setTexture("ui/Bob_task.png");
+                }
+                else if (static_cast<NPCTask*>(list->getUserData())->getNPCName() == "Mary") {
+                    list->setTexture("ui/Mary_task.png");
+                }
+                else {
+                    list->setTexture("ui/Annie_task.png");
+                }
+            }
 
             // 隐藏物品UI
             taskDetailsUi->setVisible(false);
