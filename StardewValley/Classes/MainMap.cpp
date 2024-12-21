@@ -567,25 +567,24 @@ void MainMap::getInitBackpack()
     BackpackManager::getInstance()->addItem(initItem, 1);
     initItem = ItemManager::getInstance()->getItem("Anti\nInsect");
     BackpackManager::getInstance()->addItem(initItem, 1);
-    initItem = ItemManager::getInstance()->getItem("Onion");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemA");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemB");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemC");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemD");
-    BackpackManager::getInstance()->addItem(initItem, 10);
-    initItem = ItemManager::getInstance()->getItem("GemE");
-    BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("Onion");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemA");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemB");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemC");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemD");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
+    //initItem = ItemManager::getInstance()->getItem("GemE");
+    //BackpackManager::getInstance()->addItem(initItem, 10);
     //initItem = ItemManager::getInstance()->getItem("Coin");
     //BackpackManager::getInstance()->addItem(initItem, 99);
     //initItem = ItemManager::getInstance()->getItem("Onion\nSeed");
     //BackpackManager::getInstance()->addItem(initItem, 20);
     //initItem = ItemManager::getInstance()->getItem("Fertilizer");
     //BackpackManager::getInstance()->addItem(initItem, 20);
-
 }
 
 //显示商店
@@ -619,6 +618,17 @@ void MainMap::getInitShop()
     initItem = ShopItemManager::getInstance()->getShopItem("Turnip\nSeed");
     ShopManager::getInstance()->addItem(initItem);
     initItem = ShopItemManager::getInstance()->getShopItem("Spinach\nSeed");
+    ShopManager::getInstance()->addItem(initItem);
+
+    initItem = ShopItemManager::getInstance()->getShopItem("GemA");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemB");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemC");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemD");
+    ShopManager::getInstance()->addItem(initItem);
+    initItem = ShopItemManager::getInstance()->getShopItem("GemE");
     ShopManager::getInstance()->addItem(initItem);
 
     initItem = ShopItemManager::getInstance()->getShopItem("Bait");
