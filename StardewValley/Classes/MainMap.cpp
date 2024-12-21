@@ -596,12 +596,20 @@ void MainMap::toShop()
     // 调用单例管理类显示商店层
     ShopManager::getInstance()->showShop(this);
 
+    audioId2= AudioEngine::play2d("audio/shop.mp3", true); // 第二个参数为 true，表示循环播放,
+    AudioEngine::setVolume(audioId2, 0.6f); // 设置音量为 50%
+    AudioEngine::pause(audioId0);
+
     // 禁用 MainMap 场景的时间更新
     this->unschedule(CC_SCHEDULE_SELECTOR(MainMap::update));
 }
 
 //隐藏商店界面
 void MainMap::hideShop(Ref* sender) {
+
+    audioId0 = AudioEngine::play2d("audio/back.mp3", true); // 第二个参数为 true，表示循环播放,
+    AudioEngine::pause(audioId2);
+
     // 重新启用 MainMap 场景的时间更新
     this->schedule(CC_SCHEDULE_SELECTOR(MainMap::update), 0);
 }
@@ -643,6 +651,7 @@ void MainMap::getInitShop()
 //点击任务按钮的回调函数
 void MainMap::onTaskButtonClicked(Ref* sender)
 {
+
     // 调用单例管理类显示任务层
     TaskManager::getInstance()->showTaskList(this);
 

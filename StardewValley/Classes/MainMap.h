@@ -136,6 +136,7 @@ private:
 
     int audioId0;//0∫≈±≥æ∞“Ù¿÷
     int audioId1;//1∫≈±≥æ∞“Ù¿÷
+    int audioId2;//2∫≈±≥æ∞“Ù¿÷
 };
 
 #endif // __MainMap_H__
