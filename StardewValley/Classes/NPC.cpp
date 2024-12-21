@@ -64,21 +64,25 @@ void NPC::interactWithPlayer() {
     // 获取 NPC 的随机对话内容
     std::string dialogue = getRandomDialogue();
 
+    // 移除旧的对话框
+    removeDialogue();
+
     // 创建对话框 Label，使用 TTF 字体
     auto dialogueBox = Label::createWithTTF(dialogue, "fonts/Marker Felt.ttf", 24);
+    dialogueBox->setName("dialogue_box"); // 设置名字以便移除
 
     // 设置对话框的位置
-    dialogueBox->setPosition(Vec2(getPosition().x, getPosition().y + getContentSize().height / 2 + 20));
-    dialogueBox->setAnchorPoint(Vec2(0.5, 0.5));
+    dialogueBox->setPosition(Vec2(0, this->getContentSize().height / 2 + 40));
+    dialogueBox->setAnchorPoint(Vec2(0.5, 0));
 
-    // 将对话框添加到场景中
-    this->getParent()->addChild(dialogueBox, 3); // 确保对话框显示在最上层
+    // 将对话框添加到NPC中
+    this->addChild(dialogueBox, 1); // 确保对话框显示在NPC之上
 
-    // 设置对话框的生命周期，例如 3 秒后移除
-    this->scheduleOnce([this, dialogueBox](float dt) {
-        dialogueBox->removeFromParent();
+    // 设置对话框的生命周期，例如 2 秒后移除
+    this->scheduleOnce([this](float dt) {
+        removeDialogue();
         _isDialogueVisible = false; // 对话框被移除后，重置标志位
-        }, 2.0f, "remove_dialogue_box"); // 第三个参数是定时器的标签，可选
+    }, 3.0f, "remove_dialogue_box"); // 定时器标签
 
     _isDialogueVisible = true; // 标记对话框已显示
 }
@@ -91,10 +95,7 @@ void NPC::removeDialogue() {
     if (dialogueBox) {
         dialogueBox->removeFromParent();
     }
-
-    _isDialogueVisible = false; // 重置标志位
 }
-
 void NPC::setSpecialTaskCompleted(bool completed)
 {
     _relationship.setSpecialTaskCompleted(completed);

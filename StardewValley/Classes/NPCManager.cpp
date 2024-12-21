@@ -93,18 +93,13 @@ void NPCManager::update(float dt) {
 
 void NPCManager::checkPlayerInteraction(const cocos2d::Vec2& playerPosition) {
     for (auto npc : _npcs) {
-        // 计算玩家与 NPC 的距离
+        // 计算玩家与NPC之间的距离
         float distance = playerPosition.distance(npc->getLocation());
 
-        // 调试输出距离
-        // CCLOG("Player-NPC distance: %f", distance);
-
-        // 检查玩家是否靠近 NPC
-        if (distance < 50) { // 假设交互距离为 50 像素
+        if (distance < 200) { // 如果距离小于200
             npc->interactWithPlayer(); // 触发交互
-        }
-        else {
-            npc->removeDialogue(); // 玩家远离 NPC 时移除对话框
+        } else {
+            npc->removeDialogue(); // 移除对话框
         }
     }
 }
