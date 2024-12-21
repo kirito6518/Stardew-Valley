@@ -26,27 +26,89 @@ TaskManager::TaskManager()
     taskLayer->retain();
 
     //所有会出现在任务栏的物品都在此处加载，最好不要用名字带换行符的物品
-    // 初始化任务物品
-    TaskItem::create("mineral/GemA.png", "GemA", 1);
-    TaskItem::create("mineral/GemB.png", "GemB", 2);
-    TaskItem::create("mineral/GemC.png", "GemC", 3);
-    TaskItem::create("mineral/GemD.png", "GemD", 4);
-    TaskItem::create("mineral/GemE.png", "GemE", 5);
-    TaskItem::create("fish/FishA.png", "FishA", 6);
-    TaskItem::create("fish/FishB.png", "FishB", 7);
-    TaskItem::create("fish/FishC.png", "FishC", 8);
-    TaskItem::create("fish/FishD.png", "FishD", 9);
-    TaskItem::create("fish/FishE.png", "FishE", 10);
-    TaskItem::create("crops/Onion.png", "Onion", 11);
-    TaskItem::create("crops/Potato.png", "Potato", 12);
-    TaskItem::create("crops/Carrot.png", "Carrot", 13);
-    TaskItem::create("crops/Turnip.png", "Turnip", 14);
-    TaskItem::create("crops/Potato.png", "Radish", 15);
-    TaskItem::create("crops/Spinach.png", "Spinach", 16);
-    TaskItem::create("animal/Pork.png", "Pork", 17);
-    TaskItem::create("animal/Beef.png", "Beef", 18);
-    TaskItem::create("animal/Mutton.png", "Muttun", 19);
-    TaskItem::create("animal/Chicken.png", "Chicken", 20);
+    // 初始化任务物品并设置稀有度
+    TaskItem* gemA = TaskItem::create("mineral/GemA.png", "GemA", 1);
+    gemA->setRarity(1);
+    TaskItemManager::getInstance()->addTaskItem(gemA);
+
+    TaskItem* gemB = TaskItem::create("mineral/GemB.png", "GemB", 2);
+    gemB->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(gemB);
+
+    TaskItem* gemC = TaskItem::create("mineral/GemC.png", "GemC", 3);
+    gemC->setRarity(3);
+    TaskItemManager::getInstance()->addTaskItem(gemC);
+
+    TaskItem* gemD = TaskItem::create("mineral/GemD.png", "GemD", 4);
+    gemD->setRarity(4);
+    TaskItemManager::getInstance()->addTaskItem(gemD);
+
+    TaskItem* gemE = TaskItem::create("mineral/GemE.png", "GemE", 5);
+    gemE->setRarity(5);
+    TaskItemManager::getInstance()->addTaskItem(gemE);
+
+    // 鱼类，稀有度2
+    TaskItem* fishA = TaskItem::create("fish/FishA.png", "FishA", 6);
+    fishA->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(fishA);
+
+    TaskItem* fishB = TaskItem::create("fish/FishB.png", "FishB", 7);
+    fishB->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(fishB);
+
+    TaskItem* fishC = TaskItem::create("fish/FishC.png", "FishC", 8);
+    fishC->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(fishC);
+
+    TaskItem* fishD = TaskItem::create("fish/FishD.png", "FishD", 9);
+    fishD->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(fishD);
+
+    TaskItem* fishE = TaskItem::create("fish/FishE.png", "FishE", 10);
+    fishE->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(fishE);
+
+    // 农作物
+    TaskItem* onion = TaskItem::create("crops/Onion.png", "Onion", 11);
+    onion->setRarity(4);
+    TaskItemManager::getInstance()->addTaskItem(onion);
+
+    TaskItem* potato = TaskItem::create("crops/Potato.png", "Potato", 12);
+    potato->setRarity(3);
+    TaskItemManager::getInstance()->addTaskItem(potato);
+
+    TaskItem* carrot = TaskItem::create("crops/Carrot.png", "Carrot", 13);
+    carrot->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(carrot);
+
+    TaskItem* turnip = TaskItem::create("crops/Turnip.png", "Turnip", 14);
+    turnip->setRarity(1);
+    TaskItemManager::getInstance()->addTaskItem(turnip);
+
+    TaskItem* radish = TaskItem::create("crops/Radish.png", "Radish", 15);
+    radish->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(radish);
+
+    TaskItem* spinach = TaskItem::create("crops/Spinach.png", "Spinach", 16);
+    spinach->setRarity(3);
+    TaskItemManager::getInstance()->addTaskItem(spinach);
+
+    // 动物产品，稀有度2
+    TaskItem* pork = TaskItem::create("animal/Pork.png", "Pork", 17);
+    pork->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(pork);
+
+    TaskItem* beef = TaskItem::create("animal/Beef.png", "Beef", 18);
+    beef->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(beef);
+
+    TaskItem* mutton = TaskItem::create("animal/Mutton.png", "Mutton", 19);
+    mutton->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(mutton);
+
+    TaskItem* chicken = TaskItem::create("animal/Chicken.png", "Chicken", 20);
+    chicken->setRarity(2);
+    TaskItemManager::getInstance()->addTaskItem(chicken);
 
     // 初始化四个NPC的任务
     // 店长
