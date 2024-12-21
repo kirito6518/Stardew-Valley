@@ -363,8 +363,8 @@ void BackpackLayer::onYesButtonClicked(Ref* sender)
     yesButton->setVisible(false);
     noButton->setVisible(false);
     getCoinCount->setVisible(false);
-    yesButton->setEnabled(true);
-    noButton->setEnabled(true);
+    yesButton->setEnabled(false);
+    noButton->setEnabled(false);
 }
 
 //点击no按钮的回调函数
@@ -376,8 +376,8 @@ void BackpackLayer::onNoButtonClicked(Ref* sender)
     yesButton->setVisible(false);
     noButton->setVisible(false);
     getCoinCount->setVisible(false);
-    yesButton->setEnabled(true);
-    noButton->setEnabled(true);
+    yesButton->setEnabled(false);
+    noButton->setEnabled(false);
 
 }
 

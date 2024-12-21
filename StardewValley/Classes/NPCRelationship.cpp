@@ -1,31 +1,31 @@
 #include "NPCRelationship.h"
 
 // 构造函数：初始化关系等级
-NPCRelationship::NPCRelationship(int level) : _level(level), _specialTaskCompleted(false) {}
+NPCRelationship::NPCRelationship(int level) : _level(level), _Favorability(0), _specialTaskCompleted(false) {}
 
 NPCRelationship::~NPCRelationship() {}
 
 // 增加关系等级
 void NPCRelationship::increaseLevel(int tasksCompleted)
 {
-    _level += tasksCompleted;
-    if (_level > 100)
-        _level = 100;
+    _Favorability += tasksCompleted;
+    if (_Favorability > 100)
+        _Favorability = 100;
 
-    if (_level >= 100 && _specialTaskCompleted)
+    if (_Favorability >= 100 && _specialTaskCompleted)
     {
         // 建立恋人关系
         _level = 4;
     }
-    else if (_level >= 90)
+    else if (_Favorability >= 90)
     {
         _level = 3; // 至交
     }
-    else if (_level >= 60)
+    else if (_Favorability >= 60)
     {
         _level = 2; // 好友
     }
-    else if (_level >= 30)
+    else if (_Favorability >= 30)
     {
         _level = 1; // 朋友
     }
@@ -41,6 +41,10 @@ void NPCRelationship::decreaseLevel() {
 }
 
 // 获取当前关系等级
+int NPCRelationship::getFavorability() const{
+    return _Favorability;
+}
+
 int NPCRelationship::getLevel() const {
     return _level;
 }

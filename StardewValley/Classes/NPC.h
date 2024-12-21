@@ -39,6 +39,9 @@ public:
     void setSpecialTaskCompleted(bool completed);
     bool isSpecialTaskCompleted() const;
 
+    //获取当前关系等级
+    int getFavorability()const { return _relationship.getFavorability(); }
+
 
     int _id; // NPC的唯一ID
     std::string _name; // NPC的名字
