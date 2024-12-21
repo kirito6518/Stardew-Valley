@@ -97,6 +97,9 @@
     <ClCompile Include="..\Classes\ShopItemManager.cpp">
       <Filter>Item works</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HelpScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -194,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ShopItemManager.h">
       <Filter>Item works</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelpScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
