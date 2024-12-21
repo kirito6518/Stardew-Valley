@@ -53,7 +53,7 @@ bool MainMap::init()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
 
     // 启用调试绘制
-    physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    // physicsWorld->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 
     // 加载背包
     BackpackManager::getInstance();
