@@ -39,10 +39,10 @@ NPCTask::NPCTask(std::string npcName)
     else if (npcName == "Bob") { // 渔夫
         getOnlyNum = gen() % 5 + 6; // 6-10
     }
-    else if (npcName == "John") { // 农民
+    else if (npcName == "Mary") { // 农民
         getOnlyNum = gen() % 6 + 11; // 11-16
     }
-    else if (npcName == "Mike") { // 牧民
+    else if (npcName == "Annie") { // 牧民
         getOnlyNum = gen() % 4 + 17; // 17-20
     }
     else {
@@ -67,11 +67,11 @@ NPCTask::NPCTask(std::string npcName)
     else if (npcName == "Bob") {
         taskList = Sprite::create("ui/Bob_task.png");
     }
-    else if (npcName == "John") {
-        taskList = Sprite::create("ui/John_task.png");
+    else if (npcName == "Mary") {
+        taskList = Sprite::create("ui/Mary_task.png");
     }
-    else if (npcName == "Mike") {
-        taskList = Sprite::create("ui/Mike_task.png");
+    else if (npcName == "Annie") {
+        taskList = Sprite::create("ui/Annie_task.png");
     }
     else {
         taskList = Sprite::create("ui/default_task.png");
@@ -121,10 +121,7 @@ void NPCTask::complete()
         }
 
         // 设置任务冷却时间
-        setCooldown(1.0f);
-
-        // 刷新任务列表
-        TaskManager::getInstance()->renewTask();
+        setCooldown(3.0f);
     }
 }
 
@@ -156,6 +153,11 @@ void NPCTask::renewTask()
     {
         haveTask = false;
     }
+    else if (haveTask)
+    {
+        // 如果已经有任务，则不刷新
+        return;
+    }
     else
     {
         haveTask = true;
@@ -171,10 +173,10 @@ void NPCTask::renewTask()
         else if (npcName == "Bob") { // 渔夫
             getOnlyNum = gen() % 5 + 6; // 6-10
         }
-        else if (npcName == "John") { // 农民
+        else if (npcName == "Mary") { // 农民
             getOnlyNum = gen() % 6 + 11; // 11-17
         }
-        else if (npcName == "Mike") { // 牧民
+        else if (npcName == "Annie") { // 牧民
             getOnlyNum = gen() % 4 + 17; // 17-20
         }
         else {
